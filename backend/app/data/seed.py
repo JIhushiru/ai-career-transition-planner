@@ -22,7 +22,10 @@ async def seed_roles(db: AsyncSession) -> dict[str, int]:
         return {}
 
     with open(roles_path) as f:
-        roles_data = json.load(f)
+        raw = json.load(f)
+
+    # Support both {"roles": [...]} and plain [...] formats
+    roles_data = raw.get("roles", raw) if isinstance(raw, dict) else raw
 
     title_to_id: dict[str, int] = {}
 

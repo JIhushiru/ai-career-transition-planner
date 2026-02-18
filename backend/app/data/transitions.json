@@ -1,0 +1,1523 @@
+[
+  {
+    "from_role": "Junior Software Developer",
+    "to_role": "Software Developer",
+    "difficulty": 0.25,
+    "typical_months": 24,
+    "required_upskills": ["Design Patterns", "Code Review", "System Design Basics"],
+    "market_viability": 0.95,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Software Developer",
+    "to_role": "Senior Software Developer",
+    "difficulty": 0.35,
+    "typical_months": 36,
+    "required_upskills": ["System Architecture", "Mentoring", "Technical Leadership"],
+    "market_viability": 0.92,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Software Developer",
+    "to_role": "Staff Engineer",
+    "difficulty": 0.55,
+    "typical_months": 36,
+    "required_upskills": ["Cross-Team Collaboration", "Technical Strategy", "Architectural Decision Records"],
+    "market_viability": 0.78,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Staff Engineer",
+    "to_role": "Principal Engineer",
+    "difficulty": 0.65,
+    "typical_months": 48,
+    "required_upskills": ["Organization-Wide Technical Vision", "Executive Communication", "Technology Roadmapping"],
+    "market_viability": 0.65,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Software Developer",
+    "to_role": "Engineering Manager",
+    "difficulty": 0.5,
+    "typical_months": 24,
+    "required_upskills": ["People Management", "Performance Reviews", "Hiring", "Budget Planning"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Engineering Manager",
+    "to_role": "Senior Engineering Manager",
+    "difficulty": 0.4,
+    "typical_months": 30,
+    "required_upskills": ["Multi-Team Management", "Strategic Planning", "Stakeholder Management"],
+    "market_viability": 0.8,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Engineering Manager",
+    "to_role": "Director of Engineering",
+    "difficulty": 0.55,
+    "typical_months": 36,
+    "required_upskills": ["Department Strategy", "Cross-Functional Leadership", "Organizational Design"],
+    "market_viability": 0.72,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Director of Engineering",
+    "to_role": "VP of Engineering",
+    "difficulty": 0.65,
+    "typical_months": 48,
+    "required_upskills": ["Executive Leadership", "Board Communication", "Company-Wide Strategy"],
+    "market_viability": 0.55,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "VP of Engineering",
+    "to_role": "CTO",
+    "difficulty": 0.75,
+    "typical_months": 48,
+    "required_upskills": ["Business Strategy", "Investor Relations", "Product Vision", "P&L Management"],
+    "market_viability": 0.4,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Junior Frontend Developer",
+    "to_role": "Frontend Developer",
+    "difficulty": 0.25,
+    "typical_months": 18,
+    "required_upskills": ["React", "State Management", "Responsive Design", "Performance Optimization"],
+    "market_viability": 0.93,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Frontend Developer",
+    "to_role": "Senior Frontend Developer",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["Architecture Patterns", "Accessibility", "Testing Strategies", "Mentoring"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Frontend Developer",
+    "to_role": "Full-Stack Developer",
+    "difficulty": 0.4,
+    "typical_months": 12,
+    "required_upskills": ["Backend Development", "Database Design", "API Development", "Server Management"],
+    "market_viability": 0.92,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Backend Developer",
+    "to_role": "Full-Stack Developer",
+    "difficulty": 0.4,
+    "typical_months": 12,
+    "required_upskills": ["Frontend Frameworks", "CSS", "UI/UX Fundamentals", "Browser APIs"],
+    "market_viability": 0.9,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Junior Backend Developer",
+    "to_role": "Backend Developer",
+    "difficulty": 0.25,
+    "typical_months": 20,
+    "required_upskills": ["Database Optimization", "API Design", "Security Practices", "Caching Strategies"],
+    "market_viability": 0.93,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Backend Developer",
+    "to_role": "Senior Backend Developer",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["Distributed Systems", "System Design", "Performance Tuning", "Technical Leadership"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Full-Stack Developer",
+    "to_role": "Senior Full-Stack Developer",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["System Architecture", "DevOps Practices", "Technical Decision Making"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Junior Data Analyst",
+    "to_role": "Data Analyst",
+    "difficulty": 0.25,
+    "typical_months": 18,
+    "required_upskills": ["Advanced SQL", "Statistical Analysis", "Data Visualization", "Business Acumen"],
+    "market_viability": 0.93,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Data Analyst",
+    "to_role": "Senior Data Analyst",
+    "difficulty": 0.3,
+    "typical_months": 30,
+    "required_upskills": ["Advanced Statistics", "Stakeholder Management", "Data Strategy"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Data Analyst",
+    "to_role": "BI Analyst",
+    "difficulty": 0.25,
+    "typical_months": 6,
+    "required_upskills": ["Tableau", "Power BI", "Dashboard Design", "Data Warehousing"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Data Analyst",
+    "to_role": "Data Scientist",
+    "difficulty": 0.55,
+    "typical_months": 18,
+    "required_upskills": ["Machine Learning", "Python", "Statistical Modeling", "Feature Engineering"],
+    "market_viability": 0.82,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Data Analyst",
+    "to_role": "Data Engineer",
+    "difficulty": 0.5,
+    "typical_months": 15,
+    "required_upskills": ["ETL Pipelines", "Python", "Cloud Platforms", "Data Warehousing", "Spark"],
+    "market_viability": 0.87,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Data Scientist",
+    "to_role": "Senior Data Scientist",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["Deep Learning", "Research Methodology", "Experiment Design", "Mentoring"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Data Scientist",
+    "to_role": "Lead Data Scientist",
+    "difficulty": 0.4,
+    "typical_months": 24,
+    "required_upskills": ["Team Leadership", "ML Strategy", "Cross-Functional Communication"],
+    "market_viability": 0.78,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Data Scientist",
+    "to_role": "ML Engineer",
+    "difficulty": 0.4,
+    "typical_months": 12,
+    "required_upskills": ["MLOps", "Model Deployment", "Kubernetes", "CI/CD for ML"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Data Engineer",
+    "to_role": "Senior Data Engineer",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["Distributed Systems", "Data Architecture", "Pipeline Optimization", "Mentoring"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Data Engineer",
+    "to_role": "Data Architect",
+    "difficulty": 0.45,
+    "typical_months": 24,
+    "required_upskills": ["Enterprise Data Modeling", "Data Governance", "Cloud Architecture"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Junior QA Engineer",
+    "to_role": "QA Engineer",
+    "difficulty": 0.25,
+    "typical_months": 18,
+    "required_upskills": ["Test Automation", "API Testing", "Performance Testing"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "QA Engineer",
+    "to_role": "Senior QA Engineer",
+    "difficulty": 0.3,
+    "typical_months": 30,
+    "required_upskills": ["Test Architecture", "CI/CD Integration", "Quality Strategy"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "QA Engineer",
+    "to_role": "QA Automation Engineer",
+    "difficulty": 0.35,
+    "typical_months": 12,
+    "required_upskills": ["Selenium", "Programming", "Test Framework Design", "CI/CD"],
+    "market_viability": 0.9,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "QA Engineer",
+    "to_role": "DevOps Engineer",
+    "difficulty": 0.6,
+    "typical_months": 18,
+    "required_upskills": ["Linux Administration", "Docker", "Kubernetes", "CI/CD Pipelines", "Cloud Platforms"],
+    "market_viability": 0.78,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Junior DevOps Engineer",
+    "to_role": "DevOps Engineer",
+    "difficulty": 0.3,
+    "typical_months": 20,
+    "required_upskills": ["Terraform", "Kubernetes", "Monitoring", "Security Best Practices"],
+    "market_viability": 0.92,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "DevOps Engineer",
+    "to_role": "Senior DevOps Engineer",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["Infrastructure Architecture", "Reliability Engineering", "Capacity Planning"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior DevOps Engineer",
+    "to_role": "Site Reliability Engineer",
+    "difficulty": 0.3,
+    "typical_months": 12,
+    "required_upskills": ["SLO/SLI Design", "Incident Management", "Distributed Systems Reliability"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "DevOps Engineer",
+    "to_role": "Cloud Engineer",
+    "difficulty": 0.3,
+    "typical_months": 10,
+    "required_upskills": ["AWS/Azure/GCP Deep Expertise", "Cloud Architecture", "Cost Optimization"],
+    "market_viability": 0.9,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Cloud Engineer",
+    "to_role": "Cloud Architect",
+    "difficulty": 0.45,
+    "typical_months": 30,
+    "required_upskills": ["Enterprise Architecture", "Multi-Cloud Strategy", "Security Architecture"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Junior UI/UX Designer",
+    "to_role": "UI/UX Designer",
+    "difficulty": 0.25,
+    "typical_months": 20,
+    "required_upskills": ["User Research", "Prototyping", "Design Systems", "Usability Testing"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "UI/UX Designer",
+    "to_role": "Senior UI/UX Designer",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["Design Strategy", "Cross-Functional Leadership", "Advanced Prototyping"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior UI/UX Designer",
+    "to_role": "Design Lead",
+    "difficulty": 0.4,
+    "typical_months": 24,
+    "required_upskills": ["Team Management", "Design Operations", "Stakeholder Alignment"],
+    "market_viability": 0.78,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Design Lead",
+    "to_role": "Head of Design",
+    "difficulty": 0.5,
+    "typical_months": 36,
+    "required_upskills": ["Department Strategy", "Executive Communication", "Brand Strategy"],
+    "market_viability": 0.65,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "UI/UX Designer",
+    "to_role": "Product Designer",
+    "difficulty": 0.3,
+    "typical_months": 12,
+    "required_upskills": ["Product Thinking", "Data-Driven Design", "Business Metrics"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Junior Project Manager",
+    "to_role": "Project Manager",
+    "difficulty": 0.25,
+    "typical_months": 24,
+    "required_upskills": ["Risk Management", "Stakeholder Management", "Budgeting"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Project Manager",
+    "to_role": "Senior Project Manager",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["Program Management", "Strategic Planning", "Executive Reporting"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Project Manager",
+    "to_role": "Program Manager",
+    "difficulty": 0.4,
+    "typical_months": 24,
+    "required_upskills": ["Multi-Project Coordination", "Portfolio Management", "Resource Optimization"],
+    "market_viability": 0.8,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Project Manager",
+    "to_role": "Scrum Master",
+    "difficulty": 0.3,
+    "typical_months": 6,
+    "required_upskills": ["Agile Methodology", "Scrum Framework", "Facilitation", "Servant Leadership"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Scrum Master",
+    "to_role": "Agile Coach",
+    "difficulty": 0.4,
+    "typical_months": 24,
+    "required_upskills": ["Organizational Change", "Coaching Techniques", "Scaled Agile Frameworks"],
+    "market_viability": 0.75,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Junior Product Manager",
+    "to_role": "Product Manager",
+    "difficulty": 0.3,
+    "typical_months": 24,
+    "required_upskills": ["Product Strategy", "Market Analysis", "User Research", "Roadmap Planning"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Product Manager",
+    "to_role": "Senior Product Manager",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["Product Vision", "Go-To-Market Strategy", "Revenue Modeling"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Product Manager",
+    "to_role": "Director of Product",
+    "difficulty": 0.5,
+    "typical_months": 36,
+    "required_upskills": ["Product Portfolio Management", "Team Building", "Business Strategy"],
+    "market_viability": 0.72,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Director of Product",
+    "to_role": "VP of Product",
+    "difficulty": 0.6,
+    "typical_months": 42,
+    "required_upskills": ["Executive Leadership", "Board Communication", "Company Strategy"],
+    "market_viability": 0.55,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "VP of Product",
+    "to_role": "CPO",
+    "difficulty": 0.7,
+    "typical_months": 48,
+    "required_upskills": ["C-Suite Collaboration", "Company Vision", "Investor Relations"],
+    "market_viability": 0.38,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Software Developer",
+    "to_role": "Product Manager",
+    "difficulty": 0.55,
+    "typical_months": 18,
+    "required_upskills": ["Product Thinking", "Market Research", "User Empathy", "Business Metrics"],
+    "market_viability": 0.75,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Software Developer",
+    "to_role": "DevOps Engineer",
+    "difficulty": 0.45,
+    "typical_months": 12,
+    "required_upskills": ["Docker", "Kubernetes", "CI/CD", "Infrastructure as Code", "Linux"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Software Developer",
+    "to_role": "Data Engineer",
+    "difficulty": 0.45,
+    "typical_months": 14,
+    "required_upskills": ["ETL Pipelines", "Data Warehousing", "Spark", "Airflow"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Staff Accountant",
+    "to_role": "Senior Accountant",
+    "difficulty": 0.3,
+    "typical_months": 24,
+    "required_upskills": ["Financial Reporting", "Team Management", "Advanced Excel"],
+    "market_viability": 0.92,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Accountant",
+    "to_role": "Accounting Manager",
+    "difficulty": 0.4,
+    "typical_months": 30,
+    "required_upskills": ["Team Leadership", "Month-End Close Process", "Internal Controls"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Accounting Manager",
+    "to_role": "Controller",
+    "difficulty": 0.5,
+    "typical_months": 36,
+    "required_upskills": ["Financial Strategy", "Regulatory Compliance", "ERP Systems", "Budgeting"],
+    "market_viability": 0.8,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Controller",
+    "to_role": "VP of Finance",
+    "difficulty": 0.55,
+    "typical_months": 42,
+    "required_upskills": ["Strategic Financial Planning", "Investor Relations", "Risk Management"],
+    "market_viability": 0.65,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "VP of Finance",
+    "to_role": "CFO",
+    "difficulty": 0.7,
+    "typical_months": 48,
+    "required_upskills": ["Executive Leadership", "Board Governance", "Capital Markets", "M&A"],
+    "market_viability": 0.4,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Junior Accountant",
+    "to_role": "Staff Accountant",
+    "difficulty": 0.2,
+    "typical_months": 18,
+    "required_upskills": ["GAAP Principles", "General Ledger", "Reconciliation"],
+    "market_viability": 0.95,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Staff Accountant",
+    "to_role": "Tax Accountant",
+    "difficulty": 0.35,
+    "typical_months": 12,
+    "required_upskills": ["Tax Law", "Tax Compliance", "Tax Planning", "Tax Software"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Staff Accountant",
+    "to_role": "Auditor",
+    "difficulty": 0.35,
+    "typical_months": 12,
+    "required_upskills": ["Audit Methodology", "Risk Assessment", "Sampling Techniques"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Tax Accountant",
+    "to_role": "Tax Manager",
+    "difficulty": 0.4,
+    "typical_months": 36,
+    "required_upskills": ["Tax Strategy", "Team Management", "Multi-Jurisdiction Tax"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Auditor",
+    "to_role": "Senior Auditor",
+    "difficulty": 0.3,
+    "typical_months": 24,
+    "required_upskills": ["Advanced Audit Techniques", "Team Supervision", "Regulatory Frameworks"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Auditor",
+    "to_role": "Audit Manager",
+    "difficulty": 0.4,
+    "typical_months": 30,
+    "required_upskills": ["Audit Planning", "Client Relationship Management", "Quality Review"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Accountant",
+    "to_role": "Financial Analyst",
+    "difficulty": 0.4,
+    "typical_months": 12,
+    "required_upskills": ["Financial Modeling", "Forecasting", "Data Analysis", "Presentation Skills"],
+    "market_viability": 0.82,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Financial Analyst",
+    "to_role": "Senior Financial Analyst",
+    "difficulty": 0.3,
+    "typical_months": 24,
+    "required_upskills": ["Advanced Modeling", "Strategic Analysis", "Valuation Techniques"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Financial Analyst",
+    "to_role": "Finance Manager",
+    "difficulty": 0.4,
+    "typical_months": 30,
+    "required_upskills": ["People Management", "Budget Ownership", "Business Partnering"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Accountant",
+    "to_role": "Tax Tech Consultant",
+    "difficulty": 0.55,
+    "typical_months": 18,
+    "required_upskills": ["Tax Technology", "ERP Systems", "Process Automation", "Consulting Skills"],
+    "market_viability": 0.75,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Tax Accountant",
+    "to_role": "Tax Tech Consultant",
+    "difficulty": 0.45,
+    "typical_months": 14,
+    "required_upskills": ["Tax Technology Platforms", "Process Automation", "Client Management"],
+    "market_viability": 0.78,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Bookkeeper",
+    "to_role": "Staff Accountant",
+    "difficulty": 0.4,
+    "typical_months": 24,
+    "required_upskills": ["Accounting Principles", "Financial Statements", "CPA Preparation"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Bookkeeper",
+    "to_role": "Accounts Payable Specialist",
+    "difficulty": 0.2,
+    "typical_months": 6,
+    "required_upskills": ["AP Processes", "Vendor Management", "Invoice Processing"],
+    "market_viability": 0.9,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Accounts Payable Specialist",
+    "to_role": "Accounting Clerk",
+    "difficulty": 0.15,
+    "typical_months": 6,
+    "required_upskills": ["General Ledger Entries", "Bank Reconciliation"],
+    "market_viability": 0.92,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Junior Cybersecurity Analyst",
+    "to_role": "Cybersecurity Analyst",
+    "difficulty": 0.3,
+    "typical_months": 20,
+    "required_upskills": ["Threat Analysis", "SIEM Tools", "Incident Response"],
+    "market_viability": 0.93,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Cybersecurity Analyst",
+    "to_role": "Senior Cybersecurity Analyst",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["Advanced Threat Hunting", "Security Architecture", "Compliance Frameworks"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Cybersecurity Analyst",
+    "to_role": "Security Architect",
+    "difficulty": 0.5,
+    "typical_months": 30,
+    "required_upskills": ["Enterprise Security Design", "Zero Trust Architecture", "Risk Frameworks"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Security Architect",
+    "to_role": "CISO",
+    "difficulty": 0.65,
+    "typical_months": 48,
+    "required_upskills": ["Security Strategy", "Executive Communication", "Regulatory Compliance", "Risk Management"],
+    "market_viability": 0.5,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "IT Support Specialist",
+    "to_role": "System Administrator",
+    "difficulty": 0.35,
+    "typical_months": 18,
+    "required_upskills": ["Server Management", "Networking", "Scripting", "Active Directory"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "System Administrator",
+    "to_role": "DevOps Engineer",
+    "difficulty": 0.45,
+    "typical_months": 14,
+    "required_upskills": ["Docker", "CI/CD", "Infrastructure as Code", "Cloud Platforms"],
+    "market_viability": 0.85,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "System Administrator",
+    "to_role": "Cloud Engineer",
+    "difficulty": 0.4,
+    "typical_months": 12,
+    "required_upskills": ["Cloud Platforms", "Cloud Networking", "Automation", "Cost Management"],
+    "market_viability": 0.88,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "IT Support Specialist",
+    "to_role": "Cybersecurity Analyst",
+    "difficulty": 0.5,
+    "typical_months": 18,
+    "required_upskills": ["Security Fundamentals", "Network Security", "SIEM", "Incident Response"],
+    "market_viability": 0.8,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Customer Service Representative",
+    "to_role": "Customer Success Manager",
+    "difficulty": 0.4,
+    "typical_months": 24,
+    "required_upskills": ["Account Management", "Relationship Building", "CRM Tools", "Data Analysis"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Customer Service Representative",
+    "to_role": "Technical Support Specialist",
+    "difficulty": 0.35,
+    "typical_months": 12,
+    "required_upskills": ["Technical Troubleshooting", "Product Knowledge", "Documentation"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Technical Support Specialist",
+    "to_role": "IT Support Specialist",
+    "difficulty": 0.3,
+    "typical_months": 10,
+    "required_upskills": ["Hardware Troubleshooting", "Networking Basics", "Operating Systems"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "BPO Team Leader",
+    "to_role": "BPO Operations Manager",
+    "difficulty": 0.35,
+    "typical_months": 24,
+    "required_upskills": ["Operations Management", "Workforce Management", "KPI Tracking"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "BPO Operations Manager",
+    "to_role": "IT Project Manager",
+    "difficulty": 0.5,
+    "typical_months": 18,
+    "required_upskills": ["IT Fundamentals", "Project Management", "ITIL", "Agile Methodology"],
+    "market_viability": 0.72,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "BPO Operations Manager",
+    "to_role": "Operations Director",
+    "difficulty": 0.45,
+    "typical_months": 36,
+    "required_upskills": ["Strategic Planning", "P&L Management", "Client Relationship Management"],
+    "market_viability": 0.75,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Customer Service Representative",
+    "to_role": "BPO Team Leader",
+    "difficulty": 0.3,
+    "typical_months": 18,
+    "required_upskills": ["Team Management", "Quality Monitoring", "Performance Coaching"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Marketing Coordinator",
+    "to_role": "Digital Marketing Specialist",
+    "difficulty": 0.3,
+    "typical_months": 12,
+    "required_upskills": ["SEO", "SEM", "Social Media Marketing", "Analytics"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Digital Marketing Specialist",
+    "to_role": "Marketing Manager",
+    "difficulty": 0.4,
+    "typical_months": 30,
+    "required_upskills": ["Marketing Strategy", "Budget Management", "Team Leadership", "Brand Management"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Marketing Manager",
+    "to_role": "Director of Marketing",
+    "difficulty": 0.45,
+    "typical_months": 36,
+    "required_upskills": ["Department Strategy", "Executive Communication", "Revenue Attribution"],
+    "market_viability": 0.72,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Director of Marketing",
+    "to_role": "CMO",
+    "difficulty": 0.65,
+    "typical_months": 48,
+    "required_upskills": ["C-Suite Leadership", "Brand Vision", "Investor Relations"],
+    "market_viability": 0.42,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Digital Marketing Specialist",
+    "to_role": "Growth Hacker",
+    "difficulty": 0.4,
+    "typical_months": 12,
+    "required_upskills": ["A/B Testing", "Funnel Optimization", "Product Analytics", "Experimentation"],
+    "market_viability": 0.78,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Sales Representative",
+    "to_role": "Account Executive",
+    "difficulty": 0.3,
+    "typical_months": 18,
+    "required_upskills": ["Consultative Selling", "Pipeline Management", "Negotiation"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Account Executive",
+    "to_role": "Sales Manager",
+    "difficulty": 0.4,
+    "typical_months": 30,
+    "required_upskills": ["Team Management", "Sales Strategy", "Forecasting", "Coaching"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Sales Manager",
+    "to_role": "Director of Sales",
+    "difficulty": 0.45,
+    "typical_months": 36,
+    "required_upskills": ["Revenue Strategy", "Cross-Functional Leadership", "Executive Reporting"],
+    "market_viability": 0.72,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "HR Coordinator",
+    "to_role": "HR Specialist",
+    "difficulty": 0.25,
+    "typical_months": 18,
+    "required_upskills": ["Employment Law", "Compensation & Benefits", "Employee Relations"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "HR Specialist",
+    "to_role": "HR Manager",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["HR Strategy", "Talent Management", "Organizational Development"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "HR Manager",
+    "to_role": "HR Director",
+    "difficulty": 0.45,
+    "typical_months": 36,
+    "required_upskills": ["Culture Strategy", "Executive Coaching", "Change Management"],
+    "market_viability": 0.72,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "HR Director",
+    "to_role": "CHRO",
+    "difficulty": 0.6,
+    "typical_months": 48,
+    "required_upskills": ["People Strategy", "Board Communication", "Organizational Design"],
+    "market_viability": 0.42,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Mobile Developer",
+    "to_role": "Senior Mobile Developer",
+    "difficulty": 0.35,
+    "typical_months": 30,
+    "required_upskills": ["App Architecture", "Performance Optimization", "Platform Expertise"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Frontend Developer",
+    "to_role": "Mobile Developer",
+    "difficulty": 0.4,
+    "typical_months": 10,
+    "required_upskills": ["React Native", "Mobile UI Patterns", "App Store Deployment", "Device APIs"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Software Developer",
+    "to_role": "ML Engineer",
+    "difficulty": 0.55,
+    "typical_months": 18,
+    "required_upskills": ["Machine Learning", "Python", "TensorFlow/PyTorch", "Statistics"],
+    "market_viability": 0.8,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Data Scientist",
+    "to_role": "AI Research Scientist",
+    "difficulty": 0.65,
+    "typical_months": 36,
+    "required_upskills": ["Deep Learning Theory", "Research Methodology", "Paper Writing", "Novel Architecture Design"],
+    "market_viability": 0.6,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "ML Engineer",
+    "to_role": "MLOps Engineer",
+    "difficulty": 0.3,
+    "typical_months": 10,
+    "required_upskills": ["ML Pipeline Automation", "Model Monitoring", "Feature Stores", "Infrastructure"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Business Analyst",
+    "to_role": "Product Manager",
+    "difficulty": 0.4,
+    "typical_months": 18,
+    "required_upskills": ["Product Strategy", "User Experience", "Roadmap Planning", "Technical Literacy"],
+    "market_viability": 0.82,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Business Analyst",
+    "to_role": "Data Analyst",
+    "difficulty": 0.3,
+    "typical_months": 10,
+    "required_upskills": ["SQL", "Python", "Statistical Analysis", "Data Visualization"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Business Analyst",
+    "to_role": "Senior Business Analyst",
+    "difficulty": 0.3,
+    "typical_months": 24,
+    "required_upskills": ["Requirements Elicitation", "Process Modeling", "Stakeholder Management"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Financial Analyst",
+    "to_role": "FinTech Product Manager",
+    "difficulty": 0.55,
+    "typical_months": 18,
+    "required_upskills": ["Product Management", "Technology Fundamentals", "User Research", "Agile"],
+    "market_viability": 0.72,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Senior Accountant",
+    "to_role": "ERP Consultant",
+    "difficulty": 0.5,
+    "typical_months": 14,
+    "required_upskills": ["SAP/Oracle ERP", "Business Process Reengineering", "Consulting Methodology"],
+    "market_viability": 0.78,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Database Administrator",
+    "to_role": "Data Engineer",
+    "difficulty": 0.35,
+    "typical_months": 12,
+    "required_upskills": ["ETL Tools", "Cloud Data Platforms", "Python", "Data Pipeline Design"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Database Administrator",
+    "to_role": "Senior Database Administrator",
+    "difficulty": 0.3,
+    "typical_months": 24,
+    "required_upskills": ["High Availability", "Disaster Recovery", "Performance Tuning", "Database Security"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Network Engineer",
+    "to_role": "Senior Network Engineer",
+    "difficulty": 0.3,
+    "typical_months": 24,
+    "required_upskills": ["Network Architecture", "SDN", "Network Security", "Capacity Planning"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Network Engineer",
+    "to_role": "Cloud Engineer",
+    "difficulty": 0.4,
+    "typical_months": 14,
+    "required_upskills": ["Cloud Networking", "Cloud Platforms", "Infrastructure as Code"],
+    "market_viability": 0.85,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Technical Writer",
+    "to_role": "Developer Advocate",
+    "difficulty": 0.45,
+    "typical_months": 14,
+    "required_upskills": ["Public Speaking", "Coding Demos", "Community Building", "Social Media"],
+    "market_viability": 0.72,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Technical Writer",
+    "to_role": "Content Strategist",
+    "difficulty": 0.35,
+    "typical_months": 12,
+    "required_upskills": ["Content Strategy", "SEO", "Analytics", "Information Architecture"],
+    "market_viability": 0.78,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Software Developer",
+    "to_role": "Solutions Architect",
+    "difficulty": 0.5,
+    "typical_months": 36,
+    "required_upskills": ["Enterprise Architecture", "Cloud Design Patterns", "Stakeholder Communication", "Pre-Sales"],
+    "market_viability": 0.8,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Solutions Architect",
+    "to_role": "Enterprise Architect",
+    "difficulty": 0.45,
+    "typical_months": 36,
+    "required_upskills": ["Enterprise Strategy", "TOGAF", "Business Process Architecture"],
+    "market_viability": 0.72,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Graphic Designer",
+    "to_role": "UI/UX Designer",
+    "difficulty": 0.4,
+    "typical_months": 12,
+    "required_upskills": ["User Research", "Wireframing", "Prototyping", "Usability Testing", "Figma"],
+    "market_viability": 0.82,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "UI/UX Designer",
+    "to_role": "Frontend Developer",
+    "difficulty": 0.55,
+    "typical_months": 14,
+    "required_upskills": ["HTML/CSS", "JavaScript", "React", "Responsive Development"],
+    "market_viability": 0.72,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Manual QA Tester",
+    "to_role": "QA Automation Engineer",
+    "difficulty": 0.5,
+    "typical_months": 14,
+    "required_upskills": ["Programming", "Test Automation Frameworks", "CI/CD", "API Testing"],
+    "market_viability": 0.85,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Manual QA Tester",
+    "to_role": "QA Engineer",
+    "difficulty": 0.3,
+    "typical_months": 12,
+    "required_upskills": ["Test Planning", "Bug Tracking", "Performance Testing Basics"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior QA Engineer",
+    "to_role": "QA Manager",
+    "difficulty": 0.4,
+    "typical_months": 24,
+    "required_upskills": ["Team Management", "Test Strategy", "Quality Metrics", "Process Improvement"],
+    "market_viability": 0.8,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Accounting Manager",
+    "to_role": "Finance Manager",
+    "difficulty": 0.35,
+    "typical_months": 12,
+    "required_upskills": ["Financial Planning & Analysis", "Budgeting", "Business Partnering"],
+    "market_viability": 0.82,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Financial Analyst",
+    "to_role": "Investment Analyst",
+    "difficulty": 0.4,
+    "typical_months": 18,
+    "required_upskills": ["Valuation", "Due Diligence", "Portfolio Analysis", "CFA Preparation"],
+    "market_viability": 0.72,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Accountant",
+    "to_role": "Compliance Officer",
+    "difficulty": 0.4,
+    "typical_months": 18,
+    "required_upskills": ["Regulatory Compliance", "Risk Assessment", "Anti-Money Laundering", "Policy Development"],
+    "market_viability": 0.78,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Senior Software Developer",
+    "to_role": "Technical Lead",
+    "difficulty": 0.35,
+    "typical_months": 18,
+    "required_upskills": ["Architecture Design", "Code Review Leadership", "Sprint Planning", "Mentoring"],
+    "market_viability": 0.9,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Technical Lead",
+    "to_role": "Engineering Manager",
+    "difficulty": 0.4,
+    "typical_months": 18,
+    "required_upskills": ["People Management", "Hiring", "Performance Reviews", "Budget Awareness"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Engineering Manager",
+    "to_role": "CTO",
+    "difficulty": 0.7,
+    "typical_months": 60,
+    "required_upskills": ["Technology Vision", "Business Strategy", "Executive Leadership", "Investor Communication"],
+    "market_viability": 0.35,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Data Analyst",
+    "to_role": "Product Analyst",
+    "difficulty": 0.25,
+    "typical_months": 8,
+    "required_upskills": ["Product Metrics", "A/B Testing", "User Behavior Analysis", "Cohort Analysis"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Product Analyst",
+    "to_role": "Product Manager",
+    "difficulty": 0.4,
+    "typical_months": 18,
+    "required_upskills": ["Product Strategy", "Roadmap Planning", "Stakeholder Management"],
+    "market_viability": 0.82,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Software Developer",
+    "to_role": "Technical Consultant",
+    "difficulty": 0.4,
+    "typical_months": 14,
+    "required_upskills": ["Client Management", "Consulting Methodology", "Presentation Skills", "Business Analysis"],
+    "market_viability": 0.8,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "BI Analyst",
+    "to_role": "BI Developer",
+    "difficulty": 0.3,
+    "typical_months": 10,
+    "required_upskills": ["ETL Development", "Data Modeling", "SQL Optimization", "BI Platform Administration"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "BI Developer",
+    "to_role": "Senior BI Developer",
+    "difficulty": 0.3,
+    "typical_months": 24,
+    "required_upskills": ["Data Architecture", "Performance Optimization", "Mentoring"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior BI Developer",
+    "to_role": "BI Manager",
+    "difficulty": 0.4,
+    "typical_months": 24,
+    "required_upskills": ["Team Leadership", "BI Strategy", "Stakeholder Management"],
+    "market_viability": 0.78,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Payroll Specialist",
+    "to_role": "HR Specialist",
+    "difficulty": 0.35,
+    "typical_months": 14,
+    "required_upskills": ["Employment Law", "Employee Relations", "Benefits Administration"],
+    "market_viability": 0.82,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Administrative Assistant",
+    "to_role": "Office Manager",
+    "difficulty": 0.3,
+    "typical_months": 24,
+    "required_upskills": ["Office Operations", "Vendor Management", "Budget Tracking"],
+    "market_viability": 0.85,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Administrative Assistant",
+    "to_role": "Executive Assistant",
+    "difficulty": 0.3,
+    "typical_months": 18,
+    "required_upskills": ["Executive Communication", "Calendar Management", "Travel Coordination", "Discretion"],
+    "market_viability": 0.88,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Customer Success Manager",
+    "to_role": "Account Manager",
+    "difficulty": 0.25,
+    "typical_months": 8,
+    "required_upskills": ["Upselling", "Revenue Targets", "Contract Negotiation"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Account Manager",
+    "to_role": "Sales Manager",
+    "difficulty": 0.4,
+    "typical_months": 24,
+    "required_upskills": ["Team Management", "Sales Strategy", "Revenue Forecasting"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Frontend Developer",
+    "to_role": "UI/UX Designer",
+    "difficulty": 0.45,
+    "typical_months": 14,
+    "required_upskills": ["Design Thinking", "User Research", "Visual Design", "Prototyping"],
+    "market_viability": 0.7,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Data Scientist",
+    "to_role": "Data Engineering Manager",
+    "difficulty": 0.5,
+    "typical_months": 30,
+    "required_upskills": ["People Management", "Pipeline Architecture", "Infrastructure Planning"],
+    "market_viability": 0.72,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Lead Data Scientist",
+    "to_role": "Head of Data Science",
+    "difficulty": 0.45,
+    "typical_months": 30,
+    "required_upskills": ["Department Strategy", "Executive Communication", "Budget Management"],
+    "market_viability": 0.68,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Senior Financial Analyst",
+    "to_role": "FP&A Manager",
+    "difficulty": 0.4,
+    "typical_months": 24,
+    "required_upskills": ["Team Management", "Enterprise Budgeting", "Board Reporting"],
+    "market_viability": 0.8,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "FP&A Manager",
+    "to_role": "Controller",
+    "difficulty": 0.4,
+    "typical_months": 30,
+    "required_upskills": ["Accounting Oversight", "Internal Controls", "Regulatory Compliance"],
+    "market_viability": 0.75,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Customer Service Representative",
+    "to_role": "Sales Representative",
+    "difficulty": 0.35,
+    "typical_months": 8,
+    "required_upskills": ["Sales Techniques", "Lead Qualification", "CRM Proficiency", "Closing Skills"],
+    "market_viability": 0.85,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "BPO Team Leader",
+    "to_role": "Quality Assurance Analyst",
+    "difficulty": 0.3,
+    "typical_months": 10,
+    "required_upskills": ["Quality Frameworks", "Process Auditing", "Metrics Analysis"],
+    "market_viability": 0.82,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Accountant",
+    "to_role": "Financial Analyst",
+    "difficulty": 0.35,
+    "typical_months": 12,
+    "required_upskills": ["Financial Modeling", "Excel Advanced", "Forecasting", "Business Analysis"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Senior Software Developer",
+    "to_role": "Solutions Architect",
+    "difficulty": 0.45,
+    "typical_months": 24,
+    "required_upskills": ["Enterprise Architecture", "Cloud Design Patterns", "Client Communication"],
+    "market_viability": 0.82,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Product Designer",
+    "to_role": "Product Manager",
+    "difficulty": 0.45,
+    "typical_months": 18,
+    "required_upskills": ["Business Strategy", "Engineering Collaboration", "Market Analysis", "Roadmapping"],
+    "market_viability": 0.72,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Data Analyst",
+    "to_role": "Marketing Analyst",
+    "difficulty": 0.2,
+    "typical_months": 6,
+    "required_upskills": ["Marketing Metrics", "Campaign Analysis", "Attribution Modeling"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Marketing Analyst",
+    "to_role": "Digital Marketing Specialist",
+    "difficulty": 0.3,
+    "typical_months": 10,
+    "required_upskills": ["SEO/SEM", "Content Marketing", "Social Media Strategy"],
+    "market_viability": 0.82,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Cybersecurity Analyst",
+    "to_role": "Penetration Tester",
+    "difficulty": 0.4,
+    "typical_months": 14,
+    "required_upskills": ["Ethical Hacking", "Vulnerability Assessment", "Scripting", "Red Team Tools"],
+    "market_viability": 0.82,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Penetration Tester",
+    "to_role": "Security Consultant",
+    "difficulty": 0.35,
+    "typical_months": 18,
+    "required_upskills": ["Risk Assessment", "Report Writing", "Client Management", "Compliance Frameworks"],
+    "market_viability": 0.8,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Junior Web Developer",
+    "to_role": "Frontend Developer",
+    "difficulty": 0.3,
+    "typical_months": 12,
+    "required_upskills": ["JavaScript Frameworks", "CSS Preprocessors", "Build Tools", "Testing"],
+    "market_viability": 0.92,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Financial Analyst",
+    "to_role": "Data Analyst",
+    "difficulty": 0.3,
+    "typical_months": 8,
+    "required_upskills": ["SQL", "Python", "Data Visualization Tools", "Statistical Software"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Accountant",
+    "to_role": "Internal Auditor",
+    "difficulty": 0.35,
+    "typical_months": 14,
+    "required_upskills": ["Audit Methodology", "Internal Controls", "Risk-Based Auditing"],
+    "market_viability": 0.82,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Internal Auditor",
+    "to_role": "Compliance Officer",
+    "difficulty": 0.35,
+    "typical_months": 18,
+    "required_upskills": ["Regulatory Compliance", "Policy Development", "Risk Management"],
+    "market_viability": 0.8,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Software Developer",
+    "to_role": "Cybersecurity Engineer",
+    "difficulty": 0.5,
+    "typical_months": 18,
+    "required_upskills": ["Application Security", "Threat Modeling", "Secure Coding Practices", "Security Tools"],
+    "market_viability": 0.82,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Principal Engineer",
+    "to_role": "CTO",
+    "difficulty": 0.6,
+    "typical_months": 36,
+    "required_upskills": ["Business Strategy", "People Management", "Executive Leadership", "Financial Acumen"],
+    "market_viability": 0.5,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Scrum Master",
+    "to_role": "Product Manager",
+    "difficulty": 0.45,
+    "typical_months": 14,
+    "required_upskills": ["Product Strategy", "Market Research", "Roadmapping", "Business Metrics"],
+    "market_viability": 0.72,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Technical Support Specialist",
+    "to_role": "Junior Software Developer",
+    "difficulty": 0.55,
+    "typical_months": 14,
+    "required_upskills": ["Programming", "Data Structures", "Algorithms", "Version Control"],
+    "market_viability": 0.72,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "Data Architect",
+    "to_role": "Head of Data Engineering",
+    "difficulty": 0.45,
+    "typical_months": 30,
+    "required_upskills": ["Team Leadership", "Department Strategy", "Stakeholder Management"],
+    "market_viability": 0.72,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Cloud Architect",
+    "to_role": "VP of Engineering",
+    "difficulty": 0.6,
+    "typical_months": 42,
+    "required_upskills": ["Executive Leadership", "People Management", "Business Strategy", "Budget Ownership"],
+    "market_viability": 0.45,
+    "transition_type": "stretch"
+  },
+  {
+    "from_role": "Senior Mobile Developer",
+    "to_role": "Mobile Engineering Lead",
+    "difficulty": 0.35,
+    "typical_months": 18,
+    "required_upskills": ["Technical Leadership", "Architecture Design", "Mentoring", "Sprint Planning"],
+    "market_viability": 0.82,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "BI Analyst",
+    "to_role": "Data Analyst",
+    "difficulty": 0.2,
+    "typical_months": 6,
+    "required_upskills": ["Statistical Analysis", "Python/R", "Advanced SQL"],
+    "market_viability": 0.88,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Senior DevOps Engineer",
+    "to_role": "Platform Engineer",
+    "difficulty": 0.3,
+    "typical_months": 10,
+    "required_upskills": ["Developer Experience", "Internal Tooling", "Platform Design"],
+    "market_viability": 0.85,
+    "transition_type": "lateral"
+  },
+  {
+    "from_role": "Platform Engineer",
+    "to_role": "Infrastructure Architect",
+    "difficulty": 0.45,
+    "typical_months": 30,
+    "required_upskills": ["Enterprise Infrastructure", "Capacity Planning", "Cost Optimization"],
+    "market_viability": 0.78,
+    "transition_type": "vertical"
+  },
+  {
+    "from_role": "Accounting Manager",
+    "to_role": "FinTech Operations Manager",
+    "difficulty": 0.5,
+    "typical_months": 18,
+    "required_upskills": ["Technology Platforms", "API Understanding", "Digital Payments", "Agile"],
+    "market_viability": 0.7,
+    "transition_type": "pivot"
+  },
+  {
+    "from_role": "BPO Operations Manager",
+    "to_role": "IT Service Manager",
+    "difficulty": 0.45,
+    "typical_months": 18,
+    "required_upskills": ["ITIL", "IT Service Management", "SLA Management", "Technology Fundamentals"],
+    "market_viability": 0.72,
+    "transition_type": "pivot"
+  }
+]
