@@ -16,14 +16,9 @@ const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/resume", label: "Resume", icon: FileText },
   { href: "/skills", label: "Skills", icon: Tags },
-  { href: "/explore", label: "Explore Careers", icon: Compass, disabled: true },
-  { href: "/transitions", label: "Career GPS", icon: Route, disabled: true },
-  {
-    href: "/roadmap",
-    label: "Roadmap",
-    icon: GraduationCap,
-    disabled: true,
-  },
+  { href: "/explore", label: "Explore Careers", icon: Compass },
+  { href: "/transitions", label: "Career GPS", icon: Route },
+  { href: "/roadmap", label: "Roadmap", icon: GraduationCap },
 ];
 
 export function Sidebar() {
@@ -44,22 +39,16 @@ export function Sidebar() {
           return (
             <Link
               key={item.href}
-              href={item.disabled ? "#" : item.href}
+              href={item.href}
               className={cn(
                 "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
                 isActive
                   ? "bg-primary/10 font-medium text-primary"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                item.disabled && "pointer-events-none opacity-40",
               )}
             >
               <Icon className="h-4 w-4" />
               {item.label}
-              {item.disabled && (
-                <span className="ml-auto text-[10px] uppercase tracking-wider opacity-60">
-                  Soon
-                </span>
-              )}
             </Link>
           );
         })}

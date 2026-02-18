@@ -32,7 +32,7 @@ const features = [
     description:
       "Discover matching career roles ranked by fit score using embeddings similarity and meta-model scoring.",
     href: "/explore",
-    available: false,
+    available: true,
   },
   {
     icon: Route,
@@ -40,7 +40,7 @@ const features = [
     description:
       "Multi-step career transition paths with difficulty scoring, timelines, and skill requirements.",
     href: "/transitions",
-    available: false,
+    available: true,
   },
   {
     icon: GraduationCap,
@@ -48,7 +48,7 @@ const features = [
     description:
       "Personalized skill gap analysis with course recommendations, certifications, and milestones.",
     href: "/roadmap",
-    available: false,
+    available: true,
   },
 ];
 
