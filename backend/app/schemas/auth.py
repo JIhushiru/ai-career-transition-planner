@@ -22,8 +22,15 @@ class TokenResponse(BaseModel):
     name: str | None = None
 
 
+class ProfileUpdateRequest(BaseModel):
+    current_salary: int | None = None
+    current_role_title: str | None = Field(default=None, max_length=150)
+
+
 class UserResponse(BaseModel):
     id: int
     email: str | None
     name: str | None
+    current_salary: int | None = None
+    current_role_title: str | None = None
     created_at: datetime

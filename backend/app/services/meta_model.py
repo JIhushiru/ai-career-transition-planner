@@ -26,6 +26,7 @@ WEIGHT_PRESETS: dict[str, dict[str, float]] = {
         "experience": 0.15,
         "llm": 0.20,
         "market": 0.10,
+        "salary_uplift": 0.0,
     },
     "stability": {
         "embedding": 0.20,
@@ -33,6 +34,7 @@ WEIGHT_PRESETS: dict[str, dict[str, float]] = {
         "experience": 0.20,
         "llm": 0.10,
         "market": 0.20,
+        "salary_uplift": 0.0,
     },
     "pivot": {
         "embedding": 0.35,
@@ -40,6 +42,7 @@ WEIGHT_PRESETS: dict[str, dict[str, float]] = {
         "experience": 0.10,
         "llm": 0.25,
         "market": 0.15,
+        "salary_uplift": 0.0,
     },
     "late_career": {
         "embedding": 0.20,
@@ -47,6 +50,15 @@ WEIGHT_PRESETS: dict[str, dict[str, float]] = {
         "experience": 0.25,
         "llm": 0.05,
         "market": 0.20,
+        "salary_uplift": 0.0,
+    },
+    "maximize_earnings": {
+        "embedding": 0.20,
+        "skill_overlap": 0.25,
+        "experience": 0.10,
+        "llm": 0.15,
+        "market": 0.10,
+        "salary_uplift": 0.20,
     },
 }
 
@@ -65,6 +77,7 @@ class MetaModelScorer:
         career_mode: str = "growth",
         top_k: int = 15,
         use_llm: bool = True,
+        user_salary: int | None = None,
     ) -> list[dict]:
         """Run the full meta-model scoring pipeline.
 
@@ -128,12 +141,20 @@ class MetaModelScorer:
             if career_mode == "stability" and role.stability_score:
                 market_score = (market_score + role.stability_score) / 2
 
+            # Salary uplift score: how much more this role pays vs user's current salary
+            salary_uplift_score = 0.0
+            if user_salary and user_salary > 0 and role.salary_min_ph:
+                role_midpoint = ((role.salary_min_ph or 0) + (role.salary_max_ph or role.salary_min_ph)) // 2
+                uplift_ratio = (role_midpoint - user_salary) / (user_salary * 0.5)
+                salary_uplift_score = min(max(uplift_ratio, 0.0), 1.0)
+
             meta_score = (
                 weights["embedding"] * emb_score
                 + weights["skill_overlap"] * skill_score
                 + weights["experience"] * exp_score
                 + weights["llm"] * 0.5  # placeholder until LLM scoring
                 + weights["market"] * market_score
+                + weights.get("salary_uplift", 0.0) * salary_uplift_score
             )
 
             scored_candidates.append({
@@ -146,6 +167,7 @@ class MetaModelScorer:
                     "experience_match_score": round(exp_score, 4),
                     "llm_score": None,
                     "market_score": round(market_score, 4),
+                    "salary_uplift_score": round(salary_uplift_score, 4) if user_salary else None,
                 },
                 "missing_required": overlap.get("missing_required", []),
                 "matched_skills": overlap.get("matched_skills", []),
@@ -235,7 +257,8 @@ class MetaModelScorer:
                     + weights["skill_overlap"] * (b["skill_overlap_score"] or 0)
                     + weights["experience"] * (b["experience_match_score"] or 0)
                     + weights["llm"] * llm_score
-                    + weights["market"] * (b["market_score"] or 0),
+                    + weights["market"] * (b["market_score"] or 0)
+                    + weights.get("salary_uplift", 0.0) * (b.get("salary_uplift_score") or 0),
                     4,
                 )
             except Exception as e:

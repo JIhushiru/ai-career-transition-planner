@@ -14,12 +14,13 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { MatchCard } from "@/components/career/match-card";
 import { ResumePicker } from "@/components/resume/resume-picker";
-import { apiPost } from "@/lib/api-client";
+import { apiPost, apiPut } from "@/lib/api-client";
 import { useSession } from "@/context/session-context";
 import type { MatchResultsResponse } from "@/types/career";
 import type { ResumeListItem } from "@/types/resume";
 
 const careerModes = [
+  { value: "maximize_earnings", label: "Maximize Earnings", description: "Find higher-paying roles" },
   { value: "growth", label: "Growth", description: "Maximize career growth" },
   { value: "stability", label: "Stability", description: "Prioritize job security" },
   { value: "pivot", label: "Pivot", description: "Open to career changes" },
@@ -27,10 +28,11 @@ const careerModes = [
 ];
 
 export default function ExplorePage() {
-  const { userId: sessionUserId } = useSession();
+  const { userId: sessionUserId, currentSalary, setCurrentSalary } = useSession();
   const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
   const [yearsExp, setYearsExp] = useState("");
-  const [careerMode, setCareerMode] = useState("growth");
+  const [salaryInput, setSalaryInput] = useState(currentSalary ? String(currentSalary) : "");
+  const [careerMode, setCareerMode] = useState("maximize_earnings");
   const [useLlm, setUseLlm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -44,11 +46,20 @@ export default function ExplorePage() {
     setIsLoading(true);
     setError(null);
     try {
+      const parsedSalary = salaryInput ? parseInt(salaryInput) : null;
+
+      // Save salary to session and backend profile
+      if (parsedSalary && parsedSalary !== currentSalary) {
+        setCurrentSalary(parsedSalary);
+        apiPut("/auth/me/profile", { current_salary: parsedSalary }).catch(() => {});
+      }
+
       const res = await apiPost<MatchResultsResponse>("/career/match", {
         user_id: sessionUserId,
         resume_id: selectedResumeId ?? undefined,
         career_mode: careerMode,
         years_experience: yearsExp ? parseInt(yearsExp) : null,
+        current_salary: parsedSalary,
         use_llm: useLlm,
         top_k: 15,
       });
@@ -84,6 +95,20 @@ export default function ExplorePage() {
               selectedResumeId={selectedResumeId}
               onSelect={handleResumeSelect}
             />
+            <div>
+              <label className="mb-1 block text-sm font-medium">
+                Current Monthly Salary (PHP)
+              </label>
+              <Input
+                placeholder="e.g., 25000"
+                type="number"
+                value={salaryInput}
+                onChange={(e) => setSalaryInput(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="mb-1 block text-sm font-medium">
                 Years of Experience

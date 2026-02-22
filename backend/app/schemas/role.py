@@ -11,6 +11,8 @@ class RoleResponse(BaseModel):
     preferred_skills: list[str] = Field(default_factory=list)
     salary_range_ph: str | None = None
     salary_range_usd: str | None = None
+    salary_min_ph: int | None = None
+    salary_max_ph: int | None = None
     seniority: str | None = None
     min_years_experience: int | None = None
     demand_score: float | None = None
@@ -42,6 +44,9 @@ class UserMatchResponse(BaseModel):
     explanation: str | None = None
     matched_skills: list[str] = Field(default_factory=list)
     missing_skills: list[str] = Field(default_factory=list)
+    salary_increase_min: int | None = None
+    salary_increase_max: int | None = None
+    salary_increase_pct: float | None = None
 
 
 class MatchResultsResponse(BaseModel):

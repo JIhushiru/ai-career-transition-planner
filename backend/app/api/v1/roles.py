@@ -23,6 +23,8 @@ def _role_to_response(role: Role) -> RoleResponse:
         preferred_skills=json.loads(role.preferred_skills) if role.preferred_skills else [],
         salary_range_ph=role.salary_range_ph,
         salary_range_usd=role.salary_range_usd,
+        salary_min_ph=role.salary_min_ph,
+        salary_max_ph=role.salary_max_ph,
         seniority=role.seniority,
         min_years_experience=role.min_years_experience,
         demand_score=role.demand_score,

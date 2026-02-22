@@ -18,6 +18,8 @@ class Role(Base):
     preferred_skills: Mapped[str | None] = mapped_column(Text, nullable=True)
     salary_range_ph: Mapped[str | None] = mapped_column(String(100), nullable=True)
     salary_range_usd: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    salary_min_ph: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    salary_max_ph: Mapped[int | None] = mapped_column(Integer, nullable=True)
     seniority: Mapped[str | None] = mapped_column(String(30), nullable=True)
     min_years_experience: Mapped[int | None] = mapped_column(Integer, nullable=True)
     onet_code: Mapped[str | None] = mapped_column(String(20), nullable=True)

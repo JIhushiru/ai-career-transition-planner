@@ -8,6 +8,8 @@ export interface RoleResponse {
   preferred_skills: string[];
   salary_range_ph: string | null;
   salary_range_usd: string | null;
+  salary_min_ph: number | null;
+  salary_max_ph: number | null;
   seniority: string | null;
   min_years_experience: number | null;
   demand_score: number | null;
@@ -39,6 +41,9 @@ export interface UserMatchResponse {
   explanation: string | null;
   matched_skills: string[];
   missing_skills: string[];
+  salary_increase_min: number | null;
+  salary_increase_max: number | null;
+  salary_increase_pct: number | null;
 }
 
 export interface MatchResultsResponse {

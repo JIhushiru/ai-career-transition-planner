@@ -8,6 +8,7 @@ from app.api.deps import get_current_user, get_db
 from app.models.user import User
 from app.schemas.auth import (
     LoginRequest,
+    ProfileUpdateRequest,
     SignupRequest,
     TokenResponse,
     UserResponse,
@@ -68,5 +69,29 @@ async def get_me(user: User = Depends(get_current_user)):
         id=user.id,
         email=user.email,
         name=user.name,
+        current_salary=user.current_salary,
+        current_role_title=user.current_role_title,
+        created_at=user.created_at,
+    )
+
+
+@router.put("/me/profile", response_model=UserResponse)
+async def update_profile(
+    body: ProfileUpdateRequest,
+    user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    if body.current_salary is not None:
+        user.current_salary = body.current_salary
+    if body.current_role_title is not None:
+        user.current_role_title = body.current_role_title
+    await db.commit()
+    await db.refresh(user)
+    return UserResponse(
+        id=user.id,
+        email=user.email,
+        name=user.name,
+        current_salary=user.current_salary,
+        current_role_title=user.current_role_title,
         created_at=user.created_at,
     )

@@ -10,6 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.database import AsyncSessionLocal, init_db
 from app.models.role import Role
 from app.models.career_graph import CareerTransition
+from app.services.salary_parser import parse_salary_range_ph
 
 DATA_DIR = Path(__file__).parent
 
@@ -30,10 +31,16 @@ async def seed_roles(db: AsyncSession) -> dict[str, int]:
     title_to_id: dict[str, int] = {}
 
     for entry in roles_data:
+        sal_min, sal_max = parse_salary_range_ph(entry.get("salary_range_ph"))
+
         result = await db.execute(select(Role).where(Role.title == entry["title"]))
         existing = result.scalar_one_or_none()
         if existing:
             title_to_id[entry["title"]] = existing.id
+            # Backfill numeric salary if missing
+            if existing.salary_min_ph is None and sal_min is not None:
+                existing.salary_min_ph = sal_min
+                existing.salary_max_ph = sal_max
             continue
 
         role = Role(
@@ -45,6 +52,8 @@ async def seed_roles(db: AsyncSession) -> dict[str, int]:
             preferred_skills=json.dumps(entry.get("preferred_skills", [])),
             salary_range_ph=entry.get("salary_range_ph"),
             salary_range_usd=entry.get("salary_range_usd"),
+            salary_min_ph=sal_min,
+            salary_max_ph=sal_max,
             seniority=entry.get("seniority"),
             min_years_experience=entry.get("min_years_experience"),
             onet_code=entry.get("onet_code"),

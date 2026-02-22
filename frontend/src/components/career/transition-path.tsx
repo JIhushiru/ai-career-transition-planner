@@ -4,6 +4,7 @@ import { ArrowRight, Clock, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { TransitionPathResponse } from "@/types/career";
+import { formatSalaryRange } from "@/lib/salary";
 
 interface TransitionPathViewProps {
   path: TransitionPathResponse;
@@ -23,6 +24,11 @@ function difficultyLabel(d: number): string {
 }
 
 export function TransitionPathView({ path, index }: TransitionPathViewProps) {
+  const firstRole = path.steps[0]?.from_role;
+  const lastRole = path.steps[path.steps.length - 1]?.to_role;
+  const startSalary = firstRole?.salary_min_ph || firstRole?.salary_max_ph;
+  const endSalary = lastRole?.salary_min_ph || lastRole?.salary_max_ph;
+
   return (
     <Card>
       <CardHeader className="pb-3">
@@ -43,6 +49,11 @@ export function TransitionPathView({ path, index }: TransitionPathViewProps) {
             </span>
           </div>
         </div>
+        {startSalary && endSalary && (
+          <p className="text-xs text-emerald-600 dark:text-emerald-400">
+            {formatSalaryRange(firstRole.salary_min_ph, firstRole.salary_max_ph)} → {formatSalaryRange(lastRole.salary_min_ph, lastRole.salary_max_ph)}/mo
+          </p>
+        )}
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
@@ -69,6 +80,11 @@ export function TransitionPathView({ path, index }: TransitionPathViewProps) {
                   <span className={difficultyColor(step.difficulty)}>
                     {difficultyLabel(step.difficulty)}
                   </span>
+                  {step.to_role.salary_min_ph && (
+                    <span className="text-emerald-600 dark:text-emerald-400">
+                      {formatSalaryRange(step.to_role.salary_min_ph, step.to_role.salary_max_ph)}/mo
+                    </span>
+                  )}
                 </div>
                 {step.skills_needed.length > 0 && (
                   <div className="flex flex-wrap gap-1 pt-1">

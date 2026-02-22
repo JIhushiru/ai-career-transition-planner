@@ -42,6 +42,7 @@ class MatchRequest(BaseModel):
     resume_id: int | None = None
     career_mode: str = "growth"
     years_experience: int | None = None
+    current_salary: int | None = None
     use_llm: bool = True
     top_k: int = Field(default=15, ge=1, le=50)
 
@@ -103,6 +104,9 @@ async def compute_matches(
             "Role embeddings not computed yet. POST /api/v1/career/embeddings first.",
         )
 
+    # Resolve salary: prefer request body, fall back to user profile
+    user_salary = body.current_salary or user.current_salary
+
     scored = await meta_model.score_matches(
         db,
         user_id=body.user_id,
@@ -111,23 +115,48 @@ async def compute_matches(
         career_mode=body.career_mode,
         top_k=body.top_k,
         use_llm=body.use_llm,
+        user_salary=user_salary,
     )
 
     matches = []
     for s in scored:
         role = s["role"]
+        role_resp = _role_to_response(role)
+
+        # Compute salary deltas if user salary is known
+        sal_inc_min = sal_inc_max = sal_inc_pct = None
+        if user_salary and role.salary_min_ph:
+            sal_inc_min = role.salary_min_ph - user_salary
+            sal_inc_max = (role.salary_max_ph or role.salary_min_ph) - user_salary
+            midpoint = ((role.salary_min_ph or 0) + (role.salary_max_ph or role.salary_min_ph)) // 2
+            sal_inc_pct = round(((midpoint - user_salary) / user_salary) * 100, 1) if user_salary > 0 else None
+
         matches.append(
             UserMatchResponse(
-                role=_role_to_response(role),
+                role=role_resp,
                 meta_score=s["meta_score"],
                 breakdown=s["breakdown"],
                 explanation=s.get("explanation"),
                 matched_skills=s.get("matched_skills", []),
                 missing_skills=s.get("missing_required", []),
+                salary_increase_min=sal_inc_min,
+                salary_increase_max=sal_inc_max,
+                salary_increase_pct=sal_inc_pct,
             )
         )
 
     return MatchResultsResponse(matches=matches, user_id=body.user_id)
+
+
+def _compute_salary_deltas(role: Role, user_salary: int | None):
+    """Compute salary increase fields relative to user's current salary."""
+    if not user_salary or not role.salary_min_ph:
+        return None, None, None
+    sal_inc_min = role.salary_min_ph - user_salary
+    sal_inc_max = (role.salary_max_ph or role.salary_min_ph) - user_salary
+    midpoint = ((role.salary_min_ph or 0) + (role.salary_max_ph or role.salary_min_ph)) // 2
+    sal_inc_pct = round(((midpoint - user_salary) / user_salary) * 100, 1) if user_salary > 0 else None
+    return sal_inc_min, sal_inc_max, sal_inc_pct
 
 
 @router.get("/match/{user_id}/results", response_model=MatchResultsResponse)
@@ -136,6 +165,11 @@ async def get_cached_matches(
     db: AsyncSession = Depends(get_db),
 ):
     """Retrieve previously computed match results."""
+    # Get user for salary context
+    user_result = await db.execute(select(User).where(User.id == user_id))
+    user = user_result.scalar_one_or_none()
+    user_salary = user.current_salary if user else None
+
     result = await db.execute(
         select(UserMatch, Role)
         .join(Role, UserMatch.role_id == Role.id)
@@ -149,6 +183,7 @@ async def get_cached_matches(
 
     matches = []
     for match, role in rows:
+        sal_inc_min, sal_inc_max, sal_inc_pct = _compute_salary_deltas(role, user_salary)
         matches.append(
             UserMatchResponse(
                 role=_role_to_response(role),
@@ -161,10 +196,64 @@ async def get_cached_matches(
                     "market_score": match.market_score,
                 },
                 explanation=match.explanation,
+                salary_increase_min=sal_inc_min,
+                salary_increase_max=sal_inc_max,
+                salary_increase_pct=sal_inc_pct,
             )
         )
 
     return MatchResultsResponse(matches=matches, user_id=user_id)
+
+
+@router.get("/quick-wins/{user_id}", response_model=list[UserMatchResponse])
+async def get_quick_wins(
+    user_id: int,
+    db: AsyncSession = Depends(get_db),
+):
+    """Get high-match roles that pay more than the user's current salary."""
+    user_result = await db.execute(select(User).where(User.id == user_id))
+    user = user_result.scalar_one_or_none()
+    if not user:
+        raise HTTPException(404, "User not found")
+
+    if not user.current_salary:
+        return []
+
+    result = await db.execute(
+        select(UserMatch, Role)
+        .join(Role, UserMatch.role_id == Role.id)
+        .where(
+            UserMatch.user_id == user_id,
+            UserMatch.meta_score >= 0.5,
+            Role.salary_min_ph > user.current_salary,
+        )
+        .order_by(Role.salary_max_ph.desc())
+        .limit(5)
+    )
+    rows = result.all()
+
+    wins = []
+    for match, role in rows:
+        sal_inc_min, sal_inc_max, sal_inc_pct = _compute_salary_deltas(role, user.current_salary)
+        wins.append(
+            UserMatchResponse(
+                role=_role_to_response(role),
+                meta_score=match.meta_score or 0.0,
+                breakdown={
+                    "embedding_score": match.embedding_score,
+                    "skill_overlap_score": match.skill_overlap_score,
+                    "experience_match_score": match.experience_match_score,
+                    "llm_score": match.llm_score,
+                    "market_score": match.market_score,
+                },
+                explanation=match.explanation,
+                salary_increase_min=sal_inc_min,
+                salary_increase_max=sal_inc_max,
+                salary_increase_pct=sal_inc_pct,
+            )
+        )
+
+    return wins
 
 
 @router.post("/transition-paths", response_model=CareerPathsResponse)

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Check, X } from "lucide-react";
+import { ChevronDown, ChevronUp, Check, X, TrendingUp } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { UserMatchResponse } from "@/types/career";
+import { formatSalaryRange, formatSalaryDelta } from "@/lib/salary";
 
 const seniorityColors: Record<string, string> = {
   entry: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
@@ -45,11 +46,12 @@ interface MatchCardProps {
 }
 
 export function MatchCard({ match, rank, onClick }: MatchCardProps) {
-  const { role, meta_score, breakdown, explanation, matched_skills, missing_skills } = match;
+  const { role, meta_score, breakdown, explanation, matched_skills, missing_skills, salary_increase_pct, salary_increase_min, salary_increase_max } = match;
   const pct = Math.round(meta_score * 100);
   const [expanded, setExpanded] = useState(false);
 
   const hasSkillData = matched_skills.length > 0 || missing_skills.length > 0;
+  const hasSalaryIncrease = salary_increase_pct != null && salary_increase_pct > 0;
 
   return (
     <Card
@@ -78,11 +80,22 @@ export function MatchCard({ match, rank, onClick }: MatchCardProps) {
               {role.salary_range_ph && (
                 <span className="ml-2 text-xs">{role.salary_range_ph}</span>
               )}
+              {hasSalaryIncrease && (
+                <span className="block mt-1 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                  {formatSalaryDelta(salary_increase_min!)} to {formatSalaryDelta(salary_increase_max!)}/mo
+                </span>
+              )}
             </CardDescription>
           </div>
-          <div className="text-right">
+          <div className="text-right space-y-1">
             <span className="text-2xl font-bold text-primary">{pct}%</span>
             <p className="text-[10px] text-muted-foreground">match</p>
+            {hasSalaryIncrease && (
+              <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300 text-[10px]">
+                <TrendingUp className="mr-0.5 h-3 w-3" />
+                +{Math.round(salary_increase_pct!)}%
+              </Badge>
+            )}
           </div>
         </div>
       </CardHeader>
