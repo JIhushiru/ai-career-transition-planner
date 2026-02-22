@@ -5,7 +5,7 @@
     "market": "Philippines",
     "currency": "PHP",
     "description": "Career roles seed data for the Philippine job market",
-    "total_roles": 234
+    "total_roles": 232
   },
   "roles": [
     {
@@ -149,8 +149,8 @@
         "Monitoring Tools",
         "Python"
       ],
-      "salary_range_ph": "PHP 50,000 - 100,000",
-      "salary_range_usd": "$900 - $1,800",
+      "salary_range_ph": "PHP 55,000 - 110,000",
+      "salary_range_usd": "$1,000 - $1,950",
       "seniority": "mid",
       "min_years_experience": 3,
       "onet_code": "15-1244.00",
@@ -289,7 +289,8 @@
         "CI/CD",
         "Cloud Platforms",
         "Infrastructure as Code",
-        "Linux"
+        "Linux",
+        "Monitoring & Observability"
       ],
       "preferred_skills": [
         "Go",
@@ -499,7 +500,8 @@
         "Analytics Tools",
         "Workshop Facilitation",
         "Ethnographic Research",
-        "Accessibility"
+        "Accessibility",
+        "Figma"
       ],
       "salary_range_ph": "PHP 28,000 - 55,000",
       "salary_range_usd": "$500 - $1,000",
@@ -553,7 +555,7 @@
         "Stakeholder Communication"
       ],
       "preferred_skills": [
-        "JIRA",
+        "Jira",
         "Data Analysis",
         "Domain Expertise",
         "Technical Understanding",
@@ -584,7 +586,7 @@
       "preferred_skills": [
         "SAFe",
         "Kanban",
-        "JIRA",
+        "Jira",
         "Metrics & Reporting",
         "Change Management"
       ],
@@ -628,35 +630,6 @@
       "remote_friendly": true
     },
     {
-      "title": "Staff Accountant",
-      "title_ph": "Staff Accountant / Junior Accountant",
-      "category": "Finance",
-      "description": "Prepares financial statements, maintains general ledger accounts, and assists with month-end closing. Ensures compliance with Philippine accounting standards (PFRS/PAS).",
-      "required_skills": [
-        "Bookkeeping",
-        "General Ledger",
-        "Financial Reporting",
-        "PFRS/PAS",
-        "MS Excel"
-      ],
-      "preferred_skills": [
-        "SAP",
-        "QuickBooks",
-        "BIR Compliance",
-        "Reconciliation",
-        "ERP Systems"
-      ],
-      "salary_range_ph": "PHP 18,000 - 28,000",
-      "salary_range_usd": "$300 - $500",
-      "seniority": "entry",
-      "min_years_experience": 0,
-      "onet_code": "13-2011.00",
-      "demand_score": 0.82,
-      "stability_score": 0.8,
-      "growth_potential": 0.65,
-      "remote_friendly": false
-    },
-    {
       "title": "Senior Accountant",
       "title_ph": "Senior Accountant",
       "category": "Finance",
@@ -666,7 +639,7 @@
         "PFRS/PAS",
         "Tax Compliance",
         "Auditing",
-        "MS Excel"
+        "Excel"
       ],
       "preferred_skills": [
         "SAP",
@@ -695,7 +668,7 @@
         "BIR Regulations",
         "NIRC",
         "Tax Returns Preparation",
-        "MS Excel"
+        "Excel"
       ],
       "preferred_skills": [
         "Transfer Pricing",
@@ -750,7 +723,7 @@
       "description": "Analyzes financial data, prepares forecasts, and builds financial models to support business decisions. Evaluates investment opportunities and tracks financial performance.",
       "required_skills": [
         "Financial Modeling",
-        "MS Excel",
+        "Excel",
         "Financial Analysis",
         "Forecasting",
         "Reporting"
@@ -867,7 +840,7 @@
       "required_skills": [
         "Bookkeeping",
         "Accounts Payable/Receivable",
-        "MS Excel",
+        "Excel",
         "Data Entry",
         "Basic Accounting"
       ],
@@ -994,8 +967,8 @@
         "SOC Operations",
         "Compliance (ISO 27001)"
       ],
-      "salary_range_ph": "PHP 45,000 - 95,000",
-      "salary_range_usd": "$800 - $1,700",
+      "salary_range_ph": "PHP 45,000 - 100,000",
+      "salary_range_usd": "$800 - $1,800",
       "seniority": "mid",
       "min_years_experience": 3,
       "onet_code": "15-1212.00",
@@ -1081,8 +1054,8 @@
         "Performance Management",
         "Strategic Planning"
       ],
-      "salary_range_ph": "PHP 80,000 - 140,000",
-      "salary_range_usd": "$1,450 - $2,500",
+      "salary_range_ph": "PHP 90,000 - 150,000",
+      "salary_range_usd": "$1,600 - $2,700",
       "seniority": "senior",
       "min_years_experience": 6,
       "onet_code": "11-3021.00",
@@ -1319,8 +1292,8 @@
       "min_years_experience": 7,
       "onet_code": "15-1299.09",
       "demand_score": 0.6,
-      "stability_score": 0.72,
-      "growth_potential": 0.78,
+      "stability_score": 0.7,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -1342,8 +1315,8 @@
         "Report Generation",
         "Conflict Resolution"
       ],
-      "salary_range_ph": "PHP 25,000 - 45,000",
-      "salary_range_usd": "$450 - $800",
+      "salary_range_ph": "PHP 30,000 - 50,000",
+      "salary_range_usd": "$550 - $900",
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": "43-1011.00",
@@ -1594,7 +1567,7 @@
         "Programming Basics",
         "HTML/CSS/JavaScript",
         "Git",
-        "Problem Solving",
+        "Problem-Solving",
         "Willingness to Learn"
       ],
       "preferred_skills": [
@@ -1624,7 +1597,8 @@
         "Monitoring & Alerting",
         "Incident Response",
         "Automation",
-        "Cloud Platforms"
+        "Cloud Platforms",
+        "Git"
       ],
       "preferred_skills": [
         "Kubernetes",
@@ -1633,8 +1607,8 @@
         "Chaos Engineering",
         "Go/Python"
       ],
-      "salary_range_ph": "PHP 55,000 - 110,000",
-      "salary_range_usd": "$1,000 - $1,950",
+      "salary_range_ph": "PHP 60,000 - 120,000",
+      "salary_range_usd": "$1,050 - $2,150",
       "seniority": "mid",
       "min_years_experience": 3,
       "onet_code": "15-1244.00",
@@ -1710,7 +1684,7 @@
         "Accounts Payable",
         "Invoice Processing",
         "Reconciliation",
-        "MS Excel",
+        "Excel",
         "Attention to Detail"
       ],
       "preferred_skills": [
@@ -1797,7 +1771,7 @@
         "Workforce Forecasting",
         "Scheduling",
         "Data Analysis",
-        "MS Excel",
+        "Excel",
         "Real-Time Management"
       ],
       "preferred_skills": [
@@ -1923,8 +1897,8 @@
         "Monitoring",
         "Cost Management"
       ],
-      "salary_range_ph": "PHP 45,000 - 90,000",
-      "salary_range_usd": "$800 - $1,600",
+      "salary_range_ph": "PHP 50,000 - 95,000",
+      "salary_range_usd": "$900 - $1,700",
       "seniority": "mid",
       "min_years_experience": 3,
       "onet_code": "15-1244.00",
@@ -1973,7 +1947,8 @@
         "Python",
         "PyTorch",
         "Statistics",
-        "Linear Algebra"
+        "Linear Algebra",
+        "Research Methodology"
       ],
       "preferred_skills": [
         "NLP",
@@ -1987,22 +1962,23 @@
       "seniority": "mid",
       "min_years_experience": 3,
       "onet_code": null,
-      "demand_score": 0.7,
+      "demand_score": 0.68,
       "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "growth_potential": 0.92,
       "remote_friendly": true
     },
     {
       "title": "Account Executive",
       "title_ph": "Account Executive",
-      "category": "Finance",
+      "category": "Sales",
       "description": "Manages client accounts and drives revenue growth through relationship building and strategic selling. Identifies new business opportunities and ensures client satisfaction and retention.",
       "required_skills": [
         "Sales",
         "Client Relationship Management",
         "Negotiation",
         "Communication",
-        "CRM Software"
+        "CRM Software",
+        "Presentation Skills"
       ],
       "preferred_skills": [
         "Salesforce",
@@ -2016,15 +1992,15 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.65,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
       "title": "Account Manager",
       "title_ph": "Account Manager",
-      "category": "Finance",
+      "category": "Sales",
       "description": "Oversees a portfolio of client accounts, ensuring long-term satisfaction and revenue growth. Develops account strategies, manages renewals, and identifies upsell opportunities.",
       "required_skills": [
         "Account Management",
@@ -2045,8 +2021,8 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.72,
       "growth_potential": 0.7,
       "remote_friendly": true
     },
@@ -2074,38 +2050,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
-      "remote_friendly": true
-    },
-    {
-      "title": "Accounting Clerk",
-      "title_ph": "Accounting Clerk",
-      "category": "Finance",
-      "description": "Performs routine accounting tasks including data entry, invoice processing, and bank reconciliations. Supports the accounting team with accurate record-keeping.",
-      "required_skills": [
-        "Bookkeeping",
-        "Data Entry",
-        "Excel",
-        "Accounts Payable/Receivable",
-        "Attention to Detail"
-      ],
-      "preferred_skills": [
-        "QuickBooks",
-        "SAP",
-        "Filing",
-        "Basic Accounting",
-        "Communication"
-      ],
-      "salary_range_ph": "PHP 15,000 - 25,000",
-      "salary_range_usd": "$250 - $450",
-      "seniority": "entry",
-      "min_years_experience": 0,
-      "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.82,
+      "stability_score": 0.82,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -2128,14 +2075,14 @@
         "Process Improvement",
         "Stakeholder Management"
       ],
-      "salary_range_ph": "PHP 55,000 - 85,000",
-      "salary_range_usd": "$1,000 - $1,500",
+      "salary_range_ph": "PHP 55,000 - 110,000",
+      "salary_range_usd": "$1,000 - $1,950",
       "seniority": "senior",
       "min_years_experience": 7,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.85,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -2162,9 +2109,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.72,
+      "growth_potential": 0.5,
       "remote_friendly": true
     },
     {
@@ -2192,9 +2139,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.65,
+      "stability_score": 0.68,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -2207,7 +2154,8 @@
         "Financial Analysis",
         "Risk Assessment",
         "Compliance",
-        "Communication"
+        "Communication",
+        "Excel"
       ],
       "preferred_skills": [
         "Internal Controls",
@@ -2216,14 +2164,14 @@
         "SAP",
         "Report Writing"
       ],
-      "salary_range_ph": "PHP 20,000 - 38,000",
-      "salary_range_usd": "$350 - $700",
+      "salary_range_ph": "PHP 23,000 - 40,000",
+      "salary_range_usd": "$400 - $700",
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.82,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -2250,9 +2198,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.75,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -2280,9 +2228,9 @@
       "seniority": "senior",
       "min_years_experience": 7,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.78,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -2310,9 +2258,9 @@
       "seniority": "senior",
       "min_years_experience": 8,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.75,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -2339,9 +2287,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.88,
+      "stability_score": 0.8,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -2368,9 +2316,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.75,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -2398,9 +2346,9 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.5,
+      "stability_score": 0.78,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -2428,9 +2376,9 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.62,
+      "stability_score": 0.82,
+      "growth_potential": 0.8,
       "remote_friendly": true
     },
     {
@@ -2444,7 +2392,8 @@
         "Team Leadership",
         "Digital Marketing",
         "Stakeholder Management",
-        "Budgeting"
+        "Budgeting",
+        "Revenue Growth"
       ],
       "preferred_skills": [
         "Growth Marketing",
@@ -2458,9 +2407,9 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
+      "demand_score": 0.55,
       "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -2488,9 +2437,9 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.55,
+      "stability_score": 0.75,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -2517,9 +2466,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.68,
+      "stability_score": 0.82,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -2546,9 +2495,9 @@
       "seniority": "entry",
       "min_years_experience": 1,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.85,
+      "stability_score": 0.75,
+      "growth_potential": 0.5,
       "remote_friendly": true
     },
     {
@@ -2575,9 +2524,9 @@
       "seniority": "mid",
       "min_years_experience": 3,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.72,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -2604,9 +2553,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.82,
+      "stability_score": 0.82,
+      "growth_potential": 0.88,
       "remote_friendly": true
     },
     {
@@ -2619,7 +2568,8 @@
         "Vulnerability Assessment",
         "Firewall Management",
         "SIEM",
-        "Incident Response"
+        "Incident Response",
+        "Linux"
       ],
       "preferred_skills": [
         "Penetration Testing",
@@ -2628,14 +2578,14 @@
         "IDS/IPS",
         "Cryptography"
       ],
-      "salary_range_ph": "PHP 45,000 - 80,000",
-      "salary_range_usd": "$800 - $1,450",
+      "salary_range_ph": "PHP 45,000 - 100,000",
+      "salary_range_usd": "$800 - $1,800",
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.85,
+      "stability_score": 0.85,
+      "growth_potential": 0.9,
       "remote_friendly": true
     },
     {
@@ -2663,9 +2613,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.8,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -2693,9 +2643,9 @@
       "seniority": "senior",
       "min_years_experience": 7,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.8,
+      "stability_score": 0.82,
+      "growth_potential": 0.85,
       "remote_friendly": true
     },
     {
@@ -2723,9 +2673,9 @@
       "seniority": "lead",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.68,
+      "stability_score": 0.75,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -2752,9 +2702,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.6,
+      "stability_score": 0.6,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -2781,9 +2731,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.68,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -2797,7 +2747,8 @@
         "Brand Management",
         "Budgeting",
         "Digital Marketing",
-        "Stakeholder Management"
+        "Stakeholder Management",
+        "Campaign Management"
       ],
       "preferred_skills": [
         "Growth Marketing",
@@ -2811,8 +2762,8 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
+      "demand_score": 0.6,
+      "stability_score": 0.72,
       "growth_potential": 0.7,
       "remote_friendly": true
     },
@@ -2841,9 +2792,9 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.62,
+      "stability_score": 0.78,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -2871,9 +2822,9 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.6,
+      "stability_score": 0.72,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -2901,9 +2852,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.82,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -2930,9 +2881,9 @@
       "seniority": "entry",
       "min_years_experience": 1,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.72,
+      "growth_potential": 0.55,
       "remote_friendly": true
     },
     {
@@ -2960,9 +2911,9 @@
       "seniority": "senior",
       "min_years_experience": 7,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.82,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -2990,9 +2941,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.75,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -3020,9 +2971,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.75,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -3049,9 +3000,9 @@
       "seniority": "senior",
       "min_years_experience": 7,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.85,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -3064,10 +3015,10 @@
         "HTML",
         "CSS",
         "React",
-        "Git"
+        "Git",
+        "TypeScript"
       ],
       "preferred_skills": [
-        "TypeScript",
         "Next.js",
         "Tailwind CSS",
         "Testing",
@@ -3078,9 +3029,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.85,
+      "stability_score": 0.75,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -3095,12 +3046,12 @@
         "Node.js",
         "SQL",
         "React",
-        "Git"
+        "Git",
+        "REST APIs"
       ],
       "preferred_skills": [
         "TypeScript",
         "Docker",
-        "REST APIs",
         "MongoDB",
         "CI/CD"
       ],
@@ -3109,9 +3060,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.9,
+      "stability_score": 0.8,
+      "growth_potential": 0.85,
       "remote_friendly": true
     },
     {
@@ -3138,9 +3089,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.6,
+      "growth_potential": 0.55,
       "remote_friendly": true
     },
     {
@@ -3167,9 +3118,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.72,
+      "growth_potential": 0.62,
       "remote_friendly": true
     },
     {
@@ -3197,9 +3148,9 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.6,
+      "stability_score": 0.82,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -3227,9 +3178,9 @@
       "seniority": "senior",
       "min_years_experience": 6,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.78,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -3256,9 +3207,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.75,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -3272,7 +3223,9 @@
         "Data Architecture",
         "Cloud Platforms",
         "Strategic Planning",
-        "Stakeholder Management"
+        "Stakeholder Management",
+        "Python",
+        "SQL"
       ],
       "preferred_skills": [
         "Spark",
@@ -3286,9 +3239,9 @@
       "seniority": "lead",
       "min_years_experience": 8,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.82,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -3316,9 +3269,9 @@
       "seniority": "lead",
       "min_years_experience": 8,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.8,
+      "growth_potential": 0.85,
       "remote_friendly": true
     },
     {
@@ -3346,9 +3299,9 @@
       "seniority": "lead",
       "min_years_experience": 8,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.65,
+      "stability_score": 0.75,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -3362,7 +3315,8 @@
         "Stakeholder Management",
         "Risk Management",
         "Budgeting",
-        "Communication"
+        "Communication",
+        "IT Infrastructure"
       ],
       "preferred_skills": [
         "Jira",
@@ -3376,9 +3330,9 @@
       "seniority": "senior",
       "min_years_experience": 6,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.78,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -3406,9 +3360,9 @@
       "seniority": "senior",
       "min_years_experience": 6,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.68,
+      "stability_score": 0.78,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -3436,9 +3390,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.82,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -3465,9 +3419,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.68,
+      "stability_score": 0.78,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -3493,8 +3447,8 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
+      "demand_score": 0.82,
+      "stability_score": 0.78,
       "growth_potential": 0.7,
       "remote_friendly": true
     },
@@ -3520,9 +3474,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
+      "demand_score": 0.82,
       "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "growth_potential": 0.88,
       "remote_friendly": true
     },
     {
@@ -3548,9 +3502,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.78,
+      "growth_potential": 0.9,
       "remote_friendly": true
     },
     {
@@ -3576,9 +3530,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.82,
+      "stability_score": 0.72,
+      "growth_potential": 0.85,
       "remote_friendly": true
     },
     {
@@ -3600,14 +3554,14 @@
         "Monitoring",
         "Networking"
       ],
-      "salary_range_ph": "PHP 22,000 - 38,000",
-      "salary_range_usd": "$400 - $700",
+      "salary_range_ph": "PHP 25,000 - 42,000",
+      "salary_range_usd": "$450 - $750",
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.72,
+      "growth_potential": 0.9,
       "remote_friendly": true
     },
     {
@@ -3619,10 +3573,10 @@
         "HTML",
         "CSS",
         "JavaScript",
-        "Git"
+        "Git",
+        "React"
       ],
       "preferred_skills": [
-        "React",
         "TypeScript",
         "Responsive Design",
         "Testing"
@@ -3632,9 +3586,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.82,
+      "stability_score": 0.68,
+      "growth_potential": 0.88,
       "remote_friendly": true
     },
     {
@@ -3661,9 +3615,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.68,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -3690,9 +3644,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.72,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -3717,9 +3671,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.68,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -3745,9 +3699,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.65,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -3759,11 +3713,11 @@
         "HTML",
         "CSS",
         "JavaScript",
-        "Git"
+        "Git",
+        "PHP"
       ],
       "preferred_skills": [
         "React",
-        "PHP",
         "WordPress",
         "Responsive Design"
       ],
@@ -3772,9 +3726,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.8,
+      "stability_score": 0.65,
+      "growth_potential": 0.85,
       "remote_friendly": true
     },
     {
@@ -3802,9 +3756,9 @@
       "seniority": "lead",
       "min_years_experience": 8,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.8,
+      "growth_potential": 0.85,
       "remote_friendly": true
     },
     {
@@ -3832,9 +3786,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.82,
+      "stability_score": 0.75,
+      "growth_potential": 0.92,
       "remote_friendly": true
     },
     {
@@ -3862,9 +3816,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.8,
+      "stability_score": 0.75,
+      "growth_potential": 0.9,
       "remote_friendly": true
     },
     {
@@ -3891,9 +3845,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.65,
+      "growth_potential": 0.6,
       "remote_friendly": true
     },
     {
@@ -3920,8 +3874,8 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.68,
       "growth_potential": 0.7,
       "remote_friendly": true
     },
@@ -3949,9 +3903,9 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.65,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -3979,9 +3933,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
+      "demand_score": 0.75,
       "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -4009,9 +3963,9 @@
       "seniority": "lead",
       "min_years_experience": 8,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.78,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -4039,9 +3993,9 @@
       "seniority": "mid",
       "min_years_experience": 3,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.68,
+      "stability_score": 0.72,
+      "growth_potential": 0.55,
       "remote_friendly": true
     },
     {
@@ -4069,8 +4023,8 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
+      "demand_score": 0.68,
+      "stability_score": 0.78,
       "growth_potential": 0.7,
       "remote_friendly": true
     },
@@ -4084,23 +4038,23 @@
         "Tax Compliance",
         "Excel",
         "Labor Law",
-        "Attention to Detail"
+        "Attention to Detail",
+        "HRIS"
       ],
       "preferred_skills": [
-        "HRIS",
         "SAP",
         "Benefits Administration",
         "Communication",
         "Data Entry"
       ],
-      "salary_range_ph": "PHP 22,000 - 38,000",
-      "salary_range_usd": "$400 - $700",
+      "salary_range_ph": "PHP 25,000 - 42,000",
+      "salary_range_usd": "$450 - $750",
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.78,
+      "growth_potential": 0.55,
       "remote_friendly": true
     },
     {
@@ -4113,7 +4067,8 @@
         "Vulnerability Assessment",
         "Network Security",
         "Web Application Security",
-        "Report Writing"
+        "Report Writing",
+        "Linux"
       ],
       "preferred_skills": [
         "Burp Suite",
@@ -4127,9 +4082,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.78,
+      "growth_potential": 0.85,
       "remote_friendly": true
     },
     {
@@ -4157,9 +4112,9 @@
       "seniority": "lead",
       "min_years_experience": 8,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.65,
+      "stability_score": 0.85,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -4186,9 +4141,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.72,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -4216,9 +4171,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.78,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -4232,7 +4187,8 @@
         "Risk Management",
         "Budgeting",
         "Communication",
-        "Agile"
+        "Agile",
+        "Resource Planning"
       ],
       "preferred_skills": [
         "Jira",
@@ -4246,9 +4202,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.78,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -4275,9 +4231,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.8,
+      "stability_score": 0.78,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -4305,8 +4261,8 @@
       "seniority": "senior",
       "min_years_experience": 6,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.78,
       "growth_potential": 0.7,
       "remote_friendly": true
     },
@@ -4334,9 +4290,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.72,
+      "growth_potential": 0.6,
       "remote_friendly": true
     },
     {
@@ -4364,9 +4320,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
+      "demand_score": 0.75,
       "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -4393,9 +4349,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.62,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -4423,9 +4379,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.8,
+      "stability_score": 0.85,
+      "growth_potential": 0.88,
       "remote_friendly": true
     },
     {
@@ -4453,9 +4409,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.78,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -4483,9 +4439,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.85,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -4513,9 +4469,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.78,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -4544,9 +4500,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.88,
+      "stability_score": 0.85,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -4574,9 +4530,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.78,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -4604,9 +4560,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.8,
+      "stability_score": 0.85,
+      "growth_potential": 0.88,
       "remote_friendly": true
     },
     {
@@ -4634,9 +4590,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.85,
+      "stability_score": 0.82,
+      "growth_potential": 0.88,
       "remote_friendly": true
     },
     {
@@ -4664,9 +4620,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.82,
+      "stability_score": 0.8,
+      "growth_potential": 0.88,
       "remote_friendly": true
     },
     {
@@ -4694,9 +4650,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.68,
+      "stability_score": 0.8,
+      "growth_potential": 0.62,
       "remote_friendly": true
     },
     {
@@ -4710,7 +4666,8 @@
         "Kubernetes",
         "CI/CD",
         "Cloud Platforms",
-        "Infrastructure as Code"
+        "Infrastructure as Code",
+        "Scripting"
       ],
       "preferred_skills": [
         "Terraform",
@@ -4719,14 +4676,14 @@
         "Python",
         "Security"
       ],
-      "salary_range_ph": "PHP 80,000 - 140,000",
-      "salary_range_usd": "$1,450 - $2,500",
+      "salary_range_ph": "PHP 90,000 - 160,000",
+      "salary_range_usd": "$1,600 - $2,850",
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.87,
+      "stability_score": 0.85,
+      "growth_potential": 0.88,
       "remote_friendly": true
     },
     {
@@ -4752,11 +4709,11 @@
       "salary_range_ph": "PHP 100,000 - 180,000",
       "salary_range_usd": "$1,800 - $3,200",
       "seniority": "senior",
-      "min_years_experience": 5,
+      "min_years_experience": 7,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.85,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -4784,9 +4741,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.8,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -4815,9 +4772,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.85,
+      "stability_score": 0.82,
+      "growth_potential": 0.8,
       "remote_friendly": true
     },
     {
@@ -4846,9 +4803,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.9,
+      "stability_score": 0.85,
+      "growth_potential": 0.85,
       "remote_friendly": true
     },
     {
@@ -4876,9 +4833,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.8,
+      "stability_score": 0.78,
+      "growth_potential": 0.78,
       "remote_friendly": true
     },
     {
@@ -4907,8 +4864,8 @@
       "min_years_experience": 5,
       "onet_code": null,
       "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "stability_score": 0.8,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -4936,9 +4893,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.8,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -4966,9 +4923,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.78,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -4996,9 +4953,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.88,
+      "stability_score": 0.85,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -5018,16 +4975,17 @@
         "Cloud Platforms",
         "Testing",
         "Agile",
-        "CI/CD"
+        "CI/CD",
+        "Data Structures"
       ],
       "salary_range_ph": "PHP 35,000 - 65,000",
       "salary_range_usd": "$600 - $1,150",
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.85,
+      "stability_score": 0.78,
+      "growth_potential": 0.8,
       "remote_friendly": true
     },
     {
@@ -5055,9 +5013,9 @@
       "seniority": "senior",
       "min_years_experience": 5,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.82,
+      "growth_potential": 0.8,
       "remote_friendly": true
     },
     {
@@ -5085,9 +5043,9 @@
       "seniority": "lead",
       "min_years_experience": 8,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.72,
+      "stability_score": 0.85,
+      "growth_potential": 0.8,
       "remote_friendly": true
     },
     {
@@ -5107,16 +5065,17 @@
         "Tax Planning",
         "Transfer Pricing",
         "Audit Support",
-        "ERP Systems"
+        "ERP Systems",
+        "CPA License"
       ],
       "salary_range_ph": "PHP 28,000 - 50,000",
       "salary_range_usd": "$500 - $900",
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.75,
+      "stability_score": 0.82,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -5130,7 +5089,8 @@
         "Team Leadership",
         "BIR Regulations",
         "Financial Reporting",
-        "Risk Management"
+        "Risk Management",
+        "CPA License"
       ],
       "preferred_skills": [
         "Transfer Pricing",
@@ -5144,8 +5104,8 @@
       "seniority": "senior",
       "min_years_experience": 7,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
+      "demand_score": 0.68,
+      "stability_score": 0.85,
       "growth_potential": 0.7,
       "remote_friendly": true
     },
@@ -5173,9 +5133,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.65,
+      "stability_score": 0.72,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -5202,9 +5162,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
+      "demand_score": 0.72,
       "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -5218,7 +5178,8 @@
         "Code Review",
         "System Design",
         "Agile",
-        "Git"
+        "Git",
+        "Python"
       ],
       "preferred_skills": [
         "CI/CD",
@@ -5232,9 +5193,9 @@
       "seniority": "lead",
       "min_years_experience": 8,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.78,
+      "stability_score": 0.82,
+      "growth_potential": 0.82,
       "remote_friendly": true
     },
     {
@@ -5261,9 +5222,9 @@
       "seniority": "entry",
       "min_years_experience": 1,
       "onet_code": null,
-      "demand_score": 0.7,
+      "demand_score": 0.8,
       "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "growth_potential": 0.55,
       "remote_friendly": true
     },
     {
@@ -5290,9 +5251,9 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "onet_code": null,
-      "demand_score": 0.7,
+      "demand_score": 0.65,
       "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -5320,9 +5281,9 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.55,
+      "stability_score": 0.85,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -5350,9 +5311,9 @@
       "seniority": "executive",
       "min_years_experience": 10,
       "onet_code": null,
-      "demand_score": 0.7,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.55,
+      "stability_score": 0.78,
+      "growth_potential": 0.75,
       "remote_friendly": true
     },
     {
@@ -5365,7 +5326,8 @@
         "SQL",
         "Statistics",
         "Pandas",
-        "Data Visualization"
+        "Data Visualization",
+        "Machine Learning Basics"
       ],
       "preferred_skills": [
         "Scikit-learn",
@@ -5377,7 +5339,7 @@
       "salary_range_usd": "$450 - $750",
       "seniority": "entry",
       "min_years_experience": 0,
-      "demand_score": 0.8,
+      "demand_score": 0.78,
       "stability_score": 0.7,
       "growth_potential": 0.9,
       "remote_friendly": true
@@ -5398,13 +5360,14 @@
         "Collibra",
         "Informatica",
         "Data Lineage",
-        "GDPR"
+        "GDPR",
+        "Philippine DPA"
       ],
       "salary_range_ph": "PHP 38,000 - 65,000",
       "salary_range_usd": "$700 - $1,150",
       "seniority": "mid",
       "min_years_experience": 3,
-      "demand_score": 0.7,
+      "demand_score": 0.68,
       "stability_score": 0.8,
       "growth_potential": 0.75,
       "remote_friendly": true
@@ -5419,7 +5382,8 @@
         "Machine Learning",
         "Deep Learning",
         "PyTorch",
-        "NLP"
+        "NLP",
+        "SQL"
       ],
       "preferred_skills": [
         "LLMs",
@@ -5428,8 +5392,8 @@
         "TensorFlow",
         "LangChain"
       ],
-      "salary_range_ph": "PHP 50,000 - 100,000",
-      "salary_range_usd": "$900 - $1,800",
+      "salary_range_ph": "PHP 55,000 - 105,000",
+      "salary_range_usd": "$1,000 - $1,900",
       "seniority": "mid",
       "min_years_experience": 2,
       "demand_score": 0.95,
@@ -5447,7 +5411,8 @@
         "Architecture Patterns",
         "Cloud Architecture",
         "API Design",
-        "Microservices"
+        "Microservices",
+        "Python"
       ],
       "preferred_skills": [
         "AWS",
@@ -5460,7 +5425,7 @@
       "salary_range_usd": "$1,800 - $3,200",
       "seniority": "senior",
       "min_years_experience": 8,
-      "demand_score": 0.8,
+      "demand_score": 0.78,
       "stability_score": 0.85,
       "growth_potential": 0.8,
       "remote_friendly": true
@@ -5475,7 +5440,8 @@
         "Docker",
         "Security Scanning",
         "Linux",
-        "Python"
+        "Python",
+        "Git"
       ],
       "preferred_skills": [
         "Kubernetes",
@@ -5489,7 +5455,7 @@
       "seniority": "mid",
       "min_years_experience": 3,
       "demand_score": 0.85,
-      "stability_score": 0.8,
+      "stability_score": 0.82,
       "growth_potential": 0.9,
       "remote_friendly": true
     },
@@ -5516,8 +5482,8 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "demand_score": 0.6,
-      "stability_score": 0.8,
-      "growth_potential": 0.7,
+      "stability_score": 0.78,
+      "growth_potential": 0.68,
       "remote_friendly": false
     },
     {
@@ -5542,9 +5508,9 @@
       "salary_range_usd": "$550 - $1,150",
       "seniority": "mid",
       "min_years_experience": 2,
-      "demand_score": 0.65,
-      "stability_score": 0.6,
-      "growth_potential": 0.7,
+      "demand_score": 0.62,
+      "stability_score": 0.58,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -5557,7 +5523,8 @@
         "Ethereum",
         "Smart Contracts",
         "Web3.js",
-        "Cryptography"
+        "Cryptography",
+        "JavaScript"
       ],
       "preferred_skills": [
         "DeFi",
@@ -5570,9 +5537,9 @@
       "salary_range_usd": "$700 - $1,450",
       "seniority": "mid",
       "min_years_experience": 2,
-      "demand_score": 0.55,
-      "stability_score": 0.5,
-      "growth_potential": 0.65,
+      "demand_score": 0.5,
+      "stability_score": 0.45,
+      "growth_potential": 0.6,
       "remote_friendly": true
     },
     {
@@ -5621,13 +5588,13 @@
         "Terraform",
         "Serverless"
       ],
-      "salary_range_ph": "PHP 70,000 - 130,000",
-      "salary_range_usd": "$1,250 - $2,300",
+      "salary_range_ph": "PHP 80,000 - 150,000",
+      "salary_range_usd": "$1,450 - $2,700",
       "seniority": "senior",
       "min_years_experience": 6,
-      "demand_score": 0.9,
+      "demand_score": 0.88,
       "stability_score": 0.85,
-      "growth_potential": 0.85,
+      "growth_potential": 0.88,
       "remote_friendly": true
     },
     {
@@ -5653,9 +5620,9 @@
       "salary_range_usd": "$700 - $1,350",
       "seniority": "mid",
       "min_years_experience": 3,
-      "demand_score": 0.7,
-      "stability_score": 0.75,
-      "growth_potential": 0.7,
+      "demand_score": 0.68,
+      "stability_score": 0.72,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -5674,15 +5641,16 @@
         "Cinema 4D",
         "Lottie",
         "Figma",
-        "Prototyping"
+        "Prototyping",
+        "Storyboarding"
       ],
       "salary_range_ph": "PHP 25,000 - 50,000",
       "salary_range_usd": "$450 - $900",
       "seniority": "mid",
       "min_years_experience": 2,
-      "demand_score": 0.65,
-      "stability_score": 0.6,
-      "growth_potential": 0.7,
+      "demand_score": 0.62,
+      "stability_score": 0.58,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -5707,9 +5675,9 @@
       "salary_range_usd": "$400 - $750",
       "seniority": "mid",
       "min_years_experience": 2,
-      "demand_score": 0.6,
-      "stability_score": 0.65,
-      "growth_potential": 0.6,
+      "demand_score": 0.58,
+      "stability_score": 0.6,
+      "growth_potential": 0.55,
       "remote_friendly": true
     },
     {
@@ -5735,8 +5703,8 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "demand_score": 0.6,
-      "stability_score": 0.65,
-      "growth_potential": 0.7,
+      "stability_score": 0.62,
+      "growth_potential": 0.65,
       "remote_friendly": true
     },
     {
@@ -5761,9 +5729,9 @@
       "salary_range_usd": "$500 - $850",
       "seniority": "mid",
       "min_years_experience": 2,
-      "demand_score": 0.65,
+      "demand_score": 0.62,
       "stability_score": 0.8,
-      "growth_potential": 0.6,
+      "growth_potential": 0.58,
       "remote_friendly": true
     },
     {
@@ -5788,9 +5756,9 @@
       "salary_range_usd": "$550 - $1,000",
       "seniority": "mid",
       "min_years_experience": 2,
-      "demand_score": 0.7,
+      "demand_score": 0.72,
       "stability_score": 0.85,
-      "growth_potential": 0.7,
+      "growth_potential": 0.72,
       "remote_friendly": true
     },
     {
@@ -5844,7 +5812,7 @@
       "min_years_experience": 2,
       "demand_score": 0.6,
       "stability_score": 0.85,
-      "growth_potential": 0.65,
+      "growth_potential": 0.62,
       "remote_friendly": false
     },
     {
@@ -5868,9 +5836,9 @@
       "salary_range_ph": "PHP 22,000 - 40,000",
       "salary_range_usd": "$400 - $700",
       "seniority": "mid",
-      "min_years_experience": 1,
-      "demand_score": 0.75,
-      "stability_score": 0.7,
+      "min_years_experience": 2,
+      "demand_score": 0.78,
+      "stability_score": 0.68,
       "growth_potential": 0.65,
       "remote_friendly": true
     },
@@ -5896,7 +5864,7 @@
       "salary_range_usd": "$600 - $1,050",
       "seniority": "senior",
       "min_years_experience": 5,
-      "demand_score": 0.7,
+      "demand_score": 0.72,
       "stability_score": 0.7,
       "growth_potential": 0.65,
       "remote_friendly": true
@@ -5923,8 +5891,8 @@
       "salary_range_usd": "$750 - $1,350",
       "seniority": "senior",
       "min_years_experience": 5,
-      "demand_score": 0.7,
-      "stability_score": 0.8,
+      "demand_score": 0.68,
+      "stability_score": 0.78,
       "growth_potential": 0.7,
       "remote_friendly": false
     },
@@ -5950,7 +5918,7 @@
       "salary_range_usd": "$500 - $900",
       "seniority": "mid",
       "min_years_experience": 2,
-      "demand_score": 0.7,
+      "demand_score": 0.75,
       "stability_score": 0.7,
       "growth_potential": 0.65,
       "remote_friendly": true
@@ -5977,9 +5945,9 @@
       "salary_range_usd": "$450 - $800",
       "seniority": "mid",
       "min_years_experience": 2,
-      "demand_score": 0.6,
-      "stability_score": 0.75,
-      "growth_potential": 0.65,
+      "demand_score": 0.58,
+      "stability_score": 0.72,
+      "growth_potential": 0.62,
       "remote_friendly": false
     },
     {
@@ -6000,13 +5968,13 @@
         "Job Evaluation",
         "Total Rewards"
       ],
-      "salary_range_ph": "PHP 28,000 - 50,000",
-      "salary_range_usd": "$500 - $900",
+      "salary_range_ph": "PHP 35,000 - 58,000",
+      "salary_range_usd": "$600 - $1,050",
       "seniority": "mid",
       "min_years_experience": 2,
       "demand_score": 0.6,
-      "stability_score": 0.8,
-      "growth_potential": 0.6,
+      "stability_score": 0.78,
+      "growth_potential": 0.58,
       "remote_friendly": false
     },
     {
@@ -6031,7 +5999,7 @@
       "salary_range_usd": "$400 - $700",
       "seniority": "entry",
       "min_years_experience": 1,
-      "demand_score": 0.7,
+      "demand_score": 0.72,
       "stability_score": 0.75,
       "growth_potential": 0.6,
       "remote_friendly": false
@@ -6046,7 +6014,8 @@
         "Solution Design",
         "CRM",
         "Product Knowledge",
-        "Communication"
+        "Communication",
+        "Technical Domain Expertise"
       ],
       "preferred_skills": [
         "Salesforce",
@@ -6054,12 +6023,12 @@
         "Cloud Computing",
         "Demo Skills"
       ],
-      "salary_range_ph": "PHP 35,000 - 65,000",
-      "salary_range_usd": "$600 - $1,150",
+      "salary_range_ph": "PHP 35,000 - 58,000",
+      "salary_range_usd": "$600 - $1,050",
       "seniority": "mid",
       "min_years_experience": 2,
       "demand_score": 0.75,
-      "stability_score": 0.7,
+      "stability_score": 0.72,
       "growth_potential": 0.75,
       "remote_friendly": true
     },
@@ -6086,8 +6055,8 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "demand_score": 0.8,
-      "stability_score": 0.6,
-      "growth_potential": 0.7,
+      "stability_score": 0.58,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -6105,16 +6074,16 @@
       "preferred_skills": [
         "Salesforce",
         "Contract Management",
-        "Cross-selling",
+        "Cross-Selling",
         "Revenue Forecasting"
       ],
       "salary_range_ph": "PHP 42,000 - 80,000",
       "salary_range_usd": "$750 - $1,450",
       "seniority": "senior",
       "min_years_experience": 5,
-      "demand_score": 0.7,
+      "demand_score": 0.68,
       "stability_score": 0.75,
-      "growth_potential": 0.7,
+      "growth_potential": 0.68,
       "remote_friendly": false
     },
     {
@@ -6139,9 +6108,9 @@
       "salary_range_usd": "$450 - $800",
       "seniority": "mid",
       "min_years_experience": 2,
-      "demand_score": 0.7,
+      "demand_score": 0.68,
       "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -6162,13 +6131,13 @@
         "Channel Sales",
         "Executive Selling"
       ],
-      "salary_range_ph": "PHP 55,000 - 100,000",
-      "salary_range_usd": "$1,000 - $1,800",
+      "salary_range_ph": "PHP 55,000 - 120,000",
+      "salary_range_usd": "$1,000 - $2,150",
       "seniority": "senior",
       "min_years_experience": 7,
-      "demand_score": 0.65,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "demand_score": 0.62,
+      "stability_score": 0.72,
+      "growth_potential": 0.65,
       "remote_friendly": false
     },
     {
@@ -6194,8 +6163,8 @@
       "seniority": "entry",
       "min_years_experience": 0,
       "demand_score": 0.75,
-      "stability_score": 0.6,
-      "growth_potential": 0.65,
+      "stability_score": 0.58,
+      "growth_potential": 0.62,
       "remote_friendly": true
     },
     {
@@ -6221,8 +6190,8 @@
       "seniority": "mid",
       "min_years_experience": 3,
       "demand_score": 0.65,
-      "stability_score": 0.7,
-      "growth_potential": 0.65,
+      "stability_score": 0.68,
+      "growth_potential": 0.62,
       "remote_friendly": false
     },
     {
@@ -6248,7 +6217,7 @@
       "seniority": "mid",
       "min_years_experience": 3,
       "demand_score": 0.75,
-      "stability_score": 0.7,
+      "stability_score": 0.72,
       "growth_potential": 0.75,
       "remote_friendly": true
     },
@@ -6262,13 +6231,15 @@
         "Facebook Ads",
         "Analytics",
         "Campaign Optimization",
-        "Budget Management"
+        "Budget Management",
+        "ROI/ROAS Measurement"
       ],
       "preferred_skills": [
         "TikTok Ads",
         "Programmatic",
         "SQL",
-        "Attribution Modeling"
+        "Attribution Modeling",
+        "Google Analytics"
       ],
       "salary_range_ph": "PHP 40,000 - 75,000",
       "salary_range_usd": "$700 - $1,350",
@@ -6302,8 +6273,8 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "demand_score": 0.55,
-      "stability_score": 0.65,
-      "growth_potential": 0.55,
+      "stability_score": 0.62,
+      "growth_potential": 0.52,
       "remote_friendly": false
     },
     {
@@ -6329,7 +6300,7 @@
       "seniority": "mid",
       "min_years_experience": 3,
       "demand_score": 0.6,
-      "stability_score": 0.9,
+      "stability_score": 0.88,
       "growth_potential": 0.6,
       "remote_friendly": false
     },
@@ -6356,8 +6327,8 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "demand_score": 0.65,
-      "stability_score": 0.85,
-      "growth_potential": 0.6,
+      "stability_score": 0.82,
+      "growth_potential": 0.62,
       "remote_friendly": false
     },
     {
@@ -6382,9 +6353,9 @@
       "salary_range_usd": "$900 - $1,600",
       "seniority": "senior",
       "min_years_experience": 5,
-      "demand_score": 0.7,
+      "demand_score": 0.72,
       "stability_score": 0.85,
-      "growth_potential": 0.75,
+      "growth_potential": 0.78,
       "remote_friendly": false
     },
     {
@@ -6397,7 +6368,7 @@
         "Onboarding",
         "Communication",
         "Product Knowledge",
-        "Problem Solving"
+        "Problem-Solving"
       ],
       "preferred_skills": [
         "CRM",
@@ -6410,8 +6381,8 @@
       "seniority": "entry",
       "min_years_experience": 1,
       "demand_score": 0.75,
-      "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "stability_score": 0.68,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -6436,9 +6407,9 @@
       "salary_range_usd": "$700 - $1,150",
       "seniority": "mid",
       "min_years_experience": 3,
-      "demand_score": 0.65,
+      "demand_score": 0.68,
       "stability_score": 0.7,
-      "growth_potential": 0.7,
+      "growth_potential": 0.68,
       "remote_friendly": true
     },
     {
@@ -6463,7 +6434,7 @@
       "salary_range_usd": "$500 - $850",
       "seniority": "mid",
       "min_years_experience": 3,
-      "demand_score": 0.7,
+      "demand_score": 0.72,
       "stability_score": 0.7,
       "growth_potential": 0.6,
       "remote_friendly": true
@@ -6490,9 +6461,9 @@
       "salary_range_usd": "$300 - $550",
       "seniority": "entry",
       "min_years_experience": 1,
-      "demand_score": 0.7,
-      "stability_score": 0.6,
-      "growth_potential": 0.6,
+      "demand_score": 0.72,
+      "stability_score": 0.58,
+      "growth_potential": 0.58,
       "remote_friendly": true
     },
     {
@@ -6518,8 +6489,8 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "demand_score": 0.65,
-      "stability_score": 0.6,
-      "growth_potential": 0.6,
+      "stability_score": 0.58,
+      "growth_potential": 0.55,
       "remote_friendly": true
     },
     {
@@ -6546,7 +6517,7 @@
       "min_years_experience": 5,
       "demand_score": 0.6,
       "stability_score": 0.65,
-      "growth_potential": 0.65,
+      "growth_potential": 0.62,
       "remote_friendly": true
     },
     {
@@ -6573,7 +6544,7 @@
       "min_years_experience": 2,
       "demand_score": 0.65,
       "stability_score": 0.75,
-      "growth_potential": 0.6,
+      "growth_potential": 0.58,
       "remote_friendly": false
     },
     {
@@ -6599,8 +6570,8 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "demand_score": 0.6,
-      "stability_score": 0.8,
-      "growth_potential": 0.55,
+      "stability_score": 0.78,
+      "growth_potential": 0.52,
       "remote_friendly": false
     },
     {
@@ -6613,7 +6584,8 @@
         "Inventory Management",
         "Communication",
         "ERP Systems",
-        "Problem Solving"
+        "Problem-Solving",
+        "Excel"
       ],
       "preferred_skills": [
         "SAP",
@@ -6626,8 +6598,8 @@
       "seniority": "entry",
       "min_years_experience": 1,
       "demand_score": 0.6,
-      "stability_score": 0.75,
-      "growth_potential": 0.5,
+      "stability_score": 0.72,
+      "growth_potential": 0.48,
       "remote_friendly": false
     },
     {
@@ -6652,9 +6624,9 @@
       "salary_range_usd": "$450 - $800",
       "seniority": "mid",
       "min_years_experience": 2,
-      "demand_score": 0.6,
+      "demand_score": 0.58,
       "stability_score": 0.7,
-      "growth_potential": 0.65,
+      "growth_potential": 0.62,
       "remote_friendly": true
     },
     {
@@ -6680,7 +6652,7 @@
       "seniority": "mid",
       "min_years_experience": 2,
       "demand_score": 0.55,
-      "stability_score": 0.7,
+      "stability_score": 0.68,
       "growth_potential": 0.55,
       "remote_friendly": true
     },
@@ -6706,8 +6678,8 @@
       "salary_range_usd": "$250 - $450",
       "seniority": "entry",
       "min_years_experience": 0,
-      "demand_score": 0.7,
-      "stability_score": 0.75,
+      "demand_score": 0.72,
+      "stability_score": 0.72,
       "growth_potential": 0.5,
       "remote_friendly": false
     },
@@ -6734,7 +6706,7 @@
       "salary_range_usd": "$750 - $1,350",
       "seniority": "senior",
       "min_years_experience": 5,
-      "demand_score": 0.7,
+      "demand_score": 0.68,
       "stability_score": 0.8,
       "growth_potential": 0.6,
       "remote_friendly": true
