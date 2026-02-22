@@ -10,6 +10,7 @@ import {
   GraduationCap,
   LayoutDashboard,
   LogOut,
+  Briefcase,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSession } from "@/context/session-context";
@@ -18,6 +19,7 @@ const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/resume", label: "Resume", icon: FileText },
   { href: "/skills", label: "Skills", icon: Tags },
+  { href: "/roles", label: "Roles", icon: Briefcase },
   { href: "/explore", label: "Explore Careers", icon: Compass },
   { href: "/transitions", label: "Career GPS", icon: Route },
   { href: "/roadmap", label: "Roadmap", icon: GraduationCap },
