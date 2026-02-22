@@ -149,9 +149,11 @@ class RoadmapGenerator:
                 resources = []
                 if result.get("sources"):
                     for source in result["sources"][:3]:
-                        resources.append(f"{source.get('title', '')} - {source.get('uri', '')}")
+                        title = source.get("title", "Resource")
+                        uri = source.get("uri", "")
+                        resources.append({"title": title, "url": uri})
                 if not resources and result.get("text"):
-                    resources = [result["text"][:200]]
+                    resources = [{"title": result["text"][:150], "url": ""}]
                 gap["resources"] = resources
             except Exception as e:
                 logger.warning(f"Resource search failed for {gap['skill']}: {e}")

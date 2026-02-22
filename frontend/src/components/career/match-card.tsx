@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { ChevronDown, ChevronUp, Check, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -11,11 +13,11 @@ import {
 import type { UserMatchResponse } from "@/types/career";
 
 const seniorityColors: Record<string, string> = {
-  entry: "bg-green-100 text-green-700",
-  mid: "bg-blue-100 text-blue-700",
-  senior: "bg-purple-100 text-purple-700",
-  lead: "bg-orange-100 text-orange-700",
-  executive: "bg-red-100 text-red-700",
+  entry: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
+  mid: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
+  senior: "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300",
+  lead: "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300",
+  executive: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
 };
 
 function ScoreBar({ label, value }: { label: string; value: number | null }) {
@@ -43,12 +45,15 @@ interface MatchCardProps {
 }
 
 export function MatchCard({ match, rank, onClick }: MatchCardProps) {
-  const { role, meta_score, breakdown, explanation } = match;
+  const { role, meta_score, breakdown, explanation, matched_skills, missing_skills } = match;
   const pct = Math.round(meta_score * 100);
+  const [expanded, setExpanded] = useState(false);
+
+  const hasSkillData = matched_skills.length > 0 || missing_skills.length > 0;
 
   return (
     <Card
-      className={`cursor-pointer transition-shadow hover:shadow-md ${onClick ? "" : ""}`}
+      className="transition-shadow hover:shadow-md"
       onClick={onClick}
     >
       <CardHeader className="pb-3">
@@ -90,6 +95,76 @@ export function MatchCard({ match, rank, onClick }: MatchCardProps) {
         </div>
         {explanation && (
           <p className="text-xs text-muted-foreground">{explanation}</p>
+        )}
+
+        {hasSkillData && (
+          <>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpanded(!expanded);
+              }}
+              className="flex w-full items-center justify-center gap-1 rounded-md border py-1.5 text-xs text-muted-foreground transition-colors hover:bg-muted"
+            >
+              {expanded ? (
+                <>Hide Skill Gap <ChevronUp className="h-3 w-3" /></>
+              ) : (
+                <>
+                  Show Skill Gap
+                  {missing_skills.length > 0 && (
+                    <Badge variant="secondary" className="ml-1 text-[10px] px-1.5 py-0">
+                      {missing_skills.length} to learn
+                    </Badge>
+                  )}
+                  <ChevronDown className="h-3 w-3" />
+                </>
+              )}
+            </button>
+
+            {expanded && (
+              <div className="space-y-3 rounded-md border bg-muted/30 p-3">
+                {matched_skills.length > 0 && (
+                  <div>
+                    <p className="mb-1.5 text-xs font-medium text-green-600 dark:text-green-400">
+                      Skills you have ({matched_skills.length})
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {matched_skills.map((skill) => (
+                        <Badge
+                          key={skill}
+                          variant="secondary"
+                          className="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 text-[10px]"
+                        >
+                          <Check className="mr-0.5 h-2.5 w-2.5" />
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {missing_skills.length > 0 && (
+                  <div>
+                    <p className="mb-1.5 text-xs font-medium text-amber-600 dark:text-amber-400">
+                      Skills to develop ({missing_skills.length})
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      {missing_skills.map((skill) => (
+                        <Badge
+                          key={skill}
+                          variant="secondary"
+                          className="bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300 text-[10px]"
+                        >
+                          <X className="mr-0.5 h-2.5 w-2.5" />
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </>
         )}
       </CardContent>
     </Card>

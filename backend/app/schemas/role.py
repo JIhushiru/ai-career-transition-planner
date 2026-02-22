@@ -40,6 +40,8 @@ class UserMatchResponse(BaseModel):
     meta_score: float
     breakdown: dict[str, float | None]
     explanation: str | None = None
+    matched_skills: list[str] = Field(default_factory=list)
+    missing_skills: list[str] = Field(default_factory=list)
 
 
 class MatchResultsResponse(BaseModel):
@@ -66,11 +68,16 @@ class CareerPathsResponse(BaseModel):
     target_role: RoleResponse
 
 
+class LearningResource(BaseModel):
+    title: str
+    url: str = ""
+
+
 class SkillGap(BaseModel):
     skill: str
     priority: str
     estimated_hours: int | None = None
-    resources: list[str] = Field(default_factory=list)
+    resources: list[LearningResource] = Field(default_factory=list)
 
 
 class RoadmapResponse(BaseModel):

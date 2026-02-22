@@ -122,6 +122,8 @@ async def compute_matches(
                 meta_score=s["meta_score"],
                 breakdown=s["breakdown"],
                 explanation=s.get("explanation"),
+                matched_skills=s.get("matched_skills", []),
+                missing_skills=s.get("missing_required", []),
             )
         )
 

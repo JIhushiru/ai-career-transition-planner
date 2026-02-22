@@ -37,6 +37,8 @@ export interface UserMatchResponse {
     market_score: number | null;
   };
   explanation: string | null;
+  matched_skills: string[];
+  missing_skills: string[];
 }
 
 export interface MatchResultsResponse {
@@ -63,11 +65,16 @@ export interface CareerPathsResponse {
   target_role: RoleResponse;
 }
 
+export interface LearningResource {
+  title: string;
+  url: string;
+}
+
 export interface SkillGap {
   skill: string;
   priority: string;
   estimated_hours: number | null;
-  resources: string[];
+  resources: LearningResource[];
 }
 
 export interface Milestone {

@@ -39,7 +39,19 @@ function SkillGapCard({ gap }: { gap: SkillGap }) {
           {gap.resources.map((r, i) => (
             <p key={i} className="flex items-start gap-1 text-[11px]">
               <BookOpen className="mt-0.5 h-3 w-3 shrink-0" />
-              <span className="break-all">{r}</span>
+              {r.url ? (
+                <a
+                  href={r.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:opacity-80"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {r.title}
+                </a>
+              ) : (
+                <span>{r.title}</span>
+              )}
             </p>
           ))}
         </div>
