@@ -1,14 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { ChevronDown, ChevronRight, Briefcase } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { apiGet } from "@/lib/api-client";
 import type { RoleListResponse, RoleResponse } from "@/types/career";
@@ -62,7 +55,7 @@ export default function RolesPage() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6">
       <div>
         <h2 className="text-2xl font-bold tracking-tight">Roles Overview</h2>
         <p className="text-muted-foreground">
@@ -90,70 +83,57 @@ export default function RolesPage() {
             </button>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-1">
             {grouped.map(([category, categoryRoles]) => {
               const isExpanded = expandedCategories.has(category);
               return (
-                <Card key={category}>
+                <div key={category}>
                   <button
                     onClick={() => toggleCategory(category)}
-                    className="flex w-full items-center justify-between px-6 py-4 text-left hover:bg-muted/50 transition-colors rounded-t-lg"
+                    className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left hover:bg-muted transition-colors"
                   >
-                    <div className="flex items-center gap-3">
-                      {isExpanded ? (
-                        <ChevronDown className="h-4 w-4 text-muted-foreground" />
-                      ) : (
-                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                      )}
-                      <span className="font-semibold">{category}</span>
-                      <Badge variant="secondary" className="text-xs">
-                        {categoryRoles.length}
-                      </Badge>
-                    </div>
+                    {isExpanded ? (
+                      <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    ) : (
+                      <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    )}
+                    <span className="font-medium">{category}</span>
+                    <span className="text-xs text-muted-foreground">
+                      ({categoryRoles.length})
+                    </span>
                   </button>
                   {isExpanded && (
-                    <CardContent className="pt-0 pb-4">
-                      <div className="grid gap-2 sm:grid-cols-2">
-                        {categoryRoles.map((role) => (
-                          <div
-                            key={role.id}
-                            className="flex items-start gap-2 rounded-md border px-3 py-2"
-                          >
-                            <Briefcase className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-                            <div className="min-w-0">
-                              <p className="text-sm font-medium">
-                                {role.title}
-                              </p>
-                              {role.description && (
-                                <p className="mt-1 text-xs text-muted-foreground line-clamp-2">
-                                  {role.description}
-                                </p>
-                              )}
-                              <div className="flex flex-wrap items-center gap-1 mt-1">
-                                {role.seniority && (
-                                  <Badge
-                                    variant="outline"
-                                    className="text-[10px]"
-                                  >
-                                    {role.seniority}
-                                  </Badge>
-                                )}
-                                {role.remote_friendly && (
-                                  <Badge
-                                    variant="outline"
-                                    className="text-[10px]"
-                                  >
-                                    Remote
-                                  </Badge>
-                                )}
-                              </div>
-                            </div>
+                    <div className="ml-9 border-l pl-4 pb-2">
+                      {categoryRoles.map((role) => (
+                        <div
+                          key={role.id}
+                          className="py-2 border-b last:border-b-0"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">
+                              {role.title}
+                            </span>
+                            {role.seniority && (
+                              <Badge variant="outline" className="text-[10px]">
+                                {role.seniority}
+                              </Badge>
+                            )}
+                            {role.remote_friendly && (
+                              <Badge variant="outline" className="text-[10px]">
+                                Remote
+                              </Badge>
+                            )}
                           </div>
-                        ))}
-                      </div>
-                    </CardContent>
+                          {role.description && (
+                            <p className="mt-0.5 text-xs text-muted-foreground">
+                              {role.description}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   )}
-                </Card>
+                </div>
               );
             })}
           </div>
