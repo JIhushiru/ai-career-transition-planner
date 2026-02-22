@@ -73,7 +73,7 @@ export default function RoadmapPage() {
               onChange={(e) => setIncludeResources(e.target.checked)}
               className="rounded"
             />
-            Include learning resources (uses Gemini search, requires API key)
+            Include learning resources
           </label>
 
           <Button

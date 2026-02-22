@@ -135,7 +135,7 @@ export default function ExplorePage() {
                 onChange={(e) => setUseLlm(e.target.checked)}
                 className="rounded"
               />
-              Enable LLM scoring (requires API key)
+              Enable LLM scoring
             </label>
           </div>
 
