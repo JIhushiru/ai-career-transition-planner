@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     groq_api_key: str = ""
     spacy_model: str = "en_core_web_sm"
     embedding_model: str = "all-MiniLM-L6-v2"
-    cors_origins: list[str] = ["http://localhost:3000"]
+    cors_origins: list[str] = ["http://localhost:3000", "https://*.vercel.app"]
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
 

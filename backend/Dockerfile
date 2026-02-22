@@ -13,9 +13,10 @@ RUN python -m spacy download en_core_web_sm
 
 COPY . .
 
-# Create data directory for SQLite
-RUN mkdir -p /app/data
+# Create data directory for SQLite and seed the database
+RUN mkdir -p /app/data && python -m app.data.seed
 
-EXPOSE 8000
+# HF Spaces expects port 7860
+EXPOSE 7860
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]
