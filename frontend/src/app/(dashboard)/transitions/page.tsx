@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Loader2, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,28 +18,21 @@ import type { CareerPathsResponse } from "@/types/career";
 
 export default function TransitionsPage() {
   const { userId: sessionUserId } = useSession();
-  const [userId, setUserId] = useState("");
   const [targetRoleId, setTargetRoleId] = useState("");
-
-  useEffect(() => {
-    if (sessionUserId && !userId) {
-      setUserId(String(sessionUserId));
-    }
-  }, [sessionUserId]);
   const [maxSteps, setMaxSteps] = useState("3");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<CareerPathsResponse | null>(null);
 
   const handleSearch = async () => {
-    if (!userId.trim() || !targetRoleId.trim()) return;
+    if (!sessionUserId || !targetRoleId.trim()) return;
     setIsLoading(true);
     setError(null);
     try {
       const res = await apiPost<CareerPathsResponse>(
         "/career/transition-paths",
         {
-          user_id: parseInt(userId),
+          user_id: sessionUserId,
           target_role_id: parseInt(targetRoleId),
           max_steps: parseInt(maxSteps) || 3,
         },
@@ -67,19 +60,11 @@ export default function TransitionsPage() {
             Find Transition Paths
           </CardTitle>
           <CardDescription>
-            Run career matching first, then enter your user ID and target role ID.
+            Run career matching first, then select a target role ID.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div>
-              <label className="mb-1 block text-xs font-medium">User ID</label>
-              <Input
-                placeholder="e.g., 1"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
-              />
-            </div>
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="mb-1 block text-xs font-medium">
                 Target Role ID
@@ -106,7 +91,7 @@ export default function TransitionsPage() {
 
           <Button
             onClick={handleSearch}
-            disabled={isLoading || !userId.trim() || !targetRoleId.trim()}
+            disabled={isLoading || !sessionUserId || !targetRoleId.trim()}
           >
             {isLoading ? (
               <>

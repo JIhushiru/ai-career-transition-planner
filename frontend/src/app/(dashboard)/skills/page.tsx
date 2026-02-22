@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Search, Loader2 } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
+import { Loader2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -12,17 +10,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { SkillList } from "@/components/resume/skill-list";
+import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiGet } from "@/lib/api-client";
 import type { SkillsResponse } from "@/types/resume";
+import type { ResumeListItem } from "@/types/resume";
 
 export default function SkillsPage() {
-  const [resumeId, setResumeId] = useState("");
+  const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<SkillsResponse | null>(null);
 
-  const handleFetch = async () => {
-    if (!resumeId.trim()) return;
+  const fetchSkills = async (resumeId: number) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -37,6 +36,16 @@ export default function SkillsPage() {
     }
   };
 
+  const handleResumeSelect = (resume: ResumeListItem) => {
+    setSelectedResumeId(resume.id);
+  };
+
+  useEffect(() => {
+    if (selectedResumeId) {
+      fetchSkills(selectedResumeId);
+    }
+  }, [selectedResumeId]);
+
   return (
     <div className="mx-auto max-w-4xl space-y-6">
       <div>
@@ -49,32 +58,23 @@ export default function SkillsPage() {
       <Card>
         <CardHeader>
           <CardTitle className="text-sm font-medium">
-            Load Skills by Resume ID
+            Select Resume
           </CardTitle>
           <CardDescription>
-            Enter the resume ID from a previous upload to view extracted skills.
+            Choose a resume to view its extracted skills.
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="flex gap-2">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                placeholder="Resume ID (e.g., 1)"
-                value={resumeId}
-                onChange={(e) => setResumeId(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleFetch()}
-                className="pl-9"
-              />
+        <CardContent className="space-y-4">
+          <ResumePicker
+            selectedResumeId={selectedResumeId}
+            onSelect={handleResumeSelect}
+          />
+          {isLoading && (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Loading skills...
             </div>
-            <Button onClick={handleFetch} disabled={isLoading || !resumeId.trim()}>
-              {isLoading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                "Load"
-              )}
-            </Button>
-          </div>
+          )}
         </CardContent>
       </Card>
 

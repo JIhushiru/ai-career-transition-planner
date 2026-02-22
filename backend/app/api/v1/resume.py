@@ -2,16 +2,18 @@ import json
 import uuid
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_db, get_optional_user
+from app.api.deps import get_current_user, get_db, get_optional_user
 from app.models.resume import Resume
 from app.models.skill import Skill, UserSkill
 from app.models.user import User
 from app.schemas.resume import (
     ExtractedSkill,
     ParsedSections,
+    ResumeListItem,
+    ResumeListResponse,
     ResumeTextRequest,
     ResumeUploadResponse,
     SessionResponse,
@@ -149,6 +151,38 @@ async def parse_text_resume(
         skills=skills,
         parsed_sections=ParsedSections(**parsed_sections),
     )
+
+
+@router.get("/list", response_model=ResumeListResponse)
+async def list_user_resumes(
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    """List all resumes for the authenticated user."""
+    result = await db.execute(
+        select(Resume)
+        .where(Resume.user_id == user.id)
+        .order_by(Resume.created_at.desc())
+    )
+    resumes = result.scalars().all()
+
+    items = []
+    for r in resumes:
+        skill_count_result = await db.execute(
+            select(func.count(UserSkill.id)).where(UserSkill.resume_id == r.id)
+        )
+        count = skill_count_result.scalar() or 0
+        items.append(
+            ResumeListItem(
+                id=r.id,
+                filename=r.filename,
+                source_type=r.source_type,
+                created_at=r.created_at.isoformat(),
+                skill_count=count,
+            )
+        )
+
+    return ResumeListResponse(resumes=items)
 
 
 @router.get("/{resume_id}/skills", response_model=SkillsResponse)

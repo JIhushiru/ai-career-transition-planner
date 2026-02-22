@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { Loader2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,9 +13,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { MatchCard } from "@/components/career/match-card";
+import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiPost, apiGet } from "@/lib/api-client";
 import { useSession } from "@/context/session-context";
 import type { MatchResultsResponse, CategoryCount } from "@/types/career";
+import type { ResumeListItem } from "@/types/resume";
 
 const careerModes = [
   { value: "growth", label: "Growth", description: "Maximize career growth" },
@@ -27,7 +28,7 @@ const careerModes = [
 
 export default function ExplorePage() {
   const { userId: sessionUserId } = useSession();
-  const [userId, setUserId] = useState("");
+  const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
   const [yearsExp, setYearsExp] = useState("");
   const [careerMode, setCareerMode] = useState("growth");
   const [useLlm, setUseLlm] = useState(false);
@@ -35,12 +36,6 @@ export default function ExplorePage() {
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<MatchResultsResponse | null>(null);
   const [categories, setCategories] = useState<CategoryCount[]>([]);
-
-  useEffect(() => {
-    if (sessionUserId && !userId) {
-      setUserId(String(sessionUserId));
-    }
-  }, [sessionUserId]);
 
   useEffect(() => {
     async function loadCategories() {
@@ -54,13 +49,18 @@ export default function ExplorePage() {
     loadCategories();
   }, []);
 
+  const handleResumeSelect = (resume: ResumeListItem) => {
+    setSelectedResumeId(resume.id);
+  };
+
   const handleMatch = async () => {
-    if (!userId.trim()) return;
+    if (!sessionUserId) return;
     setIsLoading(true);
     setError(null);
     try {
       const res = await apiPost<MatchResultsResponse>("/career/match", {
-        user_id: parseInt(userId),
+        user_id: sessionUserId,
+        resume_id: selectedResumeId ?? undefined,
         career_mode: careerMode,
         years_experience: yearsExp ? parseInt(yearsExp) : null,
         use_llm: useLlm,
@@ -89,21 +89,15 @@ export default function ExplorePage() {
             Run Career Matching
           </CardTitle>
           <CardDescription>
-            {sessionUserId
-              ? "Your resume is loaded. Configure options and find matching roles."
-              : <>Upload a resume first on the <Link href="/resume" className="underline text-primary">Resume page</Link> to get started.</>}
+            Select a resume and configure options to find matching roles.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className="mb-1 block text-xs font-medium">User ID</label>
-              <Input
-                placeholder="e.g., 1"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
-              />
-            </div>
+            <ResumePicker
+              selectedResumeId={selectedResumeId}
+              onSelect={handleResumeSelect}
+            />
             <div>
               <label className="mb-1 block text-xs font-medium">
                 Years of Experience
@@ -147,7 +141,7 @@ export default function ExplorePage() {
 
           <Button
             onClick={handleMatch}
-            disabled={isLoading || !userId.trim()}
+            disabled={isLoading || !sessionUserId || !selectedResumeId}
             className="w-full sm:w-auto"
           >
             {isLoading ? (

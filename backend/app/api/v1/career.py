@@ -39,6 +39,7 @@ embedding_service = EmbeddingService()
 
 class MatchRequest(BaseModel):
     user_id: int
+    resume_id: int | None = None
     career_mode: str = "growth"
     years_experience: int | None = None
     use_llm: bool = True
@@ -73,13 +74,24 @@ async def compute_matches(
     if not user:
         raise HTTPException(404, "User not found")
 
-    result = await db.execute(
-        select(Resume)
-        .where(Resume.user_id == body.user_id)
-        .order_by(Resume.created_at.desc())
-        .limit(1)
-    )
-    resume = result.scalar_one_or_none()
+    if body.resume_id:
+        result = await db.execute(
+            select(Resume).where(
+                Resume.id == body.resume_id,
+                Resume.user_id == body.user_id,
+            )
+        )
+        resume = result.scalar_one_or_none()
+        if not resume:
+            raise HTTPException(404, "Resume not found or does not belong to this user.")
+    else:
+        result = await db.execute(
+            select(Resume)
+            .where(Resume.user_id == body.user_id)
+            .order_by(Resume.created_at.desc())
+            .limit(1)
+        )
+        resume = result.scalar_one_or_none()
     if not resume:
         raise HTTPException(400, "No resume found for user. Upload a resume first.")
 

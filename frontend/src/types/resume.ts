@@ -32,6 +32,18 @@ export interface SkillsResponse {
   categories: Record<string, ExtractedSkill[]>;
 }
 
+export interface ResumeListItem {
+  id: number;
+  filename: string | null;
+  source_type: string;
+  created_at: string;
+  skill_count: number;
+}
+
+export interface ResumeListResponse {
+  resumes: ResumeListItem[];
+}
+
 export interface SessionResponse {
   session_id: string;
   user_id: number;

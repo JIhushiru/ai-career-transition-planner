@@ -48,6 +48,18 @@ class SkillsResponse(BaseModel):
     categories: dict[str, list[ExtractedSkill]] = Field(default_factory=dict)
 
 
+class ResumeListItem(BaseModel):
+    id: int
+    filename: str | None
+    source_type: str
+    created_at: str
+    skill_count: int
+
+
+class ResumeListResponse(BaseModel):
+    resumes: list[ResumeListItem]
+
+
 class SessionResponse(BaseModel):
     session_id: str
     user_id: int

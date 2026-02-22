@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Loader2, Map } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,26 +18,19 @@ import type { RoadmapResponse } from "@/types/career";
 
 export default function RoadmapPage() {
   const { userId: sessionUserId } = useSession();
-  const [userId, setUserId] = useState("");
   const [targetRoleId, setTargetRoleId] = useState("");
-
-  useEffect(() => {
-    if (sessionUserId && !userId) {
-      setUserId(String(sessionUserId));
-    }
-  }, [sessionUserId]);
   const [includeResources, setIncludeResources] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [roadmap, setRoadmap] = useState<RoadmapResponse | null>(null);
 
   const handleGenerate = async () => {
-    if (!userId.trim() || !targetRoleId.trim()) return;
+    if (!sessionUserId || !targetRoleId.trim()) return;
     setIsLoading(true);
     setError(null);
     try {
       const res = await apiPost<RoadmapResponse>("/career/roadmap", {
-        user_id: parseInt(userId),
+        user_id: sessionUserId,
         target_role_id: parseInt(targetRoleId),
         include_resources: includeResources,
       });
@@ -68,25 +61,15 @@ export default function RoadmapPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className="mb-1 block text-xs font-medium">User ID</label>
-              <Input
-                placeholder="e.g., 1"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
-              />
-            </div>
-            <div>
-              <label className="mb-1 block text-xs font-medium">
-                Target Role ID
-              </label>
-              <Input
-                placeholder="e.g., 15"
-                value={targetRoleId}
-                onChange={(e) => setTargetRoleId(e.target.value)}
-              />
-            </div>
+          <div>
+            <label className="mb-1 block text-xs font-medium">
+              Target Role ID
+            </label>
+            <Input
+              placeholder="e.g., 15"
+              value={targetRoleId}
+              onChange={(e) => setTargetRoleId(e.target.value)}
+            />
           </div>
 
           <label className="flex items-center gap-2 text-sm">
@@ -101,7 +84,7 @@ export default function RoadmapPage() {
 
           <Button
             onClick={handleGenerate}
-            disabled={isLoading || !userId.trim() || !targetRoleId.trim()}
+            disabled={isLoading || !sessionUserId || !targetRoleId.trim()}
           >
             {isLoading ? (
               <>
