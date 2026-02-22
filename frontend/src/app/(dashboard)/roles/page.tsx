@@ -23,7 +23,7 @@ export default function RolesPage() {
   useEffect(() => {
     async function load() {
       try {
-        const data = await apiGet<RoleListResponse>("/roles?limit=300");
+        const data = await apiGet<RoleListResponse>("/roles?limit=200");
         setRoles(data.roles);
       } catch {
         // silently fail
@@ -124,6 +124,11 @@ export default function RolesPage() {
                               <p className="text-sm font-medium">
                                 {role.title}
                               </p>
+                              {role.description && (
+                                <p className="mt-1 text-xs text-muted-foreground line-clamp-2">
+                                  {role.description}
+                                </p>
+                              )}
                               <div className="flex flex-wrap items-center gap-1 mt-1">
                                 {role.seniority && (
                                   <Badge
@@ -142,12 +147,6 @@ export default function RolesPage() {
                                   </Badge>
                                 )}
                               </div>
-                              {role.required_skills.length > 0 && (
-                                <p className="mt-1 text-xs text-muted-foreground truncate">
-                                  {role.required_skills.slice(0, 4).join(", ")}
-                                  {role.required_skills.length > 4 && "..."}
-                                </p>
-                              )}
                             </div>
                           </div>
                         ))}
