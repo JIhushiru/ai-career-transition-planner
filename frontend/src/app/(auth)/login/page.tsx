@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Loader2, Compass } from "lucide-react";
@@ -19,11 +19,16 @@ import type { TokenResponse } from "@/types/auth";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login } = useSession();
+  const { login, logout } = useSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Clear any stale session data so expired tokens don't interfere
+  useEffect(() => {
+    logout();
+  }, [logout]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

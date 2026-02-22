@@ -16,6 +16,16 @@ function getAuthHeaders(): Record<string, string> {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
+async function parseErrorMessage(res: Response): Promise<string> {
+  try {
+    const body = await res.json();
+    if (typeof body.detail === "string") return body.detail;
+    return JSON.stringify(body);
+  } catch {
+    return await res.text().catch(() => "Unknown error");
+  }
+}
+
 async function handleResponse<T>(res: Response, path: string): Promise<T> {
   if (!res.ok) {
     const isAuthEndpoint = path.startsWith("/auth/");
@@ -25,11 +35,12 @@ async function handleResponse<T>(res: Response, path: string): Promise<T> {
       localStorage.removeItem("ct_resume_id");
       localStorage.removeItem("ct_email");
       localStorage.removeItem("ct_name");
+      localStorage.removeItem("ct_current_salary");
       window.location.href = "/login";
       throw new ApiError(401, "Session expired. Please log in again.");
     }
-    const body = await res.text().catch(() => "Unknown error");
-    throw new ApiError(res.status, body);
+    const message = await parseErrorMessage(res);
+    throw new ApiError(res.status, message);
   }
   return res.json();
 }
@@ -42,9 +53,13 @@ export async function apiGet<T>(path: string): Promise<T> {
 }
 
 export async function apiPost<T>(path: string, body: unknown): Promise<T> {
+  const isAuthEndpoint = path.startsWith("/auth/login") || path.startsWith("/auth/signup");
   const res = await fetch(`${API_BASE}${path}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", ...getAuthHeaders() },
+    headers: {
+      "Content-Type": "application/json",
+      ...(isAuthEndpoint ? {} : getAuthHeaders()),
+    },
     body: JSON.stringify(body),
   });
   return handleResponse<T>(res, path);
