@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader2, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,11 +13,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { TransitionPathView } from "@/components/career/transition-path";
 import { apiPost } from "@/lib/api-client";
+import { useSession } from "@/context/session-context";
 import type { CareerPathsResponse } from "@/types/career";
 
 export default function TransitionsPage() {
+  const { userId: sessionUserId } = useSession();
   const [userId, setUserId] = useState("");
   const [targetRoleId, setTargetRoleId] = useState("");
+
+  useEffect(() => {
+    if (sessionUserId && !userId) {
+      setUserId(String(sessionUserId));
+    }
+  }, [sessionUserId]);
   const [maxSteps, setMaxSteps] = useState("3");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

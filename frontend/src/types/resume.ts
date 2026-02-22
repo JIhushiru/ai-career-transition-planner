@@ -20,6 +20,7 @@ export interface ParsedSections {
 }
 
 export interface ResumeUploadResponse {
+  user_id: number;
   resume_id: number;
   raw_text: string;
   skills: ExtractedSkill[];

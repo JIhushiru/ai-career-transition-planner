@@ -17,6 +17,7 @@ class ParsedSections(BaseModel):
 
 
 class ResumeUploadResponse(BaseModel):
+    user_id: int
     resume_id: int
     raw_text: str
     skills: list[ExtractedSkill]

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { Compass } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
@@ -9,18 +11,28 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { UploadForm } from "@/components/resume/upload-form";
 import { TextPasteForm } from "@/components/resume/text-paste-form";
 import { SkillList } from "@/components/resume/skill-list";
 import { apiUpload, apiPost } from "@/lib/api-client";
+import { useSession } from "@/context/session-context";
 import type { ResumeUploadResponse, ExtractedSkill } from "@/types/resume";
 
 export default function ResumePage() {
+  const { setSession } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [skills, setSkills] = useState<ExtractedSkill[]>([]);
   const [resumeId, setResumeId] = useState<number | null>(null);
   const [rawText, setRawText] = useState<string>("");
+
+  const handleResult = (result: ResumeUploadResponse) => {
+    setSkills(result.skills);
+    setResumeId(result.resume_id);
+    setRawText(result.raw_text);
+    setSession(result.user_id, result.resume_id);
+  };
 
   const handleUpload = async (file: File) => {
     setIsLoading(true);
@@ -30,9 +42,7 @@ export default function ResumePage() {
         "/resume/upload",
         file,
       );
-      setSkills(result.skills);
-      setResumeId(result.resume_id);
-      setRawText(result.raw_text);
+      handleResult(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Upload failed");
     } finally {
@@ -48,9 +58,7 @@ export default function ResumePage() {
         "/resume/parse-text",
         { text },
       );
-      setSkills(result.skills);
-      setResumeId(result.resume_id);
-      setRawText(result.raw_text);
+      handleResult(result);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Parsing failed");
     } finally {
@@ -91,6 +99,21 @@ export default function ResumePage() {
       {skills.length > 0 && (
         <>
           <SkillList skills={skills} />
+
+          <Card className="border-primary/20 bg-primary/5">
+            <CardContent className="flex items-center justify-between py-4">
+              <p className="text-sm font-medium">
+                {skills.length} skills extracted — ready to find matching
+                careers!
+              </p>
+              <Button asChild>
+                <Link href="/explore">
+                  <Compass className="mr-2 h-4 w-4" />
+                  Explore Careers
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
 
           {rawText && (
             <Card>

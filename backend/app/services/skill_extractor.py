@@ -10,7 +10,7 @@ class SkillExtractor:
     TECH_PATTERNS: dict[str, str] = {
         "technical": (
             r"\b(Python|Java|JavaScript|TypeScript|C\+\+|C#|Go|Rust|Ruby|PHP|Swift|Kotlin"
-            r"|Scala|R|MATLAB|SQL|HTML|CSS|Sass|LESS|Perl|Lua|Dart|Elixir|Haskell"
+            r"|Scala|(?<![A-Z])R(?![\.\w])|MATLAB|SQL|HTML|CSS|Sass|LESS|Perl|Lua|Dart|Elixir|Haskell"
             r"|Shell|Bash|PowerShell|VBA|ABAP|COBOL|Fortran)\b"
         ),
         "framework": (

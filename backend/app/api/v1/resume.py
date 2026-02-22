@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_db
+from app.api.deps import get_db, get_optional_user
 from app.models.resume import Resume
 from app.models.skill import Skill, UserSkill
 from app.models.user import User
@@ -80,6 +80,7 @@ async def _save_skills(
 async def upload_resume(
     file: UploadFile = File(...),
     db: AsyncSession = Depends(get_db),
+    auth_user: User | None = Depends(get_optional_user),
 ):
     if not file.filename or not file.filename.lower().endswith(".pdf"):
         raise HTTPException(400, "Only PDF files are supported")
@@ -95,7 +96,7 @@ async def upload_resume(
     parsed_sections = parser.parse_sections(raw_text)
     extracted_skills = extractor.extract_skills(raw_text)
 
-    user = await _get_or_create_user(db)
+    user = auth_user or await _get_or_create_user(db)
     resume = Resume(
         user_id=user.id,
         filename=file.filename,
@@ -110,6 +111,7 @@ async def upload_resume(
     await db.commit()
 
     return ResumeUploadResponse(
+        user_id=user.id,
         resume_id=resume.id,
         raw_text=raw_text,
         skills=skills,
@@ -121,11 +123,12 @@ async def upload_resume(
 async def parse_text_resume(
     body: ResumeTextRequest,
     db: AsyncSession = Depends(get_db),
+    auth_user: User | None = Depends(get_optional_user),
 ):
     parsed_sections = parser.parse_sections(body.text)
     extracted_skills = extractor.extract_skills(body.text)
 
-    user = await _get_or_create_user(db)
+    user = auth_user or await _get_or_create_user(db)
     resume = Resume(
         user_id=user.id,
         filename=None,
@@ -140,6 +143,7 @@ async def parse_text_resume(
     await db.commit()
 
     return ResumeUploadResponse(
+        user_id=user.id,
         resume_id=resume.id,
         raw_text=body.text,
         skills=skills,

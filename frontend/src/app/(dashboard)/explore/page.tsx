@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Loader2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +15,8 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { MatchCard } from "@/components/career/match-card";
 import { apiPost, apiGet } from "@/lib/api-client";
-import type { MatchResultsResponse, RoleListResponse, CategoryCount } from "@/types/career";
+import { useSession } from "@/context/session-context";
+import type { MatchResultsResponse, CategoryCount } from "@/types/career";
 
 const careerModes = [
   { value: "growth", label: "Growth", description: "Maximize career growth" },
@@ -24,6 +26,7 @@ const careerModes = [
 ];
 
 export default function ExplorePage() {
+  const { userId: sessionUserId } = useSession();
   const [userId, setUserId] = useState("");
   const [yearsExp, setYearsExp] = useState("");
   const [careerMode, setCareerMode] = useState("growth");
@@ -33,14 +36,23 @@ export default function ExplorePage() {
   const [results, setResults] = useState<MatchResultsResponse | null>(null);
   const [categories, setCategories] = useState<CategoryCount[]>([]);
 
-  const loadCategories = async () => {
-    try {
-      const cats = await apiGet<CategoryCount[]>("/roles/categories/list");
-      setCategories(cats);
-    } catch {
-      // silently fail
+  useEffect(() => {
+    if (sessionUserId && !userId) {
+      setUserId(String(sessionUserId));
     }
-  };
+  }, [sessionUserId]);
+
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const cats = await apiGet<CategoryCount[]>("/roles/categories/list");
+        setCategories(cats);
+      } catch {
+        // silently fail
+      }
+    }
+    loadCategories();
+  }, []);
 
   const handleMatch = async () => {
     if (!userId.trim()) return;
@@ -62,10 +74,6 @@ export default function ExplorePage() {
     }
   };
 
-  useState(() => {
-    loadCategories();
-  });
-
   return (
     <div className="mx-auto max-w-5xl space-y-6">
       <div>
@@ -81,7 +89,9 @@ export default function ExplorePage() {
             Run Career Matching
           </CardTitle>
           <CardDescription>
-            Upload a resume first, then enter your user ID to find matching roles.
+            {sessionUserId
+              ? "Your resume is loaded. Configure options and find matching roles."
+              : <>Upload a resume first on the <Link href="/resume" className="underline text-primary">Resume page</Link> to get started.</>}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
