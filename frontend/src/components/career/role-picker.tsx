@@ -65,7 +65,7 @@ export function RolePicker({
           // Reset role selection when category changes
         }}
       >
-        <option value="">Select a category...</option>
+        <option value="" disabled>Select a category...</option>
         {categories.map((cat) => (
           <option key={cat} value={cat}>
             {cat} ({grouped[cat].length})
@@ -79,7 +79,7 @@ export function RolePicker({
         onChange={(e) => onSelect(parseInt(e.target.value))}
         disabled={!selectedCategory}
       >
-        <option value="">Select a role...</option>
+        <option value="" disabled>Select a role...</option>
         {filteredRoles.map((role) => (
           <option key={role.id} value={role.id}>
             {role.title}{role.seniority ? ` (${role.seniority})` : ""}
