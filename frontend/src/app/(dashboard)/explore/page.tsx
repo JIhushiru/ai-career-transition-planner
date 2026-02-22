@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Loader2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,9 +14,9 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { MatchCard } from "@/components/career/match-card";
 import { ResumePicker } from "@/components/resume/resume-picker";
-import { apiPost, apiGet } from "@/lib/api-client";
+import { apiPost } from "@/lib/api-client";
 import { useSession } from "@/context/session-context";
-import type { MatchResultsResponse, CategoryCount } from "@/types/career";
+import type { MatchResultsResponse } from "@/types/career";
 import type { ResumeListItem } from "@/types/resume";
 
 const careerModes = [
@@ -35,20 +35,6 @@ export default function ExplorePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<MatchResultsResponse | null>(null);
-  const [categories, setCategories] = useState<CategoryCount[]>([]);
-
-  useEffect(() => {
-    async function loadCategories() {
-      try {
-        const cats = await apiGet<CategoryCount[]>("/roles/categories/list");
-        setCategories(cats);
-      } catch {
-        // silently fail
-      }
-    }
-    loadCategories();
-  }, []);
-
   const handleResumeSelect = (resume: ResumeListItem) => {
     setSelectedResumeId(resume.id);
   };
@@ -158,16 +144,6 @@ export default function ExplorePage() {
           </Button>
         </CardContent>
       </Card>
-
-      {categories.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {categories.map((c) => (
-            <Badge key={c.category} variant="secondary">
-              {c.category}: {c.count}
-            </Badge>
-          ))}
-        </div>
-      )}
 
       {error && (
         <Card className="border-destructive">
