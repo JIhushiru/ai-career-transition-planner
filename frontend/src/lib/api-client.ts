@@ -16,9 +16,10 @@ function getAuthHeaders(): Record<string, string> {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
-async function handleResponse<T>(res: Response): Promise<T> {
+async function handleResponse<T>(res: Response, path: string): Promise<T> {
   if (!res.ok) {
-    if (res.status === 401 && typeof window !== "undefined") {
+    const isAuthEndpoint = path.startsWith("/auth/");
+    if (res.status === 401 && !isAuthEndpoint && typeof window !== "undefined") {
       localStorage.removeItem("ct_token");
       localStorage.removeItem("ct_user_id");
       localStorage.removeItem("ct_resume_id");
@@ -37,7 +38,7 @@ export async function apiGet<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
     headers: { ...getAuthHeaders() },
   });
-  return handleResponse<T>(res);
+  return handleResponse<T>(res, path);
 }
 
 export async function apiPost<T>(path: string, body: unknown): Promise<T> {
@@ -46,7 +47,7 @@ export async function apiPost<T>(path: string, body: unknown): Promise<T> {
     headers: { "Content-Type": "application/json", ...getAuthHeaders() },
     body: JSON.stringify(body),
   });
-  return handleResponse<T>(res);
+  return handleResponse<T>(res, path);
 }
 
 export async function apiPut<T>(path: string, body: unknown): Promise<T> {
@@ -55,7 +56,7 @@ export async function apiPut<T>(path: string, body: unknown): Promise<T> {
     headers: { "Content-Type": "application/json", ...getAuthHeaders() },
     body: JSON.stringify(body),
   });
-  return handleResponse<T>(res);
+  return handleResponse<T>(res, path);
 }
 
 export async function apiUpload<T>(path: string, file: File): Promise<T> {
@@ -66,5 +67,5 @@ export async function apiUpload<T>(path: string, file: File): Promise<T> {
     headers: { ...getAuthHeaders() },
     body: formData,
   });
-  return handleResponse<T>(res);
+  return handleResponse<T>(res, path);
 }
