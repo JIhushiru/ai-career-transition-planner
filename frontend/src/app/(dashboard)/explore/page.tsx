@@ -85,7 +85,7 @@ export default function ExplorePage() {
               onSelect={handleResumeSelect}
             />
             <div>
-              <label className="mb-1 block text-xs font-medium">
+              <label className="mb-1 block text-sm font-medium">
                 Years of Experience
               </label>
               <Input
@@ -98,7 +98,7 @@ export default function ExplorePage() {
           </div>
 
           <div>
-            <label className="mb-2 block text-xs font-medium">Career Mode</label>
+            <label className="mb-2 block text-sm font-medium">Career Mode</label>
             <div className="flex flex-wrap gap-2">
               {careerModes.map((mode) => (
                 <Badge

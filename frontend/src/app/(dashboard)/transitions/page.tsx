@@ -71,7 +71,7 @@ export default function TransitionsPage() {
               onSelect={setTargetRoleId}
             />
             <div>
-              <label className="mb-1 block text-xs font-medium">
+              <label className="mb-1 block text-sm font-medium">
                 Max Steps
               </label>
               <Input
