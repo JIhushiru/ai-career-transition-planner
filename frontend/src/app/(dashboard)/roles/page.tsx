@@ -22,7 +22,7 @@ export default function RolesPage() {
   useEffect(() => {
     async function load() {
       try {
-        const data = await apiGet<RoleListResponse>("/roles?limit=200");
+        const data = await apiGet<RoleListResponse>("/roles?limit=300");
         setRoles(data.roles);
       } catch {
         // silently fail

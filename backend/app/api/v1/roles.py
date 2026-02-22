@@ -38,7 +38,7 @@ async def list_roles(
     seniority: str | None = Query(None),
     search: str | None = Query(None),
     skip: int = Query(0, ge=0),
-    limit: int = Query(50, ge=1, le=200),
+    limit: int = Query(50, ge=1, le=500),
     db: AsyncSession = Depends(get_db),
 ):
     query = select(Role)

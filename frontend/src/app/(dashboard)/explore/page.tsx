@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2, Sparkles } from "lucide-react";
+import { Loader2, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -128,7 +128,7 @@ export default function ExplorePage() {
           <Button
             onClick={handleMatch}
             disabled={isLoading || !sessionUserId || !selectedResumeId}
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white"
           >
             {isLoading ? (
               <>
@@ -137,7 +137,7 @@ export default function ExplorePage() {
               </>
             ) : (
               <>
-                <Sparkles className="mr-2 h-4 w-4" />
+                <Search className="mr-2 h-4 w-4" />
                 Find Matching Careers
               </>
             )}

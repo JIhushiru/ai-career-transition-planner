@@ -22,7 +22,7 @@ export function RolePicker({
   useEffect(() => {
     async function loadRoles() {
       try {
-        const data = await apiGet<RoleListResponse>("/roles?limit=200");
+        const data = await apiGet<RoleListResponse>("/roles?limit=300");
         setRoles(data.roles);
       } catch {
         // silently fail
