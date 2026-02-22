@@ -18,6 +18,15 @@ function getAuthHeaders(): Record<string, string> {
 
 async function handleResponse<T>(res: Response): Promise<T> {
   if (!res.ok) {
+    if (res.status === 401 && typeof window !== "undefined") {
+      localStorage.removeItem("ct_token");
+      localStorage.removeItem("ct_user_id");
+      localStorage.removeItem("ct_resume_id");
+      localStorage.removeItem("ct_email");
+      localStorage.removeItem("ct_name");
+      window.location.href = "/login";
+      throw new ApiError(401, "Session expired. Please log in again.");
+    }
     const body = await res.text().catch(() => "Unknown error");
     throw new ApiError(res.status, body);
   }
