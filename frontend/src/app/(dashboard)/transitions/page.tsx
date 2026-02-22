@@ -12,20 +12,21 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { TransitionPathView } from "@/components/career/transition-path";
+import { RolePicker } from "@/components/career/role-picker";
 import { apiPost } from "@/lib/api-client";
 import { useSession } from "@/context/session-context";
 import type { CareerPathsResponse } from "@/types/career";
 
 export default function TransitionsPage() {
   const { userId: sessionUserId } = useSession();
-  const [targetRoleId, setTargetRoleId] = useState("");
+  const [targetRoleId, setTargetRoleId] = useState<number | null>(null);
   const [maxSteps, setMaxSteps] = useState("3");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<CareerPathsResponse | null>(null);
 
   const handleSearch = async () => {
-    if (!sessionUserId || !targetRoleId.trim()) return;
+    if (!sessionUserId || !targetRoleId) return;
     setIsLoading(true);
     setError(null);
     try {
@@ -33,7 +34,7 @@ export default function TransitionsPage() {
         "/career/transition-paths",
         {
           user_id: sessionUserId,
-          target_role_id: parseInt(targetRoleId),
+          target_role_id: targetRoleId,
           max_steps: parseInt(maxSteps) || 3,
         },
       );
@@ -60,21 +61,15 @@ export default function TransitionsPage() {
             Find Transition Paths
           </CardTitle>
           <CardDescription>
-            Run career matching first, then select a target role ID.
+            Run career matching first, then select a target role.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className="mb-1 block text-xs font-medium">
-                Target Role ID
-              </label>
-              <Input
-                placeholder="e.g., 15"
-                value={targetRoleId}
-                onChange={(e) => setTargetRoleId(e.target.value)}
-              />
-            </div>
+            <RolePicker
+              selectedRoleId={targetRoleId}
+              onSelect={setTargetRoleId}
+            />
             <div>
               <label className="mb-1 block text-xs font-medium">
                 Max Steps
@@ -91,7 +86,7 @@ export default function TransitionsPage() {
 
           <Button
             onClick={handleSearch}
-            disabled={isLoading || !sessionUserId || !targetRoleId.trim()}
+            disabled={isLoading || !sessionUserId || !targetRoleId}
           >
             {isLoading ? (
               <>

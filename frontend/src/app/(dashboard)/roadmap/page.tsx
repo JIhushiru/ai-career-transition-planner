@@ -10,28 +10,28 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { RoadmapView } from "@/components/career/roadmap-view";
+import { RolePicker } from "@/components/career/role-picker";
 import { apiPost } from "@/lib/api-client";
 import { useSession } from "@/context/session-context";
 import type { RoadmapResponse } from "@/types/career";
 
 export default function RoadmapPage() {
   const { userId: sessionUserId } = useSession();
-  const [targetRoleId, setTargetRoleId] = useState("");
+  const [targetRoleId, setTargetRoleId] = useState<number | null>(null);
   const [includeResources, setIncludeResources] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [roadmap, setRoadmap] = useState<RoadmapResponse | null>(null);
 
   const handleGenerate = async () => {
-    if (!sessionUserId || !targetRoleId.trim()) return;
+    if (!sessionUserId || !targetRoleId) return;
     setIsLoading(true);
     setError(null);
     try {
       const res = await apiPost<RoadmapResponse>("/career/roadmap", {
         user_id: sessionUserId,
-        target_role_id: parseInt(targetRoleId),
+        target_role_id: targetRoleId,
         include_resources: includeResources,
       });
       setRoadmap(res);
@@ -61,16 +61,10 @@ export default function RoadmapPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div>
-            <label className="mb-1 block text-xs font-medium">
-              Target Role ID
-            </label>
-            <Input
-              placeholder="e.g., 15"
-              value={targetRoleId}
-              onChange={(e) => setTargetRoleId(e.target.value)}
-            />
-          </div>
+          <RolePicker
+            selectedRoleId={targetRoleId}
+            onSelect={setTargetRoleId}
+          />
 
           <label className="flex items-center gap-2 text-sm">
             <input
@@ -84,7 +78,7 @@ export default function RoadmapPage() {
 
           <Button
             onClick={handleGenerate}
-            disabled={isLoading || !sessionUserId || !targetRoleId.trim()}
+            disabled={isLoading || !sessionUserId || !targetRoleId}
           >
             {isLoading ? (
               <>
