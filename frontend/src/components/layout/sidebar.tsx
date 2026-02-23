@@ -13,7 +13,6 @@ import {
   Briefcase,
   Star,
   ClipboardCheck,
-  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSession } from "@/context/session-context";
@@ -28,7 +27,6 @@ const navItems = [
   { href: "/roadmap", label: "Roadmap", icon: GraduationCap },
   { href: "/dream-job", label: "Dream Job", icon: Star },
   { href: "/assessment", label: "Self-Assessment", icon: ClipboardCheck },
-  { href: "/stories", label: "Success Stories", icon: Users },
 ];
 
 export function Sidebar() {

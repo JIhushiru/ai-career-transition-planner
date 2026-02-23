@@ -210,19 +210,3 @@ export interface RoleComparisonResponse {
     skill_transferability: number;
   };
 }
-
-// --- Success Stories ---
-
-export interface SuccessStory {
-  name: string;
-  story: string;
-  tip: string;
-  category: string;
-  from_role: string;
-  to_role: string;
-}
-
-export interface SuccessStoriesResponse {
-  stories: SuccessStory[];
-  target_role_id: number;
-}
