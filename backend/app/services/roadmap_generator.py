@@ -12,7 +12,7 @@ from app.ai.provider_factory import ProviderFactory
 
 logger = logging.getLogger(__name__)
 
-HOURS_BY_PRIORITY = {"high": 80, "medium": 40, "low": 20}
+HOURS_BY_PRIORITY = {"high": 30, "medium": 20, "low": 10}
 
 
 class RoadmapGenerator:

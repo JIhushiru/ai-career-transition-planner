@@ -150,6 +150,49 @@ class DreamJobPlanner:
             "milestones": gap_analysis.get("milestones", []),
         }
 
+    @staticmethod
+    def _schedule_skills(
+        weeks: list[dict],
+        gaps: list[dict],
+        week_num: int,
+        today: date,
+        weekly_pace: int,
+        *,
+        phase: str,
+        verb: str,
+        extra_actions: list[str],
+    ) -> int:
+        """Schedule skill gaps into weekly chunks at *weekly_pace* h/week.
+
+        Skills that exceed the weekly pace are spread across multiple weeks.
+        Smaller skills are batched together up to the weekly cap.
+        Returns the next available week number.
+        """
+        for gap in gaps:
+            skill = gap["skill"]
+            hours = gap["estimated_hours"]
+
+            # Spread this skill across as many weeks as needed
+            while hours > 0:
+                week_hours = min(hours, weekly_pace)
+                hours -= week_hours
+
+                start_date = today + timedelta(weeks=week_num - 1)
+                weeks.append({
+                    "week": week_num,
+                    "start_date": start_date.isoformat(),
+                    "phase": phase,
+                    "focus_skills": [skill],
+                    "hours": week_hours,
+                    "actions": [
+                        f"{verb}: {skill} ({week_hours}h)",
+                        *extra_actions,
+                    ],
+                })
+                week_num += 1
+
+        return week_num
+
     def _build_weekly_plan(
         self, skill_gaps: list[dict], milestones: list[dict]
     ) -> list[dict]:
@@ -158,98 +201,32 @@ class DreamJobPlanner:
         week_num = 1
         today = date.today()
 
-        # Phase 1: Core skills (10 hrs/week pace)
+        weekly_pace = 10  # hours per week
+
+        # Phase 1: Core skills
         high_gaps = [g for g in skill_gaps if g["priority"] == "high"]
         medium_gaps = [g for g in skill_gaps if g["priority"] == "medium"]
 
-        # Batch high-priority skills into weekly chunks
-        current_batch: list[str] = []
-        batch_hours = 0
-
-        for gap in high_gaps:
-            skill = gap["skill"]
-            hours = gap["estimated_hours"]
-
-            if batch_hours + hours > 10 and current_batch:
-                start_date = today + timedelta(weeks=week_num - 1)
-                weeks.append({
-                    "week": week_num,
-                    "start_date": start_date.isoformat(),
-                    "phase": "Core Skills",
-                    "focus_skills": current_batch,
-                    "hours": batch_hours,
-                    "actions": [
-                        f"Study: {', '.join(current_batch)} ({batch_hours}h)",
-                        "Practice with hands-on exercises or tutorials",
-                        "Update your resume/LinkedIn with progress",
-                    ],
-                })
-                week_num += 1
-                current_batch = []
-                batch_hours = 0
-
-            current_batch.append(skill)
-            batch_hours += hours
-
-        if current_batch:
-            start_date = today + timedelta(weeks=week_num - 1)
-            weeks.append({
-                "week": week_num,
-                "start_date": start_date.isoformat(),
-                "phase": "Core Skills",
-                "focus_skills": current_batch,
-                "hours": batch_hours,
-                "actions": [
-                    f"Study: {', '.join(current_batch)} ({batch_hours}h)",
-                    "Practice with hands-on exercises or tutorials",
-                    "Update your resume/LinkedIn with progress",
-                ],
-            })
-            week_num += 1
+        week_num = self._schedule_skills(
+            weeks, high_gaps, week_num, today, weekly_pace,
+            phase="Core Skills",
+            verb="Study",
+            extra_actions=[
+                "Practice with hands-on exercises or tutorials",
+                "Update your resume/LinkedIn with progress",
+            ],
+        )
 
         # Phase 2: Preferred skills
-        current_batch = []
-        batch_hours = 0
-        for gap in medium_gaps:
-            skill = gap["skill"]
-            hours = gap["estimated_hours"]
-
-            if batch_hours + hours > 10 and current_batch:
-                start_date = today + timedelta(weeks=week_num - 1)
-                weeks.append({
-                    "week": week_num,
-                    "start_date": start_date.isoformat(),
-                    "phase": "Expand Skills",
-                    "focus_skills": current_batch,
-                    "hours": batch_hours,
-                    "actions": [
-                        f"Learn: {', '.join(current_batch)} ({batch_hours}h)",
-                        "Build small side projects using new skills",
-                        "Network with professionals in your target role",
-                    ],
-                })
-                week_num += 1
-                current_batch = []
-                batch_hours = 0
-
-            current_batch.append(skill)
-            batch_hours += hours
-
-        if current_batch:
-            start_date = today + timedelta(weeks=week_num - 1)
-            weeks.append({
-                "week": week_num,
-                "start_date": start_date.isoformat(),
-                "phase": "Expand Skills",
-                "focus_skills": current_batch,
-                "hours": batch_hours,
-                "actions": [
-                    f"Learn: {', '.join(current_batch)} ({batch_hours}h)",
-                    "Build small side projects using new skills",
-                    "Network with professionals in your target role",
-                ],
-            })
-            week_num += 1
+        week_num = self._schedule_skills(
+            weeks, medium_gaps, week_num, today, weekly_pace,
+            phase="Expand Skills",
+            verb="Learn",
+            extra_actions=[
+                "Build small side projects using new skills",
+                "Network with professionals in your target role",
+            ],
+        )
 
         # Phase 3: Portfolio & job prep
         for i in range(4):
