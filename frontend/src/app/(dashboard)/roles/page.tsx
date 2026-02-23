@@ -7,7 +7,6 @@ import {
   Search,
   X,
   Wifi,
-  MapPin,
   Briefcase,
   DollarSign,
   FolderOpen,
@@ -175,10 +174,10 @@ export default function RolesPage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <div className="flex items-center gap-1.5">
-                <Briefcase className="h-3.5 w-3.5 text-muted-foreground" />
+              <div className="relative">
+                <Briefcase className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <select
-                  className="rounded-md border bg-background px-2.5 py-1.5 text-sm"
+                  className="h-8 appearance-none rounded-lg border bg-background pl-8 pr-8 text-sm transition-colors hover:border-foreground/25 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
                   value={seniorityFilter}
                   onChange={(e) => setSeniorityFilter(e.target.value)}
                 >
@@ -189,12 +188,13 @@ export default function RolesPage() {
                     </option>
                   ))}
                 </select>
+                <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
               </div>
 
-              <div className="flex items-center gap-1.5">
-                <DollarSign className="h-3.5 w-3.5 text-muted-foreground" />
+              <div className="relative">
+                <DollarSign className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <select
-                  className="rounded-md border bg-background px-2.5 py-1.5 text-sm"
+                  className="h-8 appearance-none rounded-lg border bg-background pl-8 pr-8 text-sm transition-colors hover:border-foreground/25 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
                   value={salaryPreset}
                   onChange={(e) => setSalaryPreset(Number(e.target.value))}
                 >
@@ -204,6 +204,7 @@ export default function RolesPage() {
                     </option>
                   ))}
                 </select>
+                <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
               </div>
 
               <button

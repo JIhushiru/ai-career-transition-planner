@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, FileText, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { apiGet } from "@/lib/api-client";
 import type { ResumeListResponse, ResumeListItem } from "@/types/resume";
@@ -34,7 +34,14 @@ export function ResumePicker({ selectedResumeId, onSelect }: ResumePickerProps) 
   }, []);
 
   if (isLoading) {
-    return <p className="text-sm text-muted-foreground">Loading resumes...</p>;
+    return (
+      <div className="space-y-2">
+        <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wide">
+          Resume
+        </label>
+        <div className="h-10 animate-pulse rounded-lg bg-muted" />
+      </div>
+    );
   }
 
   if (error) {
@@ -59,23 +66,29 @@ export function ResumePicker({ selectedResumeId, onSelect }: ResumePickerProps) 
   }
 
   return (
-    <div>
-      <label className="mb-1 block text-sm font-medium">Resume</label>
-      <select
-        className="w-full rounded-md border bg-background px-3 py-2 text-sm"
-        value={selectedResumeId ?? ""}
-        onChange={(e) => {
-          const r = resumes.find((r) => r.id === parseInt(e.target.value));
-          if (r) onSelect(r);
-        }}
-      >
-        {resumes.map((r) => (
-          <option key={r.id} value={r.id}>
-            {r.filename || "Text paste"} ({r.skill_count} skills) -{" "}
-            {new Date(r.created_at).toLocaleDateString()}
-          </option>
-        ))}
-      </select>
+    <div className="space-y-2">
+      <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wide">
+        Resume
+      </label>
+      <div className="relative">
+        <FileText className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <select
+          className="h-10 w-full appearance-none rounded-lg border bg-background pl-9 pr-9 text-sm font-medium transition-colors hover:border-foreground/25 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
+          value={selectedResumeId ?? ""}
+          onChange={(e) => {
+            const r = resumes.find((r) => r.id === parseInt(e.target.value));
+            if (r) onSelect(r);
+          }}
+        >
+          {resumes.map((r) => (
+            <option key={r.id} value={r.id}>
+              {r.filename || "Text paste"} ({r.skill_count} skills) -{" "}
+              {new Date(r.created_at).toLocaleDateString()}
+            </option>
+          ))}
+        </select>
+        <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      </div>
     </div>
   );
 }
