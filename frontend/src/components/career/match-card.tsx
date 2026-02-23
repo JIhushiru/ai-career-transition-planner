@@ -107,11 +107,12 @@ export function MatchCard({ match, rank, onClick }: MatchCardProps) {
           <>
             <button
               type="button"
+              aria-expanded={expanded}
               onClick={(e) => {
                 e.stopPropagation();
                 setExpanded(!expanded);
               }}
-              className="flex w-full items-center justify-center gap-1 rounded-md border py-1.5 text-xs text-muted-foreground transition-colors hover:bg-muted"
+              className="flex w-full items-center justify-center gap-1 rounded-md border py-1.5 text-xs text-muted-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {expanded ? (
                 <>Hide Skill Gap <ChevronUp className="h-3 w-3" /></>

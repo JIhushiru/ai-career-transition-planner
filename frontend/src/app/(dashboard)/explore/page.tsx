@@ -158,7 +158,7 @@ export default function ExplorePage() {
                 type="checkbox"
                 checked={useLlm}
                 onChange={(e) => setUseLlm(e.target.checked)}
-                className="rounded"
+                className="h-4 w-4 rounded border-input accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               />
               Enable LLM scoring
             </label>

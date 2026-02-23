@@ -158,7 +158,7 @@ export default function AssessmentPage() {
 
       {error && (
         <Card className="border-destructive">
-          <CardContent className="py-4 text-sm text-destructive">
+          <CardContent role="alert" className="py-4 text-sm text-destructive">
             {error}
           </CardContent>
         </Card>
@@ -237,7 +237,7 @@ export default function AssessmentPage() {
                             [q.skill]: level,
                           }))
                         }
-                        className={`rounded px-2 py-1 text-xs transition-colors ${
+                        className={`rounded px-2 py-1 text-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                           ratings[q.skill] === level
                             ? RATING_COLORS[level]
                             : "bg-muted/50 text-muted-foreground hover:bg-muted"
@@ -258,7 +258,6 @@ export default function AssessmentPage() {
             <Button
               onClick={handleSubmit}
               disabled={isSubmitting || ratedCount === 0 || !sessionUserId}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white"
             >
               {isSubmitting ? (
                 <>

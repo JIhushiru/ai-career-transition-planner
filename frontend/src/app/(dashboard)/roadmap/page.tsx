@@ -85,7 +85,7 @@ export default function RoadmapPage() {
               type="checkbox"
               checked={includeResources}
               onChange={(e) => setIncludeResources(e.target.checked)}
-              className="rounded"
+              className="h-4 w-4 rounded border-input accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             />
             Include learning resources
           </label>

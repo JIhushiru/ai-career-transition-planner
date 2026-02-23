@@ -12,9 +12,9 @@ interface TransitionPathViewProps {
 }
 
 function difficultyColor(d: number): string {
-  if (d < 0.3) return "text-green-600";
-  if (d < 0.6) return "text-yellow-600";
-  return "text-red-600";
+  if (d < 0.3) return "text-green-600 dark:text-green-400";
+  if (d < 0.6) return "text-yellow-600 dark:text-yellow-400";
+  return "text-red-600 dark:text-red-400";
 }
 
 function difficultyLabel(d: number): string {

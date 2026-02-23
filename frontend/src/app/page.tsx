@@ -43,7 +43,8 @@ const features = [
     description:
       "Upload your resume to discover your earning potential and find roles that pay more.",
     href: "/resume",
-    color: "text-blue-600 dark:text-blue-400",
+    iconColor: "text-blue-600 dark:text-blue-400",
+    bgColor: "bg-blue-100 dark:bg-blue-950",
   },
   {
     icon: Compass,
@@ -51,7 +52,8 @@ const features = [
     description:
       "AI-powered matching finds roles that fit your skills and pay more than your current salary.",
     href: "/explore",
-    color: "text-violet-600 dark:text-violet-400",
+    iconColor: "text-violet-600 dark:text-violet-400",
+    bgColor: "bg-violet-100 dark:bg-violet-950",
   },
   {
     icon: Route,
@@ -59,7 +61,8 @@ const features = [
     description:
       "See step-by-step career transitions with salary at each stage, from where you are to where you want to be.",
     href: "/transitions",
-    color: "text-emerald-600 dark:text-emerald-400",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
+    bgColor: "bg-emerald-100 dark:bg-emerald-950",
   },
   {
     icon: GraduationCap,
@@ -67,7 +70,8 @@ const features = [
     description:
       "Get a personalized learning plan to close skill gaps and unlock higher-salary roles.",
     href: "/roadmap",
-    color: "text-amber-600 dark:text-amber-400",
+    iconColor: "text-amber-600 dark:text-amber-400",
+    bgColor: "bg-amber-100 dark:bg-amber-950",
   },
   {
     icon: Star,
@@ -75,7 +79,8 @@ const features = [
     description:
       "Pick your dream role and get a reverse-engineered plan with career paths, weekly actions, and interview prep.",
     href: "/dream-job",
-    color: "text-amber-500 dark:text-amber-400",
+    iconColor: "text-amber-500 dark:text-amber-400",
+    bgColor: "bg-amber-100 dark:bg-amber-950",
   },
   {
     icon: ClipboardCheck,
@@ -83,7 +88,8 @@ const features = [
     description:
       "Rate your own skill levels to improve match accuracy and get better recommendations.",
     href: "/assessment",
-    color: "text-pink-600 dark:text-pink-400",
+    iconColor: "text-pink-600 dark:text-pink-400",
+    bgColor: "bg-pink-100 dark:bg-pink-950",
   },
 ];
 
@@ -246,86 +252,86 @@ export default function Home() {
 
   return (
     <div className="mx-auto max-w-5xl py-10">
-        {/* Hero */}
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight">
-            Plan Your Next Career Move
-          </h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Upload your resume, discover roles that match your skills, and build
-            a personalized roadmap to reach your dream job.
+      {/* Hero */}
+      <div className="mb-12 text-center">
+        <h1 className="mb-4 text-4xl font-bold tracking-tight">
+          Plan Your Next Career Move
+        </h1>
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          Upload your resume, discover roles that match your skills, and build
+          a personalized roadmap to reach your dream job.
+        </p>
+        <blockquote className="mx-auto mt-6 max-w-xl border-l-4 border-primary/30 pl-4 text-left">
+          <p className="italic text-muted-foreground">
+            &ldquo;{quote.text}&rdquo;
           </p>
-          <blockquote className="mx-auto mt-6 max-w-xl border-l-4 border-primary/30 pl-4 text-left">
-            <p className="italic text-muted-foreground">
-              &ldquo;{quote.text}&rdquo;
-            </p>
-            <footer className="mt-1 text-xs text-muted-foreground/70">
-              &mdash; {quote.author}
-            </footer>
-          </blockquote>
-          <div className="mt-6 flex justify-center gap-3">
-            <Button asChild size="lg">
-              <Link href={hasData ? "/explore" : "/resume"}>
-                {hasData ? "Explore Matching Roles" : "Get Started"}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+          <footer className="mt-1 text-xs text-muted-foreground/70">
+            &mdash; {quote.author}
+          </footer>
+        </blockquote>
+        <div className="mt-6 flex justify-center gap-3">
+          <Button asChild size="lg">
+            <Link href={hasData ? "/explore" : "/resume"}>
+              {hasData ? "Explore Matching Roles" : "Get Started"}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+
+      {/* Progress Summary */}
+      {(skillCount > 0 || matchCount > 0) && (
+        <ProgressSummary
+          skillCount={skillCount}
+          matchCount={matchCount}
+          topCategory={topCategory}
+        />
+      )}
+
+      {/* Quick Wins */}
+      {quickWins.length > 0 && (
+        <div className="mb-12">
+          <h2 className="mb-4 text-xl font-bold">
+            Quick Wins — Roles You Can Reach That Pay More
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {quickWins.slice(0, 3).map((win, i) => (
+              <QuickWinCard key={win.role.id} match={win} rank={i + 1} />
+            ))}
+          </div>
+          <div className="mt-4 text-center">
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/explore">See all matches</Link>
             </Button>
           </div>
         </div>
+      )}
 
-        {/* Progress Summary */}
-        {(skillCount > 0 || matchCount > 0) && (
-          <ProgressSummary
-            skillCount={skillCount}
-            matchCount={matchCount}
-            topCategory={topCategory}
-          />
-        )}
-
-        {/* Quick Wins */}
-        {quickWins.length > 0 && (
-          <div className="mb-12">
-            <h2 className="mb-4 text-xl font-bold">
-              Quick Wins — Roles You Can Reach That Pay More
-            </h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {quickWins.slice(0, 3).map((win, i) => (
-                <QuickWinCard key={win.role.id} match={win} rank={i + 1} />
-              ))}
-            </div>
-            <div className="mt-4 text-center">
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/explore">See all matches</Link>
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {/* Feature Cards */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature) => {
-            const Icon = feature.icon;
-            return (
-              <Card key={feature.title} className="transition-shadow hover:shadow-md">
+      {/* Feature Cards */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {features.map((feature) => {
+          const Icon = feature.icon;
+          return (
+            <Link key={feature.title} href={feature.href} className="group">
+              <Card className="h-full transition-all hover:shadow-md group-hover:border-primary/20">
                 <CardHeader>
-                  <div className="mb-2 flex items-center gap-2">
-                    <Icon className={`h-5 w-5 ${feature.color}`} />
-                    <CardTitle className="text-base">{feature.title}</CardTitle>
+                  <div className={`mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg ${feature.bgColor}`}>
+                    <Icon className={`h-5 w-5 ${feature.iconColor}`} />
                   </div>
+                  <CardTitle className="text-base">{feature.title}</CardTitle>
                   <CardDescription>{feature.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href={feature.href}>
-                      Open
-                      <ArrowRight className="ml-1 h-3 w-3" />
-                    </Link>
-                  </Button>
+                  <span className="inline-flex items-center text-sm font-medium text-primary group-hover:underline">
+                    Open
+                    <ArrowRight className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                  </span>
                 </CardContent>
               </Card>
-            );
-          })}
-        </div>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

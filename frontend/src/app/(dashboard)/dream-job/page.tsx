@@ -222,20 +222,20 @@ export default function DreamJobPage() {
               </div>
               <div className="mt-3 flex items-center gap-4">
                 <div className="flex items-center gap-1 text-sm">
-                  <TrendingUp className="h-4 w-4 text-green-600" />
+                  <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />
                   <span>
                     {plan.skill_analysis.match_percentage}% skill match
                   </span>
                 </div>
                 <div className="flex items-center gap-1 text-sm">
-                  <Clock className="h-4 w-4 text-blue-600" />
+                  <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                   <span>
                     ~{plan.skill_analysis.total_learning_hours}h to learn
                   </span>
                 </div>
                 {plan.career_paths.length > 0 && (
                   <div className="flex items-center gap-1 text-sm">
-                    <Target className="h-4 w-4 text-purple-600" />
+                    <Target className="h-4 w-4 text-purple-600 dark:text-purple-400" />
                     <span>
                       ~{plan.career_paths[0].total_months} months via best path
                     </span>
@@ -565,7 +565,7 @@ function CollapsibleSection({
       <button
         aria-expanded={isExpanded}
         onClick={onToggle}
-        className="flex w-full items-center justify-between px-6 py-4 text-left"
+        className="flex w-full items-center justify-between px-6 py-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset rounded-lg"
       >
         <div className="flex items-center gap-3">
           {icon}

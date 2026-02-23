@@ -211,7 +211,7 @@ export default function RolesPage() {
               <button
                 aria-pressed={remoteOnly}
                 onClick={() => setRemoteOnly(!remoteOnly)}
-                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   remoteOnly
                     ? "border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-300"
                     : "border-border text-muted-foreground hover:bg-muted"
@@ -293,7 +293,7 @@ export default function RolesPage() {
                     <button
                       aria-expanded={isExpanded}
                       onClick={() => toggleCategory(category)}
-                      className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 transition-colors"
+                      className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
                     >
                       {isExpanded ? (
                         <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
