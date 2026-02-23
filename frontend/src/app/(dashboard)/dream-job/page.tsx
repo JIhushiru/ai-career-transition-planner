@@ -27,12 +27,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { RolePicker } from "@/components/career/role-picker";
+import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiPost } from "@/lib/api-client";
 import { useSession } from "@/context/session-context";
 import type { DreamJobPlanResponse } from "@/types/career";
+import type { ResumeListItem } from "@/types/resume";
 
 export default function DreamJobPage() {
   const { userId: sessionUserId, currentSalary } = useSession();
+  const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
   const [dreamRoleId, setDreamRoleId] = useState<number | null>(null);
   const [yearsExp, setYearsExp] = useState<string>("");
   const [salary, setSalary] = useState<string>(currentSalary?.toString() || "");
@@ -52,14 +55,19 @@ export default function DreamJobPage() {
     });
   };
 
+  const handleResumeSelect = (resume: ResumeListItem) => {
+    setSelectedResumeId(resume.id);
+  };
+
   const handleGenerate = async () => {
-    if (!sessionUserId || !dreamRoleId) return;
+    if (!sessionUserId || !dreamRoleId || !selectedResumeId) return;
     setIsLoading(true);
     setError(null);
     try {
       const res = await apiPost<DreamJobPlanResponse>("/career/dream-job", {
         user_id: sessionUserId,
         dream_role_id: dreamRoleId,
+        resume_id: selectedResumeId,
         years_experience: yearsExp ? parseInt(yearsExp) : undefined,
         current_salary: salary ? parseInt(salary) : undefined,
       });
@@ -109,10 +117,16 @@ export default function DreamJobPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <RolePicker
-            selectedRoleId={dreamRoleId}
-            onSelect={setDreamRoleId}
-          />
+          <div className="grid gap-4 sm:grid-cols-2">
+            <ResumePicker
+              selectedResumeId={selectedResumeId}
+              onSelect={handleResumeSelect}
+            />
+            <RolePicker
+              selectedRoleId={dreamRoleId}
+              onSelect={setDreamRoleId}
+            />
+          </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -146,7 +160,7 @@ export default function DreamJobPage() {
 
           <Button
             onClick={handleGenerate}
-            disabled={isLoading || !sessionUserId || !dreamRoleId}
+            disabled={isLoading || !sessionUserId || !dreamRoleId || !selectedResumeId}
             className="bg-amber-600 hover:bg-amber-700 text-white"
           >
             {isLoading ? (

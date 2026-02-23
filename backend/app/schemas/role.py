@@ -98,6 +98,7 @@ class RoadmapResponse(BaseModel):
 class DreamJobRequest(BaseModel):
     user_id: int
     dream_role_id: int
+    resume_id: int | None = None
     current_role_id: int | None = None
     years_experience: int | None = None
     current_salary: int | None = None

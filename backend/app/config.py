@@ -7,7 +7,11 @@ class Settings(BaseSettings):
     groq_api_key: str = ""
     spacy_model: str = "en_core_web_sm"
     embedding_model: str = "all-MiniLM-L6-v2"
-    cors_origins: list[str] = ["http://localhost:3000", "https://*.vercel.app"]
+    cors_origins: list[str] = [
+        "http://localhost:3000",
+        "https://*.vercel.app",
+        "https://*.hf.space",
+    ]
     secret_key: str = "ct-planner-default-jwt-secret-change-in-production"
     access_token_expire_minutes: int = 1440
 

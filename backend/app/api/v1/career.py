@@ -406,6 +406,28 @@ async def plan_dream_job(
     if not user:
         raise HTTPException(404, "User not found")
 
+    # Validate resume exists
+    if body.resume_id:
+        result = await db.execute(
+            select(Resume).where(
+                Resume.id == body.resume_id,
+                Resume.user_id == body.user_id,
+            )
+        )
+        resume = result.scalar_one_or_none()
+        if not resume:
+            raise HTTPException(404, "Resume not found or does not belong to this user.")
+    else:
+        result = await db.execute(
+            select(Resume)
+            .where(Resume.user_id == body.user_id)
+            .order_by(Resume.created_at.desc())
+            .limit(1)
+        )
+        resume = result.scalar_one_or_none()
+    if not resume:
+        raise HTTPException(400, "No resume found. Upload a resume first.")
+
     # Resolve current role: from request, from best match, or None
     current_role_id = body.current_role_id
     if not current_role_id:
