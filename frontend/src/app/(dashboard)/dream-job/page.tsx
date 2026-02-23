@@ -175,7 +175,7 @@ export default function DreamJobPage() {
       {plan && (
         <div ref={planRef} className="space-y-6 print:space-y-4">
           {/* Export Button */}
-          <div className="flex justify-end print:hidden">
+          <div className="flex justify-end no-print">
             <Button
               variant="outline"
               size="sm"

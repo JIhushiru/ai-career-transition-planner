@@ -134,7 +134,7 @@
   }
   aside,
   header,
-  .print\\:hidden {
+  .no-print {
     display: none !important;
   }
   main {
