@@ -162,34 +162,43 @@ class DreamJobPlanner:
         verb: str,
         extra_actions: list[str],
     ) -> int:
-        """Schedule skill gaps into weekly chunks at *weekly_pace* h/week.
+        """Schedule skill gaps as consolidated blocks.
 
-        Skills that exceed the weekly pace are spread across multiple weeks.
-        Smaller skills are batched together up to the weekly cap.
+        Each skill becomes one entry spanning the weeks it needs at the
+        given weekly pace, instead of duplicating identical week cards.
         Returns the next available week number.
         """
+        from math import ceil
+
         for gap in gaps:
             skill = gap["skill"]
             hours = gap["estimated_hours"]
+            num_weeks = max(1, ceil(hours / weekly_pace))
 
-            # Spread this skill across as many weeks as needed
-            while hours > 0:
-                week_hours = min(hours, weekly_pace)
-                hours -= week_hours
+            start_week = week_num
+            end_week = week_num + num_weeks - 1
+            start_date = today + timedelta(weeks=start_week - 1)
 
-                start_date = today + timedelta(weeks=week_num - 1)
-                weeks.append({
-                    "week": week_num,
-                    "start_date": start_date.isoformat(),
-                    "phase": phase,
-                    "focus_skills": [skill],
-                    "hours": week_hours,
-                    "actions": [
-                        f"{verb}: {skill} ({week_hours}h)",
-                        *extra_actions,
-                    ],
-                })
-                week_num += 1
+            if num_weeks == 1:
+                label = f"Week {start_week}"
+            else:
+                label = f"Weeks {start_week}\u2013{end_week}"
+
+            weeks.append({
+                "week": start_week,
+                "week_end": end_week,
+                "week_label": label,
+                "start_date": start_date.isoformat(),
+                "phase": phase,
+                "focus_skills": [skill],
+                "hours": hours,
+                "hours_per_week": weekly_pace,
+                "actions": [
+                    f"{verb}: {skill} ({hours}h total, ~{weekly_pace}h/week)",
+                    *extra_actions,
+                ],
+            })
+            week_num = end_week + 1
 
         return week_num
 

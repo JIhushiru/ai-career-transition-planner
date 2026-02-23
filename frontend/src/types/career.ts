@@ -137,10 +137,13 @@ export interface DreamJobPlanResponse {
   };
   weekly_plan: {
     week: number;
+    week_end?: number;
+    week_label?: string;
     start_date: string;
     phase: string;
     focus_skills: string[];
     hours: number;
+    hours_per_week?: number;
     actions: string[];
   }[];
   interview_prep: {

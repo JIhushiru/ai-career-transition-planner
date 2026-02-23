@@ -355,7 +355,7 @@ export default function DreamJobPage() {
             <CollapsibleSection
               title="Weekly Action Plan"
               icon={<Calendar className="h-5 w-5 text-green-600" />}
-              subtitle={`${plan.weekly_plan.length} weeks`}
+              subtitle={`${plan.weekly_plan.at(-1)?.week_end || plan.weekly_plan.at(-1)?.week || plan.weekly_plan.length} weeks`}
               isExpanded={expandedSections.has("weekly")}
               onToggle={() => toggleSection("weekly")}
             >
@@ -367,13 +367,16 @@ export default function DreamJobPage() {
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-medium">
-                        Week {week.week}{" "}
+                        {week.week_label || `Week ${week.week}`}{" "}
                         <span className="text-muted-foreground font-normal">
                           &middot; {week.phase}
                         </span>
                       </span>
                       <span className="text-xs text-muted-foreground">
                         {week.start_date} &middot; {week.hours}h
+                        {week.hours_per_week && week.hours > week.hours_per_week && (
+                          <> ({week.hours_per_week}h/wk)</>
+                        )}
                       </span>
                     </div>
                     {week.focus_skills.length > 0 && (
