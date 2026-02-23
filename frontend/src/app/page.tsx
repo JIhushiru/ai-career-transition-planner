@@ -24,8 +24,16 @@ import {
   Target,
 } from "lucide-react";
 import { apiGet } from "@/lib/api-client";
-import { formatPHP, formatSalaryRange } from "@/lib/salary";
+import { formatSalaryRange } from "@/lib/salary";
 import type { UserMatchResponse, MatchResultsResponse } from "@/types/career";
+
+const MOTIVATIONAL_QUOTES = [
+  { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+  { text: "Your career is a marathon, not a sprint. Every skill you build compounds.", author: "Unknown" },
+  { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb" },
+  { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
+  { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+];
 
 const features = [
   {
@@ -181,22 +189,18 @@ function ProgressSummary({
 
 export default function Home() {
   const [quickWins, setQuickWins] = useState<UserMatchResponse[]>([]);
-  const [topSalary, setTopSalary] = useState<number | null>(null);
-  const [currentSalary, setCurrentSalary] = useState<number | null>(null);
   const [hasData, setHasData] = useState(false);
   const [skillCount, setSkillCount] = useState(0);
   const [matchCount, setMatchCount] = useState(0);
   const [topCategory, setTopCategory] = useState<string | null>(null);
+  const [quote] = useState(() => MOTIVATIONAL_QUOTES[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length)]);
 
   useEffect(() => {
     const token = localStorage.getItem("ct_token");
     const userId = localStorage.getItem("ct_user_id");
-    const salary = localStorage.getItem("ct_current_salary");
     const resumeId = localStorage.getItem("ct_resume_id");
 
     if (!token || !userId) return;
-
-    if (salary) setCurrentSalary(parseInt(salary));
 
     // Load skill stats if we have a resume
     if (resumeId) {
@@ -218,14 +222,6 @@ export default function Home() {
         if (wins.length > 0) {
           setQuickWins(wins);
           setHasData(true);
-          const maxSalary = Math.max(
-            ...wins
-              .map((w) => w.role.salary_max_ph ?? 0)
-              .filter((s) => s > 0),
-          );
-          if (maxSalary > 0) {
-            setTopSalary((prev) => (prev ? Math.max(prev, maxSalary) : maxSalary));
-          }
         }
       })
       .catch(() => {});
@@ -236,66 +232,35 @@ export default function Home() {
         if (res.matches.length > 0) {
           setHasData(true);
           setMatchCount(res.matches.length);
-          const maxSalary = Math.max(
-            ...res.matches
-              .map((m) => m.role.salary_max_ph ?? 0)
-              .filter((s) => s > 0),
-          );
-          if (maxSalary > 0) {
-            setTopSalary((prev) => (prev ? Math.max(prev, maxSalary) : maxSalary));
-          }
         }
       })
       .catch(() => {});
   }, []);
-
-  const salaryIncreasePct =
-    currentSalary && topSalary
-      ? Math.round(((topSalary - currentSalary) / currentSalary) * 100)
-      : null;
 
   return (
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-5xl px-6 py-16">
         {/* Hero */}
         <div className="mb-12 text-center">
-          {hasData && topSalary && currentSalary && salaryIncreasePct && salaryIncreasePct > 0 ? (
-            <>
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 dark:bg-emerald-900 px-4 py-2 text-sm font-medium text-emerald-700 dark:text-emerald-300">
-                <TrendingUp className="h-4 w-4" />
-                You could earn up to {salaryIncreasePct}% more
-              </div>
-              <h1 className="mb-4 text-4xl font-bold tracking-tight">
-                Your skills could earn up to{" "}
-                <span className="text-emerald-600 dark:text-emerald-400">
-                  {formatPHP(topSalary)}/mo
-                </span>
-              </h1>
-              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-                That&apos;s{" "}
-                <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                  {formatPHP(topSalary - currentSalary)} more
-                </span>{" "}
-                than your current salary. Explore the roles that match your
-                skills and pay more.
-              </p>
-            </>
-          ) : (
-            <>
-              <h1 className="mb-4 text-4xl font-bold tracking-tight">
-                Discover How Much More You Could Earn
-              </h1>
-              <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-                Upload your resume, enter your current salary, and our AI will
-                find roles that match your skills and pay more. Your next
-                career move starts here.
-              </p>
-            </>
-          )}
+          <h1 className="mb-4 text-4xl font-bold tracking-tight">
+            Plan Your Next Career Move
+          </h1>
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+            Upload your resume, discover roles that match your skills, and build
+            a personalized roadmap to reach your dream job.
+          </p>
+          <blockquote className="mx-auto mt-6 max-w-xl border-l-4 border-primary/30 pl-4 text-left">
+            <p className="italic text-muted-foreground">
+              &ldquo;{quote.text}&rdquo;
+            </p>
+            <footer className="mt-1 text-xs text-muted-foreground/70">
+              &mdash; {quote.author}
+            </footer>
+          </blockquote>
           <div className="mt-6 flex justify-center gap-3">
             <Button asChild size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white">
               <Link href={hasData ? "/explore" : "/resume"}>
-                {hasData ? "Explore Higher-Paying Roles" : "Get Started"}
+                {hasData ? "Explore Matching Roles" : "Get Started"}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
