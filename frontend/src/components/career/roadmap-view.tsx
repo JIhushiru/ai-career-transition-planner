@@ -45,7 +45,7 @@ function SkillGapCard({ gap }: { gap: SkillGap }) {
                   href={r.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline hover:opacity-80"
+                  className="underline hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {r.title}

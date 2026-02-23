@@ -128,8 +128,8 @@ export default function ExplorePage() {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium">Career Mode</label>
-            <div className="flex flex-wrap gap-2">
+            <label id="career-mode-label" className="mb-2 block text-sm font-medium">Career Mode</label>
+            <div role="radiogroup" aria-labelledby="career-mode-label" className="flex flex-wrap gap-2">
               {careerModes.map((mode) => (
                 <Badge
                   key={mode.value}
@@ -137,7 +137,7 @@ export default function ExplorePage() {
                   aria-checked={careerMode === mode.value}
                   tabIndex={0}
                   variant={careerMode === mode.value ? "default" : "outline"}
-                  className="cursor-pointer px-3 py-1"
+                  className="cursor-pointer px-3 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   onClick={() => setCareerMode(mode.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {

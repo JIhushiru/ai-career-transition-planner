@@ -312,7 +312,7 @@ export default function Home() {
         {features.map((feature) => {
           const Icon = feature.icon;
           return (
-            <Link key={feature.title} href={feature.href} className="group">
+            <Link key={feature.title} href={feature.href} className="group rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
               <Card className="h-full transition-all hover:shadow-md group-hover:border-primary/20">
                 <CardHeader>
                   <div className={`mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg ${feature.bgColor}`}>

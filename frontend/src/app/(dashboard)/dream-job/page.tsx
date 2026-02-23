@@ -249,7 +249,7 @@ export default function DreamJobPage() {
           {plan.career_paths.length > 0 && (
             <CollapsibleSection
               title="Career Path"
-              icon={<Target className="h-5 w-5 text-purple-600" />}
+              icon={<Target className="h-5 w-5 text-purple-600 dark:text-purple-400" />}
               subtitle={`${plan.career_paths.length} path(s) found`}
               isExpanded={expandedSections.has("paths")}
               onToggle={() => toggleSection("paths")}
@@ -295,7 +295,7 @@ export default function DreamJobPage() {
           {/* Skill Analysis */}
           <CollapsibleSection
             title="Skill Gap Analysis"
-            icon={<GraduationCap className="h-5 w-5 text-blue-600" />}
+            icon={<GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />}
             subtitle={`${plan.skill_analysis.skills_to_learn.length} skills to learn`}
             isExpanded={expandedSections.has("skills")}
             onToggle={() => toggleSection("skills")}
@@ -353,7 +353,7 @@ export default function DreamJobPage() {
           {plan.weekly_plan.length > 0 && (
             <CollapsibleSection
               title="Weekly Action Plan"
-              icon={<Calendar className="h-5 w-5 text-green-600" />}
+              icon={<Calendar className="h-5 w-5 text-green-600 dark:text-green-400" />}
               subtitle={`${plan.weekly_plan.at(-1)?.week_end || plan.weekly_plan.at(-1)?.week || plan.weekly_plan.length} weeks`}
               isExpanded={expandedSections.has("weekly")}
               onToggle={() => toggleSection("weekly")}
@@ -407,7 +407,7 @@ export default function DreamJobPage() {
           {/* Interview Prep */}
           <CollapsibleSection
             title="Interview Preparation"
-            icon={<MessageSquare className="h-5 w-5 text-indigo-600" />}
+            icon={<MessageSquare className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />}
             subtitle="Questions, topics & tips"
             isExpanded={expandedSections.has("interview")}
             onToggle={() => toggleSection("interview")}
@@ -493,7 +493,7 @@ export default function DreamJobPage() {
           {/* Portfolio Projects */}
           <CollapsibleSection
             title="Portfolio Projects"
-            icon={<FolderOpen className="h-5 w-5 text-teal-600" />}
+            icon={<FolderOpen className="h-5 w-5 text-teal-600 dark:text-teal-400" />}
             subtitle={`${plan.portfolio_projects.length} suggested projects`}
             isExpanded={expandedSections.has("portfolio")}
             onToggle={() => toggleSection("portfolio")}

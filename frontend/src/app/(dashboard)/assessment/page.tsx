@@ -29,7 +29,7 @@ const RATING_LABELS: Record<number, string> = {
 };
 
 const RATING_COLORS: Record<number, string> = {
-  0: "bg-gray-100 text-gray-500 dark:bg-gray-800",
+  0: "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400",
   1: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
   2: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400",
   3: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
@@ -125,7 +125,7 @@ export default function AssessmentPage() {
     <div className="mx-auto max-w-4xl space-y-6">
       <div>
         <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
-          <ClipboardCheck className="h-6 w-6 text-emerald-600" />
+          <ClipboardCheck className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
           Skill Self-Assessment
         </h2>
         <p className="text-muted-foreground">
@@ -227,7 +227,7 @@ export default function AssessmentPage() {
                       </span>
                     )}
                   </div>
-                  <div className="flex items-center gap-1">
+                  <div role="group" aria-label={`Rate ${q.skill}`} className="flex items-center gap-1">
                     {[0, 1, 2, 3, 4].map((level) => (
                       <button
                         key={level}
@@ -237,6 +237,7 @@ export default function AssessmentPage() {
                             [q.skill]: level,
                           }))
                         }
+                        aria-pressed={ratings[q.skill] === level}
                         className={`rounded px-2 py-1 text-xs transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                           ratings[q.skill] === level
                             ? RATING_COLORS[level]

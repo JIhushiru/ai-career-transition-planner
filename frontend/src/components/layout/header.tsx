@@ -31,7 +31,7 @@ export function Header({ onMenuClick }: HeaderProps) {
         <button
           aria-label="Open menu"
           onClick={onMenuClick}
-          className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:hidden"
+          className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden"
         >
           <Menu className="h-5 w-5" />
         </button>
@@ -40,7 +40,7 @@ export function Header({ onMenuClick }: HeaderProps) {
       <button
         aria-label="Toggle theme"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <Sun className="h-4 w-4 dark:hidden" />
         <Moon className="hidden h-4 w-4 dark:block" />

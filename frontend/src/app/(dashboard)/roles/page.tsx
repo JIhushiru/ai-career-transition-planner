@@ -105,7 +105,7 @@ export default function RolesPage() {
     if (search) {
       setExpandedCategories(new Set(grouped.map(([cat]) => cat)));
     }
-  }, [search, grouped.length]);
+  }, [search, grouped]);
 
   const totalCategories = useMemo(
     () => new Set(roles.map((r) => r.category || "Other")).size,
