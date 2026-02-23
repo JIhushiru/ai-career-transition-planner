@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { TransitionPathView } from "@/components/career/transition-path";
 import { RolePicker } from "@/components/career/role-picker";
 import { ResumePicker } from "@/components/resume/resume-picker";
@@ -23,7 +22,6 @@ export default function TransitionsPage() {
   const { userId: sessionUserId } = useSession();
   const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
   const [targetRoleId, setTargetRoleId] = useState<number | null>(null);
-  const [maxSteps, setMaxSteps] = useState("3");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<CareerPathsResponse | null>(null);
@@ -43,7 +41,6 @@ export default function TransitionsPage() {
           user_id: sessionUserId,
           target_role_id: targetRoleId,
           resume_id: selectedResumeId,
-          max_steps: parseInt(maxSteps) || 3,
         },
       );
       setResults(res);
@@ -69,7 +66,7 @@ export default function TransitionsPage() {
             Find Transition Paths
           </CardTitle>
           <CardDescription>
-            Run career matching first, then select a target role.
+            Select your resume and target role to discover career paths.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -82,21 +79,6 @@ export default function TransitionsPage() {
               selectedRoleId={targetRoleId}
               onSelect={setTargetRoleId}
             />
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className="mb-1 block text-sm font-medium">
-                Max Steps
-              </label>
-              <Input
-                type="number"
-                min="1"
-                max="5"
-                value={maxSteps}
-                onChange={(e) => setMaxSteps(e.target.value)}
-              />
-            </div>
           </div>
 
           <Button
@@ -133,18 +115,9 @@ export default function TransitionsPage() {
             {results.paths.length} path{results.paths.length !== 1 ? "s" : ""}{" "}
             to {results.target_role.title}
           </h3>
-          {results.paths.length === 0 ? (
-            <Card>
-              <CardContent className="py-8 text-center text-muted-foreground">
-                No transition paths found. Try a different target role or
-                increase max steps.
-              </CardContent>
-            </Card>
-          ) : (
-            results.paths.map((path, i) => (
-              <TransitionPathView key={i} path={path} index={i} />
-            ))
-          )}
+          {results.paths.map((path, i) => (
+            <TransitionPathView key={i} path={path} index={i} />
+          ))}
         </div>
       )}
     </div>

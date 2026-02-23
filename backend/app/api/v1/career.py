@@ -66,7 +66,6 @@ class TransitionRequest(BaseModel):
     user_id: int
     target_role_id: int
     resume_id: int | None = None
-    max_steps: int = Field(default=3, ge=1, le=5)
 
 
 class RoadmapRequest(BaseModel):
@@ -316,7 +315,7 @@ async def find_transition_paths(
         raise HTTPException(404, "Target role not found")
 
     paths = await graph_service.find_paths(
-        db, start_role_id, body.target_role_id, max_steps=body.max_steps
+        db, start_role_id, body.target_role_id, max_steps=5
     )
     role_map = await graph_service.get_role_map(db)
 
@@ -353,6 +352,38 @@ async def find_transition_paths(
                     steps=steps,
                     total_months=total_months,
                     total_difficulty=round(total_diff / len(steps), 3) if steps else 0,
+                )
+            )
+
+    # Fallback: if no graph paths found, generate a direct transition
+    if not response_paths and start_role_id != body.target_role_id:
+        start_role = role_map.get(start_role_id)
+        if start_role and target_role:
+            # Compute skill gap as upskills
+            target_required = json.loads(target_role.required_skills) if target_role.required_skills else []
+            start_skills = set()
+            if start_role.required_skills:
+                start_skills = {s.lower() for s in json.loads(start_role.required_skills)}
+            skills_needed = [s for s in target_required if s.lower() not in start_skills]
+
+            # Estimate difficulty based on skill gap
+            gap_ratio = len(skills_needed) / max(len(target_required), 1)
+            difficulty = round(0.3 + gap_ratio * 0.6, 2)
+            months = max(6, int(len(skills_needed) * 2.5))
+
+            response_paths.append(
+                TransitionPathResponse(
+                    steps=[
+                        TransitionPathStep(
+                            from_role=_role_to_response(start_role),
+                            to_role=_role_to_response(target_role),
+                            skills_needed=skills_needed,
+                            months=months,
+                            difficulty=difficulty,
+                        )
+                    ],
+                    total_months=months,
+                    total_difficulty=difficulty,
                 )
             )
 
