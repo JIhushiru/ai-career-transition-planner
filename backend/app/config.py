@@ -1,8 +1,20 @@
+import os
+from pathlib import Path
+
 from pydantic_settings import BaseSettings
 
 
+def _default_database_url() -> str:
+    """Use HF Spaces persistent /data dir if available, else local ./data."""
+    if os.environ.get("SPACE_ID"):
+        # Running on HF Spaces — use /data for persistence across rebuilds
+        Path("/data").mkdir(parents=True, exist_ok=True)
+        return "sqlite+aiosqlite:////data/career_planner.db"
+    return "sqlite+aiosqlite:///./data/career_planner.db"
+
+
 class Settings(BaseSettings):
-    database_url: str = "sqlite+aiosqlite:///./data/career_planner.db"
+    database_url: str = _default_database_url()
     gemini_api_key: str = ""
     groq_api_key: str = ""
     spacy_model: str = "en_core_web_sm"

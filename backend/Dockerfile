@@ -13,8 +13,8 @@ RUN python -m spacy download en_core_web_sm
 
 COPY . .
 
-# Create data directory for SQLite and seed the database
-RUN mkdir -p /app/data && python -m app.data.seed
+# Create local data dir (fallback); HF Spaces uses persistent /data at runtime
+RUN mkdir -p /app/data /data
 
 # HF Spaces expects port 7860
 EXPOSE 7860
