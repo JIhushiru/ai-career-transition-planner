@@ -11,9 +11,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { RolePicker } from "@/components/career/role-picker";
+import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiGet } from "@/lib/api-client";
 import { useSession } from "@/context/session-context";
 import type { SuccessStoriesResponse, SuccessStory } from "@/types/career";
+import type { ResumeListItem } from "@/types/resume";
 
 function StoryCard({ story }: { story: SuccessStory }) {
   return (
@@ -50,13 +52,18 @@ function StoryCard({ story }: { story: SuccessStory }) {
 
 export default function StoriesPage() {
   const { userId } = useSession();
+  const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
   const [targetRoleId, setTargetRoleId] = useState<number | null>(null);
   const [stories, setStories] = useState<SuccessStory[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const handleResumeSelect = (resume: ResumeListItem) => {
+    setSelectedResumeId(resume.id);
+  };
+
   const handleLoad = async () => {
-    if (!userId || !targetRoleId) return;
+    if (!userId || !targetRoleId || !selectedResumeId) return;
     setIsLoading(true);
     setError(null);
     try {
@@ -96,14 +103,20 @@ export default function StoriesPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <RolePicker
-            selectedRoleId={targetRoleId}
-            onSelect={setTargetRoleId}
-          />
+          <div className="grid gap-4 sm:grid-cols-2">
+            <ResumePicker
+              selectedResumeId={selectedResumeId}
+              onSelect={handleResumeSelect}
+            />
+            <RolePicker
+              selectedRoleId={targetRoleId}
+              onSelect={setTargetRoleId}
+            />
+          </div>
           <div className="flex gap-2">
             <Button
               onClick={handleLoad}
-              disabled={isLoading || !userId || !targetRoleId}
+              disabled={isLoading || !userId || !targetRoleId || !selectedResumeId}
               className="bg-violet-600 hover:bg-violet-700 text-white"
             >
               {isLoading ? (

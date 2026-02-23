@@ -13,20 +13,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { TransitionPathView } from "@/components/career/transition-path";
 import { RolePicker } from "@/components/career/role-picker";
+import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiPost } from "@/lib/api-client";
 import { useSession } from "@/context/session-context";
 import type { CareerPathsResponse } from "@/types/career";
+import type { ResumeListItem } from "@/types/resume";
 
 export default function TransitionsPage() {
   const { userId: sessionUserId } = useSession();
+  const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
   const [targetRoleId, setTargetRoleId] = useState<number | null>(null);
   const [maxSteps, setMaxSteps] = useState("3");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<CareerPathsResponse | null>(null);
 
+  const handleResumeSelect = (resume: ResumeListItem) => {
+    setSelectedResumeId(resume.id);
+  };
+
   const handleSearch = async () => {
-    if (!sessionUserId || !targetRoleId) return;
+    if (!sessionUserId || !targetRoleId || !selectedResumeId) return;
     setIsLoading(true);
     setError(null);
     try {
@@ -35,6 +42,7 @@ export default function TransitionsPage() {
         {
           user_id: sessionUserId,
           target_role_id: targetRoleId,
+          resume_id: selectedResumeId,
           max_steps: parseInt(maxSteps) || 3,
         },
       );
@@ -66,10 +74,17 @@ export default function TransitionsPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
+            <ResumePicker
+              selectedResumeId={selectedResumeId}
+              onSelect={handleResumeSelect}
+            />
             <RolePicker
               selectedRoleId={targetRoleId}
               onSelect={setTargetRoleId}
             />
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label className="mb-1 block text-sm font-medium">
                 Max Steps
@@ -86,7 +101,7 @@ export default function TransitionsPage() {
 
           <Button
             onClick={handleSearch}
-            disabled={isLoading || !sessionUserId || !targetRoleId}
+            disabled={isLoading || !sessionUserId || !targetRoleId || !selectedResumeId}
             className="bg-emerald-600 hover:bg-emerald-700 text-white"
           >
             {isLoading ? (

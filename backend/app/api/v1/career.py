@@ -65,12 +65,14 @@ class MatchRequest(BaseModel):
 class TransitionRequest(BaseModel):
     user_id: int
     target_role_id: int
+    resume_id: int | None = None
     max_steps: int = Field(default=3, ge=1, le=5)
 
 
 class RoadmapRequest(BaseModel):
     user_id: int
     target_role_id: int
+    resume_id: int | None = None
     include_resources: bool = False
 
 
@@ -277,6 +279,23 @@ async def find_transition_paths(
     db: AsyncSession = Depends(get_db),
 ):
     """Find multi-step career transition paths to a target role."""
+    # Validate resume exists
+    if body.resume_id:
+        result = await db.execute(
+            select(Resume).where(
+                Resume.id == body.resume_id,
+                Resume.user_id == body.user_id,
+            )
+        )
+        if not result.scalar_one_or_none():
+            raise HTTPException(404, "Resume not found or does not belong to this user.")
+    else:
+        result = await db.execute(
+            select(Resume).where(Resume.user_id == body.user_id).limit(1)
+        )
+        if not result.scalar_one_or_none():
+            raise HTTPException(400, "No resume found. Upload a resume first.")
+
     # Find user's best-match current role
     result = await db.execute(
         select(UserMatch)
@@ -349,6 +368,23 @@ async def generate_roadmap(
     db: AsyncSession = Depends(get_db),
 ):
     """Generate skill gap analysis and learning roadmap."""
+    # Validate resume exists
+    if body.resume_id:
+        result = await db.execute(
+            select(Resume).where(
+                Resume.id == body.resume_id,
+                Resume.user_id == body.user_id,
+            )
+        )
+        if not result.scalar_one_or_none():
+            raise HTTPException(404, "Resume not found or does not belong to this user.")
+    else:
+        result = await db.execute(
+            select(Resume).where(Resume.user_id == body.user_id).limit(1)
+        )
+        if not result.scalar_one_or_none():
+            raise HTTPException(400, "No resume found. Upload a resume first.")
+
     analysis = await roadmap_gen.analyze_skill_gaps(
         db, body.user_id, body.target_role_id
     )
@@ -533,6 +569,13 @@ async def get_success_stories(
     result = await db.execute(select(User).where(User.id == user_id))
     if not result.scalar_one_or_none():
         raise HTTPException(404, "User not found")
+
+    # Validate user has a resume
+    result = await db.execute(
+        select(Resume).where(Resume.user_id == user_id).limit(1)
+    )
+    if not result.scalar_one_or_none():
+        raise HTTPException(400, "No resume found. Upload a resume first.")
 
     stories = await stories_service.generate_stories(
         db, user_id, target_role_id, count=count

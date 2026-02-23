@@ -12,26 +12,34 @@ import {
 } from "@/components/ui/card";
 import { RoadmapView } from "@/components/career/roadmap-view";
 import { RolePicker } from "@/components/career/role-picker";
+import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiPost } from "@/lib/api-client";
 import { useSession } from "@/context/session-context";
 import type { RoadmapResponse } from "@/types/career";
+import type { ResumeListItem } from "@/types/resume";
 
 export default function RoadmapPage() {
   const { userId: sessionUserId } = useSession();
+  const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
   const [targetRoleId, setTargetRoleId] = useState<number | null>(null);
   const [includeResources, setIncludeResources] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [roadmap, setRoadmap] = useState<RoadmapResponse | null>(null);
 
+  const handleResumeSelect = (resume: ResumeListItem) => {
+    setSelectedResumeId(resume.id);
+  };
+
   const handleGenerate = async () => {
-    if (!sessionUserId || !targetRoleId) return;
+    if (!sessionUserId || !targetRoleId || !selectedResumeId) return;
     setIsLoading(true);
     setError(null);
     try {
       const res = await apiPost<RoadmapResponse>("/career/roadmap", {
         user_id: sessionUserId,
         target_role_id: targetRoleId,
+        resume_id: selectedResumeId,
         include_resources: includeResources,
       });
       setRoadmap(res);
@@ -61,10 +69,16 @@ export default function RoadmapPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <RolePicker
-            selectedRoleId={targetRoleId}
-            onSelect={setTargetRoleId}
-          />
+          <div className="grid gap-4 sm:grid-cols-2">
+            <ResumePicker
+              selectedResumeId={selectedResumeId}
+              onSelect={handleResumeSelect}
+            />
+            <RolePicker
+              selectedRoleId={targetRoleId}
+              onSelect={setTargetRoleId}
+            />
+          </div>
 
           <label className="flex items-center gap-2 text-sm">
             <input
@@ -78,7 +92,7 @@ export default function RoadmapPage() {
 
           <Button
             onClick={handleGenerate}
-            disabled={isLoading || !sessionUserId || !targetRoleId}
+            disabled={isLoading || !sessionUserId || !targetRoleId || !selectedResumeId}
             className="bg-violet-600 hover:bg-violet-700 text-white"
           >
             {isLoading ? (
