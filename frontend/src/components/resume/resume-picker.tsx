@@ -73,6 +73,7 @@ export function ResumePicker({ selectedResumeId, onSelect }: ResumePickerProps) 
       <div className="relative">
         <FileText className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <select
+          aria-label="Select resume"
           className="h-10 w-full appearance-none rounded-lg border bg-background pl-9 pr-9 text-sm font-medium transition-colors hover:border-foreground/25 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
           value={selectedResumeId ?? ""}
           onChange={(e) => {

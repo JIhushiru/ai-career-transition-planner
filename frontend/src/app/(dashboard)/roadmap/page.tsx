@@ -93,7 +93,6 @@ export default function RoadmapPage() {
           <Button
             onClick={handleGenerate}
             disabled={isLoading || !sessionUserId || !targetRoleId || !selectedResumeId}
-            className="bg-violet-600 hover:bg-violet-700 text-white"
           >
             {isLoading ? (
               <>

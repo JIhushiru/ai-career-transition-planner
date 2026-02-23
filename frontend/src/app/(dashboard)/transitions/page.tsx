@@ -84,7 +84,6 @@ export default function TransitionsPage() {
           <Button
             onClick={handleSearch}
             disabled={isLoading || !sessionUserId || !targetRoleId || !selectedResumeId}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white"
           >
             {isLoading ? (
               <>

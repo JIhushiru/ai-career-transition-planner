@@ -1,7 +1,11 @@
+import logging
 import os
+import secrets
 from pathlib import Path
 
 from pydantic_settings import BaseSettings
+
+logger = logging.getLogger(__name__)
 
 
 def _default_database_url() -> str:
@@ -11,6 +15,15 @@ def _default_database_url() -> str:
         Path("/data").mkdir(parents=True, exist_ok=True)
         return "sqlite+aiosqlite:////data/career_planner.db"
     return "sqlite+aiosqlite:///./data/career_planner.db"
+
+
+def _default_secret_key() -> str:
+    """Generate a random secret key if none is provided. Warn in production."""
+    if os.environ.get("SPACE_ID"):
+        logger.warning(
+            "SECRET_KEY not set in production! Set the SECRET_KEY environment variable."
+        )
+    return secrets.token_urlsafe(32)
 
 
 class Settings(BaseSettings):
@@ -24,7 +37,7 @@ class Settings(BaseSettings):
         "https://*.vercel.app",
         "https://*.hf.space",
     ]
-    secret_key: str = "ct-planner-default-jwt-secret-change-in-production"
+    secret_key: str = _default_secret_key()
     access_token_expire_minutes: int = 1440
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}

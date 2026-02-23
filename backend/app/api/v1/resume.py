@@ -169,28 +169,33 @@ async def list_user_resumes(
     user: User = Depends(get_current_user),
 ):
     """List all resumes for the authenticated user."""
+    # Single query with aggregated skill count (avoids N+1)
+    from sqlalchemy.orm import aliased
+
+    skill_count_subq = (
+        select(UserSkill.resume_id, func.count(UserSkill.id).label("skill_count"))
+        .group_by(UserSkill.resume_id)
+        .subquery()
+    )
+
     result = await db.execute(
-        select(Resume)
+        select(Resume, func.coalesce(skill_count_subq.c.skill_count, 0))
+        .outerjoin(skill_count_subq, Resume.id == skill_count_subq.c.resume_id)
         .where(Resume.user_id == user.id)
         .order_by(Resume.created_at.desc())
     )
-    resumes = result.scalars().all()
+    rows = result.all()
 
-    items = []
-    for r in resumes:
-        skill_count_result = await db.execute(
-            select(func.count(UserSkill.id)).where(UserSkill.resume_id == r.id)
+    items = [
+        ResumeListItem(
+            id=r.id,
+            filename=r.filename,
+            source_type=r.source_type,
+            created_at=r.created_at.isoformat(),
+            skill_count=count,
         )
-        count = skill_count_result.scalar() or 0
-        items.append(
-            ResumeListItem(
-                id=r.id,
-                filename=r.filename,
-                source_type=r.source_type,
-                created_at=r.created_at.isoformat(),
-                skill_count=count,
-            )
-        )
+        for r, count in rows
+    ]
 
     return ResumeListResponse(resumes=items)
 
@@ -199,11 +204,14 @@ async def list_user_resumes(
 async def get_resume_skills(
     resume_id: int,
     db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
 ):
     result = await db.execute(select(Resume).where(Resume.id == resume_id))
     resume = result.scalar_one_or_none()
     if not resume:
         raise HTTPException(404, "Resume not found")
+    if resume.user_id != user.id:
+        raise HTTPException(403, "Not authorized to access this resume")
 
     result = await db.execute(
         select(UserSkill, Skill)

@@ -24,6 +24,7 @@ import {
   Target,
 } from "lucide-react";
 import { apiGet } from "@/lib/api-client";
+import { STORAGE_KEYS } from "@/lib/constants";
 import { formatSalaryRange } from "@/lib/salary";
 import type { UserMatchResponse, MatchResultsResponse } from "@/types/career";
 
@@ -196,9 +197,9 @@ export default function Home() {
   const [quote] = useState(() => MOTIVATIONAL_QUOTES[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length)]);
 
   useEffect(() => {
-    const token = localStorage.getItem("ct_token");
-    const userId = localStorage.getItem("ct_user_id");
-    const resumeId = localStorage.getItem("ct_resume_id");
+    const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+    const userId = localStorage.getItem(STORAGE_KEYS.USER_ID);
+    const resumeId = localStorage.getItem(STORAGE_KEYS.RESUME_ID);
 
     if (!token || !userId) return;
 
@@ -213,10 +214,12 @@ export default function Home() {
             setTopCategory(sorted[0][0]);
           }
         })
-        .catch(() => {});
+        .catch(() => {
+          // Dashboard data is optional — user hasn't uploaded a resume yet
+        });
     }
 
-    // Try to load quick wins
+    // Try to load quick wins (optional — only populated after matching)
     apiGet<UserMatchResponse[]>(`/career/quick-wins/${userId}`)
       .then((wins) => {
         if (wins.length > 0) {
@@ -224,9 +227,11 @@ export default function Home() {
           setHasData(true);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        // No matches computed yet — this is expected for new users
+      });
 
-    // Load cached matches
+    // Load cached matches (optional — only populated after matching)
     apiGet<MatchResultsResponse>(`/career/match/${userId}/results`)
       .then((res) => {
         if (res.matches.length > 0) {
@@ -234,7 +239,9 @@ export default function Home() {
           setMatchCount(res.matches.length);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        // No cached results — this is expected for new users
+      });
   }, []);
 
   return (
@@ -258,7 +265,7 @@ export default function Home() {
             </footer>
           </blockquote>
           <div className="mt-6 flex justify-center gap-3">
-            <Button asChild size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+            <Button asChild size="lg">
               <Link href={hasData ? "/explore" : "/resume"}>
                 {hasData ? "Explore Matching Roles" : "Get Started"}
                 <ArrowRight className="ml-2 h-4 w-4" />

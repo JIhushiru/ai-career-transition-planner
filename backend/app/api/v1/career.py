@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.api.deps import get_db
+from app.api.deps import get_current_user, get_db
 from app.api.v1.roles import _role_to_response
 from app.models.career_graph import UserMatch
 from app.models.resume import Resume
@@ -38,7 +38,6 @@ from app.services.meta_model import MetaModelScorer
 from app.services.roadmap_generator import RoadmapGenerator
 from app.services.role_insights import RoleInsightsService
 from app.services.self_assessment import SelfAssessmentService
-from app.services.success_stories import SuccessStoryService
 
 router = APIRouter(prefix="/career", tags=["career"])
 
@@ -49,15 +48,14 @@ embedding_service = EmbeddingService()
 dream_planner = DreamJobPlanner()
 assessment_service = SelfAssessmentService()
 insights_service = RoleInsightsService()
-stories_service = SuccessStoryService()
 
 
 class MatchRequest(BaseModel):
     user_id: int
     resume_id: int | None = None
     career_mode: str = "growth"
-    years_experience: int | None = None
-    current_salary: int | None = None
+    years_experience: int | None = Field(default=None, ge=0, le=100)
+    current_salary: int | None = Field(default=None, ge=0)
     use_llm: bool = True
     top_k: int = Field(default=15, ge=1, le=50)
 
@@ -179,12 +177,12 @@ def _compute_salary_deltas(role: Role, user_salary: int | None):
 async def get_cached_matches(
     user_id: int,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     """Retrieve previously computed match results."""
-    # Get user for salary context
-    user_result = await db.execute(select(User).where(User.id == user_id))
-    user = user_result.scalar_one_or_none()
-    user_salary = user.current_salary if user else None
+    if current_user.id != user_id:
+        raise HTTPException(403, "Not authorized to access another user's matches")
+    user_salary = current_user.current_salary
 
     result = await db.execute(
         select(UserMatch, Role)
@@ -225,12 +223,12 @@ async def get_cached_matches(
 async def get_quick_wins(
     user_id: int,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     """Get high-match roles that pay more than the user's current salary."""
-    user_result = await db.execute(select(User).where(User.id == user_id))
-    user = user_result.scalar_one_or_none()
-    if not user:
-        raise HTTPException(404, "User not found")
+    if current_user.id != user_id:
+        raise HTTPException(403, "Not authorized to access another user's data")
+    user = current_user
 
     if not user.current_salary:
         return []
@@ -360,10 +358,10 @@ async def find_transition_paths(
         start_role = role_map.get(start_role_id)
         if start_role and target_role:
             # Compute skill gap as upskills
-            target_required = json.loads(target_role.required_skills) if target_role.required_skills else []
-            start_skills = set()
-            if start_role.required_skills:
-                start_skills = {s.lower() for s in json.loads(start_role.required_skills)}
+            from app.api.v1.roles import _safe_json_loads
+
+            target_required = _safe_json_loads(target_role.required_skills)
+            start_skills = {s.lower() for s in _safe_json_loads(start_role.required_skills)}
             skills_needed = [s for s in target_required if s.lower() not in start_skills]
 
             # Estimate difficulty based on skill gap

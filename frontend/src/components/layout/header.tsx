@@ -22,6 +22,7 @@ export function Header() {
     <header className="flex h-14 items-center justify-between border-b bg-card px-6">
       <h1 className="text-lg font-semibold">{title}</h1>
       <button
+        aria-label="Toggle theme"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
       >

@@ -12,14 +12,7 @@ import {
 } from "@/components/ui/card";
 import type { UserMatchResponse } from "@/types/career";
 import { formatSalaryRange, formatSalaryDelta } from "@/lib/salary";
-
-const seniorityColors: Record<string, string> = {
-  entry: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
-  mid: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
-  senior: "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300",
-  lead: "bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300",
-  executive: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
-};
+import { SENIORITY_COLORS } from "@/lib/constants";
 
 function ScoreBar({ label, value }: { label: string; value: number | null }) {
   const pct = Math.round((value ?? 0) * 100);
@@ -72,7 +65,7 @@ export function MatchCard({ match, rank, onClick }: MatchCardProps) {
               {role.seniority && (
                 <Badge
                   variant="secondary"
-                  className={`ml-2 text-[10px] ${seniorityColors[role.seniority] || ""}`}
+                  className={`ml-2 text-[10px] ${SENIORITY_COLORS[role.seniority] || ""}`}
                 >
                   {role.seniority}
                 </Badge>

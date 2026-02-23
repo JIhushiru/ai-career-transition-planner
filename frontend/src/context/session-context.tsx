@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { STORAGE_KEYS, clearSessionStorage } from "@/lib/constants";
 
 interface SessionState {
   userId: number | null;
@@ -16,18 +17,10 @@ interface SessionContextValue extends SessionState {
   setSession: (userId: number, resumeId: number) => void;
   login: (token: string, userId: number, email: string, name?: string | null) => void;
   logout: () => void;
-  clearSession: () => void;
   setCurrentSalary: (salary: number | null) => void;
 }
 
 const SessionContext = createContext<SessionContextValue | null>(null);
-
-const STORAGE_KEY_USER = "ct_user_id";
-const STORAGE_KEY_RESUME = "ct_resume_id";
-const STORAGE_KEY_TOKEN = "ct_token";
-const STORAGE_KEY_EMAIL = "ct_email";
-const STORAGE_KEY_NAME = "ct_name";
-const STORAGE_KEY_SALARY = "ct_current_salary";
 
 export function SessionProvider({ children }: { children: React.ReactNode }) {
   const [session, _setSession] = useState<SessionState>({
@@ -40,12 +33,12 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   });
 
   useEffect(() => {
-    const storedToken = localStorage.getItem(STORAGE_KEY_TOKEN);
-    const storedUser = localStorage.getItem(STORAGE_KEY_USER);
-    const storedResume = localStorage.getItem(STORAGE_KEY_RESUME);
-    const storedEmail = localStorage.getItem(STORAGE_KEY_EMAIL);
-    const storedName = localStorage.getItem(STORAGE_KEY_NAME);
-    const storedSalary = localStorage.getItem(STORAGE_KEY_SALARY);
+    const storedToken = localStorage.getItem(STORAGE_KEYS.TOKEN);
+    const storedUser = localStorage.getItem(STORAGE_KEYS.USER_ID);
+    const storedResume = localStorage.getItem(STORAGE_KEYS.RESUME_ID);
+    const storedEmail = localStorage.getItem(STORAGE_KEYS.EMAIL);
+    const storedName = localStorage.getItem(STORAGE_KEYS.NAME);
+    const storedSalary = localStorage.getItem(STORAGE_KEYS.SALARY);
     if (storedToken && storedUser) {
       _setSession({
         token: storedToken,
@@ -61,40 +54,33 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   const login = useCallback(
     (token: string, userId: number, email: string, name?: string | null) => {
       _setSession((prev) => ({ ...prev, token, userId, email, name: name ?? null }));
-      localStorage.setItem(STORAGE_KEY_TOKEN, token);
-      localStorage.setItem(STORAGE_KEY_USER, String(userId));
-      localStorage.setItem(STORAGE_KEY_EMAIL, email);
-      if (name) localStorage.setItem(STORAGE_KEY_NAME, name);
+      localStorage.setItem(STORAGE_KEYS.TOKEN, token);
+      localStorage.setItem(STORAGE_KEYS.USER_ID, String(userId));
+      localStorage.setItem(STORAGE_KEYS.EMAIL, email);
+      if (name) localStorage.setItem(STORAGE_KEYS.NAME, name);
     },
     [],
   );
 
   const logout = useCallback(() => {
     _setSession({ userId: null, resumeId: null, token: null, email: null, name: null, currentSalary: null });
-    localStorage.removeItem(STORAGE_KEY_TOKEN);
-    localStorage.removeItem(STORAGE_KEY_USER);
-    localStorage.removeItem(STORAGE_KEY_RESUME);
-    localStorage.removeItem(STORAGE_KEY_EMAIL);
-    localStorage.removeItem(STORAGE_KEY_NAME);
-    localStorage.removeItem(STORAGE_KEY_SALARY);
+    clearSessionStorage();
   }, []);
 
   const setSession = useCallback((userId: number, resumeId: number) => {
     _setSession((prev) => ({ ...prev, userId, resumeId }));
-    localStorage.setItem(STORAGE_KEY_USER, String(userId));
-    localStorage.setItem(STORAGE_KEY_RESUME, String(resumeId));
+    localStorage.setItem(STORAGE_KEYS.USER_ID, String(userId));
+    localStorage.setItem(STORAGE_KEYS.RESUME_ID, String(resumeId));
   }, []);
 
   const setCurrentSalary = useCallback((salary: number | null) => {
     _setSession((prev) => ({ ...prev, currentSalary: salary }));
     if (salary != null) {
-      localStorage.setItem(STORAGE_KEY_SALARY, String(salary));
+      localStorage.setItem(STORAGE_KEYS.SALARY, String(salary));
     } else {
-      localStorage.removeItem(STORAGE_KEY_SALARY);
+      localStorage.removeItem(STORAGE_KEYS.SALARY);
     }
   }, []);
-
-  const clearSession = logout;
 
   return (
     <SessionContext.Provider
@@ -104,7 +90,6 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
         setSession,
         login,
         logout,
-        clearSession,
         setCurrentSalary,
       }}
     >

@@ -28,9 +28,22 @@ async def init_db():
         await _add_column_if_missing(conn, "users", "years_experience", "INTEGER")
 
 
+_ALLOWED_TABLES = {"users", "roles", "resumes", "skills", "user_skills", "career_transitions", "user_matches", "transition_paths"}
+_ALLOWED_COL_TYPES = {"INTEGER", "TEXT", "REAL", "BLOB", "FLOAT", "VARCHAR(255)", "BOOLEAN"}
+
+
 async def _add_column_if_missing(conn, table: str, column: str, col_type: str):
     """SQLite-compatible: add a column if it doesn't already exist."""
+    import re
     from sqlalchemy import text
+
+    # Validate inputs against whitelists to prevent SQL injection
+    if table not in _ALLOWED_TABLES:
+        raise ValueError(f"Table '{table}' is not in the allowed list")
+    if not re.match(r"^[a-z_][a-z0-9_]*$", column):
+        raise ValueError(f"Column name '{column}' contains invalid characters")
+    if col_type.upper() not in _ALLOWED_COL_TYPES:
+        raise ValueError(f"Column type '{col_type}' is not in the allowed list")
 
     result = await conn.execute(text(f"PRAGMA table_info({table})"))
     columns = [row[1] for row in result]

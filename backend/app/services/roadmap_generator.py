@@ -39,10 +39,16 @@ class RoadmapGenerator:
 
         required = set()
         preferred = set()
-        if role.required_skills:
-            required = {s for s in json.loads(role.required_skills)}
-        if role.preferred_skills:
-            preferred = {s for s in json.loads(role.preferred_skills)}
+        try:
+            if role.required_skills:
+                required = set(json.loads(role.required_skills))
+        except (json.JSONDecodeError, TypeError):
+            logger.warning("Malformed required_skills JSON for role %d", target_role_id)
+        try:
+            if role.preferred_skills:
+                preferred = set(json.loads(role.preferred_skills))
+        except (json.JSONDecodeError, TypeError):
+            logger.warning("Malformed preferred_skills JSON for role %d", target_role_id)
 
         # Identify gaps
         missing_required = [s for s in required if s.lower() not in user_skills]

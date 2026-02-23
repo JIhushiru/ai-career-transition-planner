@@ -111,10 +111,16 @@ class MatchingService:
         required: set[str] = set()
         preferred: set[str] = set()
 
-        if role.required_skills:
-            required = set(json.loads(role.required_skills))
-        if role.preferred_skills:
-            preferred = set(json.loads(role.preferred_skills))
+        try:
+            if role.required_skills:
+                required = set(json.loads(role.required_skills))
+        except (json.JSONDecodeError, TypeError):
+            pass
+        try:
+            if role.preferred_skills:
+                preferred = set(json.loads(role.preferred_skills))
+        except (json.JSONDecodeError, TypeError):
+            pass
 
         all_role_skills = required | preferred
         if not all_role_skills:

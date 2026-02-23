@@ -29,6 +29,7 @@ import {
 import { RolePicker } from "@/components/career/role-picker";
 import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiPost } from "@/lib/api-client";
+import { safeParseInt } from "@/lib/constants";
 import { useSession } from "@/context/session-context";
 import type { DreamJobPlanResponse } from "@/types/career";
 import type { ResumeListItem } from "@/types/resume";
@@ -68,8 +69,8 @@ export default function DreamJobPage() {
         user_id: sessionUserId,
         dream_role_id: dreamRoleId,
         resume_id: selectedResumeId,
-        years_experience: yearsExp ? parseInt(yearsExp) : undefined,
-        current_salary: salary ? parseInt(salary) : undefined,
+        years_experience: safeParseInt(yearsExp) ?? undefined,
+        current_salary: safeParseInt(salary) ?? undefined,
       });
       setPlan(res);
     } catch (err) {
@@ -130,30 +131,32 @@ export default function DreamJobPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium">
+              <label htmlFor="dream-years-exp" className="text-sm font-medium">
                 Years of Experience
               </label>
               <input
+                id="dream-years-exp"
                 type="number"
                 min="0"
                 max="30"
                 value={yearsExp}
                 onChange={(e) => setYearsExp(e.target.value)}
                 placeholder="e.g. 3"
-                className="mt-1 w-full rounded-md border px-3 py-2 text-sm"
+                className="mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label className="text-sm font-medium">
+              <label htmlFor="dream-salary" className="text-sm font-medium">
                 Current Salary (PHP/mo)
               </label>
               <input
+                id="dream-salary"
                 type="number"
                 min="0"
                 value={salary}
                 onChange={(e) => setSalary(e.target.value)}
                 placeholder="e.g. 40000"
-                className="mt-1 w-full rounded-md border px-3 py-2 text-sm"
+                className="mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm"
               />
             </div>
           </div>
@@ -161,7 +164,6 @@ export default function DreamJobPage() {
           <Button
             onClick={handleGenerate}
             disabled={isLoading || !sessionUserId || !dreamRoleId || !selectedResumeId}
-            className="bg-amber-600 hover:bg-amber-700 text-white"
           >
             {isLoading ? (
               <>

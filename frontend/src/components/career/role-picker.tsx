@@ -26,7 +26,7 @@ export function RolePicker({
         const data = await apiGet<RoleListResponse>("/roles?limit=300");
         setRoles(data.roles);
       } catch {
-        // silently fail
+        // Roles list is non-critical — page still renders without it
       } finally {
         setIsLoading(false);
       }

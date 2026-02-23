@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { MatchCard } from "@/components/career/match-card";
 import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiPost, apiPut } from "@/lib/api-client";
+import { safeParseInt } from "@/lib/constants";
 import { useSession } from "@/context/session-context";
 import type { MatchResultsResponse } from "@/types/career";
 import type { ResumeListItem } from "@/types/resume";
@@ -46,19 +47,21 @@ export default function ExplorePage() {
     setIsLoading(true);
     setError(null);
     try {
-      const parsedSalary = salaryInput ? parseInt(salaryInput) : null;
+      const parsedSalary = safeParseInt(salaryInput);
 
       // Save salary to session and backend profile
       if (parsedSalary && parsedSalary !== currentSalary) {
         setCurrentSalary(parsedSalary);
-        apiPut("/auth/me/profile", { current_salary: parsedSalary }).catch(() => {});
+        apiPut("/auth/me/profile", { current_salary: parsedSalary }).catch(() => {
+          // Profile update is best-effort — salary is still used locally
+        });
       }
 
       const res = await apiPost<MatchResultsResponse>("/career/match", {
         user_id: sessionUserId,
         resume_id: selectedResumeId ?? undefined,
         career_mode: careerMode,
-        years_experience: yearsExp ? parseInt(yearsExp) : null,
+        years_experience: safeParseInt(yearsExp),
         current_salary: parsedSalary,
         use_llm: useLlm,
         top_k: 15,
@@ -153,7 +156,7 @@ export default function ExplorePage() {
           <Button
             onClick={handleMatch}
             disabled={isLoading || !sessionUserId || !selectedResumeId}
-            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white"
+            className="w-full sm:w-auto"
           >
             {isLoading ? (
               <>

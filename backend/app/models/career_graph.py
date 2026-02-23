@@ -27,7 +27,7 @@ class UserMatch(Base):
     __tablename__ = "user_matches"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     role_id: Mapped[int] = mapped_column(Integer, ForeignKey("roles.id"), nullable=False)
     embedding_score: Mapped[float | None] = mapped_column(Float, nullable=True)
     skill_overlap_score: Mapped[float | None] = mapped_column(Float, nullable=True)

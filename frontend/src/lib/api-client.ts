@@ -1,3 +1,5 @@
+import { STORAGE_KEYS, clearSessionStorage } from "@/lib/constants";
+
 const API_BASE =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
 
@@ -12,7 +14,7 @@ export class ApiError extends Error {
 }
 
 function getAuthHeaders(): Record<string, string> {
-  const token = typeof window !== "undefined" ? localStorage.getItem("ct_token") : null;
+  const token = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEYS.TOKEN) : null;
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
@@ -30,12 +32,7 @@ async function handleResponse<T>(res: Response, path: string): Promise<T> {
   if (!res.ok) {
     const isAuthEndpoint = path.startsWith("/auth/");
     if (res.status === 401 && !isAuthEndpoint && typeof window !== "undefined") {
-      localStorage.removeItem("ct_token");
-      localStorage.removeItem("ct_user_id");
-      localStorage.removeItem("ct_resume_id");
-      localStorage.removeItem("ct_email");
-      localStorage.removeItem("ct_name");
-      localStorage.removeItem("ct_current_salary");
+      clearSessionStorage();
       window.location.href = "/login";
       throw new ApiError(401, "Session expired. Please log in again.");
     }

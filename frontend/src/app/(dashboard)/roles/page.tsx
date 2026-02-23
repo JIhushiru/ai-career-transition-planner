@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { apiGet } from "@/lib/api-client";
 import { formatSalaryRange } from "@/lib/salary";
+import { SENIORITY_COLORS } from "@/lib/constants";
 import type { RoleListResponse, RoleResponse } from "@/types/career";
 
 const seniorityOptions = ["entry", "mid", "senior", "lead"];
@@ -29,15 +30,6 @@ const SALARY_PRESETS = [
   { label: "100K - 150K", min: 100000, max: 150000 },
   { label: "150K+", min: 150000, max: 0 },
 ];
-
-const seniorityColors: Record<string, string> = {
-  entry:
-    "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800",
-  mid: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950 dark:text-amber-300 dark:border-amber-800",
-  senior:
-    "bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800",
-  lead: "bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950 dark:text-rose-300 dark:border-rose-800",
-};
 
 export default function RolesPage() {
   const [roles, setRoles] = useState<RoleResponse[]>([]);
@@ -56,7 +48,7 @@ export default function RolesPage() {
         const data = await apiGet<RoleListResponse>("/roles?limit=300");
         setRoles(data.roles);
       } catch {
-        // silently fail
+        // Roles are the main content — loading state already shown
       } finally {
         setIsLoading(false);
       }
@@ -208,6 +200,7 @@ export default function RolesPage() {
               </div>
 
               <button
+                aria-pressed={remoteOnly}
                 onClick={() => setRemoteOnly(!remoteOnly)}
                 className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
                   remoteOnly
@@ -316,7 +309,7 @@ export default function RolesPage() {
                               {role.seniority && (
                                 <Badge
                                   variant="outline"
-                                  className={`text-[10px] ${seniorityColors[role.seniority] || ""}`}
+                                  className={`text-[10px] ${SENIORITY_COLORS[role.seniority] || ""}`}
                                 >
                                   {role.seniority}
                                 </Badge>
