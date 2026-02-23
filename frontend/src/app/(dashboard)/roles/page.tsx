@@ -1,9 +1,21 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { ChevronDown, ChevronRight, Search, X } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  Search,
+  X,
+  Wifi,
+  MapPin,
+  Briefcase,
+  DollarSign,
+  FolderOpen,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { apiGet } from "@/lib/api-client";
 import { formatSalaryRange } from "@/lib/salary";
 import type { RoleListResponse, RoleResponse } from "@/types/career";
@@ -18,6 +30,15 @@ const SALARY_PRESETS = [
   { label: "100K - 150K", min: 100000, max: 150000 },
   { label: "150K+", min: 150000, max: 0 },
 ];
+
+const seniorityColors: Record<string, string> = {
+  entry:
+    "bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:border-blue-800",
+  mid: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950 dark:text-amber-300 dark:border-amber-800",
+  senior:
+    "bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800",
+  lead: "bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950 dark:text-rose-300 dark:border-rose-800",
+};
 
 export default function RolesPage() {
   const [roles, setRoles] = useState<RoleResponse[]>([]);
@@ -87,12 +108,17 @@ export default function RolesPage() {
     return Object.entries(groups).sort(([a], [b]) => a.localeCompare(b));
   }, [filteredRoles]);
 
-  // Auto-expand all categories when searching
+  // Only auto-expand when searching by text
   useEffect(() => {
-    if (hasFilters) {
+    if (search) {
       setExpandedCategories(new Set(grouped.map(([cat]) => cat)));
     }
-  }, [search, seniorityFilter, remoteOnly, salaryPreset, grouped.length]);
+  }, [search, grouped.length]);
+
+  const totalCategories = useMemo(
+    () => new Set(roles.map((r) => r.category || "Other")).size,
+    [roles],
+  );
 
   const toggleCategory = (cat: string) => {
     setExpandedCategories((prev) => {
@@ -122,23 +148,22 @@ export default function RolesPage() {
     <div className="mx-auto max-w-3xl space-y-6">
       <div>
         <h2 className="text-2xl font-bold tracking-tight">Roles Overview</h2>
-        <p className="text-muted-foreground">
-          Browse all {roles.length} roles across{" "}
-          {useMemo(
-            () =>
-              new Set(roles.map((r) => r.category || "Other")).size,
-            [roles],
-          )}{" "}
-          categories.
+        <p className="text-sm text-muted-foreground">
+          Browse {roles.length} roles across {totalCategories} categories
         </p>
       </div>
 
       {isLoading ? (
-        <p className="text-sm text-muted-foreground">Loading roles...</p>
+        <div className="flex items-center justify-center py-12">
+          <div className="text-center space-y-2">
+            <div className="mx-auto h-6 w-6 animate-spin rounded-full border-2 border-muted-foreground border-t-transparent" />
+            <p className="text-sm text-muted-foreground">Loading roles...</p>
+          </div>
+        </div>
       ) : (
         <>
           {/* Search & Filters */}
-          <div className="space-y-3">
+          <Card className="gap-0 p-4 space-y-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
@@ -149,130 +174,173 @@ export default function RolesPage() {
               />
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <select
-                className="rounded-md border bg-background px-3 py-1.5 text-sm"
-                value={seniorityFilter}
-                onChange={(e) => setSeniorityFilter(e.target.value)}
-              >
-                <option value="">All levels</option>
-                {seniorityOptions.map((s) => (
-                  <option key={s} value={s}>
-                    {s.charAt(0).toUpperCase() + s.slice(1)}
-                  </option>
-                ))}
-              </select>
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="flex items-center gap-1.5">
+                <Briefcase className="h-3.5 w-3.5 text-muted-foreground" />
+                <select
+                  className="rounded-md border bg-background px-2.5 py-1.5 text-sm"
+                  value={seniorityFilter}
+                  onChange={(e) => setSeniorityFilter(e.target.value)}
+                >
+                  <option value="">All levels</option>
+                  {seniorityOptions.map((s) => (
+                    <option key={s} value={s}>
+                      {s.charAt(0).toUpperCase() + s.slice(1)}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-              <select
-                className="rounded-md border bg-background px-3 py-1.5 text-sm"
-                value={salaryPreset}
-                onChange={(e) => setSalaryPreset(Number(e.target.value))}
-              >
-                {SALARY_PRESETS.map((p, i) => (
-                  <option key={i} value={i}>
-                    {p.label}
-                  </option>
-                ))}
-              </select>
+              <div className="flex items-center gap-1.5">
+                <DollarSign className="h-3.5 w-3.5 text-muted-foreground" />
+                <select
+                  className="rounded-md border bg-background px-2.5 py-1.5 text-sm"
+                  value={salaryPreset}
+                  onChange={(e) => setSalaryPreset(Number(e.target.value))}
+                >
+                  {SALARY_PRESETS.map((p, i) => (
+                    <option key={i} value={i}>
+                      {p.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-              <label className="flex items-center gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  checked={remoteOnly}
-                  onChange={(e) => setRemoteOnly(e.target.checked)}
-                  className="rounded"
-                />
+              <button
+                onClick={() => setRemoteOnly(!remoteOnly)}
+                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+                  remoteOnly
+                    ? "border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-300"
+                    : "border-border text-muted-foreground hover:bg-muted"
+                }`}
+              >
+                <Wifi className="h-3 w-3" />
                 Remote only
-              </label>
+              </button>
 
               {hasFilters && (
-                <button
+                <Button
+                  variant="ghost"
+                  size="xs"
                   onClick={clearFilters}
-                  className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-muted-foreground"
                 >
                   <X className="h-3 w-3" />
-                  Clear filters
-                </button>
+                  Clear
+                </Button>
               )}
 
-              <span className="ml-auto text-xs text-muted-foreground">
+              <span className="ml-auto text-xs tabular-nums text-muted-foreground">
                 {filteredRoles.length} role{filteredRoles.length !== 1 ? "s" : ""}
                 {hasFilters ? " found" : ""}
               </span>
             </div>
-          </div>
+          </Card>
 
           {/* Expand/Collapse */}
-          <div className="flex gap-2">
-            <button
-              onClick={expandAll}
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Expand all
-            </button>
-            <span className="text-xs text-muted-foreground">/</span>
-            <button
-              onClick={collapseAll}
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Collapse all
-            </button>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-muted-foreground">
+              {grouped.length} categor{grouped.length !== 1 ? "ies" : "y"}
+            </span>
+            <div className="flex gap-1">
+              <Button
+                variant="ghost"
+                size="xs"
+                onClick={expandAll}
+                className="text-muted-foreground"
+              >
+                Expand all
+              </Button>
+              <Button
+                variant="ghost"
+                size="xs"
+                onClick={collapseAll}
+                className="text-muted-foreground"
+              >
+                Collapse all
+              </Button>
+            </div>
           </div>
 
           {/* Role List */}
           {grouped.length === 0 ? (
-            <p className="py-8 text-center text-sm text-muted-foreground">
-              No roles match your filters.
-            </p>
+            <div className="flex flex-col items-center justify-center rounded-lg border border-dashed py-12 text-center">
+              <FolderOpen className="mb-3 h-8 w-8 text-muted-foreground/50" />
+              <p className="text-sm font-medium text-muted-foreground">
+                No roles match your filters
+              </p>
+              <Button
+                variant="link"
+                size="xs"
+                onClick={clearFilters}
+                className="mt-1"
+              >
+                Clear all filters
+              </Button>
+            </div>
           ) : (
-            <div className="space-y-1">
+            <div className="space-y-2">
               {grouped.map(([category, categoryRoles]) => {
                 const isExpanded = expandedCategories.has(category);
                 return (
-                  <div key={category}>
+                  <div
+                    key={category}
+                    className="rounded-lg border bg-card overflow-hidden"
+                  >
                     <button
                       onClick={() => toggleCategory(category)}
-                      className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left hover:bg-muted transition-colors"
+                      className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 transition-colors"
                     >
                       {isExpanded ? (
                         <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
                       ) : (
                         <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
                       )}
-                      <span className="font-medium">{category}</span>
-                      <span className="text-xs text-muted-foreground">
-                        ({categoryRoles.length})
-                      </span>
+                      <span className="font-medium text-sm">{category}</span>
+                      <Badge variant="secondary" className="text-[10px] ml-auto">
+                        {categoryRoles.length}
+                      </Badge>
                     </button>
                     {isExpanded && (
-                      <div className="ml-9 border-l pl-4 pb-2">
+                      <div className="border-t divide-y">
                         {categoryRoles.map((role) => (
                           <div
                             key={role.id}
-                            className="py-2 border-b last:border-b-0"
+                            className="px-4 py-3 pl-11 hover:bg-muted/30 transition-colors"
                           >
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2 flex-wrap">
                               <span className="text-sm font-medium">
                                 {role.title}
                               </span>
                               {role.seniority && (
-                                <Badge variant="outline" className="text-[10px]">
+                                <Badge
+                                  variant="outline"
+                                  className={`text-[10px] ${seniorityColors[role.seniority] || ""}`}
+                                >
                                   {role.seniority}
                                 </Badge>
                               )}
                               {role.remote_friendly && (
-                                <Badge variant="outline" className="text-[10px]">
+                                <span className="inline-flex items-center gap-1 text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
+                                  <Wifi className="h-2.5 w-2.5" />
                                   Remote
-                                </Badge>
+                                </span>
                               )}
                             </div>
                             {(role.salary_min_ph || role.salary_max_ph) && (
-                              <span className="mt-0.5 block text-xs font-medium text-emerald-600 dark:text-emerald-400">
-                                {formatSalaryRange(role.salary_min_ph, role.salary_max_ph)}/mo
-                              </span>
+                              <div className="mt-1 flex items-center gap-1">
+                                <DollarSign className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
+                                <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                                  {formatSalaryRange(
+                                    role.salary_min_ph,
+                                    role.salary_max_ph,
+                                  )}
+                                  /mo
+                                </span>
+                              </div>
                             )}
                             {role.description && (
-                              <p className="mt-0.5 text-xs text-muted-foreground">
+                              <p className="mt-1 text-xs leading-relaxed text-muted-foreground line-clamp-2">
                                 {role.description}
                               </p>
                             )}
