@@ -39,6 +39,8 @@ async def list_roles(
     category: str | None = Query(None),
     seniority: str | None = Query(None),
     search: str | None = Query(None),
+    salary_min: int | None = Query(None, ge=0, description="Minimum monthly salary (PHP)"),
+    salary_max: int | None = Query(None, ge=0, description="Maximum monthly salary (PHP)"),
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=500),
     db: AsyncSession = Depends(get_db),
@@ -58,6 +60,12 @@ async def list_roles(
         count_query = count_query.where(
             Role.title.ilike(pattern) | Role.description.ilike(pattern)
         )
+    if salary_min is not None:
+        query = query.where(Role.salary_max_ph >= salary_min)
+        count_query = count_query.where(Role.salary_max_ph >= salary_min)
+    if salary_max is not None:
+        query = query.where(Role.salary_min_ph <= salary_max)
+        count_query = count_query.where(Role.salary_min_ph <= salary_max)
 
     total_result = await db.execute(count_query)
     total = total_result.scalar() or 0

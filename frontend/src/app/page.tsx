@@ -13,12 +13,15 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   FileText,
-  Tags,
   Compass,
   Route,
   GraduationCap,
   TrendingUp,
   ArrowRight,
+  Star,
+  ClipboardCheck,
+  CheckCircle2,
+  Target,
 } from "lucide-react";
 import { apiGet } from "@/lib/api-client";
 import { formatPHP, formatSalaryRange } from "@/lib/salary";
@@ -57,6 +60,22 @@ const features = [
     href: "/roadmap",
     color: "text-amber-600 dark:text-amber-400",
   },
+  {
+    icon: Star,
+    title: "Dream Job Planner",
+    description:
+      "Pick your dream role and get a reverse-engineered plan with career paths, weekly actions, and interview prep.",
+    href: "/dream-job",
+    color: "text-amber-500 dark:text-amber-400",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Self-Assessment",
+    description:
+      "Rate your own skill levels to improve match accuracy and get better recommendations.",
+    href: "/assessment",
+    color: "text-pink-600 dark:text-pink-400",
+  },
 ];
 
 function QuickWinCard({ match, rank }: { match: UserMatchResponse; rank: number }) {
@@ -94,20 +113,104 @@ function QuickWinCard({ match, rank }: { match: UserMatchResponse; rank: number 
   );
 }
 
+interface SkillsSummary {
+  skills: { name: string; category: string }[];
+  categories: Record<string, { name: string }[]>;
+}
+
+function ProgressSummary({
+  skillCount,
+  matchCount,
+  topCategory,
+}: {
+  skillCount: number;
+  matchCount: number;
+  topCategory: string | null;
+}) {
+  const steps = [
+    { label: "Resume uploaded", done: skillCount > 0 },
+    { label: "Skills extracted", done: skillCount > 0 },
+    { label: "Roles matched", done: matchCount > 0 },
+  ];
+  const completed = steps.filter((s) => s.done).length;
+
+  return (
+    <Card className="mb-8">
+      <CardContent className="py-5">
+        <div className="grid gap-4 sm:grid-cols-4">
+          <div className="text-center">
+            <p className="text-2xl font-bold text-primary">{skillCount}</p>
+            <p className="text-xs text-muted-foreground">Skills Detected</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold text-violet-600 dark:text-violet-400">{matchCount}</p>
+            <p className="text-xs text-muted-foreground">Roles Matched</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+              {topCategory || "\u2014"}
+            </p>
+            <p className="text-xs text-muted-foreground">Top Skill Area</p>
+          </div>
+          <div className="text-center">
+            <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+              {completed}/{steps.length}
+            </p>
+            <p className="text-xs text-muted-foreground">Steps Completed</p>
+          </div>
+        </div>
+
+        <div className="mt-4 flex items-center gap-3">
+          {steps.map((step) => (
+            <div key={step.label} className="flex items-center gap-1.5 text-xs">
+              {step.done ? (
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+              ) : (
+                <Target className="h-3.5 w-3.5 text-muted-foreground" />
+              )}
+              <span className={step.done ? "text-foreground" : "text-muted-foreground"}>
+                {step.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
 export default function Home() {
   const [quickWins, setQuickWins] = useState<UserMatchResponse[]>([]);
   const [topSalary, setTopSalary] = useState<number | null>(null);
   const [currentSalary, setCurrentSalary] = useState<number | null>(null);
   const [hasData, setHasData] = useState(false);
+  const [skillCount, setSkillCount] = useState(0);
+  const [matchCount, setMatchCount] = useState(0);
+  const [topCategory, setTopCategory] = useState<string | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem("ct_token");
     const userId = localStorage.getItem("ct_user_id");
     const salary = localStorage.getItem("ct_current_salary");
+    const resumeId = localStorage.getItem("ct_resume_id");
 
     if (!token || !userId) return;
 
     if (salary) setCurrentSalary(parseInt(salary));
+
+    // Load skill stats if we have a resume
+    if (resumeId) {
+      apiGet<SkillsSummary>(`/resume/${resumeId}/skills`)
+        .then((data) => {
+          setSkillCount(data.skills.length);
+          const cats = Object.entries(data.categories);
+          if (cats.length > 0) {
+            const sorted = cats.sort((a, b) => b[1].length - a[1].length);
+            setTopCategory(sorted[0][0]);
+          }
+        })
+        .catch(() => {});
+    }
 
     // Try to load quick wins
     apiGet<UserMatchResponse[]>(`/career/quick-wins/${userId}`)
@@ -115,29 +218,31 @@ export default function Home() {
         if (wins.length > 0) {
           setQuickWins(wins);
           setHasData(true);
-          // Find highest salary role
           const maxSalary = Math.max(
             ...wins
               .map((w) => w.role.salary_max_ph ?? 0)
               .filter((s) => s > 0),
           );
-          if (maxSalary > 0) setTopSalary(maxSalary);
+          if (maxSalary > 0) {
+            setTopSalary((prev) => (prev ? Math.max(prev, maxSalary) : maxSalary));
+          }
         }
       })
       .catch(() => {});
 
-    // Fallback: load cached matches if no quick wins
+    // Load cached matches
     apiGet<MatchResultsResponse>(`/career/match/${userId}/results`)
       .then((res) => {
         if (res.matches.length > 0) {
           setHasData(true);
-          if (!topSalary) {
-            const maxSalary = Math.max(
-              ...res.matches
-                .map((m) => m.role.salary_max_ph ?? 0)
-                .filter((s) => s > 0),
-            );
-            if (maxSalary > 0) setTopSalary(maxSalary);
+          setMatchCount(res.matches.length);
+          const maxSalary = Math.max(
+            ...res.matches
+              .map((m) => m.role.salary_max_ph ?? 0)
+              .filter((s) => s > 0),
+          );
+          if (maxSalary > 0) {
+            setTopSalary((prev) => (prev ? Math.max(prev, maxSalary) : maxSalary));
           }
         }
       })
@@ -197,6 +302,15 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Progress Summary */}
+        {(skillCount > 0 || matchCount > 0) && (
+          <ProgressSummary
+            skillCount={skillCount}
+            matchCount={matchCount}
+            topCategory={topCategory}
+          />
+        )}
+
         {/* Quick Wins */}
         {quickWins.length > 0 && (
           <div className="mb-12">
@@ -217,7 +331,7 @@ export default function Home() {
         )}
 
         {/* Feature Cards */}
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => {
             const Icon = feature.icon;
             return (

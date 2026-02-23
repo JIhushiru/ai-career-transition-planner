@@ -11,47 +11,60 @@ class SkillExtractor:
         "technical": (
             r"\b(Python|Java|JavaScript|TypeScript|C\+\+|C#|Go|Rust|Ruby|PHP|Swift|Kotlin"
             r"|Scala|(?<![A-Z])R(?![\.\w])|MATLAB|SQL|HTML|CSS|Sass|LESS|Perl|Lua|Dart|Elixir|Haskell"
-            r"|Shell|Bash|PowerShell|VBA|ABAP|COBOL|Fortran)\b"
+            r"|Shell|Bash|PowerShell|VBA|ABAP|COBOL|Fortran|Solidity|Markdown|ARM"
+            r"|Statistics|OOP|Data\s*Structures|Algorithms|Linux)\b"
         ),
         "framework": (
-            r"\b(React|Angular|Vue\.?js|Next\.?js|Nuxt\.?js|Svelte|Django|Flask|FastAPI"
+            r"\b(React|React\s*Native|Angular|Vue\.?js|Next\.?js|Nuxt\.?js|Svelte|Django|Flask|FastAPI"
             r"|Spring\s*Boot|\.NET|ASP\.NET|Node\.?js|Express\.?js|NestJS|Rails"
             r"|Laravel|Symfony|TensorFlow|PyTorch|Keras|Scikit-learn|Pandas|NumPy"
-            r"|Matplotlib|Seaborn|Plotly|Streamlit|Gradio|LangChain)\b"
+            r"|Matplotlib|Seaborn|Plotly|Streamlit|Gradio|LangChain|Tailwind\s*CSS"
+            r"|Robot\s*Framework|Cypress|Playwright|Selenium|Unity)\b"
         ),
         "tool": (
             r"\b(Docker|Kubernetes|Git|GitHub|GitLab|Bitbucket|AWS|Azure|GCP"
             r"|Jenkins|CircleCI|Travis\s*CI|Terraform|Ansible|Puppet|Chef"
-            r"|Figma|Sketch|Adobe\s*XD|Photoshop|Illustrator"
-            r"|Tableau|Power\s*BI|Looker|Metabase|Grafana"
+            r"|Figma|Sketch|Adobe\s*XD|Photoshop|Illustrator|Canva"
+            r"|Tableau|Power\s*BI|Looker|Metabase|Grafana|Datadog"
             r"|Jira|Confluence|Slack|Trello|Notion|Asana"
             r"|Postman|Swagger|Nginx|Apache|Redis|RabbitMQ|Kafka"
             r"|MongoDB|PostgreSQL|MySQL|SQLite|Oracle|DynamoDB|Cassandra"
             r"|Elasticsearch|Supabase|Firebase|Vercel|Netlify|Heroku"
-            r"|SAP|QuickBooks|Xero|Sage|Tally|Zoho)\b"
+            r"|SAP|QuickBooks|Xero|Sage|Tally|Zoho|Snowflake|BigQuery"
+            r"|Airflow|Spark|dbt|Excel|HRIS|Active\s*Directory|SIEM"
+            r"|Ahrefs|SEMrush|Hubspot|Salesforce|Miro|WordPress)\b"
         ),
         "soft": (
             r"\b(leadership|communication|teamwork|team\s*work|problem[- ]solving"
             r"|critical\s*thinking|project\s*management|time\s*management"
             r"|adaptability|creativity|collaboration|mentoring|coaching"
             r"|presentation|negotiation|conflict\s*resolution"
-            r"|strategic\s*planning|decision[- ]making|analytical\s*thinking)\b"
+            r"|strategic\s*planning|decision[- ]making|analytical\s*thinking"
+            r"|team\s*leadership|stakeholder\s*management|change\s*management"
+            r"|vendor\s*management|team\s*management|client\s*management"
+            r"|public\s*speaking|technical\s*writing)\b"
         ),
         "domain": (
             r"\b(machine\s*learning|deep\s*learning|natural\s*language\s*processing|NLP"
             r"|computer\s*vision|data\s*science|data\s*engineering|data\s*analytics"
             r"|business\s*intelligence|DevOps|MLOps|CI/CD|microservices"
-            r"|REST\s*API|GraphQL|web\s*scraping|ETL|data\s*warehousing"
+            r"|REST\s*APIs?|GraphQL|web\s*scraping|ETL|data\s*warehousing"
             r"|agile|scrum|kanban|lean|six\s*sigma"
             r"|financial\s*analysis|tax\s*compliance|auditing|bookkeeping"
             r"|accounting|budgeting|forecasting|financial\s*reporting"
-            r"|BPO|customer\s*service|quality\s*assurance|QA|testing)\b"
+            r"|BPO|customer\s*service|quality\s*assurance|QA|testing"
+            r"|cloud\s*architecture|system\s*design|data\s*analysis"
+            r"|A/B\s*testing|risk\s*management|process\s*improvement"
+            r"|compliance|user\s*research|data\s*governance|SEO|SEM"
+            r"|digital\s*marketing|network\s*security|cloud\s*security"
+            r"|incident\s*response|data\s*modeling|data\s*visualization"
+            r"|infrastructure\s*as\s*code|accessibility|cybersecurity)\b"
         ),
         "certification": (
             r"\b(AWS\s*Certified|Azure\s*Certified|GCP\s*Certified|PMP|PRINCE2"
             r"|Scrum\s*Master|CSM|CISSP|CISA|CPA|CMA|CFA|FRM|ACCA"
             r"|CompTIA|CCNA|CCNP|ITIL|Six\s*Sigma|Lean\s*Six\s*Sigma"
-            r"|Google\s*Analytics|HubSpot|Salesforce)\b"
+            r"|Google\s*Analytics|TOGAF|SAFe|ISO\s*27001)\b"
         ),
     }
 
@@ -85,6 +98,7 @@ class SkillExtractor:
         "dynamodb": "DynamoDB",
         "graphql": "GraphQL",
         "rest api": "REST API",
+        "rest apis": "REST APIs",
         "ci/cd": "CI/CD",
         "devops": "DevOps",
         "mlops": "MLOps",
@@ -98,9 +112,15 @@ class SkillExtractor:
         "tf": "Terraform",
         "gcp": "GCP",
         "aws": "AWS",
+        "seo": "SEO",
+        "sem": "SEM",
+        "a/b testing": "A/B Testing",
+        "tailwind css": "Tailwind CSS",
+        "react native": "React Native",
     }
 
     def __init__(self, spacy_model: str = "en_core_web_sm"):
+        self._taxonomy_categories: dict[str, str] = {}
         self.nlp = self._load_spacy(spacy_model)
         self._add_skill_patterns()
 
@@ -122,8 +142,10 @@ class SkillExtractor:
         patterns = []
         for entry in taxonomy:
             pattern_def = entry.get("pattern")
+            category = entry.get("category", "technical")
             if isinstance(pattern_def, str):
                 patterns.append({"label": "SKILL", "pattern": pattern_def})
+                self._taxonomy_categories[pattern_def.lower()] = category
             elif isinstance(pattern_def, list):
                 patterns.append({"label": "SKILL", "pattern": pattern_def})
         ruler.add_patterns(patterns)
@@ -168,6 +190,10 @@ class SkillExtractor:
 
     def _categorize(self, skill_name: str) -> str:
         key = skill_name.lower()
+        # Check taxonomy first (most comprehensive)
+        if key in self._taxonomy_categories:
+            return self._taxonomy_categories[key]
+        # Fall back to regex patterns
         for category, pattern in self.TECH_PATTERNS.items():
             if re.search(pattern, skill_name, re.IGNORECASE):
                 return category

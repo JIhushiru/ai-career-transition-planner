@@ -11,6 +11,9 @@ import {
   LayoutDashboard,
   LogOut,
   Briefcase,
+  Star,
+  ClipboardCheck,
+  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSession } from "@/context/session-context";
@@ -23,6 +26,9 @@ const navItems = [
   { href: "/explore", label: "Explore Careers", icon: Compass },
   { href: "/transitions", label: "Career GPS", icon: Route },
   { href: "/roadmap", label: "Roadmap", icon: GraduationCap },
+  { href: "/dream-job", label: "Dream Job", icon: Star },
+  { href: "/assessment", label: "Self-Assessment", icon: ClipboardCheck },
+  { href: "/stories", label: "Success Stories", icon: Users },
 ];
 
 export function Sidebar() {

@@ -97,6 +97,7 @@ async def upload_resume(
 
     parsed_sections = parser.parse_sections(raw_text)
     extracted_skills = extractor.extract_skills(raw_text)
+    estimated_years = parser.estimate_years_experience(raw_text)
 
     user = auth_user or await _get_or_create_user(db)
     resume = Resume(
@@ -109,6 +110,9 @@ async def upload_resume(
     db.add(resume)
     await db.flush()
 
+    if estimated_years and not user.years_experience:
+        user.years_experience = estimated_years
+
     skills = await _save_skills(db, user, resume, extracted_skills)
     await db.commit()
 
@@ -118,6 +122,7 @@ async def upload_resume(
         raw_text=raw_text,
         skills=skills,
         parsed_sections=ParsedSections(**parsed_sections),
+        estimated_years_experience=estimated_years,
     )
 
 
@@ -129,6 +134,7 @@ async def parse_text_resume(
 ):
     parsed_sections = parser.parse_sections(body.text)
     extracted_skills = extractor.extract_skills(body.text)
+    estimated_years = parser.estimate_years_experience(body.text)
 
     user = auth_user or await _get_or_create_user(db)
     resume = Resume(
@@ -141,6 +147,9 @@ async def parse_text_resume(
     db.add(resume)
     await db.flush()
 
+    if estimated_years and not user.years_experience:
+        user.years_experience = estimated_years
+
     skills = await _save_skills(db, user, resume, extracted_skills)
     await db.commit()
 
@@ -150,6 +159,7 @@ async def parse_text_resume(
         raw_text=body.text,
         skills=skills,
         parsed_sections=ParsedSections(**parsed_sections),
+        estimated_years_experience=estimated_years,
     )
 
 

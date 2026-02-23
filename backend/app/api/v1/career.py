@@ -14,9 +14,16 @@ from app.models.resume import Resume
 from app.models.role import Role
 from app.models.user import User
 from app.schemas.role import (
+    AssessmentQuestionsResponse,
+    AssessmentRequest,
+    AssessmentResponse,
     CareerPathsResponse,
+    DayInLifeResponse,
+    DreamJobPlanResponse,
+    DreamJobRequest,
     MatchResultsResponse,
     RoadmapResponse,
+    RoleComparisonResponse,
     RoleResponse,
     SkillGap,
     TransitionPathResponse,
@@ -24,10 +31,14 @@ from app.schemas.role import (
     UserMatchResponse,
 )
 from app.services.career_graph import CareerGraphService
+from app.services.dream_job_planner import DreamJobPlanner
 from app.services.embedding_service import EmbeddingService
 from app.services.matching_service import MatchingService
 from app.services.meta_model import MetaModelScorer
 from app.services.roadmap_generator import RoadmapGenerator
+from app.services.role_insights import RoleInsightsService
+from app.services.self_assessment import SelfAssessmentService
+from app.services.success_stories import SuccessStoryService
 
 router = APIRouter(prefix="/career", tags=["career"])
 
@@ -35,6 +46,10 @@ meta_model = MetaModelScorer()
 graph_service = CareerGraphService()
 roadmap_gen = RoadmapGenerator()
 embedding_service = EmbeddingService()
+dream_planner = DreamJobPlanner()
+assessment_service = SelfAssessmentService()
+insights_service = RoleInsightsService()
+stories_service = SuccessStoryService()
 
 
 class MatchRequest(BaseModel):
@@ -371,3 +386,133 @@ async def compute_embeddings(
     """Pre-compute embeddings for all roles. Run after seeding."""
     count = await embedding_service.compute_role_embeddings(db)
     return {"message": f"Computed embeddings for {count} roles"}
+
+
+# --- Dream Job Planner ---
+
+
+@router.post("/dream-job", response_model=DreamJobPlanResponse)
+async def plan_dream_job(
+    body: DreamJobRequest,
+    db: AsyncSession = Depends(get_db),
+):
+    """Build a complete reverse-engineered plan to reach a dream role.
+
+    Returns career paths, skill gaps, weekly action plan, interview prep,
+    and portfolio project suggestions.
+    """
+    result = await db.execute(select(User).where(User.id == body.user_id))
+    user = result.scalar_one_or_none()
+    if not user:
+        raise HTTPException(404, "User not found")
+
+    # Resolve current role: from request, from best match, or None
+    current_role_id = body.current_role_id
+    if not current_role_id:
+        match_result = await db.execute(
+            select(UserMatch)
+            .where(UserMatch.user_id == body.user_id)
+            .order_by(UserMatch.meta_score.desc())
+            .limit(1)
+        )
+        best_match = match_result.scalar_one_or_none()
+        if best_match:
+            current_role_id = best_match.role_id
+
+    salary = body.current_salary or user.current_salary
+
+    plan = await dream_planner.build_plan(
+        db,
+        user_id=body.user_id,
+        dream_role_id=body.dream_role_id,
+        current_role_id=current_role_id,
+        user_years=body.years_experience,
+        current_salary=salary,
+    )
+
+    if "error" in plan:
+        raise HTTPException(404, plan["error"])
+
+    return DreamJobPlanResponse(**plan)
+
+
+# --- Self-Assessment ---
+
+
+@router.get("/assessment/questions", response_model=AssessmentQuestionsResponse)
+async def get_assessment_questions(
+    target_role_id: int | None = Query(None),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get skill assessment questions, optionally tailored to a target role."""
+    questions = await assessment_service.get_assessment_questions(
+        db, target_role_id=target_role_id
+    )
+    return AssessmentQuestionsResponse(
+        questions=questions,
+        target_role_id=target_role_id,
+    )
+
+
+@router.post("/assessment", response_model=AssessmentResponse)
+async def submit_assessment(
+    body: AssessmentRequest,
+    db: AsyncSession = Depends(get_db),
+):
+    """Submit skill self-assessment ratings. Merges with existing skills."""
+    result = await db.execute(select(User).where(User.id == body.user_id))
+    if not result.scalar_one_or_none():
+        raise HTTPException(404, "User not found")
+
+    ratings = [r.model_dump() for r in body.ratings]
+    saved = await assessment_service.save_assessment(db, body.user_id, ratings)
+    return AssessmentResponse(**saved)
+
+
+# --- Role Insights ---
+
+
+@router.get("/roles/{role_id}/day-in-life", response_model=DayInLifeResponse)
+async def get_day_in_life(
+    role_id: int,
+    db: AsyncSession = Depends(get_db),
+):
+    """Get a 'day in the life' description for a role."""
+    result = await insights_service.get_day_in_life(db, role_id)
+    if "error" in result:
+        raise HTTPException(404, result["error"])
+    return DayInLifeResponse(**result)
+
+
+@router.get("/roles/compare", response_model=RoleComparisonResponse)
+async def compare_roles(
+    role_a: int = Query(..., description="First role ID"),
+    role_b: int = Query(..., description="Second role ID"),
+    db: AsyncSession = Depends(get_db),
+):
+    """Compare two roles side by side."""
+    result = await insights_service.compare_roles(db, role_a, role_b)
+    if "error" in result:
+        raise HTTPException(404, result["error"])
+    return RoleComparisonResponse(**result)
+
+
+# --- Success Stories ---
+
+
+@router.get("/stories/{user_id}")
+async def get_success_stories(
+    user_id: int,
+    target_role_id: int = Query(..., description="Target role ID"),
+    count: int = Query(3, ge=1, le=5),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get 'People Like You' success story templates for a target role."""
+    result = await db.execute(select(User).where(User.id == user_id))
+    if not result.scalar_one_or_none():
+        raise HTTPException(404, "User not found")
+
+    stories = await stories_service.generate_stories(
+        db, user_id, target_role_id, count=count
+    )
+    return {"stories": stories, "target_role_id": target_role_id}

@@ -16,6 +16,7 @@ class User(Base):
     name: Mapped[str | None] = mapped_column(String(100), nullable=True)
     current_salary: Mapped[int | None] = mapped_column(Integer, nullable=True)
     current_role_title: Mapped[str | None] = mapped_column(String(150), nullable=True)
+    years_experience: Mapped[int | None] = mapped_column(Integer, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(
         DateTime, server_default=func.now(), onupdate=func.now()

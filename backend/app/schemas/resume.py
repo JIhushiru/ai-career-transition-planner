@@ -22,6 +22,7 @@ class ResumeUploadResponse(BaseModel):
     raw_text: str
     skills: list[ExtractedSkill]
     parsed_sections: ParsedSections
+    estimated_years_experience: int | None = None
 
 
 class ResumeTextRequest(BaseModel):

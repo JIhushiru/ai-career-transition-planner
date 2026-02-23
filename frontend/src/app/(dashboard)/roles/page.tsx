@@ -5,9 +5,19 @@ import { ChevronDown, ChevronRight, Search, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { apiGet } from "@/lib/api-client";
+import { formatSalaryRange } from "@/lib/salary";
 import type { RoleListResponse, RoleResponse } from "@/types/career";
 
 const seniorityOptions = ["entry", "mid", "senior", "lead"];
+
+const SALARY_PRESETS = [
+  { label: "Any salary", min: 0, max: 0 },
+  { label: "Below 30K", min: 0, max: 30000 },
+  { label: "30K - 60K", min: 30000, max: 60000 },
+  { label: "60K - 100K", min: 60000, max: 100000 },
+  { label: "100K - 150K", min: 100000, max: 150000 },
+  { label: "150K+", min: 150000, max: 0 },
+];
 
 export default function RolesPage() {
   const [roles, setRoles] = useState<RoleResponse[]>([]);
@@ -18,6 +28,7 @@ export default function RolesPage() {
   const [search, setSearch] = useState("");
   const [seniorityFilter, setSeniorityFilter] = useState("");
   const [remoteOnly, setRemoteOnly] = useState(false);
+  const [salaryPreset, setSalaryPreset] = useState(0);
 
   useEffect(() => {
     async function load() {
@@ -33,7 +44,7 @@ export default function RolesPage() {
     load();
   }, []);
 
-  const hasFilters = search || seniorityFilter || remoteOnly;
+  const hasFilters = search || seniorityFilter || remoteOnly || salaryPreset > 0;
 
   const filteredRoles = useMemo(() => {
     let result = roles;
@@ -52,8 +63,19 @@ export default function RolesPage() {
     if (remoteOnly) {
       result = result.filter((r) => r.remote_friendly);
     }
+    if (salaryPreset > 0) {
+      const preset = SALARY_PRESETS[salaryPreset];
+      result = result.filter((r) => {
+        if (!r.salary_min_ph && !r.salary_max_ph) return false;
+        const rMin = r.salary_min_ph ?? 0;
+        const rMax = r.salary_max_ph ?? rMin;
+        if (preset.min > 0 && rMax < preset.min) return false;
+        if (preset.max > 0 && rMin > preset.max) return false;
+        return true;
+      });
+    }
     return result;
-  }, [roles, search, seniorityFilter, remoteOnly]);
+  }, [roles, search, seniorityFilter, remoteOnly, salaryPreset]);
 
   const grouped = useMemo(() => {
     const groups: Record<string, RoleResponse[]> = {};
@@ -70,7 +92,7 @@ export default function RolesPage() {
     if (hasFilters) {
       setExpandedCategories(new Set(grouped.map(([cat]) => cat)));
     }
-  }, [search, seniorityFilter, remoteOnly, grouped.length]);
+  }, [search, seniorityFilter, remoteOnly, salaryPreset, grouped.length]);
 
   const toggleCategory = (cat: string) => {
     setExpandedCategories((prev) => {
@@ -93,6 +115,7 @@ export default function RolesPage() {
     setSearch("");
     setSeniorityFilter("");
     setRemoteOnly(false);
+    setSalaryPreset(0);
   };
 
   return (
@@ -136,6 +159,18 @@ export default function RolesPage() {
                 {seniorityOptions.map((s) => (
                   <option key={s} value={s}>
                     {s.charAt(0).toUpperCase() + s.slice(1)}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                className="rounded-md border bg-background px-3 py-1.5 text-sm"
+                value={salaryPreset}
+                onChange={(e) => setSalaryPreset(Number(e.target.value))}
+              >
+                {SALARY_PRESETS.map((p, i) => (
+                  <option key={i} value={i}>
+                    {p.label}
                   </option>
                 ))}
               </select>
@@ -231,6 +266,11 @@ export default function RolesPage() {
                                 </Badge>
                               )}
                             </div>
+                            {(role.salary_min_ph || role.salary_max_ph) && (
+                              <span className="mt-0.5 block text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                                {formatSalaryRange(role.salary_min_ph, role.salary_max_ph)}/mo
+                              </span>
+                            )}
                             {role.description && (
                               <p className="mt-0.5 text-xs text-muted-foreground">
                                 {role.description}

@@ -1,147 +1,3770 @@
 [
-  {"pattern": "Python", "category": "technical"},
-  {"pattern": "Java", "category": "technical"},
-  {"pattern": "JavaScript", "category": "technical"},
-  {"pattern": "TypeScript", "category": "technical"},
-  {"pattern": "C++", "category": "technical"},
-  {"pattern": "C#", "category": "technical"},
-  {"pattern": "Go", "category": "technical"},
-  {"pattern": "Rust", "category": "technical"},
-  {"pattern": "Ruby", "category": "technical"},
-  {"pattern": "PHP", "category": "technical"},
-  {"pattern": "Swift", "category": "technical"},
-  {"pattern": "Kotlin", "category": "technical"},
-  {"pattern": "Scala", "category": "technical"},
-  {"pattern": "R", "category": "technical"},
-  {"pattern": "SQL", "category": "technical"},
-  {"pattern": "HTML", "category": "technical"},
-  {"pattern": "CSS", "category": "technical"},
-  {"pattern": "Dart", "category": "technical"},
-  {"pattern": "VBA", "category": "technical"},
-  {"pattern": "ABAP", "category": "technical"},
-  {"pattern": "React", "category": "framework"},
-  {"pattern": "Angular", "category": "framework"},
-  {"pattern": [{"LOWER": "vue"}, {"LOWER": "."}, {"LOWER": "js"}], "category": "framework"},
-  {"pattern": [{"LOWER": "next"}, {"LOWER": "."}, {"LOWER": "js"}], "category": "framework"},
-  {"pattern": "Django", "category": "framework"},
-  {"pattern": "Flask", "category": "framework"},
-  {"pattern": "FastAPI", "category": "framework"},
-  {"pattern": [{"LOWER": "spring"}, {"LOWER": "boot"}], "category": "framework"},
-  {"pattern": ".NET", "category": "framework"},
-  {"pattern": [{"LOWER": "node"}, {"LOWER": "."}, {"LOWER": "js"}], "category": "framework"},
-  {"pattern": "Express", "category": "framework"},
-  {"pattern": "Rails", "category": "framework"},
-  {"pattern": "Laravel", "category": "framework"},
-  {"pattern": "TensorFlow", "category": "framework"},
-  {"pattern": "PyTorch", "category": "framework"},
-  {"pattern": "Keras", "category": "framework"},
-  {"pattern": [{"LOWER": "scikit"}, {"TEXT": "-"}, {"LOWER": "learn"}], "category": "framework"},
-  {"pattern": "Pandas", "category": "framework"},
-  {"pattern": "NumPy", "category": "framework"},
-  {"pattern": "Streamlit", "category": "framework"},
-  {"pattern": "LangChain", "category": "framework"},
-  {"pattern": "Docker", "category": "tool"},
-  {"pattern": "Kubernetes", "category": "tool"},
-  {"pattern": "Git", "category": "tool"},
-  {"pattern": "GitHub", "category": "tool"},
-  {"pattern": "GitLab", "category": "tool"},
-  {"pattern": "AWS", "category": "tool"},
-  {"pattern": "Azure", "category": "tool"},
-  {"pattern": "GCP", "category": "tool"},
-  {"pattern": "Jenkins", "category": "tool"},
-  {"pattern": "Terraform", "category": "tool"},
-  {"pattern": "Ansible", "category": "tool"},
-  {"pattern": "Figma", "category": "tool"},
-  {"pattern": "Tableau", "category": "tool"},
-  {"pattern": [{"LOWER": "power"}, {"LOWER": "bi"}], "category": "tool"},
-  {"pattern": "Jira", "category": "tool"},
-  {"pattern": "Confluence", "category": "tool"},
-  {"pattern": "Postman", "category": "tool"},
-  {"pattern": "Redis", "category": "tool"},
-  {"pattern": "Kafka", "category": "tool"},
-  {"pattern": "MongoDB", "category": "tool"},
-  {"pattern": "PostgreSQL", "category": "tool"},
-  {"pattern": "MySQL", "category": "tool"},
-  {"pattern": "Oracle", "category": "tool"},
-  {"pattern": "Elasticsearch", "category": "tool"},
-  {"pattern": "Supabase", "category": "tool"},
-  {"pattern": "Firebase", "category": "tool"},
-  {"pattern": "Vercel", "category": "tool"},
-  {"pattern": "Heroku", "category": "tool"},
-  {"pattern": "SAP", "category": "tool"},
-  {"pattern": "QuickBooks", "category": "tool"},
-  {"pattern": "Xero", "category": "tool"},
-  {"pattern": "Sage", "category": "tool"},
-  {"pattern": "Tally", "category": "tool"},
-  {"pattern": "Zoho", "category": "tool"},
-  {"pattern": "Salesforce", "category": "tool"},
-  {"pattern": "HubSpot", "category": "tool"},
-  {"pattern": "Nginx", "category": "tool"},
-  {"pattern": "Apache", "category": "tool"},
-  {"pattern": "RabbitMQ", "category": "tool"},
-  {"pattern": "Grafana", "category": "tool"},
-  {"pattern": "Metabase", "category": "tool"},
-  {"pattern": "Looker", "category": "tool"},
-  {"pattern": [{"LOWER": "machine"}, {"LOWER": "learning"}], "category": "domain"},
-  {"pattern": [{"LOWER": "deep"}, {"LOWER": "learning"}], "category": "domain"},
-  {"pattern": [{"LOWER": "natural"}, {"LOWER": "language"}, {"LOWER": "processing"}], "category": "domain"},
-  {"pattern": [{"LOWER": "computer"}, {"LOWER": "vision"}], "category": "domain"},
-  {"pattern": [{"LOWER": "data"}, {"LOWER": "science"}], "category": "domain"},
-  {"pattern": [{"LOWER": "data"}, {"LOWER": "engineering"}], "category": "domain"},
-  {"pattern": [{"LOWER": "data"}, {"LOWER": "analytics"}], "category": "domain"},
-  {"pattern": [{"LOWER": "business"}, {"LOWER": "intelligence"}], "category": "domain"},
-  {"pattern": "DevOps", "category": "domain"},
-  {"pattern": "MLOps", "category": "domain"},
-  {"pattern": [{"LOWER": "rest"}, {"LOWER": "api"}], "category": "domain"},
-  {"pattern": "GraphQL", "category": "domain"},
-  {"pattern": [{"LOWER": "web"}, {"LOWER": "scraping"}], "category": "domain"},
-  {"pattern": [{"LOWER": "data"}, {"LOWER": "warehousing"}], "category": "domain"},
-  {"pattern": [{"LOWER": "financial"}, {"LOWER": "analysis"}], "category": "domain"},
-  {"pattern": [{"LOWER": "tax"}, {"LOWER": "compliance"}], "category": "domain"},
-  {"pattern": "auditing", "category": "domain"},
-  {"pattern": "bookkeeping", "category": "domain"},
-  {"pattern": "accounting", "category": "domain"},
-  {"pattern": "budgeting", "category": "domain"},
-  {"pattern": "forecasting", "category": "domain"},
-  {"pattern": [{"LOWER": "financial"}, {"LOWER": "reporting"}], "category": "domain"},
-  {"pattern": [{"LOWER": "quality"}, {"LOWER": "assurance"}], "category": "domain"},
-  {"pattern": [{"LOWER": "customer"}, {"LOWER": "service"}], "category": "domain"},
-  {"pattern": "microservices", "category": "domain"},
-  {"pattern": "ETL", "category": "domain"},
-  {"pattern": "Agile", "category": "domain"},
-  {"pattern": "Scrum", "category": "domain"},
-  {"pattern": "Kanban", "category": "domain"},
-  {"pattern": [{"LOWER": "six"}, {"LOWER": "sigma"}], "category": "domain"},
-  {"pattern": "leadership", "category": "soft"},
-  {"pattern": "communication", "category": "soft"},
-  {"pattern": "teamwork", "category": "soft"},
-  {"pattern": [{"LOWER": "problem"}, {"LOWER": "solving"}], "category": "soft"},
-  {"pattern": [{"LOWER": "problem"}, {"TEXT": "-"}, {"LOWER": "solving"}], "category": "soft"},
-  {"pattern": [{"LOWER": "critical"}, {"LOWER": "thinking"}], "category": "soft"},
-  {"pattern": [{"LOWER": "project"}, {"LOWER": "management"}], "category": "soft"},
-  {"pattern": [{"LOWER": "time"}, {"LOWER": "management"}], "category": "soft"},
-  {"pattern": "adaptability", "category": "soft"},
-  {"pattern": "creativity", "category": "soft"},
-  {"pattern": "collaboration", "category": "soft"},
-  {"pattern": "mentoring", "category": "soft"},
-  {"pattern": "coaching", "category": "soft"},
-  {"pattern": "negotiation", "category": "soft"},
-  {"pattern": [{"LOWER": "strategic"}, {"LOWER": "planning"}], "category": "soft"},
-  {"pattern": [{"LOWER": "decision"}, {"LOWER": "making"}], "category": "soft"},
-  {"pattern": [{"LOWER": "analytical"}, {"LOWER": "thinking"}], "category": "soft"},
-  {"pattern": "presentation", "category": "soft"},
-  {"pattern": [{"LOWER": "aws"}, {"LOWER": "certified"}], "category": "certification"},
-  {"pattern": [{"LOWER": "azure"}, {"LOWER": "certified"}], "category": "certification"},
-  {"pattern": "PMP", "category": "certification"},
-  {"pattern": "PRINCE2", "category": "certification"},
-  {"pattern": [{"LOWER": "scrum"}, {"LOWER": "master"}], "category": "certification"},
-  {"pattern": "CISSP", "category": "certification"},
-  {"pattern": "CISA", "category": "certification"},
-  {"pattern": "CPA", "category": "certification"},
-  {"pattern": "CMA", "category": "certification"},
-  {"pattern": "CFA", "category": "certification"},
-  {"pattern": "ACCA", "category": "certification"},
-  {"pattern": "CCNA", "category": "certification"},
-  {"pattern": "ITIL", "category": "certification"},
-  {"pattern": "CompTIA", "category": "certification"}
+  {
+    "pattern": "3D Mathematics",
+    "category": "technical"
+  },
+  {
+    "pattern": "ABAP",
+    "category": "technical"
+  },
+  {
+    "pattern": "ARM",
+    "category": "technical"
+  },
+  {
+    "pattern": "Bash",
+    "category": "technical"
+  },
+  {
+    "pattern": "C",
+    "category": "technical"
+  },
+  {
+    "pattern": "C#",
+    "category": "technical"
+  },
+  {
+    "pattern": "C++",
+    "category": "technical"
+  },
+  {
+    "pattern": "Cryptography",
+    "category": "technical"
+  },
+  {
+    "pattern": "CSS",
+    "category": "technical"
+  },
+  {
+    "pattern": "Dart",
+    "category": "technical"
+  },
+  {
+    "pattern": "Data Structures",
+    "category": "technical"
+  },
+  {
+    "pattern": "Data Structures & Algorithms",
+    "category": "technical"
+  },
+  {
+    "pattern": "DAX",
+    "category": "technical"
+  },
+  {
+    "pattern": "Embedded Systems",
+    "category": "technical"
+  },
+  {
+    "pattern": "Encryption",
+    "category": "technical"
+  },
+  {
+    "pattern": "Flutter",
+    "category": "technical"
+  },
+  {
+    "pattern": "Go",
+    "category": "technical"
+  },
+  {
+    "pattern": "Hardware Interfaces",
+    "category": "technical"
+  },
+  {
+    "pattern": "HTML",
+    "category": "technical"
+  },
+  {
+    "pattern": "IoT Protocols",
+    "category": "technical"
+  },
+  {
+    "pattern": "Java",
+    "category": "technical"
+  },
+  {
+    "pattern": "JavaScript",
+    "category": "technical"
+  },
+  {
+    "pattern": "Kotlin",
+    "category": "technical"
+  },
+  {
+    "pattern": "Linear Algebra",
+    "category": "technical"
+  },
+  {
+    "pattern": "Linux",
+    "category": "technical"
+  },
+  {
+    "pattern": "Linux Kernel",
+    "category": "technical"
+  },
+  {
+    "pattern": "Markdown",
+    "category": "technical"
+  },
+  {
+    "pattern": "NLP",
+    "category": "technical"
+  },
+  {
+    "pattern": "OOP",
+    "category": "technical"
+  },
+  {
+    "pattern": "PCB Design",
+    "category": "technical"
+  },
+  {
+    "pattern": "PHP",
+    "category": "technical"
+  },
+  {
+    "pattern": "Programming",
+    "category": "technical"
+  },
+  {
+    "pattern": "Programming Basics",
+    "category": "technical"
+  },
+  {
+    "pattern": "Python",
+    "category": "technical"
+  },
+  {
+    "pattern": "R",
+    "category": "technical"
+  },
+  {
+    "pattern": "Responsive Design",
+    "category": "technical"
+  },
+  {
+    "pattern": "Routing & Switching",
+    "category": "technical"
+  },
+  {
+    "pattern": "RTOS",
+    "category": "technical"
+  },
+  {
+    "pattern": "Ruby",
+    "category": "technical"
+  },
+  {
+    "pattern": "Rust",
+    "category": "technical"
+  },
+  {
+    "pattern": "Scala",
+    "category": "technical"
+  },
+  {
+    "pattern": "Scripting",
+    "category": "technical"
+  },
+  {
+    "pattern": "Shader Programming",
+    "category": "technical"
+  },
+  {
+    "pattern": "Smart Contracts",
+    "category": "technical"
+  },
+  {
+    "pattern": "Solidity",
+    "category": "technical"
+  },
+  {
+    "pattern": "SQL",
+    "category": "technical"
+  },
+  {
+    "pattern": "State Management",
+    "category": "technical"
+  },
+  {
+    "pattern": "Statistics",
+    "category": "technical"
+  },
+  {
+    "pattern": "Stored Procedures",
+    "category": "technical"
+  },
+  {
+    "pattern": "Swift",
+    "category": "technical"
+  },
+  {
+    "pattern": "System Design",
+    "category": "technical"
+  },
+  {
+    "pattern": "TypeScript",
+    "category": "technical"
+  },
+  {
+    "pattern": "VBA",
+    "category": "technical"
+  },
+  {
+    "pattern": "Web3.js",
+    "category": "technical"
+  },
+  {
+    "pattern": "Wireless Technologies",
+    "category": "technical"
+  },
+  {
+    "pattern": ".NET",
+    "category": "framework"
+  },
+  {
+    "pattern": "Angular",
+    "category": "framework"
+  },
+  {
+    "pattern": "Django",
+    "category": "framework"
+  },
+  {
+    "pattern": "Express",
+    "category": "framework"
+  },
+  {
+    "pattern": "FastAPI",
+    "category": "framework"
+  },
+  {
+    "pattern": "Flask",
+    "category": "framework"
+  },
+  {
+    "pattern": "Keras",
+    "category": "framework"
+  },
+  {
+    "pattern": "LangChain",
+    "category": "framework"
+  },
+  {
+    "pattern": "Laravel",
+    "category": "framework"
+  },
+  {
+    "pattern": "Lottie",
+    "category": "framework"
+  },
+  {
+    "pattern": "NumPy",
+    "category": "framework"
+  },
+  {
+    "pattern": "Pandas",
+    "category": "framework"
+  },
+  {
+    "pattern": "PyTorch",
+    "category": "framework"
+  },
+  {
+    "pattern": "Rails",
+    "category": "framework"
+  },
+  {
+    "pattern": "React",
+    "category": "framework"
+  },
+  {
+    "pattern": "React Native",
+    "category": "framework"
+  },
+  {
+    "pattern": "Robot Framework",
+    "category": "framework"
+  },
+  {
+    "pattern": "Streamlit",
+    "category": "framework"
+  },
+  {
+    "pattern": "Tailwind CSS",
+    "category": "framework"
+  },
+  {
+    "pattern": "TensorFlow",
+    "category": "framework"
+  },
+  {
+    "pattern": "Active Directory",
+    "category": "tool"
+  },
+  {
+    "pattern": "Adobe Captivate",
+    "category": "tool"
+  },
+  {
+    "pattern": "Adobe Creative Suite",
+    "category": "tool"
+  },
+  {
+    "pattern": "Adobe Illustrator",
+    "category": "tool"
+  },
+  {
+    "pattern": "Adobe Photoshop",
+    "category": "tool"
+  },
+  {
+    "pattern": "After Effects",
+    "category": "tool"
+  },
+  {
+    "pattern": "Airflow",
+    "category": "tool"
+  },
+  {
+    "pattern": "Amplitude",
+    "category": "tool"
+  },
+  {
+    "pattern": "Analytics Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Ansible",
+    "category": "tool"
+  },
+  {
+    "pattern": "Apache",
+    "category": "tool"
+  },
+  {
+    "pattern": "ArgoCD",
+    "category": "tool"
+  },
+  {
+    "pattern": "Articulate",
+    "category": "tool"
+  },
+  {
+    "pattern": "Articulate Storyline",
+    "category": "tool"
+  },
+  {
+    "pattern": "ATS Systems",
+    "category": "tool"
+  },
+  {
+    "pattern": "AWS",
+    "category": "tool"
+  },
+  {
+    "pattern": "Azure",
+    "category": "tool"
+  },
+  {
+    "pattern": "BigQuery",
+    "category": "tool"
+  },
+  {
+    "pattern": "Bloomberg",
+    "category": "tool"
+  },
+  {
+    "pattern": "Bloomberg Terminal",
+    "category": "tool"
+  },
+  {
+    "pattern": "Burp Suite",
+    "category": "tool"
+  },
+  {
+    "pattern": "Canva",
+    "category": "tool"
+  },
+  {
+    "pattern": "Cinema 4D",
+    "category": "tool"
+  },
+  {
+    "pattern": "Cisco",
+    "category": "tool"
+  },
+  {
+    "pattern": "CMS",
+    "category": "tool"
+  },
+  {
+    "pattern": "CMS Platforms",
+    "category": "tool"
+  },
+  {
+    "pattern": "Collibra",
+    "category": "tool"
+  },
+  {
+    "pattern": "Confluence",
+    "category": "tool"
+  },
+  {
+    "pattern": "CRM",
+    "category": "tool"
+  },
+  {
+    "pattern": "CRM Platforms",
+    "category": "tool"
+  },
+  {
+    "pattern": "CRM Software",
+    "category": "tool"
+  },
+  {
+    "pattern": "CRM Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Cypress",
+    "category": "tool"
+  },
+  {
+    "pattern": "dbt",
+    "category": "tool"
+  },
+  {
+    "pattern": "Developer Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Docker",
+    "category": "tool"
+  },
+  {
+    "pattern": "E-Learning Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Elasticsearch",
+    "category": "tool"
+  },
+  {
+    "pattern": "Email Marketing Platforms",
+    "category": "tool"
+  },
+  {
+    "pattern": "ERP Systems",
+    "category": "tool"
+  },
+  {
+    "pattern": "ETL Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Excel",
+    "category": "tool"
+  },
+  {
+    "pattern": "Facebook Ads",
+    "category": "tool"
+  },
+  {
+    "pattern": "Figma",
+    "category": "tool"
+  },
+  {
+    "pattern": "Firebase",
+    "category": "tool"
+  },
+  {
+    "pattern": "GCP",
+    "category": "tool"
+  },
+  {
+    "pattern": "Git",
+    "category": "tool"
+  },
+  {
+    "pattern": "GitHub",
+    "category": "tool"
+  },
+  {
+    "pattern": "GitLab",
+    "category": "tool"
+  },
+  {
+    "pattern": "Google Ads",
+    "category": "tool"
+  },
+  {
+    "pattern": "Google Analytics",
+    "category": "tool"
+  },
+  {
+    "pattern": "Google Search Console",
+    "category": "tool"
+  },
+  {
+    "pattern": "Google Sheets",
+    "category": "tool"
+  },
+  {
+    "pattern": "Google Workspace",
+    "category": "tool"
+  },
+  {
+    "pattern": "Grafana",
+    "category": "tool"
+  },
+  {
+    "pattern": "GRC Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Helm",
+    "category": "tool"
+  },
+  {
+    "pattern": "Heroku",
+    "category": "tool"
+  },
+  {
+    "pattern": "HRIS",
+    "category": "tool"
+  },
+  {
+    "pattern": "HubSpot",
+    "category": "tool"
+  },
+  {
+    "pattern": "Informatica",
+    "category": "tool"
+  },
+  {
+    "pattern": "Intercom",
+    "category": "tool"
+  },
+  {
+    "pattern": "Jenkins",
+    "category": "tool"
+  },
+  {
+    "pattern": "Jira",
+    "category": "tool"
+  },
+  {
+    "pattern": "JMeter",
+    "category": "tool"
+  },
+  {
+    "pattern": "Jupyter",
+    "category": "tool"
+  },
+  {
+    "pattern": "Kafka",
+    "category": "tool"
+  },
+  {
+    "pattern": "Kubernetes",
+    "category": "tool"
+  },
+  {
+    "pattern": "LinkedIn Recruiter",
+    "category": "tool"
+  },
+  {
+    "pattern": "LinkedIn Sales Navigator",
+    "category": "tool"
+  },
+  {
+    "pattern": "LMS",
+    "category": "tool"
+  },
+  {
+    "pattern": "Looker",
+    "category": "tool"
+  },
+  {
+    "pattern": "Mercer",
+    "category": "tool"
+  },
+  {
+    "pattern": "Metabase",
+    "category": "tool"
+  },
+  {
+    "pattern": "Metasploit",
+    "category": "tool"
+  },
+  {
+    "pattern": "Microsoft Office",
+    "category": "tool"
+  },
+  {
+    "pattern": "Mixpanel",
+    "category": "tool"
+  },
+  {
+    "pattern": "MLflow",
+    "category": "tool"
+  },
+  {
+    "pattern": "MongoDB",
+    "category": "tool"
+  },
+  {
+    "pattern": "Monitoring Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Moody's Analytics",
+    "category": "tool"
+  },
+  {
+    "pattern": "MySQL",
+    "category": "tool"
+  },
+  {
+    "pattern": "Nginx",
+    "category": "tool"
+  },
+  {
+    "pattern": "NICE inContact",
+    "category": "tool"
+  },
+  {
+    "pattern": "Observability Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Office 365",
+    "category": "tool"
+  },
+  {
+    "pattern": "Oracle",
+    "category": "tool"
+  },
+  {
+    "pattern": "Oracle Financials",
+    "category": "tool"
+  },
+  {
+    "pattern": "OWASP",
+    "category": "tool"
+  },
+  {
+    "pattern": "Playwright",
+    "category": "tool"
+  },
+  {
+    "pattern": "PostgreSQL",
+    "category": "tool"
+  },
+  {
+    "pattern": "Postman",
+    "category": "tool"
+  },
+  {
+    "pattern": "PR Software",
+    "category": "tool"
+  },
+  {
+    "pattern": "QuickBooks",
+    "category": "tool"
+  },
+  {
+    "pattern": "RabbitMQ",
+    "category": "tool"
+  },
+  {
+    "pattern": "Redis",
+    "category": "tool"
+  },
+  {
+    "pattern": "Remote Desktop",
+    "category": "tool"
+  },
+  {
+    "pattern": "Remote Support Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Reporting Dashboards",
+    "category": "tool"
+  },
+  {
+    "pattern": "Reporting Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Sage",
+    "category": "tool"
+  },
+  {
+    "pattern": "Salesforce",
+    "category": "tool"
+  },
+  {
+    "pattern": "SAP",
+    "category": "tool"
+  },
+  {
+    "pattern": "SAP Treasury",
+    "category": "tool"
+  },
+  {
+    "pattern": "Selenium",
+    "category": "tool"
+  },
+  {
+    "pattern": "ServiceNow",
+    "category": "tool"
+  },
+  {
+    "pattern": "SIEM",
+    "category": "tool"
+  },
+  {
+    "pattern": "Snowflake",
+    "category": "tool"
+  },
+  {
+    "pattern": "Social Listening Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Spark",
+    "category": "tool"
+  },
+  {
+    "pattern": "SSIS",
+    "category": "tool"
+  },
+  {
+    "pattern": "Supabase",
+    "category": "tool"
+  },
+  {
+    "pattern": "Swagger",
+    "category": "tool"
+  },
+  {
+    "pattern": "Tableau",
+    "category": "tool"
+  },
+  {
+    "pattern": "Tally",
+    "category": "tool"
+  },
+  {
+    "pattern": "Tax Software",
+    "category": "tool"
+  },
+  {
+    "pattern": "Terraform",
+    "category": "tool"
+  },
+  {
+    "pattern": "Ticketing Systems",
+    "category": "tool"
+  },
+  {
+    "pattern": "TikTok Ads",
+    "category": "tool"
+  },
+  {
+    "pattern": "Unity",
+    "category": "tool"
+  },
+  {
+    "pattern": "Unreal Engine",
+    "category": "tool"
+  },
+  {
+    "pattern": "Vercel",
+    "category": "tool"
+  },
+  {
+    "pattern": "Verint",
+    "category": "tool"
+  },
+  {
+    "pattern": "VMware",
+    "category": "tool"
+  },
+  {
+    "pattern": "VPN",
+    "category": "tool"
+  },
+  {
+    "pattern": "Windows",
+    "category": "tool"
+  },
+  {
+    "pattern": "Windows Server",
+    "category": "tool"
+  },
+  {
+    "pattern": "WMS",
+    "category": "tool"
+  },
+  {
+    "pattern": "WordPress",
+    "category": "tool"
+  },
+  {
+    "pattern": "Workforce Management Tools",
+    "category": "tool"
+  },
+  {
+    "pattern": "Xero",
+    "category": "tool"
+  },
+  {
+    "pattern": "Zendesk",
+    "category": "tool"
+  },
+  {
+    "pattern": "Zoho",
+    "category": "tool"
+  },
+  {
+    "pattern": "Zoom",
+    "category": "tool"
+  },
+  {
+    "pattern": "Accessibility",
+    "category": "domain"
+  },
+  {
+    "pattern": "Accessibility Standards",
+    "category": "domain"
+  },
+  {
+    "pattern": "Account Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "accounting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Accounts Payable",
+    "category": "domain"
+  },
+  {
+    "pattern": "Ad Copy",
+    "category": "domain"
+  },
+  {
+    "pattern": "ADDIE Model",
+    "category": "domain"
+  },
+  {
+    "pattern": "Agency Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Agile",
+    "category": "domain"
+  },
+  {
+    "pattern": "Agile Coaching",
+    "category": "domain"
+  },
+  {
+    "pattern": "Agile Methodologies",
+    "category": "domain"
+  },
+  {
+    "pattern": "Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Analytics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Animation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Anti-Money Laundering",
+    "category": "domain"
+  },
+  {
+    "pattern": "Apache Spark",
+    "category": "domain"
+  },
+  {
+    "pattern": "API Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "API Documentation",
+    "category": "domain"
+  },
+  {
+    "pattern": "API Knowledge",
+    "category": "domain"
+  },
+  {
+    "pattern": "API Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "App Store Deployment",
+    "category": "domain"
+  },
+  {
+    "pattern": "Architecture Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Architecture Governance",
+    "category": "domain"
+  },
+  {
+    "pattern": "Architecture Patterns",
+    "category": "domain"
+  },
+  {
+    "pattern": "Architecture Review",
+    "category": "domain"
+  },
+  {
+    "pattern": "Architecture Vision",
+    "category": "domain"
+  },
+  {
+    "pattern": "Attribution Modeling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Audit",
+    "category": "domain"
+  },
+  {
+    "pattern": "Audit Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Audit Support",
+    "category": "domain"
+  },
+  {
+    "pattern": "auditing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Auditing Standards",
+    "category": "domain"
+  },
+  {
+    "pattern": "Automation",
+    "category": "domain"
+  },
+  {
+    "pattern": "AWS Security",
+    "category": "domain"
+  },
+  {
+    "pattern": "Backlog Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Backup & Recovery",
+    "category": "domain"
+  },
+  {
+    "pattern": "Bank Reconciliation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Banking",
+    "category": "domain"
+  },
+  {
+    "pattern": "Basel Framework",
+    "category": "domain"
+  },
+  {
+    "pattern": "Basic Accounting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Benefits",
+    "category": "domain"
+  },
+  {
+    "pattern": "Benefits Administration",
+    "category": "domain"
+  },
+  {
+    "pattern": "BIR Compliance",
+    "category": "domain"
+  },
+  {
+    "pattern": "BIR Filing",
+    "category": "domain"
+  },
+  {
+    "pattern": "BIR Regulations",
+    "category": "domain"
+  },
+  {
+    "pattern": "Board Communication",
+    "category": "domain"
+  },
+  {
+    "pattern": "Board Presentations",
+    "category": "domain"
+  },
+  {
+    "pattern": "Board Reporting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Board-Level Presentations",
+    "category": "domain"
+  },
+  {
+    "pattern": "bookkeeping",
+    "category": "domain"
+  },
+  {
+    "pattern": "Boolean Search",
+    "category": "domain"
+  },
+  {
+    "pattern": "Brand Guidelines",
+    "category": "domain"
+  },
+  {
+    "pattern": "Brand Identity",
+    "category": "domain"
+  },
+  {
+    "pattern": "Brand Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Brand Storytelling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Brand Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Brand Voice",
+    "category": "domain"
+  },
+  {
+    "pattern": "Budget Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Budget Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "budgeting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Bug Reporting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Bug Tracking",
+    "category": "domain"
+  },
+  {
+    "pattern": "Business Acumen",
+    "category": "domain"
+  },
+  {
+    "pattern": "Business Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Business Development",
+    "category": "domain"
+  },
+  {
+    "pattern": "Business Process Mapping",
+    "category": "domain"
+  },
+  {
+    "pattern": "Calendar Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Calibration",
+    "category": "domain"
+  },
+  {
+    "pattern": "Call Auditing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Campaign Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Campaign Optimization",
+    "category": "domain"
+  },
+  {
+    "pattern": "Capacity Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Capital Markets",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cash Flow Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cash Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Change Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Channel Sales",
+    "category": "domain"
+  },
+  {
+    "pattern": "Chaos Engineering",
+    "category": "domain"
+  },
+  {
+    "pattern": "Client Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Client Relationship Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cloud Architecture",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cloud Basics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cloud Computing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cloud Databases",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cloud Migration",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cloud ML Services",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cloud Networking",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cloud Platforms",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cloud Security",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cloud Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Code Review",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cold Calling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Community Building",
+    "category": "domain"
+  },
+  {
+    "pattern": "Community Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Compensation & Benefits",
+    "category": "domain"
+  },
+  {
+    "pattern": "Compensation Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Compensation Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Competitive Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Compliance",
+    "category": "domain"
+  },
+  {
+    "pattern": "Compliance (ISO 27001)",
+    "category": "domain"
+  },
+  {
+    "pattern": "Compliance Frameworks",
+    "category": "domain"
+  },
+  {
+    "pattern": "Configuration",
+    "category": "domain"
+  },
+  {
+    "pattern": "Consumer Insights",
+    "category": "domain"
+  },
+  {
+    "pattern": "Content Creation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Content Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Content Marketing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Content Organization",
+    "category": "domain"
+  },
+  {
+    "pattern": "Content Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Contract Law",
+    "category": "domain"
+  },
+  {
+    "pattern": "Contract Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Contract Negotiation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Conversion Optimization",
+    "category": "domain"
+  },
+  {
+    "pattern": "Copywriting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Corporate Law",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cost Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cost Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cost Optimization",
+    "category": "domain"
+  },
+  {
+    "pattern": "CPA License",
+    "category": "domain"
+  },
+  {
+    "pattern": "Credit Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "CRM Integration",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cross-Selling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cultural Transformation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Curriculum Development",
+    "category": "domain"
+  },
+  {
+    "pattern": "Customer Journey Mapping",
+    "category": "domain"
+  },
+  {
+    "pattern": "Customer Relationship Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Customer Service Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Customer Success",
+    "category": "domain"
+  },
+  {
+    "pattern": "Customer Support",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cybersecurity",
+    "category": "domain"
+  },
+  {
+    "pattern": "Cybersecurity Governance",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Architecture",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Cataloging",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Entry",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Governance",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Lake",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Lineage",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Mapping",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Migration",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Modeling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Pipelines",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Privacy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Quality",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Quality Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Security",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data Visualization",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data-Driven Decision Making",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data-Driven Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data-Driven Marketing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Data-Informed Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Database Administration",
+    "category": "domain"
+  },
+  {
+    "pattern": "Database Basics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Database Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Database Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Database Security",
+    "category": "domain"
+  },
+  {
+    "pattern": "Debt Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "DeFi",
+    "category": "domain"
+  },
+  {
+    "pattern": "Deliverability Optimization",
+    "category": "domain"
+  },
+  {
+    "pattern": "Design Ops",
+    "category": "domain"
+  },
+  {
+    "pattern": "Design Principles",
+    "category": "domain"
+  },
+  {
+    "pattern": "Design Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Design Systems",
+    "category": "domain"
+  },
+  {
+    "pattern": "Design Thinking",
+    "category": "domain"
+  },
+  {
+    "pattern": "DevOps",
+    "category": "domain"
+  },
+  {
+    "pattern": "Digital Marketing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Digital Marketing Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Digital Transformation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Disaster Recovery",
+    "category": "domain"
+  },
+  {
+    "pattern": "Distributed Systems",
+    "category": "domain"
+  },
+  {
+    "pattern": "Diversity Hiring",
+    "category": "domain"
+  },
+  {
+    "pattern": "Documentation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Domain Expertise",
+    "category": "domain"
+  },
+  {
+    "pattern": "Domain-Driven Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Due Diligence",
+    "category": "domain"
+  },
+  {
+    "pattern": "E-Learning Development",
+    "category": "domain"
+  },
+  {
+    "pattern": "Editing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Editorial Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Email Marketing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Email Outreach",
+    "category": "domain"
+  },
+  {
+    "pattern": "Employee Relations",
+    "category": "domain"
+  },
+  {
+    "pattern": "Employer Branding",
+    "category": "domain"
+  },
+  {
+    "pattern": "Employment Law",
+    "category": "domain"
+  },
+  {
+    "pattern": "Engineering Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Enterprise Architecture",
+    "category": "domain"
+  },
+  {
+    "pattern": "Enterprise Integration",
+    "category": "domain"
+  },
+  {
+    "pattern": "ERP Implementation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Escalation Handling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Ethereum",
+    "category": "domain"
+  },
+  {
+    "pattern": "Ethnographic Research",
+    "category": "domain"
+  },
+  {
+    "pattern": "ETL",
+    "category": "domain"
+  },
+  {
+    "pattern": "Event Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Event Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Event-Driven Architecture",
+    "category": "domain"
+  },
+  {
+    "pattern": "Experiment Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Feature Engineering",
+    "category": "domain"
+  },
+  {
+    "pattern": "Filing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Financial Accounting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Financial Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Financial Modeling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Financial Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Financial Planning & Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Financial Statements",
+    "category": "domain"
+  },
+  {
+    "pattern": "Financial Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "FinTech",
+    "category": "domain"
+  },
+  {
+    "pattern": "Firewall Basics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Firewall Configuration",
+    "category": "domain"
+  },
+  {
+    "pattern": "Firewall Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "forecasting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Forensics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Fraud Detection",
+    "category": "domain"
+  },
+  {
+    "pattern": "Freight Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Front-End Basics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Front-End Knowledge",
+    "category": "domain"
+  },
+  {
+    "pattern": "Funnel Optimization",
+    "category": "domain"
+  },
+  {
+    "pattern": "FX Trading",
+    "category": "domain"
+  },
+  {
+    "pattern": "Game Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Gamification",
+    "category": "domain"
+  },
+  {
+    "pattern": "GDPR",
+    "category": "domain"
+  },
+  {
+    "pattern": "GitOps",
+    "category": "domain"
+  },
+  {
+    "pattern": "Go-to-Market",
+    "category": "domain"
+  },
+  {
+    "pattern": "Go-to-Market Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "GraphQL",
+    "category": "domain"
+  },
+  {
+    "pattern": "Growth Marketing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Growth Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Hardware Support",
+    "category": "domain"
+  },
+  {
+    "pattern": "Help Desk Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Hiring",
+    "category": "domain"
+  },
+  {
+    "pattern": "Hiring & Mentoring",
+    "category": "domain"
+  },
+  {
+    "pattern": "HR Administration",
+    "category": "domain"
+  },
+  {
+    "pattern": "HR Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "HR Operations",
+    "category": "domain"
+  },
+  {
+    "pattern": "HR Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "IaC",
+    "category": "domain"
+  },
+  {
+    "pattern": "Identity & Access Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Implementation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Incident Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Incident Response",
+    "category": "domain"
+  },
+  {
+    "pattern": "Incident Triage",
+    "category": "domain"
+  },
+  {
+    "pattern": "Industry Expertise",
+    "category": "domain"
+  },
+  {
+    "pattern": "Industry Knowledge",
+    "category": "domain"
+  },
+  {
+    "pattern": "Industry Networking",
+    "category": "domain"
+  },
+  {
+    "pattern": "Industry Research",
+    "category": "domain"
+  },
+  {
+    "pattern": "Industry Thought Leadership",
+    "category": "domain"
+  },
+  {
+    "pattern": "Influencer Marketing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Information Architecture",
+    "category": "domain"
+  },
+  {
+    "pattern": "Information Security Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "InfoSec",
+    "category": "domain"
+  },
+  {
+    "pattern": "Infrastructure as Code",
+    "category": "domain"
+  },
+  {
+    "pattern": "Infrastructure Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Innovation Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Innovation Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Instructional Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Integration",
+    "category": "domain"
+  },
+  {
+    "pattern": "Interaction Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Internal Auditing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Internal Controls",
+    "category": "domain"
+  },
+  {
+    "pattern": "International Tax",
+    "category": "domain"
+  },
+  {
+    "pattern": "Interviewing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Inventory Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Investor Relations",
+    "category": "domain"
+  },
+  {
+    "pattern": "Invoice Processing",
+    "category": "domain"
+  },
+  {
+    "pattern": "IP Law",
+    "category": "domain"
+  },
+  {
+    "pattern": "IPFS",
+    "category": "domain"
+  },
+  {
+    "pattern": "IT Audit",
+    "category": "domain"
+  },
+  {
+    "pattern": "IT Infrastructure",
+    "category": "domain"
+  },
+  {
+    "pattern": "IT Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Job Evaluation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Kanban",
+    "category": "domain"
+  },
+  {
+    "pattern": "Key Account Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Keyword Research",
+    "category": "domain"
+  },
+  {
+    "pattern": "Kirkpatrick Model",
+    "category": "domain"
+  },
+  {
+    "pattern": "KPI Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "KPI Tracking",
+    "category": "domain"
+  },
+  {
+    "pattern": "Labor Law",
+    "category": "domain"
+  },
+  {
+    "pattern": "Landing Pages",
+    "category": "domain"
+  },
+  {
+    "pattern": "Layer 2 Solutions",
+    "category": "domain"
+  },
+  {
+    "pattern": "Layout Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Lead Qualification",
+    "category": "domain"
+  },
+  {
+    "pattern": "Lean",
+    "category": "domain"
+  },
+  {
+    "pattern": "Legal Research",
+    "category": "domain"
+  },
+  {
+    "pattern": "Link Building",
+    "category": "domain"
+  },
+  {
+    "pattern": "List Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Litigation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Live Chat",
+    "category": "domain"
+  },
+  {
+    "pattern": "LLMs",
+    "category": "domain"
+  },
+  {
+    "pattern": "LMS Administration",
+    "category": "domain"
+  },
+  {
+    "pattern": "Load Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Localization",
+    "category": "domain"
+  },
+  {
+    "pattern": "Logistics",
+    "category": "domain"
+  },
+  {
+    "pattern": "M&A",
+    "category": "domain"
+  },
+  {
+    "pattern": "M&A HR",
+    "category": "domain"
+  },
+  {
+    "pattern": "M&A Technical Due Diligence",
+    "category": "domain"
+  },
+  {
+    "pattern": "Machine Learning Basics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Malware Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Manual Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Market Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Market Research",
+    "category": "domain"
+  },
+  {
+    "pattern": "Marketing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Marketing Automation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Marketing Coordination",
+    "category": "domain"
+  },
+  {
+    "pattern": "Marketing Metrics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Marketing Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Media Relations",
+    "category": "domain"
+  },
+  {
+    "pattern": "Meeting Minutes",
+    "category": "domain"
+  },
+  {
+    "pattern": "Message Queues",
+    "category": "domain"
+  },
+  {
+    "pattern": "Messaging",
+    "category": "domain"
+  },
+  {
+    "pattern": "Metadata Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Metrics & Reporting",
+    "category": "domain"
+  },
+  {
+    "pattern": "microservices",
+    "category": "domain"
+  },
+  {
+    "pattern": "Migration Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "ML Pipelines",
+    "category": "domain"
+  },
+  {
+    "pattern": "MLOps",
+    "category": "domain"
+  },
+  {
+    "pattern": "Mobile Development",
+    "category": "domain"
+  },
+  {
+    "pattern": "Mobile Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Mobile UI Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Model Serving",
+    "category": "domain"
+  },
+  {
+    "pattern": "Monitoring",
+    "category": "domain"
+  },
+  {
+    "pattern": "Monitoring & Alerting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Monitoring & Observability",
+    "category": "domain"
+  },
+  {
+    "pattern": "Monte Carlo Simulation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Month-End Close",
+    "category": "domain"
+  },
+  {
+    "pattern": "Motion Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Motion Graphics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Multi-Cloud Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Multiplayer Networking",
+    "category": "domain"
+  },
+  {
+    "pattern": "Needs Assessment",
+    "category": "domain"
+  },
+  {
+    "pattern": "Network Architecture",
+    "category": "domain"
+  },
+  {
+    "pattern": "Network Automation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Network Basics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Network Monitoring",
+    "category": "domain"
+  },
+  {
+    "pattern": "Network Security",
+    "category": "domain"
+  },
+  {
+    "pattern": "Networking",
+    "category": "domain"
+  },
+  {
+    "pattern": "Networking Basics",
+    "category": "domain"
+  },
+  {
+    "pattern": "NFTs",
+    "category": "domain"
+  },
+  {
+    "pattern": "NIRC",
+    "category": "domain"
+  },
+  {
+    "pattern": "Office Administration",
+    "category": "domain"
+  },
+  {
+    "pattern": "OKRs",
+    "category": "domain"
+  },
+  {
+    "pattern": "Omnichannel Support",
+    "category": "domain"
+  },
+  {
+    "pattern": "On-Page SEO",
+    "category": "domain"
+  },
+  {
+    "pattern": "Onboarding",
+    "category": "domain"
+  },
+  {
+    "pattern": "Open Source",
+    "category": "domain"
+  },
+  {
+    "pattern": "Operations Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Operations Supervision",
+    "category": "domain"
+  },
+  {
+    "pattern": "Organizational Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Organizational Development",
+    "category": "domain"
+  },
+  {
+    "pattern": "P&L Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Packaging Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Paid Acquisition",
+    "category": "domain"
+  },
+  {
+    "pattern": "Paid Social Ads",
+    "category": "domain"
+  },
+  {
+    "pattern": "Payment Systems",
+    "category": "domain"
+  },
+  {
+    "pattern": "Payroll",
+    "category": "domain"
+  },
+  {
+    "pattern": "Payroll Processing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Penetration Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Performance Monitoring",
+    "category": "domain"
+  },
+  {
+    "pattern": "Performance Optimization",
+    "category": "domain"
+  },
+  {
+    "pattern": "Performance Reporting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Performance Reviews",
+    "category": "domain"
+  },
+  {
+    "pattern": "Performance Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Performance Tuning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Persuasive Writing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Philippine DPA",
+    "category": "domain"
+  },
+  {
+    "pattern": "Photography",
+    "category": "domain"
+  },
+  {
+    "pattern": "Pipeline Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Policy Development",
+    "category": "domain"
+  },
+  {
+    "pattern": "Portfolio Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Pre-Sales",
+    "category": "domain"
+  },
+  {
+    "pattern": "Press Releases",
+    "category": "domain"
+  },
+  {
+    "pattern": "Print Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Privacy Impact Assessment",
+    "category": "domain"
+  },
+  {
+    "pattern": "Problem Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Process Automation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Process Documentation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Process Improvement",
+    "category": "domain"
+  },
+  {
+    "pattern": "Process Optimization",
+    "category": "domain"
+  },
+  {
+    "pattern": "Process Redesign",
+    "category": "domain"
+  },
+  {
+    "pattern": "Procurement",
+    "category": "domain"
+  },
+  {
+    "pattern": "Product Analytics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Product Demos",
+    "category": "domain"
+  },
+  {
+    "pattern": "Product Knowledge",
+    "category": "domain"
+  },
+  {
+    "pattern": "Product Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Product Marketing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Product Metrics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Product Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Product Thinking",
+    "category": "domain"
+  },
+  {
+    "pattern": "Product-Led Growth",
+    "category": "domain"
+  },
+  {
+    "pattern": "Program Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Programmatic",
+    "category": "domain"
+  },
+  {
+    "pattern": "Project Coordination",
+    "category": "domain"
+  },
+  {
+    "pattern": "Project Portfolio Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Prospecting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Prototyping",
+    "category": "domain"
+  },
+  {
+    "pattern": "QA Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Quality Frameworks",
+    "category": "domain"
+  },
+  {
+    "pattern": "Quality Metrics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Quality Monitoring",
+    "category": "domain"
+  },
+  {
+    "pattern": "Quality Standards",
+    "category": "domain"
+  },
+  {
+    "pattern": "Real-Time Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Reconciliation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Recruiting Analytics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Recruitment",
+    "category": "domain"
+  },
+  {
+    "pattern": "Recruitment Coordination",
+    "category": "domain"
+  },
+  {
+    "pattern": "Recruitment Marketing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Regression Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Regulatory Compliance",
+    "category": "domain"
+  },
+  {
+    "pattern": "Regulatory Knowledge",
+    "category": "domain"
+  },
+  {
+    "pattern": "Reinforcement Learning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Release Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Remote Support",
+    "category": "domain"
+  },
+  {
+    "pattern": "Replication",
+    "category": "domain"
+  },
+  {
+    "pattern": "Report Generation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Report Writing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Reporting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Requirements Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Requirements Gathering",
+    "category": "domain"
+  },
+  {
+    "pattern": "Research",
+    "category": "domain"
+  },
+  {
+    "pattern": "Research Methodology",
+    "category": "domain"
+  },
+  {
+    "pattern": "Research Publication",
+    "category": "domain"
+  },
+  {
+    "pattern": "Research Synthesis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Resource Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "REST APIs",
+    "category": "domain"
+  },
+  {
+    "pattern": "Revenue Forecasting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Revenue Growth",
+    "category": "domain"
+  },
+  {
+    "pattern": "Revenue Modeling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Risk Assessment",
+    "category": "domain"
+  },
+  {
+    "pattern": "Risk Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Roadmap Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Roadmapping",
+    "category": "domain"
+  },
+  {
+    "pattern": "Root Cause Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "SaaS",
+    "category": "domain"
+  },
+  {
+    "pattern": "SaaS Sales",
+    "category": "domain"
+  },
+  {
+    "pattern": "Salary Surveys",
+    "category": "domain"
+  },
+  {
+    "pattern": "Sales",
+    "category": "domain"
+  },
+  {
+    "pattern": "Sales Analytics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Sales Automation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Sales Enablement",
+    "category": "domain"
+  },
+  {
+    "pattern": "Sales Forecasting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Sales Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Sales Operations",
+    "category": "domain"
+  },
+  {
+    "pattern": "Sales Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Scaling Teams",
+    "category": "domain"
+  },
+  {
+    "pattern": "Scenario Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Scheduling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Schema Markup",
+    "category": "domain"
+  },
+  {
+    "pattern": "Scrum",
+    "category": "domain"
+  },
+  {
+    "pattern": "Scrum Framework",
+    "category": "domain"
+  },
+  {
+    "pattern": "SD-WAN",
+    "category": "domain"
+  },
+  {
+    "pattern": "SDN",
+    "category": "domain"
+  },
+  {
+    "pattern": "Security",
+    "category": "domain"
+  },
+  {
+    "pattern": "Security Architecture",
+    "category": "domain"
+  },
+  {
+    "pattern": "Security Assessment",
+    "category": "domain"
+  },
+  {
+    "pattern": "Security Best Practices",
+    "category": "domain"
+  },
+  {
+    "pattern": "Security Frameworks",
+    "category": "domain"
+  },
+  {
+    "pattern": "Security Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Security Monitoring",
+    "category": "domain"
+  },
+  {
+    "pattern": "Security Operations",
+    "category": "domain"
+  },
+  {
+    "pattern": "Security Scanning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Security Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Segmentation",
+    "category": "domain"
+  },
+  {
+    "pattern": "SEO",
+    "category": "domain"
+  },
+  {
+    "pattern": "SEO Basics",
+    "category": "domain"
+  },
+  {
+    "pattern": "SEO Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Serverless",
+    "category": "domain"
+  },
+  {
+    "pattern": "Service Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Service Mesh",
+    "category": "domain"
+  },
+  {
+    "pattern": "SLA Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "SOC Operations",
+    "category": "domain"
+  },
+  {
+    "pattern": "Social Media",
+    "category": "domain"
+  },
+  {
+    "pattern": "Social Media Graphics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Social Media Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Social Media Marketing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Social Media Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Software Architecture",
+    "category": "domain"
+  },
+  {
+    "pattern": "Software Development",
+    "category": "domain"
+  },
+  {
+    "pattern": "Solution Architecture",
+    "category": "domain"
+  },
+  {
+    "pattern": "Solution Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Sourcing",
+    "category": "domain"
+  },
+  {
+    "pattern": "SOX",
+    "category": "domain"
+  },
+  {
+    "pattern": "SOX Compliance",
+    "category": "domain"
+  },
+  {
+    "pattern": "Sprint Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Statistical Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Statistical Modeling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Storyboarding",
+    "category": "domain"
+  },
+  {
+    "pattern": "Strategic Sourcing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Supply Chain",
+    "category": "domain"
+  },
+  {
+    "pattern": "Supply Chain Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Survey Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Systems Integration",
+    "category": "domain"
+  },
+  {
+    "pattern": "Tax Advisory",
+    "category": "domain"
+  },
+  {
+    "pattern": "Tax Basics",
+    "category": "domain"
+  },
+  {
+    "pattern": "Tax Litigation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Tax Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Tax Preparation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Tax Returns Preparation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Technical SEO",
+    "category": "domain"
+  },
+  {
+    "pattern": "Test Automation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Test Case Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Test Case Writing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Test Framework Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Test Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Test Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Test Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Testing Libraries",
+    "category": "domain"
+  },
+  {
+    "pattern": "Threat Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Threat Modeling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Total Rewards",
+    "category": "domain"
+  },
+  {
+    "pattern": "TRAIN Law",
+    "category": "domain"
+  },
+  {
+    "pattern": "Training",
+    "category": "domain"
+  },
+  {
+    "pattern": "Training & Development",
+    "category": "domain"
+  },
+  {
+    "pattern": "Training Coordination",
+    "category": "domain"
+  },
+  {
+    "pattern": "Training Delivery",
+    "category": "domain"
+  },
+  {
+    "pattern": "Training Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Training Development",
+    "category": "domain"
+  },
+  {
+    "pattern": "Training Support",
+    "category": "domain"
+  },
+  {
+    "pattern": "Transfer Pricing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Travel Coordination",
+    "category": "domain"
+  },
+  {
+    "pattern": "Treasury Operations",
+    "category": "domain"
+  },
+  {
+    "pattern": "Troubleshooting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Typography",
+    "category": "domain"
+  },
+  {
+    "pattern": "UI Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Unit Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Upselling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Usability Testing",
+    "category": "domain"
+  },
+  {
+    "pattern": "User Interviews",
+    "category": "domain"
+  },
+  {
+    "pattern": "User Research",
+    "category": "domain"
+  },
+  {
+    "pattern": "User Stories",
+    "category": "domain"
+  },
+  {
+    "pattern": "User Training",
+    "category": "domain"
+  },
+  {
+    "pattern": "UX Research",
+    "category": "domain"
+  },
+  {
+    "pattern": "UX Writing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Valuation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Variance Analysis",
+    "category": "domain"
+  },
+  {
+    "pattern": "Vendor Evaluation",
+    "category": "domain"
+  },
+  {
+    "pattern": "Vendor Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Vendor Negotiations",
+    "category": "domain"
+  },
+  {
+    "pattern": "Vendor Strategy",
+    "category": "domain"
+  },
+  {
+    "pattern": "Video Content",
+    "category": "domain"
+  },
+  {
+    "pattern": "Video Editing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Video Production",
+    "category": "domain"
+  },
+  {
+    "pattern": "Virtual Training",
+    "category": "domain"
+  },
+  {
+    "pattern": "Virtualization",
+    "category": "domain"
+  },
+  {
+    "pattern": "Visual Design",
+    "category": "domain"
+  },
+  {
+    "pattern": "Visual Identity",
+    "category": "domain"
+  },
+  {
+    "pattern": "Voice of Customer",
+    "category": "domain"
+  },
+  {
+    "pattern": "Vulnerability Assessment",
+    "category": "domain"
+  },
+  {
+    "pattern": "Vulnerability Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Vulnerability Scanning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Web Application Security",
+    "category": "domain"
+  },
+  {
+    "pattern": "Wireframing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Workforce Forecasting",
+    "category": "domain"
+  },
+  {
+    "pattern": "Workforce Management",
+    "category": "domain"
+  },
+  {
+    "pattern": "Workforce Planning",
+    "category": "domain"
+  },
+  {
+    "pattern": "Workforce Scheduling",
+    "category": "domain"
+  },
+  {
+    "pattern": "Writing",
+    "category": "domain"
+  },
+  {
+    "pattern": "Zero Trust",
+    "category": "domain"
+  },
+  {
+    "pattern": "adaptability",
+    "category": "soft"
+  },
+  {
+    "pattern": "Analytical Skills",
+    "category": "soft"
+  },
+  {
+    "pattern": "Assessment",
+    "category": "soft"
+  },
+  {
+    "pattern": "Attention to Detail",
+    "category": "soft"
+  },
+  {
+    "pattern": "coaching",
+    "category": "soft"
+  },
+  {
+    "pattern": "collaboration",
+    "category": "soft"
+  },
+  {
+    "pattern": "communication",
+    "category": "soft"
+  },
+  {
+    "pattern": "Communication Skills",
+    "category": "soft"
+  },
+  {
+    "pattern": "Confidentiality",
+    "category": "soft"
+  },
+  {
+    "pattern": "Conflict Resolution",
+    "category": "soft"
+  },
+  {
+    "pattern": "creativity",
+    "category": "soft"
+  },
+  {
+    "pattern": "Crisis Management",
+    "category": "soft"
+  },
+  {
+    "pattern": "Cross-Functional Collaboration",
+    "category": "soft"
+  },
+  {
+    "pattern": "Cross-Functional Leadership",
+    "category": "soft"
+  },
+  {
+    "pattern": "Cross-Team Collaboration",
+    "category": "soft"
+  },
+  {
+    "pattern": "Cross-Team Coordination",
+    "category": "soft"
+  },
+  {
+    "pattern": "Demo Skills",
+    "category": "soft"
+  },
+  {
+    "pattern": "Design Leadership",
+    "category": "soft"
+  },
+  {
+    "pattern": "Executive Advisory",
+    "category": "soft"
+  },
+  {
+    "pattern": "Executive Coaching",
+    "category": "soft"
+  },
+  {
+    "pattern": "Executive Communication",
+    "category": "soft"
+  },
+  {
+    "pattern": "Executive Leadership",
+    "category": "soft"
+  },
+  {
+    "pattern": "Executive Search",
+    "category": "soft"
+  },
+  {
+    "pattern": "Executive Selling",
+    "category": "soft"
+  },
+  {
+    "pattern": "Facilitation",
+    "category": "soft"
+  },
+  {
+    "pattern": "Facilities Management",
+    "category": "soft"
+  },
+  {
+    "pattern": "Feedback Delivery",
+    "category": "soft"
+  },
+  {
+    "pattern": "leadership",
+    "category": "soft"
+  },
+  {
+    "pattern": "Leadership Development",
+    "category": "soft"
+  },
+  {
+    "pattern": "mentoring",
+    "category": "soft"
+  },
+  {
+    "pattern": "negotiation",
+    "category": "soft"
+  },
+  {
+    "pattern": "Organization",
+    "category": "soft"
+  },
+  {
+    "pattern": "Organizational Leadership",
+    "category": "soft"
+  },
+  {
+    "pattern": "People Management",
+    "category": "soft"
+  },
+  {
+    "pattern": "Performance Management",
+    "category": "soft"
+  },
+  {
+    "pattern": "presentation",
+    "category": "soft"
+  },
+  {
+    "pattern": "Presentation Preparation",
+    "category": "soft"
+  },
+  {
+    "pattern": "Presentation Skills",
+    "category": "soft"
+  },
+  {
+    "pattern": "Prioritization",
+    "category": "soft"
+  },
+  {
+    "pattern": "Public Speaking",
+    "category": "soft"
+  },
+  {
+    "pattern": "Relationship Building",
+    "category": "soft"
+  },
+  {
+    "pattern": "Stakeholder Communication",
+    "category": "soft"
+  },
+  {
+    "pattern": "Stakeholder Management",
+    "category": "soft"
+  },
+  {
+    "pattern": "Strategic Thinking",
+    "category": "soft"
+  },
+  {
+    "pattern": "Talent Acquisition",
+    "category": "soft"
+  },
+  {
+    "pattern": "Talent Development",
+    "category": "soft"
+  },
+  {
+    "pattern": "Talent Management",
+    "category": "soft"
+  },
+  {
+    "pattern": "Team Dynamics",
+    "category": "soft"
+  },
+  {
+    "pattern": "Team Leadership",
+    "category": "soft"
+  },
+  {
+    "pattern": "Team Management",
+    "category": "soft"
+  },
+  {
+    "pattern": "teamwork",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Assessment",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Background",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Documentation",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Domain Expertise",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Knowledge",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Leadership",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Mentoring",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Presentation",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Strategy",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Understanding",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Vision",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technical Writing",
+    "category": "soft"
+  },
+  {
+    "pattern": "Technology Strategy",
+    "category": "soft"
+  },
+  {
+    "pattern": "Thought Leadership",
+    "category": "soft"
+  },
+  {
+    "pattern": "Willingness to Learn",
+    "category": "soft"
+  },
+  {
+    "pattern": "Workshop Facilitation",
+    "category": "soft"
+  },
+  {
+    "pattern": "ACCA",
+    "category": "certification"
+  },
+  {
+    "pattern": "CCNA",
+    "category": "certification"
+  },
+  {
+    "pattern": "CFA",
+    "category": "certification"
+  },
+  {
+    "pattern": "CISA",
+    "category": "certification"
+  },
+  {
+    "pattern": "CISSP",
+    "category": "certification"
+  },
+  {
+    "pattern": "CMA",
+    "category": "certification"
+  },
+  {
+    "pattern": "CompTIA",
+    "category": "certification"
+  },
+  {
+    "pattern": "CPA",
+    "category": "certification"
+  },
+  {
+    "pattern": "ISO 27001",
+    "category": "certification"
+  },
+  {
+    "pattern": "ITIL",
+    "category": "certification"
+  },
+  {
+    "pattern": "PMP",
+    "category": "certification"
+  },
+  {
+    "pattern": "PRINCE2",
+    "category": "certification"
+  },
+  {
+    "pattern": "SAFe",
+    "category": "certification"
+  },
+  {
+    "pattern": "TOGAF",
+    "category": "certification"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "vue"
+      },
+      {
+        "LOWER": "."
+      },
+      {
+        "LOWER": "js"
+      }
+    ],
+    "category": "framework"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "next"
+      },
+      {
+        "LOWER": "."
+      },
+      {
+        "LOWER": "js"
+      }
+    ],
+    "category": "framework"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "spring"
+      },
+      {
+        "LOWER": "boot"
+      }
+    ],
+    "category": "framework"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "node"
+      },
+      {
+        "LOWER": "."
+      },
+      {
+        "LOWER": "js"
+      }
+    ],
+    "category": "framework"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "scikit"
+      },
+      {
+        "TEXT": "-"
+      },
+      {
+        "LOWER": "learn"
+      }
+    ],
+    "category": "framework"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "power"
+      },
+      {
+        "LOWER": "bi"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "machine"
+      },
+      {
+        "LOWER": "learning"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "deep"
+      },
+      {
+        "LOWER": "learning"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "natural"
+      },
+      {
+        "LOWER": "language"
+      },
+      {
+        "LOWER": "processing"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "computer"
+      },
+      {
+        "LOWER": "vision"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "data"
+      },
+      {
+        "LOWER": "science"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "data"
+      },
+      {
+        "LOWER": "engineering"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "data"
+      },
+      {
+        "LOWER": "analytics"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "business"
+      },
+      {
+        "LOWER": "intelligence"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "rest"
+      },
+      {
+        "LOWER": "api"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "web"
+      },
+      {
+        "LOWER": "scraping"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "data"
+      },
+      {
+        "LOWER": "warehousing"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "financial"
+      },
+      {
+        "LOWER": "analysis"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "tax"
+      },
+      {
+        "LOWER": "compliance"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "financial"
+      },
+      {
+        "LOWER": "reporting"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "quality"
+      },
+      {
+        "LOWER": "assurance"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "customer"
+      },
+      {
+        "LOWER": "service"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "six"
+      },
+      {
+        "LOWER": "sigma"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "problem"
+      },
+      {
+        "LOWER": "solving"
+      }
+    ],
+    "category": "soft"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "problem"
+      },
+      {
+        "TEXT": "-"
+      },
+      {
+        "LOWER": "solving"
+      }
+    ],
+    "category": "soft"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "critical"
+      },
+      {
+        "LOWER": "thinking"
+      }
+    ],
+    "category": "soft"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "project"
+      },
+      {
+        "LOWER": "management"
+      }
+    ],
+    "category": "soft"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "time"
+      },
+      {
+        "LOWER": "management"
+      }
+    ],
+    "category": "soft"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "strategic"
+      },
+      {
+        "LOWER": "planning"
+      }
+    ],
+    "category": "soft"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "decision"
+      },
+      {
+        "LOWER": "making"
+      }
+    ],
+    "category": "soft"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "analytical"
+      },
+      {
+        "LOWER": "thinking"
+      }
+    ],
+    "category": "soft"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "aws"
+      },
+      {
+        "LOWER": "certified"
+      }
+    ],
+    "category": "certification"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "azure"
+      },
+      {
+        "LOWER": "certified"
+      }
+    ],
+    "category": "certification"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "scrum"
+      },
+      {
+        "LOWER": "master"
+      }
+    ],
+    "category": "certification"
+  }
 ]

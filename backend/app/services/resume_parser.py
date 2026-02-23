@@ -154,3 +154,83 @@ class ResumeParser:
                     skills.append(cleaned)
 
         return skills
+
+    # ---- Years-of-experience estimator ----
+
+    MONTH_MAP = {
+        "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+        "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
+        "january": 1, "february": 2, "march": 3, "april": 4,
+        "june": 6, "july": 7, "august": 8, "september": 9,
+        "october": 10, "november": 11, "december": 12,
+    }
+
+    DATE_RANGE_RE = re.compile(
+        r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*)"
+        r"[\s.,-]*(\d{4})"
+        r"\s*[-–to]+\s*"
+        r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*[\s.,-]*\d{4}"
+        r"|[Pp]resent|[Cc]urrent|[Nn]ow)",
+        re.IGNORECASE,
+    )
+
+    EXPLICIT_YEARS_RE = re.compile(
+        r"(\d{1,2})\+?\s*(?:years?|yrs?)[\s-]*(?:of\s+)?(?:experience|professional|work)",
+        re.IGNORECASE,
+    )
+
+    def estimate_years_experience(self, text: str) -> int | None:
+        """Estimate total years of professional experience from resume text.
+
+        Strategy:
+        1. Parse date ranges from experience entries and sum months.
+        2. Fall back to explicit statements like '5+ years of experience'.
+        """
+        from datetime import datetime
+
+        entries = self._extract_experience_entries(text)
+        if entries:
+            total_months = 0
+            now = datetime.now()
+            for entry in entries:
+                dates_str = entry.get("dates", "")
+                if not dates_str:
+                    continue
+                m = self.DATE_RANGE_RE.search(dates_str)
+                if not m:
+                    continue
+
+                start_month_str = m.group(1).lower()[:3]
+                start_year = int(m.group(2))
+                end_raw = m.group(3).strip().lower()
+
+                start_month = self.MONTH_MAP.get(start_month_str, 1)
+
+                if end_raw in ("present", "current", "now"):
+                    end_month = now.month
+                    end_year = now.year
+                else:
+                    end_match = re.search(
+                        r"(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*[\s.,-]*(\d{4})",
+                        end_raw,
+                        re.IGNORECASE,
+                    )
+                    if end_match:
+                        end_month = self.MONTH_MAP.get(end_match.group(1).lower()[:3], 12)
+                        end_year = int(end_match.group(2))
+                    else:
+                        continue
+
+                months = (end_year - start_year) * 12 + (end_month - start_month)
+                if 0 < months < 600:  # sanity: up to 50 years
+                    total_months += months
+
+            if total_months > 0:
+                return max(1, round(total_months / 12))
+
+        # Fallback: look for explicit statements
+        explicit = self.EXPLICIT_YEARS_RE.search(text)
+        if explicit:
+            return int(explicit.group(1))
+
+        return None

@@ -90,3 +90,69 @@ class RoadmapResponse(BaseModel):
     skill_gaps: list[SkillGap]
     total_estimated_hours: int | None = None
     milestones: list[dict] = Field(default_factory=list)
+
+
+# --- Dream Job Planner ---
+
+
+class DreamJobRequest(BaseModel):
+    user_id: int
+    dream_role_id: int
+    current_role_id: int | None = None
+    years_experience: int | None = None
+    current_salary: int | None = None
+
+
+class DreamJobPlanResponse(BaseModel):
+    dream_role: dict
+    career_paths: list[dict] = Field(default_factory=list)
+    skill_analysis: dict
+    weekly_plan: list[dict] = Field(default_factory=list)
+    interview_prep: dict
+    portfolio_projects: list[dict] = Field(default_factory=list)
+    milestones: list[dict] = Field(default_factory=list)
+
+
+# --- Self-Assessment ---
+
+
+class AssessmentRating(BaseModel):
+    skill: str
+    rating: int = Field(ge=0, le=4)
+    category: str | None = None
+
+
+class AssessmentRequest(BaseModel):
+    user_id: int
+    ratings: list[AssessmentRating]
+
+
+class AssessmentResponse(BaseModel):
+    added: int
+    updated: int
+    total: int
+
+
+class AssessmentQuestionsResponse(BaseModel):
+    questions: list[dict]
+    target_role_id: int | None = None
+
+
+# --- Role Insights ---
+
+
+class DayInLifeResponse(BaseModel):
+    role_id: int
+    role_title: str
+    source: str
+    schedule: list[dict] = Field(default_factory=list)
+    daily_tools: list[str] = Field(default_factory=list)
+    team_interactions: list[str] = Field(default_factory=list)
+    challenges: list[str] = Field(default_factory=list)
+    rewards: list[str] = Field(default_factory=list)
+
+
+class RoleComparisonResponse(BaseModel):
+    role_a: dict
+    role_b: dict
+    comparison: dict

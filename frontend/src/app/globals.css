@@ -124,3 +124,27 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Print styles for PDF export */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 11px !important;
+  }
+  aside,
+  header,
+  .print\\:hidden {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .flex.h-screen {
+    display: block !important;
+  }
+  .flex-1.overflow-y-auto {
+    overflow: visible !important;
+  }
+}
