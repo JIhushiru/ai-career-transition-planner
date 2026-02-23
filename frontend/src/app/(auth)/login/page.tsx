@@ -62,8 +62,9 @@ export default function LoginPage() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium">Email</label>
+            <label htmlFor="login-email" className="mb-1 block text-sm font-medium">Email</label>
             <Input
+              id="login-email"
               type="email"
               placeholder="you@example.com"
               value={email}
@@ -72,8 +73,9 @@ export default function LoginPage() {
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium">Password</label>
+            <label htmlFor="login-password" className="mb-1 block text-sm font-medium">Password</label>
             <Input
+              id="login-password"
               type="password"
               placeholder="Enter your password"
               value={password}
@@ -84,7 +86,7 @@ export default function LoginPage() {
           </div>
 
           {error && (
-            <p className="text-sm text-destructive">{error}</p>
+            <p role="alert" className="text-sm text-destructive">{error}</p>
           )}
 
           <Button type="submit" className="w-full" disabled={isLoading}>

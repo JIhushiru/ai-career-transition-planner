@@ -45,7 +45,7 @@ export function ResumePicker({ selectedResumeId, onSelect }: ResumePickerProps) 
   }
 
   if (error) {
-    return <p className="text-sm text-destructive">{error}</p>;
+    return <p role="alert" className="text-sm text-destructive">{error}</p>;
   }
 
   if (resumes.length === 0) {
@@ -77,7 +77,7 @@ export function ResumePicker({ selectedResumeId, onSelect }: ResumePickerProps) 
           className="h-10 w-full appearance-none rounded-lg border bg-background pl-9 pr-9 text-sm font-medium transition-colors hover:border-foreground/25 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
           value={selectedResumeId ?? ""}
           onChange={(e) => {
-            const r = resumes.find((r) => r.id === parseInt(e.target.value));
+            const r = resumes.find((r) => r.id === parseInt(e.target.value, 10));
             if (r) onSelect(r);
           }}
         >

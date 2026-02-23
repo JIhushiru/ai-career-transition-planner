@@ -111,7 +111,7 @@ export default function RoadmapPage() {
 
       {error && (
         <Card className="border-destructive">
-          <CardContent className="py-4 text-sm text-destructive">
+          <CardContent role="alert" className="py-4 text-sm text-destructive">
             {error}
           </CardContent>
         </Card>

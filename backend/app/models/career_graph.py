@@ -10,8 +10,8 @@ class CareerTransition(Base):
     __tablename__ = "career_transitions"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    from_role_id: Mapped[int] = mapped_column(Integer, ForeignKey("roles.id"), nullable=False)
-    to_role_id: Mapped[int] = mapped_column(Integer, ForeignKey("roles.id"), nullable=False)
+    from_role_id: Mapped[int] = mapped_column(Integer, ForeignKey("roles.id"), nullable=False, index=True)
+    to_role_id: Mapped[int] = mapped_column(Integer, ForeignKey("roles.id"), nullable=False, index=True)
     difficulty: Mapped[float] = mapped_column(Float, default=0.5)
     typical_months: Mapped[int | None] = mapped_column(Integer, nullable=True)
     required_upskills: Mapped[str | None] = mapped_column(Text, nullable=True)
@@ -43,7 +43,7 @@ class TransitionPath(Base):
     __tablename__ = "transition_paths"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     target_role_id: Mapped[int] = mapped_column(Integer, ForeignKey("roles.id"), nullable=False)
     path_data: Mapped[str | None] = mapped_column(Text, nullable=True)
     total_difficulty: Mapped[float | None] = mapped_column(Float, nullable=True)

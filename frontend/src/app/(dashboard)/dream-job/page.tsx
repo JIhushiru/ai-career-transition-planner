@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
   Loader2,
   Star,
@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/card";
 import { RolePicker } from "@/components/career/role-picker";
 import { ResumePicker } from "@/components/resume/resume-picker";
+import { Input } from "@/components/ui/input";
 import { apiPost } from "@/lib/api-client";
 import { safeParseInt } from "@/lib/constants";
 import { useSession } from "@/context/session-context";
@@ -82,8 +83,6 @@ export default function DreamJobPage() {
     }
   };
 
-  const planRef = useRef<HTMLDivElement>(null);
-
   const handleExportPDF = useCallback(() => {
     // Expand all sections before printing
     setExpandedSections(new Set(["paths", "skills", "weekly", "interview", "portfolio"]));
@@ -131,32 +130,30 @@ export default function DreamJobPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="dream-years-exp" className="text-sm font-medium">
+              <label htmlFor="dream-years-exp" className="mb-1 block text-sm font-medium">
                 Years of Experience
               </label>
-              <input
+              <Input
                 id="dream-years-exp"
                 type="number"
-                min="0"
-                max="30"
+                min={0}
+                max={30}
                 value={yearsExp}
                 onChange={(e) => setYearsExp(e.target.value)}
                 placeholder="e.g. 3"
-                className="mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm"
               />
             </div>
             <div>
-              <label htmlFor="dream-salary" className="text-sm font-medium">
+              <label htmlFor="dream-salary" className="mb-1 block text-sm font-medium">
                 Current Salary (PHP/mo)
               </label>
-              <input
+              <Input
                 id="dream-salary"
                 type="number"
-                min="0"
+                min={0}
                 value={salary}
                 onChange={(e) => setSalary(e.target.value)}
                 placeholder="e.g. 40000"
-                className="mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm"
               />
             </div>
           </div>
@@ -182,14 +179,14 @@ export default function DreamJobPage() {
 
       {error && (
         <Card className="border-destructive">
-          <CardContent className="py-4 text-sm text-destructive">
+          <CardContent role="alert" className="py-4 text-sm text-destructive">
             {error}
           </CardContent>
         </Card>
       )}
 
       {plan && (
-        <div ref={planRef} className="space-y-6 print:space-y-4">
+        <div className="space-y-6 print:space-y-4">
           {/* Export Button */}
           <div className="flex justify-end no-print">
             <Button
@@ -566,6 +563,7 @@ function CollapsibleSection({
   return (
     <Card>
       <button
+        aria-expanded={isExpanded}
         onClick={onToggle}
         className="flex w-full items-center justify-between px-6 py-4 text-left"
       >

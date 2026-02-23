@@ -99,10 +99,11 @@ export default function ExplorePage() {
               onSelect={handleResumeSelect}
             />
             <div>
-              <label className="mb-1 block text-sm font-medium">
+              <label htmlFor="explore-salary" className="mb-1 block text-sm font-medium">
                 Current Monthly Salary (PHP)
               </label>
               <Input
+                id="explore-salary"
                 placeholder="e.g., 25000"
                 type="number"
                 value={salaryInput}
@@ -113,10 +114,11 @@ export default function ExplorePage() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-sm font-medium">
+              <label htmlFor="explore-years" className="mb-1 block text-sm font-medium">
                 Years of Experience
               </label>
               <Input
+                id="explore-years"
                 placeholder="e.g., 5"
                 type="number"
                 value={yearsExp}
@@ -131,9 +133,18 @@ export default function ExplorePage() {
               {careerModes.map((mode) => (
                 <Badge
                   key={mode.value}
+                  role="radio"
+                  aria-checked={careerMode === mode.value}
+                  tabIndex={0}
                   variant={careerMode === mode.value ? "default" : "outline"}
                   className="cursor-pointer px-3 py-1"
                   onClick={() => setCareerMode(mode.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setCareerMode(mode.value);
+                    }
+                  }}
                 >
                   {mode.label}
                 </Badge>
@@ -175,7 +186,7 @@ export default function ExplorePage() {
 
       {error && (
         <Card className="border-destructive">
-          <CardContent className="py-4 text-sm text-destructive">
+          <CardContent role="alert" className="py-4 text-sm text-destructive">
             {error}
           </CardContent>
         </Card>

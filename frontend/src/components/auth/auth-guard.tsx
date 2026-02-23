@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/context/session-context";
+import { STORAGE_KEYS } from "@/lib/constants";
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, token } = useSession();
@@ -10,7 +11,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Wait for hydration from localStorage before redirecting
-    const storedToken = localStorage.getItem("ct_token");
+    const storedToken = localStorage.getItem(STORAGE_KEYS.TOKEN);
     if (!storedToken) {
       router.replace("/login");
     }

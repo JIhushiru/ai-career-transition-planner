@@ -1,6 +1,6 @@
 """Career matching, transition paths, and roadmap endpoints."""
 
-import json
+from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from pydantic import BaseModel, Field
@@ -33,7 +33,6 @@ from app.schemas.role import (
 from app.services.career_graph import CareerGraphService
 from app.services.dream_job_planner import DreamJobPlanner
 from app.services.embedding_service import EmbeddingService
-from app.services.matching_service import MatchingService
 from app.services.meta_model import MetaModelScorer
 from app.services.roadmap_generator import RoadmapGenerator
 from app.services.role_insights import RoleInsightsService
@@ -53,7 +52,7 @@ insights_service = RoleInsightsService()
 class MatchRequest(BaseModel):
     user_id: int
     resume_id: int | None = None
-    career_mode: str = "growth"
+    career_mode: Literal["growth", "stability", "pivot", "late_career", "maximize_earnings"] = "growth"
     years_experience: int | None = Field(default=None, ge=0, le=100)
     current_salary: int | None = Field(default=None, ge=0)
     use_llm: bool = True
@@ -81,13 +80,12 @@ class EmbeddingsRequest(BaseModel):
 async def compute_matches(
     body: MatchRequest,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     """Run the full meta-model scoring pipeline for a user."""
-    # Verify user exists and has a resume
-    result = await db.execute(select(User).where(User.id == body.user_id))
-    user = result.scalar_one_or_none()
-    if not user:
-        raise HTTPException(404, "User not found")
+    if current_user.id != body.user_id:
+        raise HTTPException(403, "Not authorized to act as another user")
+    user = current_user
 
     if body.resume_id:
         result = await db.execute(
@@ -137,13 +135,7 @@ async def compute_matches(
         role = s["role"]
         role_resp = _role_to_response(role)
 
-        # Compute salary deltas if user salary is known
-        sal_inc_min = sal_inc_max = sal_inc_pct = None
-        if user_salary and role.salary_min_ph:
-            sal_inc_min = role.salary_min_ph - user_salary
-            sal_inc_max = (role.salary_max_ph or role.salary_min_ph) - user_salary
-            midpoint = ((role.salary_min_ph or 0) + (role.salary_max_ph or role.salary_min_ph)) // 2
-            sal_inc_pct = round(((midpoint - user_salary) / user_salary) * 100, 1) if user_salary > 0 else None
+        sal_inc_min, sal_inc_max, sal_inc_pct = _compute_salary_deltas(role, user_salary)
 
         matches.append(
             UserMatchResponse(
@@ -274,8 +266,11 @@ async def get_quick_wins(
 async def find_transition_paths(
     body: TransitionRequest,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     """Find multi-step career transition paths to a target role."""
+    if current_user.id != body.user_id:
+        raise HTTPException(403, "Not authorized to act as another user")
     # Validate resume exists
     if body.resume_id:
         result = await db.execute(
@@ -358,10 +353,10 @@ async def find_transition_paths(
         start_role = role_map.get(start_role_id)
         if start_role and target_role:
             # Compute skill gap as upskills
-            from app.api.v1.roles import _safe_json_loads
+            from app.utils import safe_json_loads
 
-            target_required = _safe_json_loads(target_role.required_skills)
-            start_skills = {s.lower() for s in _safe_json_loads(start_role.required_skills)}
+            target_required = safe_json_loads(target_role.required_skills)
+            start_skills = {s.lower() for s in safe_json_loads(start_role.required_skills)}
             skills_needed = [s for s in target_required if s.lower() not in start_skills]
 
             # Estimate difficulty based on skill gap
@@ -395,8 +390,11 @@ async def find_transition_paths(
 async def generate_roadmap(
     body: RoadmapRequest,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     """Generate skill gap analysis and learning roadmap."""
+    if current_user.id != body.user_id:
+        raise HTTPException(403, "Not authorized to act as another user")
     # Validate resume exists
     if body.resume_id:
         result = await db.execute(
@@ -460,16 +458,16 @@ async def compute_embeddings(
 async def plan_dream_job(
     body: DreamJobRequest,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     """Build a complete reverse-engineered plan to reach a dream role.
 
     Returns career paths, skill gaps, weekly action plan, interview prep,
     and portfolio project suggestions.
     """
-    result = await db.execute(select(User).where(User.id == body.user_id))
-    user = result.scalar_one_or_none()
-    if not user:
-        raise HTTPException(404, "User not found")
+    if current_user.id != body.user_id:
+        raise HTTPException(403, "Not authorized to act as another user")
+    user = current_user
 
     # Validate resume exists
     if body.resume_id:
@@ -545,11 +543,11 @@ async def get_assessment_questions(
 async def submit_assessment(
     body: AssessmentRequest,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     """Submit skill self-assessment ratings. Merges with existing skills."""
-    result = await db.execute(select(User).where(User.id == body.user_id))
-    if not result.scalar_one_or_none():
-        raise HTTPException(404, "User not found")
+    if current_user.id != body.user_id:
+        raise HTTPException(403, "Not authorized to act as another user")
 
     ratings = [r.model_dump() for r in body.ratings]
     saved = await assessment_service.save_assessment(db, body.user_id, ratings)
@@ -582,31 +580,3 @@ async def compare_roles(
     if "error" in result:
         raise HTTPException(404, result["error"])
     return RoleComparisonResponse(**result)
-
-
-# --- Success Stories ---
-
-
-@router.get("/stories/{user_id}")
-async def get_success_stories(
-    user_id: int,
-    target_role_id: int = Query(..., description="Target role ID"),
-    count: int = Query(3, ge=1, le=5),
-    db: AsyncSession = Depends(get_db),
-):
-    """Get 'People Like You' success story templates for a target role."""
-    result = await db.execute(select(User).where(User.id == user_id))
-    if not result.scalar_one_or_none():
-        raise HTTPException(404, "User not found")
-
-    # Validate user has a resume
-    result = await db.execute(
-        select(Resume).where(Resume.user_id == user_id).limit(1)
-    )
-    if not result.scalar_one_or_none():
-        raise HTTPException(400, "No resume found. Upload a resume first.")
-
-    stories = await stories_service.generate_stories(
-        db, user_id, target_role_id, count=count
-    )
-    return {"stories": stories, "target_role_id": target_role_id}

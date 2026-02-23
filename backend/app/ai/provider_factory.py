@@ -37,11 +37,3 @@ class ProviderFactory:
         if settings.groq_api_key:
             return GroqProvider(settings.groq_api_key)
         raise RuntimeError("No AI provider API keys configured")
-
-
-def get_gemini_provider() -> GeminiProvider:
-    return GeminiProvider(settings.gemini_api_key)
-
-
-def get_groq_provider() -> GroqProvider:
-    return GroqProvider(settings.groq_api_key)

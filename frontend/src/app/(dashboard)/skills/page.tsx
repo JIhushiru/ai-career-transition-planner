@@ -12,8 +12,7 @@ import {
 import { SkillList } from "@/components/resume/skill-list";
 import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiGet } from "@/lib/api-client";
-import type { SkillsResponse } from "@/types/resume";
-import type { ResumeListItem } from "@/types/resume";
+import type { SkillsResponse, ResumeListItem } from "@/types/resume";
 
 export default function SkillsPage() {
   const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
@@ -80,7 +79,7 @@ export default function SkillsPage() {
 
       {error && (
         <Card className="border-destructive">
-          <CardContent className="py-4 text-sm text-destructive">
+          <CardContent role="alert" className="py-4 text-sm text-destructive">
             {error}
           </CardContent>
         </Card>

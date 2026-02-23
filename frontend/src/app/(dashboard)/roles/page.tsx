@@ -41,14 +41,15 @@ export default function RolesPage() {
   const [seniorityFilter, setSeniorityFilter] = useState("");
   const [remoteOnly, setRemoteOnly] = useState(false);
   const [salaryPreset, setSalaryPreset] = useState(0);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function load() {
       try {
         const data = await apiGet<RoleListResponse>("/roles?limit=300");
         setRoles(data.roles);
-      } catch {
-        // Roles are the main content — loading state already shown
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load roles");
       } finally {
         setIsLoading(false);
       }
@@ -144,6 +145,12 @@ export default function RolesPage() {
         </p>
       </div>
 
+      {error && (
+        <Card className="border-destructive">
+          <div role="alert" className="px-4 py-3 text-sm text-destructive">{error}</div>
+        </Card>
+      )}
+
       {isLoading ? (
         <div className="flex items-center justify-center py-12">
           <div className="text-center space-y-2">
@@ -169,6 +176,7 @@ export default function RolesPage() {
               <div className="relative">
                 <Briefcase className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <select
+                  aria-label="Filter by seniority level"
                   className="h-8 appearance-none rounded-lg border bg-background pl-8 pr-8 text-sm transition-colors hover:border-foreground/25 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
                   value={seniorityFilter}
                   onChange={(e) => setSeniorityFilter(e.target.value)}
@@ -186,6 +194,7 @@ export default function RolesPage() {
               <div className="relative">
                 <DollarSign className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <select
+                  aria-label="Filter by salary range"
                   className="h-8 appearance-none rounded-lg border bg-background pl-8 pr-8 text-sm transition-colors hover:border-foreground/25 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
                   value={salaryPreset}
                   onChange={(e) => setSalaryPreset(Number(e.target.value))}
@@ -282,6 +291,7 @@ export default function RolesPage() {
                     className="rounded-lg border bg-card overflow-hidden"
                   >
                     <button
+                      aria-expanded={isExpanded}
                       onClick={() => toggleCategory(category)}
                       className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 transition-colors"
                     >

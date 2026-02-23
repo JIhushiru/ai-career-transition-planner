@@ -1,6 +1,3 @@
-import json
-import logging
-
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select, func as sa_func
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -9,21 +6,9 @@ from app.api.deps import get_db
 from app.models.role import Role
 from app.models.career_graph import CareerTransition
 from app.schemas.role import RoleResponse, RoleListResponse, TransitionResponse
-
-logger = logging.getLogger(__name__)
+from app.utils import safe_json_loads
 
 router = APIRouter(prefix="/roles", tags=["roles"])
-
-
-def _safe_json_loads(raw: str | None, fallback: list | dict | None = None) -> list | dict:
-    """Parse JSON with a fallback on failure."""
-    if not raw:
-        return fallback if fallback is not None else []
-    try:
-        return json.loads(raw)
-    except (json.JSONDecodeError, TypeError):
-        logger.warning("Malformed JSON in database: %s", raw[:100])
-        return fallback if fallback is not None else []
 
 
 def _role_to_response(role: Role) -> RoleResponse:
@@ -33,8 +18,8 @@ def _role_to_response(role: Role) -> RoleResponse:
         title_ph=role.title_ph,
         category=role.category,
         description=role.description,
-        required_skills=_safe_json_loads(role.required_skills),
-        preferred_skills=_safe_json_loads(role.preferred_skills),
+        required_skills=safe_json_loads(role.required_skills),
+        preferred_skills=safe_json_loads(role.preferred_skills),
         salary_range_ph=role.salary_range_ph,
         salary_range_usd=role.salary_range_usd,
         salary_min_ph=role.salary_min_ph,
@@ -127,7 +112,7 @@ async def get_role_transitions(role_id: int, db: AsyncSession = Depends(get_db))
                 to_role=_role_to_response(to_role),
                 difficulty=ct.difficulty,
                 typical_months=ct.typical_months,
-                required_upskills=_safe_json_loads(ct.required_upskills),
+                required_upskills=safe_json_loads(ct.required_upskills),
                 market_viability=ct.market_viability,
                 transition_type=ct.transition_type,
             )

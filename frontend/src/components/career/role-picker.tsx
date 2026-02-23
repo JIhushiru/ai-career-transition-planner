@@ -18,6 +18,7 @@ export function RolePicker({
 }: RolePickerProps) {
   const [roles, setRoles] = useState<RoleResponse[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
@@ -25,8 +26,8 @@ export function RolePicker({
       try {
         const data = await apiGet<RoleListResponse>("/roles?limit=300");
         setRoles(data.roles);
-      } catch {
-        // Roles list is non-critical — page still renders without it
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load roles");
       } finally {
         setIsLoading(false);
       }
@@ -63,6 +64,17 @@ export function RolePicker({
     );
   }
 
+  if (error) {
+    return (
+      <div className="space-y-2">
+        <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wide">
+          {label}
+        </label>
+        <p role="alert" className="text-sm text-destructive">{error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-2">
       <label className="block text-xs font-medium text-muted-foreground uppercase tracking-wide">
@@ -71,6 +83,7 @@ export function RolePicker({
       <div className="relative">
         <FolderOpen className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <select
+          aria-label="Select category"
           className="h-10 w-full appearance-none rounded-lg border bg-background pl-9 pr-9 text-sm font-medium transition-colors hover:border-foreground/25 focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
           value={selectedCategory}
           onChange={(e) => {
@@ -92,13 +105,14 @@ export function RolePicker({
       <div className="relative">
         <Briefcase className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <select
+          aria-label="Select role"
           className={`h-10 w-full appearance-none rounded-lg border bg-background pl-9 pr-9 text-sm font-medium transition-colors focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20 ${
             !selectedCategory
               ? "cursor-not-allowed opacity-50"
               : "hover:border-foreground/25"
           }`}
           value={selectedRoleId ?? ""}
-          onChange={(e) => onSelect(parseInt(e.target.value))}
+          onChange={(e) => onSelect(parseInt(e.target.value, 10))}
           disabled={!selectedCategory}
         >
           <option value="" disabled>

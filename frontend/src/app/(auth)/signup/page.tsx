@@ -64,10 +64,11 @@ export default function SignupPage() {
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium">
+            <label htmlFor="signup-name" className="mb-1 block text-sm font-medium">
               Name <span className="text-muted-foreground">(optional)</span>
             </label>
             <Input
+              id="signup-name"
               type="text"
               placeholder="Your name"
               value={name}
@@ -75,8 +76,9 @@ export default function SignupPage() {
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium">Email</label>
+            <label htmlFor="signup-email" className="mb-1 block text-sm font-medium">Email</label>
             <Input
+              id="signup-email"
               type="email"
               placeholder="you@example.com"
               value={email}
@@ -85,8 +87,9 @@ export default function SignupPage() {
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium">Password</label>
+            <label htmlFor="signup-password" className="mb-1 block text-sm font-medium">Password</label>
             <Input
+              id="signup-password"
               type="password"
               placeholder="At least 6 characters"
               value={password}
@@ -97,7 +100,7 @@ export default function SignupPage() {
           </div>
 
           {error && (
-            <p className="text-sm text-destructive">{error}</p>
+            <p role="alert" className="text-sm text-destructive">{error}</p>
           )}
 
           <Button type="submit" className="w-full" disabled={isLoading}>

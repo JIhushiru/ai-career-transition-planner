@@ -36,7 +36,7 @@ class UserSkill(Base):
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False)
     skill_id: Mapped[int] = mapped_column(Integer, ForeignKey("skills.id"), nullable=False)
     resume_id: Mapped[int | None] = mapped_column(
-        Integer, ForeignKey("resumes.id"), nullable=True
+        Integer, ForeignKey("resumes.id"), nullable=True, index=True
     )
     proficiency: Mapped[float | None] = mapped_column(Float, nullable=True)
     confidence: Mapped[float | None] = mapped_column(Float, nullable=True)

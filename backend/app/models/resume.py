@@ -10,7 +10,7 @@ class Resume(Base):
     __tablename__ = "resumes"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     filename: Mapped[str | None] = mapped_column(String(255), nullable=True)
     raw_text: Mapped[str] = mapped_column(Text, nullable=False)
     source_type: Mapped[str] = mapped_column(String(20), nullable=False)

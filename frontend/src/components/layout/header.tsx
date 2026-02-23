@@ -11,6 +11,9 @@ const pageTitles: Record<string, string> = {
   "/explore": "Explore Careers",
   "/transitions": "Career GPS",
   "/roadmap": "Learning Roadmap",
+  "/roles": "Roles Overview",
+  "/dream-job": "Dream Job Planner",
+  "/assessment": "Skills Assessment",
 };
 
 export function Header() {

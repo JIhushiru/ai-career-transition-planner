@@ -1,3 +1,5 @@
+import re
+
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from app.config import settings
@@ -34,7 +36,6 @@ _ALLOWED_COL_TYPES = {"INTEGER", "TEXT", "REAL", "BLOB", "FLOAT", "VARCHAR(255)"
 
 async def _add_column_if_missing(conn, table: str, column: str, col_type: str):
     """SQLite-compatible: add a column if it doesn't already exist."""
-    import re
     from sqlalchemy import text
 
     # Validate inputs against whitelists to prevent SQL injection
