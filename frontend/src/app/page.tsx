@@ -245,8 +245,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="mx-auto max-w-5xl px-6 py-16">
+    <div className="mx-auto max-w-5xl py-10">
         {/* Hero */}
         <div className="mb-12 text-center">
           <h1 className="mb-4 text-4xl font-bold tracking-tight">
@@ -327,7 +326,6 @@ export default function Home() {
             );
           })}
         </div>
-      </div>
-    </main>
+    </div>
   );
 }

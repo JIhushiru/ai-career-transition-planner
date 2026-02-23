@@ -1,5 +1,4 @@
-import { Sidebar } from "@/components/layout/sidebar";
-import { Header } from "@/components/layout/header";
+import { DashboardShell } from "@/components/layout/dashboard-shell";
 import { SessionProvider } from "@/context/session-context";
 import { AuthGuard } from "@/components/auth/auth-guard";
 
@@ -11,13 +10,7 @@ export default function DashboardLayout({
   return (
     <SessionProvider>
       <AuthGuard>
-        <div className="flex h-screen">
-          <Sidebar />
-          <div className="flex flex-1 flex-col overflow-hidden">
-            <Header />
-            <main className="flex-1 overflow-y-auto p-6">{children}</main>
-          </div>
-        </div>
+        <DashboardShell>{children}</DashboardShell>
       </AuthGuard>
     </SessionProvider>
   );

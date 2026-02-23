@@ -137,7 +137,7 @@ export default function RolesPage() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
+    <div className="mx-auto max-w-4xl space-y-6">
       <div>
         <h2 className="text-2xl font-bold tracking-tight">Roles Overview</h2>
         <p className="text-sm text-muted-foreground">
