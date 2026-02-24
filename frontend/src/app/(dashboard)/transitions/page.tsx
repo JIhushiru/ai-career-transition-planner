@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader2, Navigation } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +14,7 @@ import { TransitionPathView } from "@/components/career/transition-path";
 import { RolePicker } from "@/components/career/role-picker";
 import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiPost } from "@/lib/api-client";
+import { STORAGE_KEYS, cacheResult, loadCachedResult } from "@/lib/constants";
 import { useSession } from "@/context/session-context";
 import type { CareerPathsResponse } from "@/types/career";
 import type { ResumeListItem } from "@/types/resume";
@@ -25,6 +26,12 @@ export default function TransitionsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<CareerPathsResponse | null>(null);
+
+  // Restore cached results on mount
+  useEffect(() => {
+    const cached = loadCachedResult<CareerPathsResponse>(STORAGE_KEYS.CACHE_TRANSITIONS);
+    if (cached) setResults(cached);
+  }, []);
 
   const handleResumeSelect = (resume: ResumeListItem) => {
     setSelectedResumeId(resume.id);
@@ -44,6 +51,7 @@ export default function TransitionsPage() {
         },
       );
       setResults(res);
+      cacheResult(STORAGE_KEYS.CACHE_TRANSITIONS, res);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Pathfinding failed");
     } finally {

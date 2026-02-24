@@ -1,3 +1,4 @@
+import asyncio
 import json
 import uuid
 
@@ -92,12 +93,14 @@ async def upload_resume(
     if len(contents) > 10 * 1024 * 1024:
         raise HTTPException(400, "File too large (max 10MB)")
 
-    raw_text = parser.extract_text_from_pdf(contents)
+    raw_text = await asyncio.to_thread(parser.extract_text_from_pdf, contents)
     if not raw_text.strip():
         raise HTTPException(422, "Could not extract text from PDF")
 
     parsed_sections = parser.parse_sections(raw_text)
-    extracted_skills = extractor.extract_skills(raw_text, sections=parsed_sections)
+    extracted_skills = await asyncio.to_thread(
+        extractor.extract_skills, raw_text, parsed_sections
+    )
     estimated_years = parser.estimate_years_experience(raw_text)
 
     user = auth_user or await _get_or_create_user(db)

@@ -8,9 +8,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.career_graph import UserMatch
-from app.models.resume import Resume
 from app.models.role import Role
-from app.models.skill import UserSkill, Skill
 from app.services.embedding_service import EmbeddingService
 from app.services.matching_service import MatchingService
 from app.ai.provider_factory import ProviderFactory
@@ -91,16 +89,13 @@ class MetaModelScorer:
         """
         weights = WEIGHT_PRESETS.get(career_mode, WEIGHT_PRESETS["growth"])
 
-        # Get user skills
-        result = await db.execute(
-            select(Skill.name)
-            .join(UserSkill, UserSkill.skill_id == Skill.id)
-            .where(UserSkill.user_id == user_id)
+        # Get user skills (cached for reuse by overlap computation)
+        user_skill_names = list(
+            await self.matching_service.get_user_skill_names(db, user_id)
         )
-        user_skill_names = [row[0] for row in result.all()]
 
-        # Step 1: Embedding similarity
-        user_embedding = self.embedding_service.build_user_embedding(
+        # Step 1: Embedding similarity (runs in thread pool)
+        user_embedding = await self.embedding_service.build_user_embedding(
             resume_text, user_skill_names
         )
         embedding_matches = await self.embedding_service.match_user_to_roles(
@@ -114,9 +109,10 @@ class MetaModelScorer:
         roles = result.scalars().all()
         role_map = {r.id: r for r in roles}
 
-        # Step 2: Skill overlap
+        # Step 2: Skill overlap (pass pre-fetched skills to avoid duplicate query)
+        user_skill_set = {s.lower() for s in user_skill_names}
         overlaps = await self.matching_service.compute_all_overlaps(
-            db, user_id, roles, user_years
+            db, user_id, roles, user_years, user_skills=user_skill_set
         )
         overlap_map = {o["role_id"]: o for o in overlaps}
 

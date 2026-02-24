@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader2, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { MatchCard } from "@/components/career/match-card";
 import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiPost, apiPut } from "@/lib/api-client";
-import { safeParseInt } from "@/lib/constants";
+import { safeParseInt, STORAGE_KEYS, cacheResult, loadCachedResult } from "@/lib/constants";
 import { useSession } from "@/context/session-context";
 import type { MatchResultsResponse } from "@/types/career";
 import type { ResumeListItem } from "@/types/resume";
@@ -38,6 +38,13 @@ export default function ExplorePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<MatchResultsResponse | null>(null);
+
+  // Restore cached results on mount
+  useEffect(() => {
+    const cached = loadCachedResult<MatchResultsResponse>(STORAGE_KEYS.CACHE_EXPLORE);
+    if (cached) setResults(cached);
+  }, []);
+
   const handleResumeSelect = (resume: ResumeListItem) => {
     setSelectedResumeId(resume.id);
   };
@@ -67,6 +74,7 @@ export default function ExplorePage() {
         top_k: 15,
       });
       setResults(res);
+      cacheResult(STORAGE_KEYS.CACHE_EXPLORE, res);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Matching failed");
     } finally {

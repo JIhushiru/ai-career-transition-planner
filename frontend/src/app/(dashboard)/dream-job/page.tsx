@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {
   Loader2,
   Star,
@@ -30,7 +30,7 @@ import { RolePicker } from "@/components/career/role-picker";
 import { ResumePicker } from "@/components/resume/resume-picker";
 import { Input } from "@/components/ui/input";
 import { apiPost } from "@/lib/api-client";
-import { safeParseInt } from "@/lib/constants";
+import { safeParseInt, STORAGE_KEYS, cacheResult, loadCachedResult } from "@/lib/constants";
 import { useSession } from "@/context/session-context";
 import type { DreamJobPlanResponse } from "@/types/career";
 import type { ResumeListItem } from "@/types/resume";
@@ -47,6 +47,12 @@ export default function DreamJobPage() {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set(["paths", "skills", "weekly", "interview", "portfolio"])
   );
+
+  // Restore cached results on mount
+  useEffect(() => {
+    const cached = loadCachedResult<DreamJobPlanResponse>(STORAGE_KEYS.CACHE_DREAM_JOB);
+    if (cached) setPlan(cached);
+  }, []);
 
   const toggleSection = (section: string) => {
     setExpandedSections((prev) => {
@@ -74,6 +80,7 @@ export default function DreamJobPage() {
         current_salary: safeParseInt(salary) ?? undefined,
       });
       setPlan(res);
+      cacheResult(STORAGE_KEYS.CACHE_DREAM_JOB, res);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Failed to generate plan"

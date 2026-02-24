@@ -14,6 +14,7 @@ if not _is_sqlite:
     engine_kwargs["pool_size"] = 5
     engine_kwargs["max_overflow"] = 10
     engine_kwargs["pool_pre_ping"] = True
+    engine_kwargs["pool_recycle"] = 300  # Recycle connections every 5 min (Neon drops idle after ~5 min)
 
 engine = create_async_engine(settings.database_url, **engine_kwargs)
 

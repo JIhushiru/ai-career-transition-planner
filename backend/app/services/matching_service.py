@@ -195,9 +195,11 @@ class MatchingService:
         user_id: int,
         roles: list[Role],
         user_years: int | None = None,
+        user_skills: set[str] | None = None,
     ) -> list[dict]:
         """Compute skill overlap for a user against multiple roles."""
-        user_skills = await self.get_user_skill_names(db, user_id)
+        if user_skills is None:
+            user_skills = await self.get_user_skill_names(db, user_id)
 
         results = []
         for role in roles:

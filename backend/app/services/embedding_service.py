@@ -1,5 +1,6 @@
 """Embedding service using sentence-transformers for semantic similarity."""
 
+import asyncio
 import json
 import struct
 from functools import lru_cache
@@ -58,7 +59,7 @@ def cosine_similarity_batch(query: np.ndarray, corpus: np.ndarray) -> np.ndarray
 
 
 class EmbeddingService:
-    def build_user_embedding(self, resume_text: str, skills: list[str]) -> np.ndarray:
+    async def build_user_embedding(self, resume_text: str, skills: list[str]) -> np.ndarray:
         """Create a combined embedding from resume text and extracted skills."""
         skills_text = ", ".join(skills) if skills else ""
         combined = f"{resume_text}\n\nKey Skills: {skills_text}"
@@ -66,26 +67,15 @@ class EmbeddingService:
         words = combined.split()
         if len(words) > 500:
             combined = " ".join(words[:500])
-        return encode_text(combined)
-
-    def build_role_embedding(self, role: Role) -> np.ndarray:
-        """Create embedding for a role from its description and skills."""
-        parts = [role.title]
-        if role.description:
-            parts.append(role.description)
-        if role.required_skills:
-            skills = json.loads(role.required_skills)
-            parts.append("Required skills: " + ", ".join(skills))
-        if role.preferred_skills:
-            skills = json.loads(role.preferred_skills)
-            parts.append("Preferred skills: " + ", ".join(skills))
-        text = ". ".join(parts)
-        return encode_text(text)
+        return await asyncio.to_thread(encode_text, combined)
 
     async def compute_role_embeddings(self, db: AsyncSession) -> int:
-        """Pre-compute and store embeddings for all roles."""
-        result = await db.execute(select(Role))
+        """Pre-compute and store embeddings for roles that don't have one yet."""
+        result = await db.execute(select(Role).where(Role.embedding.is_(None)))
         roles = result.scalars().all()
+
+        if not roles:
+            return 0
 
         texts = []
         for role in roles:
@@ -97,7 +87,7 @@ class EmbeddingService:
                 parts.append("Required skills: " + ", ".join(skills))
             texts.append(". ".join(parts))
 
-        embeddings = encode_texts(texts)
+        embeddings = await asyncio.to_thread(encode_texts, texts)
 
         for role, emb in zip(roles, embeddings):
             role.embedding = embedding_to_bytes(emb)

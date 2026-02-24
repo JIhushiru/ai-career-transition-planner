@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader2, Map } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +14,7 @@ import { RoadmapView } from "@/components/career/roadmap-view";
 import { RolePicker } from "@/components/career/role-picker";
 import { ResumePicker } from "@/components/resume/resume-picker";
 import { apiPost } from "@/lib/api-client";
+import { STORAGE_KEYS, cacheResult, loadCachedResult } from "@/lib/constants";
 import { useSession } from "@/context/session-context";
 import type { RoadmapResponse } from "@/types/career";
 import type { ResumeListItem } from "@/types/resume";
@@ -26,6 +27,12 @@ export default function RoadmapPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [roadmap, setRoadmap] = useState<RoadmapResponse | null>(null);
+
+  // Restore cached results on mount
+  useEffect(() => {
+    const cached = loadCachedResult<RoadmapResponse>(STORAGE_KEYS.CACHE_ROADMAP);
+    if (cached) setRoadmap(cached);
+  }, []);
 
   const handleResumeSelect = (resume: ResumeListItem) => {
     setSelectedResumeId(resume.id);
@@ -43,6 +50,7 @@ export default function RoadmapPage() {
         include_resources: includeResources,
       });
       setRoadmap(res);
+      cacheResult(STORAGE_KEYS.CACHE_ROADMAP, res);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Roadmap generation failed");
     } finally {
