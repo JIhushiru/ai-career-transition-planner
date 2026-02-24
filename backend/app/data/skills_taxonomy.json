@@ -3766,5 +3766,350 @@
       }
     ],
     "category": "certification"
+  },
+  {
+    "pattern": "GAAP",
+    "category": "domain"
+  },
+  {
+    "pattern": "IFRS",
+    "category": "domain"
+  },
+  {
+    "pattern": "VAT",
+    "category": "domain"
+  },
+  {
+    "pattern": "GST",
+    "category": "domain"
+  },
+  {
+    "pattern": "WHT",
+    "category": "domain"
+  },
+  {
+    "pattern": "SUT",
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "indirect"
+      },
+      {
+        "LOWER": "tax"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "indirect"
+      },
+      {
+        "LOWER": "taxes"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "withholding"
+      },
+      {
+        "LOWER": "tax"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "tax"
+      },
+      {
+        "LOWER": "compliance"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "tax"
+      },
+      {
+        "LOWER": "reconciliation"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "tax"
+      },
+      {
+        "LOWER": "reporting"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "management"
+      },
+      {
+        "LOWER": "accounting"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": "ERP",
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "oracle"
+      },
+      {
+        "LOWER": "netsuite"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "oracle"
+      },
+      {
+        "LOWER": "ebs"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "sap"
+      },
+      {
+        "LOWER": "s/4hana"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "sap"
+      },
+      {
+        "TEXT": "S4/HANA"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "sap"
+      },
+      {
+        "LOWER": "ariba"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "sap"
+      },
+      {
+        "LOWER": "concur"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "sap"
+      },
+      {
+        "LOWER": "business"
+      },
+      {
+        "LOWER": "suite"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "sap"
+      },
+      {
+        "LOWER": "s4"
+      },
+      {
+        "TEXT": "/"
+      },
+      {
+        "LOWER": "hana"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "visual"
+      },
+      {
+        "LOWER": "basic"
+      }
+    ],
+    "category": "technical"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "ms"
+      },
+      {
+        "LOWER": "office"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": "OneSource",
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "sherlock"
+      },
+      {
+        "LOWER": "system"
+      }
+    ],
+    "category": "tool"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "accounts"
+      },
+      {
+        "LOWER": "payable"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "vendor"
+      },
+      {
+        "LOWER": "master"
+      },
+      {
+        "LOWER": "data"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "supplier"
+      },
+      {
+        "LOWER": "master"
+      },
+      {
+        "LOWER": "data"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "data"
+      },
+      {
+        "LOWER": "cleansing"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "process"
+      },
+      {
+        "LOWER": "standardization"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "wire"
+      },
+      {
+        "LOWER": "transfer"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "wire"
+      },
+      {
+        "LOWER": "transfers"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": "ACH",
+    "category": "domain"
+  },
+  {
+    "pattern": [
+      {
+        "LOWER": "cost"
+      },
+      {
+        "LOWER": "savings"
+      }
+    ],
+    "category": "domain"
+  },
+  {
+    "pattern": "SOP",
+    "category": "domain"
+  },
+  {
+    "pattern": "S2K",
+    "category": "tool"
   }
 ]

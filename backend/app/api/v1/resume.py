@@ -2,6 +2,7 @@ import json
 import uuid
 
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from fastapi.responses import PlainTextResponse
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -96,7 +97,7 @@ async def upload_resume(
         raise HTTPException(422, "Could not extract text from PDF")
 
     parsed_sections = parser.parse_sections(raw_text)
-    extracted_skills = extractor.extract_skills(raw_text)
+    extracted_skills = extractor.extract_skills(raw_text, sections=parsed_sections)
     estimated_years = parser.estimate_years_experience(raw_text)
 
     user = auth_user or await _get_or_create_user(db)
@@ -133,7 +134,7 @@ async def parse_text_resume(
     auth_user: User | None = Depends(get_optional_user),
 ):
     parsed_sections = parser.parse_sections(body.text)
-    extracted_skills = extractor.extract_skills(body.text)
+    extracted_skills = extractor.extract_skills(body.text, sections=parsed_sections)
     estimated_years = parser.estimate_years_experience(body.text)
 
     user = auth_user or await _get_or_create_user(db)
@@ -238,6 +239,27 @@ async def get_resume_skills(
         categories[cat].append(extracted)
 
     return SkillsResponse(skills=skills, categories=categories)
+
+
+@router.get("/{resume_id}/download")
+async def download_resume_text(
+    resume_id: int,
+    db: AsyncSession = Depends(get_db),
+    user: User = Depends(get_current_user),
+):
+    """Download the extracted resume text as a .txt file."""
+    result = await db.execute(select(Resume).where(Resume.id == resume_id))
+    resume = result.scalar_one_or_none()
+    if not resume:
+        raise HTTPException(404, "Resume not found")
+    if resume.user_id != user.id:
+        raise HTTPException(403, "Not authorized to access this resume")
+
+    filename = resume.filename.rsplit(".", 1)[0] if resume.filename else f"resume_{resume_id}"
+    return PlainTextResponse(
+        content=resume.raw_text,
+        headers={"Content-Disposition": f'attachment; filename="{filename}.txt"'},
+    )
 
 
 @router.post("/session", response_model=SessionResponse)

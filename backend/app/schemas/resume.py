@@ -14,6 +14,7 @@ class ParsedSections(BaseModel):
     experience: list[dict] = Field(default_factory=list)
     education: list[dict] = Field(default_factory=list)
     skills_section: list[str] = Field(default_factory=list)
+    events: list[str] = Field(default_factory=list)
 
 
 class ResumeUploadResponse(BaseModel):

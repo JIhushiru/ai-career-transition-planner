@@ -9,6 +9,7 @@ class ResumeParser:
         "skills_section": r"(?i)\b(skills|technical\s*skills|core\s*competencies|competencies|expertise|proficiencies)\b",
         "certifications": r"(?i)\b(certifications?|licenses?|credentials?)\b",
         "projects": r"(?i)\b(projects|portfolio)\b",
+        "events": r"(?i)\b(relevant\s+experience|conferences?|professional\s+development|seminars?|workshops?)\b",
     }
 
     EMAIL_PATTERN = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
@@ -34,6 +35,7 @@ class ResumeParser:
             "experience": self._extract_experience_entries(raw_text),
             "education": self._extract_education_entries(raw_text),
             "skills_section": self._extract_skills_list(raw_text),
+            "events": self._extract_events_list(raw_text),
         }
 
     def _extract_contact(self, text: str) -> dict:
@@ -154,6 +156,20 @@ class ResumeParser:
                     skills.append(cleaned)
 
         return skills
+
+    def _extract_events_list(self, text: str) -> list[str]:
+        raw = self._extract_section(text, "events")
+        if not raw:
+            return []
+
+        events = []
+        for line in raw.split("\n"):
+            line = line.strip()
+            if line:
+                cleaned = re.sub(r"^[•\-*–]\s*", "", line)
+                if cleaned:
+                    events.append(cleaned)
+        return events
 
     # ---- Years-of-experience estimator ----
 

@@ -17,6 +17,7 @@ export interface ParsedSections {
     text: string;
   }>;
   skills_section: string[];
+  events: string[];
 }
 
 export interface ResumeUploadResponse {

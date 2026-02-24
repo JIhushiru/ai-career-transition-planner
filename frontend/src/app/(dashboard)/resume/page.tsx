@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { UploadForm } from "@/components/resume/upload-form";
 import { TextPasteForm } from "@/components/resume/text-paste-form";
 import { SkillList } from "@/components/resume/skill-list";
+import { ResumeList } from "@/components/resume/resume-list";
 import { apiUpload, apiPost } from "@/lib/api-client";
 import { useSession } from "@/context/session-context";
 import type { ResumeUploadResponse, ExtractedSkill } from "@/types/resume";
@@ -26,12 +27,14 @@ export default function ResumePage() {
   const [skills, setSkills] = useState<ExtractedSkill[]>([]);
   const [resumeId, setResumeId] = useState<number | null>(null);
   const [rawText, setRawText] = useState<string>("");
+  const [listKey, setListKey] = useState(0);
 
   const handleResult = (result: ResumeUploadResponse) => {
     setSkills(result.skills);
     setResumeId(result.resume_id);
     setRawText(result.raw_text);
     setSession(result.user_id, result.resume_id);
+    setListKey((k) => k + 1);
   };
 
   const handleUpload = async (file: File) => {
@@ -87,6 +90,8 @@ export default function ResumePage() {
           <TextPasteForm onSubmit={handleTextSubmit} isLoading={isLoading} />
         </TabsContent>
       </Tabs>
+
+      <ResumeList key={listKey} />
 
       {error && (
         <Card className="border-destructive">
