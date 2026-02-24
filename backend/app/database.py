@@ -7,7 +7,7 @@ from app.models.base import Base
 
 _is_sqlite = "sqlite" in settings.database_url
 
-connect_args = {"check_same_thread": False} if _is_sqlite else {}
+connect_args = {"check_same_thread": False} if _is_sqlite else {"ssl": True}
 engine_kwargs: dict = {"connect_args": connect_args, "echo": False}
 if not _is_sqlite:
     # PostgreSQL connection pool settings for serverless (Neon)

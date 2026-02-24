@@ -8,11 +8,26 @@ logger = logging.getLogger(__name__)
 
 
 def _ensure_async_url(url: str) -> str:
-    """Convert standard postgres:// URLs to use the asyncpg driver."""
+    """Convert standard postgres:// URLs to use the asyncpg driver.
+
+    Also strips ``sslmode`` from the query string because asyncpg does not
+    accept it — SSL is instead configured via ``connect_args`` in database.py.
+    """
     if url.startswith("postgres://"):
-        return url.replace("postgres://", "postgresql+asyncpg://", 1)
-    if url.startswith("postgresql://"):
-        return url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+    elif url.startswith("postgresql://"):
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+
+    # asyncpg doesn't understand the libpq `sslmode` param — strip it
+    if "sslmode" in url:
+        from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+
+        parsed = urlparse(url)
+        params = parse_qs(parsed.query)
+        params.pop("sslmode", None)
+        new_query = urlencode(params, doseq=True)
+        url = urlunparse(parsed._replace(query=new_query))
+
     return url
 
 
