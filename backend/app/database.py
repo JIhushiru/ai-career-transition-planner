@@ -5,13 +5,17 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 from app.config import settings
 from app.models.base import Base
 
-connect_args = {"check_same_thread": False} if "sqlite" in settings.database_url else {}
+_is_sqlite = "sqlite" in settings.database_url
 
-engine = create_async_engine(
-    settings.database_url,
-    connect_args=connect_args,
-    echo=False,
-)
+connect_args = {"check_same_thread": False} if _is_sqlite else {}
+engine_kwargs: dict = {"connect_args": connect_args, "echo": False}
+if not _is_sqlite:
+    # PostgreSQL connection pool settings for serverless (Neon)
+    engine_kwargs["pool_size"] = 5
+    engine_kwargs["max_overflow"] = 10
+    engine_kwargs["pool_pre_ping"] = True
+
+engine = create_async_engine(settings.database_url, **engine_kwargs)
 
 AsyncSessionLocal = async_sessionmaker(
     engine, class_=AsyncSession, expire_on_commit=False
@@ -35,7 +39,7 @@ _ALLOWED_COL_TYPES = {"INTEGER", "TEXT", "REAL", "BLOB", "FLOAT", "VARCHAR(255)"
 
 
 async def _add_column_if_missing(conn, table: str, column: str, col_type: str):
-    """SQLite-compatible: add a column if it doesn't already exist."""
+    """Add a column if it doesn't already exist (supports SQLite and PostgreSQL)."""
     from sqlalchemy import text
 
     # Validate inputs against whitelists to prevent SQL injection
@@ -46,7 +50,18 @@ async def _add_column_if_missing(conn, table: str, column: str, col_type: str):
     if col_type.upper() not in _ALLOWED_COL_TYPES:
         raise ValueError(f"Column type '{col_type}' is not in the allowed list")
 
-    result = await conn.execute(text(f"PRAGMA table_info({table})"))
-    columns = [row[1] for row in result]
+    if _is_sqlite:
+        result = await conn.execute(text(f"PRAGMA table_info({table})"))
+        columns = [row[1] for row in result]
+    else:
+        result = await conn.execute(
+            text(
+                "SELECT column_name FROM information_schema.columns "
+                "WHERE table_name = :table"
+            ),
+            {"table": table},
+        )
+        columns = [row[0] for row in result]
+
     if column not in columns:
         await conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {column} {col_type}"))

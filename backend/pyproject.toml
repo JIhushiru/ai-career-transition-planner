@@ -9,6 +9,7 @@ dependencies = [
     "python-multipart>=0.0.18",
     "sqlalchemy>=2.0.36",
     "aiosqlite>=0.20.0",
+    "asyncpg>=0.30.0",
     "pydantic-settings>=2.7.0",
     "PyMuPDF>=1.25.0",
     "spacy>=3.8.0",

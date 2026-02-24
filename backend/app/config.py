@@ -1,7 +1,6 @@
 import logging
 import os
 import secrets
-from pathlib import Path
 
 from pydantic_settings import BaseSettings
 
@@ -9,11 +8,15 @@ logger = logging.getLogger(__name__)
 
 
 def _default_database_url() -> str:
-    """Use HF Spaces persistent /data dir if available, else local ./data."""
-    if os.environ.get("SPACE_ID"):
-        # Running on HF Spaces — use /data for persistence across rebuilds
-        Path("/data").mkdir(parents=True, exist_ok=True)
-        return "sqlite+aiosqlite:////data/career_planner.db"
+    """Use DATABASE_URL env var if set (Neon/PostgreSQL), else local SQLite."""
+    env_url = os.environ.get("DATABASE_URL", "")
+    if env_url:
+        # Support Neon/Supabase URLs: postgres:// → postgresql+asyncpg://
+        if env_url.startswith("postgres://"):
+            return env_url.replace("postgres://", "postgresql+asyncpg://", 1)
+        if env_url.startswith("postgresql://"):
+            return env_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return env_url
     return "sqlite+aiosqlite:///./data/career_planner.db"
 
 
