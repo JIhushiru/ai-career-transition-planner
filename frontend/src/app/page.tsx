@@ -200,7 +200,11 @@ export default function Home() {
   const [skillCount, setSkillCount] = useState(0);
   const [matchCount, setMatchCount] = useState(0);
   const [topCategory, setTopCategory] = useState<string | null>(null);
-  const [quote] = useState(() => MOTIVATIONAL_QUOTES[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length)]);
+  const [quote, setQuote] = useState(MOTIVATIONAL_QUOTES[0]);
+
+  useEffect(() => {
+    setQuote(MOTIVATIONAL_QUOTES[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.length)]);
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem(STORAGE_KEYS.TOKEN);

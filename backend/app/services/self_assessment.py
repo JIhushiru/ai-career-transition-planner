@@ -130,10 +130,8 @@ class SelfAssessmentService:
             if not skill_name or level <= 0:
                 continue
 
-            # Map rating to proficiency label
-            proficiency = {1: "beginner", 2: "intermediate", 3: "advanced", 4: "expert"}.get(
-                level, "beginner"
-            )
+            # Map rating to numeric proficiency (0.0–1.0)
+            proficiency = {1: 0.25, 2: 0.5, 3: 0.75, 4: 1.0}.get(level, 0.25)
             # Map rating to confidence score
             confidence = min(0.5 + (level * 0.1), 0.95)
 
@@ -148,11 +146,13 @@ class SelfAssessmentService:
                 db.add(skill)
                 await db.flush()
 
-            # Check if user already has this skill
+            # Check if user already has a self-assessment entry for this skill
+            # (filter by resume_id IS NULL to avoid colliding with resume-extracted records)
             result = await db.execute(
                 select(UserSkill).where(
                     UserSkill.user_id == user_id,
                     UserSkill.skill_id == skill.id,
+                    UserSkill.resume_id.is_(None),
                 )
             )
             existing = result.scalar_one_or_none()
