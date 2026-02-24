@@ -30,7 +30,7 @@ import type { UserMatchResponse, MatchResultsResponse } from "@/types/career";
 
 const MOTIVATIONAL_QUOTES = [
   { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
-  { text: "Your career is a marathon, not a sprint. Every skill you build compounds.", author: "Unknown" },
+  { text: "I am always doing what I cannot do yet, in order to learn how to do it.", author: "Vincent van Gogh" },
   { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb" },
   { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
   { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
@@ -261,11 +261,12 @@ export default function Home() {
           Upload your resume, discover roles that match your skills, and build
           a personalized roadmap to reach your dream job.
         </p>
-        <blockquote className="mx-auto mt-6 max-w-xl border-l-4 border-primary/30 pl-4 text-left">
-          <p className="italic text-muted-foreground">
-            &ldquo;{quote.text}&rdquo;
+        <blockquote className="mx-auto mt-8 max-w-lg rounded-xl bg-muted/40 px-8 py-6 text-center">
+          <span className="mb-2 block text-3xl leading-none text-primary/40" aria-hidden="true">&ldquo;</span>
+          <p className="text-base font-medium leading-relaxed text-foreground/80">
+            {quote.text}
           </p>
-          <footer className="mt-1 text-xs text-muted-foreground/70">
+          <footer className="mt-3 text-sm text-muted-foreground">
             &mdash; {quote.author}
           </footer>
         </blockquote>
