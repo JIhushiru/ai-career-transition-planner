@@ -1,11 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Loader2,
   ClipboardCheck,
   CheckCircle2,
   Send,
+  FileText,
+  ArrowRight,
+  Info,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,7 +41,7 @@ const RATING_COLORS: Record<number, string> = {
 };
 
 export default function AssessmentPage() {
-  const { userId: sessionUserId } = useSession();
+  const { userId: sessionUserId, resumeId } = useSession();
   const [targetRoleId, setTargetRoleId] = useState<number | null>(null);
   const [questions, setQuestions] = useState<
     AssessmentQuestionsResponse | null
@@ -134,6 +138,30 @@ export default function AssessmentPage() {
         </p>
       </div>
 
+      {/* Resume hint */}
+      {!resumeId && (
+        <Card className="border-blue-200 bg-blue-50/50 dark:border-blue-800 dark:bg-blue-900/20">
+          <CardContent className="py-4 flex items-start gap-3">
+            <Info className="mt-0.5 h-5 w-5 shrink-0 text-blue-600 dark:text-blue-300" />
+            <div>
+              <p className="font-medium text-blue-800 dark:text-blue-300">
+                Upload a resume first for best results
+              </p>
+              <p className="mt-1 text-sm text-blue-600 dark:text-blue-400">
+                Self-assessment works on its own, but uploading your resume lets
+                us auto-detect skills and give you more accurate career matches.
+              </p>
+              <Button variant="outline" size="sm" className="mt-3" asChild>
+                <Link href="/resume">
+                  <FileText className="mr-2 h-3.5 w-3.5" />
+                  Upload Resume
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Target Role Selector */}
       <Card>
         <CardHeader>
@@ -166,17 +194,22 @@ export default function AssessmentPage() {
 
       {submitted && result && (
         <Card className="border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-900/20">
-          <CardContent className="py-4 flex items-center gap-3">
-            <CheckCircle2 className="h-5 w-5 text-green-600" />
+          <CardContent className="py-4 flex items-start gap-3">
+            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-green-600" />
             <div>
               <p className="font-medium text-green-800 dark:text-green-300">
                 Assessment saved successfully!
               </p>
-              <p className="text-sm text-green-600 dark:text-green-500">
+              <p className="mt-1 text-sm text-green-600 dark:text-green-500">
                 {result.added} new skills added, {result.updated} skills updated
                 ({result.total} total).
-                Your career matches will now be more accurate.
               </p>
+              <Button variant="outline" size="sm" className="mt-3" asChild>
+                <Link href="/explore">
+                  Find Matching Roles
+                  <ArrowRight className="ml-2 h-3.5 w-3.5" />
+                </Link>
+              </Button>
             </div>
           </CardContent>
         </Card>
