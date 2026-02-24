@@ -74,7 +74,7 @@ export function MatchCard({ match, rank, onClick }: MatchCardProps) {
                 <span className="ml-2 text-xs">{role.salary_range_ph}</span>
               )}
               {hasSalaryIncrease && (
-                <span className="block mt-1 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                <span className="block mt-1 text-xs font-medium text-emerald-600 dark:text-emerald-300">
                   {formatSalaryDelta(salary_increase_min!)} to {formatSalaryDelta(salary_increase_max!)}/mo
                 </span>
               )}
@@ -84,7 +84,7 @@ export function MatchCard({ match, rank, onClick }: MatchCardProps) {
             <span className="text-2xl font-bold text-primary">{pct}%</span>
             <p className="text-[10px] text-muted-foreground">match</p>
             {hasSalaryIncrease && (
-              <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300 text-[10px]">
+              <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 text-[10px]">
                 <TrendingUp className="mr-0.5 h-3 w-3" />
                 +{Math.round(salary_increase_pct!)}%
               </Badge>
@@ -133,7 +133,7 @@ export function MatchCard({ match, rank, onClick }: MatchCardProps) {
               <div className="space-y-3 rounded-md border bg-muted/30 p-3">
                 {matched_skills.length > 0 && (
                   <div>
-                    <p className="mb-1.5 text-xs font-medium text-green-600 dark:text-green-400">
+                    <p className="mb-1.5 text-xs font-medium text-green-600 dark:text-green-300">
                       Skills you have ({matched_skills.length})
                     </p>
                     <div className="flex flex-wrap gap-1">
@@ -141,7 +141,7 @@ export function MatchCard({ match, rank, onClick }: MatchCardProps) {
                         <Badge
                           key={skill}
                           variant="secondary"
-                          className="bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 text-[10px]"
+                          className="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 text-[10px]"
                         >
                           <Check className="mr-0.5 h-2.5 w-2.5" />
                           {skill}
@@ -152,7 +152,7 @@ export function MatchCard({ match, rank, onClick }: MatchCardProps) {
                 )}
                 {missing_skills.length > 0 && (
                   <div>
-                    <p className="mb-1.5 text-xs font-medium text-amber-600 dark:text-amber-400">
+                    <p className="mb-1.5 text-xs font-medium text-amber-600 dark:text-amber-300">
                       Skills to develop ({missing_skills.length})
                     </p>
                     <div className="flex flex-wrap gap-1">
@@ -160,7 +160,7 @@ export function MatchCard({ match, rank, onClick }: MatchCardProps) {
                         <Badge
                           key={skill}
                           variant="secondary"
-                          className="bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300 text-[10px]"
+                          className="bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 text-[10px]"
                         >
                           <X className="mr-0.5 h-2.5 w-2.5" />
                           {skill}

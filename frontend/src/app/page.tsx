@@ -43,8 +43,8 @@ const features = [
     description:
       "Upload your resume to discover your earning potential and find roles that pay more.",
     href: "/resume",
-    iconColor: "text-blue-600 dark:text-blue-400",
-    bgColor: "bg-blue-100 dark:bg-blue-950",
+    iconColor: "text-blue-600 dark:text-blue-300",
+    bgColor: "bg-blue-100 dark:bg-blue-900/30",
   },
   {
     icon: Compass,
@@ -52,8 +52,8 @@ const features = [
     description:
       "AI-powered matching finds roles that fit your skills and pay more than your current salary.",
     href: "/explore",
-    iconColor: "text-violet-600 dark:text-violet-400",
-    bgColor: "bg-violet-100 dark:bg-violet-950",
+    iconColor: "text-violet-600 dark:text-violet-300",
+    bgColor: "bg-violet-100 dark:bg-violet-900/30",
   },
   {
     icon: Route,
@@ -61,8 +61,8 @@ const features = [
     description:
       "See step-by-step career transitions with salary at each stage, from where you are to where you want to be.",
     href: "/transitions",
-    iconColor: "text-emerald-600 dark:text-emerald-400",
-    bgColor: "bg-emerald-100 dark:bg-emerald-950",
+    iconColor: "text-emerald-600 dark:text-emerald-300",
+    bgColor: "bg-emerald-100 dark:bg-emerald-900/30",
   },
   {
     icon: GraduationCap,
@@ -70,8 +70,8 @@ const features = [
     description:
       "Get a personalized learning plan to close skill gaps and unlock higher-salary roles.",
     href: "/roadmap",
-    iconColor: "text-amber-600 dark:text-amber-400",
-    bgColor: "bg-amber-100 dark:bg-amber-950",
+    iconColor: "text-amber-600 dark:text-amber-300",
+    bgColor: "bg-amber-100 dark:bg-amber-900/30",
   },
   {
     icon: Star,
@@ -79,8 +79,8 @@ const features = [
     description:
       "Pick your dream role and get a reverse-engineered plan with career paths, weekly actions, and interview prep.",
     href: "/dream-job",
-    iconColor: "text-amber-500 dark:text-amber-400",
-    bgColor: "bg-amber-100 dark:bg-amber-950",
+    iconColor: "text-amber-500 dark:text-amber-300",
+    bgColor: "bg-amber-100 dark:bg-amber-900/30",
   },
   {
     icon: ClipboardCheck,
@@ -88,8 +88,8 @@ const features = [
     description:
       "Rate your own skill levels to improve match accuracy and get better recommendations.",
     href: "/assessment",
-    iconColor: "text-pink-600 dark:text-pink-400",
-    bgColor: "bg-pink-100 dark:bg-pink-950",
+    iconColor: "text-pink-600 dark:text-pink-300",
+    bgColor: "bg-pink-100 dark:bg-pink-900/30",
   },
 ];
 
@@ -101,21 +101,21 @@ function QuickWinCard({ match, rank }: { match: UserMatchResponse; rank: number 
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
                 {rank}
               </span>
               <span className="font-medium text-sm">{role.title}</span>
             </div>
             <p className="mt-1 text-xs text-muted-foreground">{role.category}</p>
             {role.salary_min_ph && (
-              <p className="mt-1 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+              <p className="mt-1 text-xs text-emerald-600 dark:text-emerald-300 font-medium">
                 {formatSalaryRange(role.salary_min_ph, role.salary_max_ph)}/mo
               </p>
             )}
           </div>
           <div className="text-right">
             {salary_increase_pct != null && salary_increase_pct > 0 && (
-              <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300">
+              <Badge className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
                 <TrendingUp className="mr-0.5 h-3 w-3" />
                 +{Math.round(salary_increase_pct)}%
               </Badge>
@@ -158,17 +158,17 @@ function ProgressSummary({
             <p className="text-xs text-muted-foreground">Skills Detected</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-violet-600 dark:text-violet-400">{matchCount}</p>
+            <p className="text-2xl font-bold text-violet-600 dark:text-violet-300">{matchCount}</p>
             <p className="text-xs text-muted-foreground">Roles Matched</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+            <p className="text-2xl font-bold text-amber-600 dark:text-amber-300">
               {topCategory || "\u2014"}
             </p>
             <p className="text-xs text-muted-foreground">Top Skill Area</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+            <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-300">
               {completed}/{steps.length}
             </p>
             <p className="text-xs text-muted-foreground">Steps Completed</p>

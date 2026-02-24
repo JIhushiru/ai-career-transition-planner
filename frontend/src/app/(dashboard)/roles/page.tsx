@@ -213,7 +213,7 @@ export default function RolesPage() {
                 onClick={() => setRemoteOnly(!remoteOnly)}
                 className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                   remoteOnly
-                    ? "border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-300"
+                    ? "border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
                     : "border-border text-muted-foreground hover:bg-muted"
                 }`}
               >
@@ -325,7 +325,7 @@ export default function RolesPage() {
                                 </Badge>
                               )}
                               {role.remote_friendly && (
-                                <span className="inline-flex items-center gap-1 text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
+                                <span className="inline-flex items-center gap-1 text-[10px] font-medium text-emerald-600 dark:text-emerald-300">
                                   <Wifi className="h-2.5 w-2.5" />
                                   Remote
                                 </span>
@@ -333,8 +333,8 @@ export default function RolesPage() {
                             </div>
                             {(role.salary_min_ph || role.salary_max_ph) && (
                               <div className="mt-1 flex items-center gap-1">
-                                <DollarSign className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
-                                <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                                <DollarSign className="h-3 w-3 text-emerald-600 dark:text-emerald-300" />
+                                <span className="text-xs font-medium text-emerald-600 dark:text-emerald-300">
                                   {formatSalaryRange(
                                     role.salary_min_ph,
                                     role.salary_max_ph,

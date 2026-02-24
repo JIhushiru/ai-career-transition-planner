@@ -13,9 +13,9 @@ import type { RoadmapResponse, SkillGap, Milestone } from "@/types/career";
 import { formatSalaryRange } from "@/lib/salary";
 
 const priorityStyles: Record<string, string> = {
-  high: "border-red-200 bg-red-50 text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300",
-  medium: "border-yellow-200 bg-yellow-50 text-yellow-700 dark:border-yellow-900 dark:bg-yellow-950 dark:text-yellow-300",
-  low: "border-green-200 bg-green-50 text-green-700 dark:border-green-900 dark:bg-green-950 dark:text-green-300",
+  high: "border-red-200 bg-red-50 text-red-700 dark:border-red-900 dark:bg-red-900/30 dark:text-red-300",
+  medium: "border-yellow-200 bg-yellow-50 text-yellow-700 dark:border-yellow-900 dark:bg-yellow-900/30 dark:text-yellow-300",
+  low: "border-green-200 bg-green-50 text-green-700 dark:border-green-900 dark:bg-green-900/30 dark:text-green-300",
 };
 
 function SkillGapCard({ gap }: { gap: SkillGap }) {
@@ -117,7 +117,7 @@ export function RoadmapView({ roadmap }: RoadmapViewProps) {
             {roadmap.skill_gaps.length} skill gaps &middot;{" "}
             {roadmap.total_estimated_hours ?? "?"}h estimated learning
             {roadmap.target_role.salary_min_ph && (
-              <span className="block mt-1 text-emerald-600 dark:text-emerald-400 font-medium">
+              <span className="block mt-1 text-emerald-600 dark:text-emerald-300 font-medium">
                 Target salary: {formatSalaryRange(roadmap.target_role.salary_min_ph, roadmap.target_role.salary_max_ph)}/mo
               </span>
             )}

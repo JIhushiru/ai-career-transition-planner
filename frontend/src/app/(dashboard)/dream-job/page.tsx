@@ -200,7 +200,7 @@ export default function DreamJobPage() {
           </div>
 
           {/* Dream Role Summary */}
-          <Card className="border-amber-200 bg-amber-50/50 dark:border-amber-800 dark:bg-amber-950/20">
+          <Card className="border-amber-200 bg-amber-50/50 dark:border-amber-800 dark:bg-amber-900/20">
             <CardContent className="py-4">
               <div className="flex items-start justify-between">
                 <div>
@@ -222,20 +222,20 @@ export default function DreamJobPage() {
               </div>
               <div className="mt-3 flex items-center gap-4">
                 <div className="flex items-center gap-1 text-sm">
-                  <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-300" />
                   <span>
                     {plan.skill_analysis.match_percentage}% skill match
                   </span>
                 </div>
                 <div className="flex items-center gap-1 text-sm">
-                  <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  <Clock className="h-4 w-4 text-blue-600 dark:text-blue-300" />
                   <span>
                     ~{plan.skill_analysis.total_learning_hours}h to learn
                   </span>
                 </div>
                 {plan.career_paths.length > 0 && (
                   <div className="flex items-center gap-1 text-sm">
-                    <Target className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                    <Target className="h-4 w-4 text-purple-600 dark:text-purple-300" />
                     <span>
                       ~{plan.career_paths[0].total_months} months via best path
                     </span>
@@ -249,7 +249,7 @@ export default function DreamJobPage() {
           {plan.career_paths.length > 0 && (
             <CollapsibleSection
               title="Career Path"
-              icon={<Target className="h-5 w-5 text-purple-600 dark:text-purple-400" />}
+              icon={<Target className="h-5 w-5 text-purple-600 dark:text-purple-300" />}
               subtitle={`${plan.career_paths.length} path(s) found`}
               isExpanded={expandedSections.has("paths")}
               onToggle={() => toggleSection("paths")}
@@ -258,7 +258,7 @@ export default function DreamJobPage() {
                 {plan.career_paths.map((path, pathIdx) => (
                   <div key={pathIdx} className="space-y-2">
                     <div className="flex items-center gap-2 text-sm font-medium">
-                      <span className="rounded bg-purple-100 px-2 py-0.5 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">
+                      <span className="rounded bg-purple-100 px-2 py-0.5 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">
                         Path {pathIdx + 1}
                       </span>
                       <span className="text-muted-foreground">
@@ -295,7 +295,7 @@ export default function DreamJobPage() {
           {/* Skill Analysis */}
           <CollapsibleSection
             title="Skill Gap Analysis"
-            icon={<GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-400" />}
+            icon={<GraduationCap className="h-5 w-5 text-blue-600 dark:text-blue-300" />}
             subtitle={`${plan.skill_analysis.skills_to_learn.length} skills to learn`}
             isExpanded={expandedSections.has("skills")}
             onToggle={() => toggleSection("skills")}
@@ -303,14 +303,14 @@ export default function DreamJobPage() {
             <div className="space-y-3">
               {plan.skill_analysis.skills_matched.length > 0 && (
                 <div>
-                  <h4 className="text-sm font-medium text-green-700 dark:text-green-400 mb-1">
+                  <h4 className="text-sm font-medium text-green-700 dark:text-green-300 mb-1">
                     Skills You Already Have
                   </h4>
                   <div className="flex flex-wrap gap-1">
                     {plan.skill_analysis.skills_matched.map((s) => (
                       <span
                         key={s}
-                        className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                        className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-700 dark:bg-green-900/30 dark:text-green-300"
                       >
                         <CheckCircle2 className="h-3 w-3" />
                         {s}
@@ -320,7 +320,7 @@ export default function DreamJobPage() {
                 </div>
               )}
               <div>
-                <h4 className="text-sm font-medium text-orange-700 dark:text-orange-400 mb-1">
+                <h4 className="text-sm font-medium text-orange-700 dark:text-orange-300 mb-1">
                   Skills to Learn
                 </h4>
                 <div className="space-y-1">
@@ -353,7 +353,7 @@ export default function DreamJobPage() {
           {plan.weekly_plan.length > 0 && (
             <CollapsibleSection
               title="Weekly Action Plan"
-              icon={<Calendar className="h-5 w-5 text-green-600 dark:text-green-400" />}
+              icon={<Calendar className="h-5 w-5 text-green-600 dark:text-green-300" />}
               subtitle={`${plan.weekly_plan.at(-1)?.week_end || plan.weekly_plan.at(-1)?.week || plan.weekly_plan.length} weeks`}
               isExpanded={expandedSections.has("weekly")}
               onToggle={() => toggleSection("weekly")}
@@ -383,7 +383,7 @@ export default function DreamJobPage() {
                         {week.focus_skills.map((s) => (
                           <span
                             key={s}
-                            className="rounded bg-blue-100 px-1.5 py-0.5 text-xs text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                            className="rounded bg-blue-100 px-1.5 py-0.5 text-xs text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
                           >
                             {s}
                           </span>
@@ -407,7 +407,7 @@ export default function DreamJobPage() {
           {/* Interview Prep */}
           <CollapsibleSection
             title="Interview Preparation"
-            icon={<MessageSquare className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />}
+            icon={<MessageSquare className="h-5 w-5 text-indigo-600 dark:text-indigo-300" />}
             subtitle="Questions, topics & tips"
             isExpanded={expandedSections.has("interview")}
             onToggle={() => toggleSection("interview")}
@@ -493,7 +493,7 @@ export default function DreamJobPage() {
           {/* Portfolio Projects */}
           <CollapsibleSection
             title="Portfolio Projects"
-            icon={<FolderOpen className="h-5 w-5 text-teal-600 dark:text-teal-400" />}
+            icon={<FolderOpen className="h-5 w-5 text-teal-600 dark:text-teal-300" />}
             subtitle={`${plan.portfolio_projects.length} suggested projects`}
             isExpanded={expandedSections.has("portfolio")}
             onToggle={() => toggleSection("portfolio")}
@@ -507,10 +507,10 @@ export default function DreamJobPage() {
                       <span
                         className={`rounded px-1.5 py-0.5 text-xs ${
                           project.complexity === "high"
-                            ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+                            ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300"
                             : project.complexity === "medium"
-                            ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
-                            : "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                            ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300"
+                            : "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300"
                         }`}
                       >
                         {project.complexity}
@@ -528,7 +528,7 @@ export default function DreamJobPage() {
                       {project.skills_demonstrated.map((s) => (
                         <span
                           key={s}
-                          className="rounded bg-teal-100 px-1.5 py-0.5 text-[10px] text-teal-700 dark:bg-teal-900/30 dark:text-teal-400"
+                          className="rounded bg-teal-100 px-1.5 py-0.5 text-[10px] text-teal-700 dark:bg-teal-900/30 dark:text-teal-300"
                         >
                           {s}
                         </span>

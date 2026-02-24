@@ -50,8 +50,8 @@ export function ResumePicker({ selectedResumeId, onSelect }: ResumePickerProps) 
 
   if (resumes.length === 0) {
     return (
-      <div className="flex items-center gap-3 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-800 dark:bg-amber-950">
-        <AlertCircle className="h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" />
+      <div className="flex items-center gap-3 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 dark:border-amber-800 dark:bg-amber-900/30">
+        <AlertCircle className="h-5 w-5 shrink-0 text-amber-600 dark:text-amber-300" />
         <div>
           <p className="text-sm font-medium">No resumes found</p>
           <p className="text-xs text-muted-foreground">

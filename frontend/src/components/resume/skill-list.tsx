@@ -11,13 +11,13 @@ import {
 import type { ExtractedSkill } from "@/types/resume";
 
 const categoryColors: Record<string, string> = {
-  technical: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
-  framework: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200",
-  tool: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200",
-  soft: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200",
-  domain: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200",
-  certification: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200",
-  other: "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200",
+  technical: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
+  framework: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
+  tool: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+  soft: "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
+  domain: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-300",
+  certification: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+  other: "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300",
 };
 
 const categoryLabels: Record<string, string> = {

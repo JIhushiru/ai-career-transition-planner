@@ -30,10 +30,10 @@ const RATING_LABELS: Record<number, string> = {
 
 const RATING_COLORS: Record<number, string> = {
   0: "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400",
-  1: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  2: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400",
-  3: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-  4: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+  1: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+  2: "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-300",
+  3: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
+  4: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
 };
 
 export default function AssessmentPage() {
@@ -125,7 +125,7 @@ export default function AssessmentPage() {
     <div className="mx-auto max-w-4xl space-y-6">
       <div>
         <h2 className="text-2xl font-bold tracking-tight flex items-center gap-2">
-          <ClipboardCheck className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+          <ClipboardCheck className="h-6 w-6 text-emerald-600 dark:text-emerald-300" />
           Skill Self-Assessment
         </h2>
         <p className="text-muted-foreground">
@@ -165,11 +165,11 @@ export default function AssessmentPage() {
       )}
 
       {submitted && result && (
-        <Card className="border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-950/20">
+        <Card className="border-green-200 bg-green-50/50 dark:border-green-800 dark:bg-green-900/20">
           <CardContent className="py-4 flex items-center gap-3">
             <CheckCircle2 className="h-5 w-5 text-green-600" />
             <div>
-              <p className="font-medium text-green-800 dark:text-green-400">
+              <p className="font-medium text-green-800 dark:text-green-300">
                 Assessment saved successfully!
               </p>
               <p className="text-sm text-green-600 dark:text-green-500">
@@ -217,12 +217,12 @@ export default function AssessmentPage() {
                   <div className="flex items-center gap-3">
                     <span className="font-medium text-sm">{q.skill}</span>
                     {q.importance === "required" && (
-                      <span className="rounded bg-red-100 px-1.5 py-0.5 text-[10px] text-red-600 dark:bg-red-900/30 dark:text-red-400">
+                      <span className="rounded bg-red-100 px-1.5 py-0.5 text-[10px] text-red-600 dark:bg-red-900/30 dark:text-red-300">
                         Required
                       </span>
                     )}
                     {q.importance === "preferred" && (
-                      <span className="rounded bg-yellow-100 px-1.5 py-0.5 text-[10px] text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400">
+                      <span className="rounded bg-yellow-100 px-1.5 py-0.5 text-[10px] text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-300">
                         Preferred
                       </span>
                     )}

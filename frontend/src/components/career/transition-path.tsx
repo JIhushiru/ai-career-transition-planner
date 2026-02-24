@@ -12,9 +12,9 @@ interface TransitionPathViewProps {
 }
 
 function difficultyColor(d: number): string {
-  if (d < 0.3) return "text-green-600 dark:text-green-400";
-  if (d < 0.6) return "text-yellow-600 dark:text-yellow-400";
-  return "text-red-600 dark:text-red-400";
+  if (d < 0.3) return "text-green-600 dark:text-green-300";
+  if (d < 0.6) return "text-yellow-600 dark:text-yellow-300";
+  return "text-red-600 dark:text-red-300";
 }
 
 function difficultyLabel(d: number): string {
@@ -50,7 +50,7 @@ export function TransitionPathView({ path, index }: TransitionPathViewProps) {
           </div>
         </div>
         {startSalary && endSalary && (
-          <p className="text-xs text-emerald-600 dark:text-emerald-400">
+          <p className="text-xs text-emerald-600 dark:text-emerald-300">
             {formatSalaryRange(firstRole.salary_min_ph, firstRole.salary_max_ph)} → {formatSalaryRange(lastRole.salary_min_ph, lastRole.salary_max_ph)}/mo
           </p>
         )}
@@ -81,7 +81,7 @@ export function TransitionPathView({ path, index }: TransitionPathViewProps) {
                     {difficultyLabel(step.difficulty)}
                   </span>
                   {step.to_role.salary_min_ph && (
-                    <span className="text-emerald-600 dark:text-emerald-400">
+                    <span className="text-emerald-600 dark:text-emerald-300">
                       {formatSalaryRange(step.to_role.salary_min_ph, step.to_role.salary_max_ph)}/mo
                     </span>
                   )}
