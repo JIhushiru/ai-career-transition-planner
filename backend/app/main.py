@@ -1,3 +1,4 @@
+import logging
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -9,14 +10,19 @@ from app.api.v1.router import api_router
 from app.data.seed import run_seed
 from app.services.embedding_service import EmbeddingService
 
+logger = logging.getLogger(__name__)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await init_db()
-    await run_seed()
-    async with AsyncSessionLocal() as db:
-        count = await EmbeddingService().compute_role_embeddings(db)
-        print(f"Computed embeddings for {count} roles")
+    try:
+        await init_db()
+        await run_seed()
+        async with AsyncSessionLocal() as db:
+            count = await EmbeddingService().compute_role_embeddings(db)
+            logger.info("Computed embeddings for %d roles", count)
+    except Exception:
+        logger.exception("Startup initialization failed — app will start but some features may be unavailable")
     yield
 
 
