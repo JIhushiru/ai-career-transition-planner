@@ -118,10 +118,15 @@ export default function TransitionsPage() {
 
       {results && (
         <div className="space-y-4">
-          <h3 className="font-semibold">
-            {results.paths.length} path{results.paths.length !== 1 ? "s" : ""}{" "}
-            to {results.target_role.title}
-          </h3>
+          <div className="flex items-baseline gap-2">
+            <h3 className="font-semibold text-foreground">
+              {results.paths.length} path{results.paths.length !== 1 ? "s" : ""} to{" "}
+              <span className="text-primary">{results.target_role.title}</span>
+            </h3>
+            <span className="text-xs text-muted-foreground">
+              ranked by ease of transition
+            </span>
+          </div>
           {results.paths.map((path, i) => (
             <TransitionPathView key={i} path={path} index={i} />
           ))}
