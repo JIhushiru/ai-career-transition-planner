@@ -1,7 +1,20 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { Search, ExternalLink, BookOpen, Code, Database, BarChart3, Brain, Server, FlaskConical } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+import {
+  Search,
+  ExternalLink,
+  BookOpen,
+  Code,
+  Database,
+  BarChart3,
+  Brain,
+  Server,
+  FlaskConical,
+  Loader2,
+  Sparkles,
+  CheckCircle2,
+} from "lucide-react";
 import {
   Card,
   CardContent,
@@ -11,6 +24,14 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ResumePicker } from "@/components/resume/resume-picker";
+import { apiGet } from "@/lib/api-client";
+import type { SkillsResponse, ExtractedSkill, ResumeListItem } from "@/types/resume";
+
+/* ------------------------------------------------------------------ */
+/*  Career track data with skill keywords for matching                */
+/* ------------------------------------------------------------------ */
 
 interface CareerTrack {
   title: string;
@@ -18,6 +39,8 @@ interface CareerTrack {
   courses: string;
   category: string;
   primaryTech: string;
+  /** Skills that map to this track — used for matching against resume */
+  keywords: string[];
   partner?: string;
   url: string;
 }
@@ -29,6 +52,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "13 Courses and Projects",
     category: "Data Analysis",
     primaryTech: "SQL",
+    keywords: ["sql", "postgresql", "mysql", "database", "data analysis", "excel", "spreadsheet", "reporting", "data visualization", "statistics"],
     url: "https://www.datacamp.com/tracks/associate-data-analyst-in-sql",
   },
   {
@@ -37,6 +61,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "19 Courses and Projects",
     category: "Data Science",
     primaryTech: "Python",
+    keywords: ["python", "pandas", "numpy", "scikit-learn", "matplotlib", "seaborn", "statistics", "machine learning", "data science", "data analysis", "jupyter"],
     url: "https://www.datacamp.com/tracks/associate-data-scientist-in-python",
   },
   {
@@ -45,6 +70,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "17 Courses and Projects",
     category: "Data Analysis",
     primaryTech: "Power BI",
+    keywords: ["power bi", "dax", "microsoft", "data visualization", "reporting", "dashboard", "excel", "sql", "data modeling", "business intelligence", "etl"],
     partner: "Microsoft",
     url: "https://www.datacamp.com/tracks/data-analyst-in-power-bi",
   },
@@ -54,6 +80,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "14 Courses and Projects",
     category: "Data Analysis",
     primaryTech: "Python",
+    keywords: ["python", "pandas", "numpy", "matplotlib", "seaborn", "data analysis", "statistics", "data visualization", "jupyter", "sql"],
     url: "https://www.datacamp.com/tracks/data-analyst-in-python",
   },
   {
@@ -62,6 +89,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "11 Courses and Projects",
     category: "Data Engineering",
     primaryTech: "SQL",
+    keywords: ["sql", "postgresql", "snowflake", "database", "data warehousing", "etl", "data modeling", "data pipeline", "schema design"],
     url: "https://www.datacamp.com/tracks/associate-data-engineer-in-sql",
   },
   {
@@ -70,6 +98,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "17 Courses and Projects",
     category: "Data Engineering",
     primaryTech: "Python",
+    keywords: ["python", "etl", "data pipeline", "airflow", "spark", "sql", "docker", "aws", "data warehousing", "kafka", "database"],
     url: "https://www.datacamp.com/tracks/data-engineer-in-python",
   },
   {
@@ -78,6 +107,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "11 Courses and Projects",
     category: "AI & ML",
     primaryTech: "Python",
+    keywords: ["python", "machine learning", "deep learning", "tensorflow", "pytorch", "llm", "nlp", "transformers", "hugging face", "ai", "neural network", "fine-tuning"],
     url: "https://www.datacamp.com/tracks/associate-ai-engineer-for-data-scientists",
   },
   {
@@ -86,6 +116,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "26 Courses and Projects",
     category: "Data Science",
     primaryTech: "R",
+    keywords: ["r", "ggplot2", "dplyr", "tidyverse", "statistics", "machine learning", "data science", "data analysis", "data visualization"],
     url: "https://www.datacamp.com/tracks/associate-data-scientist-in-r",
   },
   {
@@ -94,6 +125,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "11 Courses and Projects",
     category: "Data Science",
     primaryTech: "Python",
+    keywords: ["python", "pandas", "numpy", "scikit-learn", "machine learning", "statistics", "data science", "deep learning", "matplotlib", "sql"],
     url: "https://www.datacamp.com/tracks/data-scientist-in-python",
   },
   {
@@ -102,6 +134,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "9 Courses and Projects",
     category: "Data Analysis",
     primaryTech: "Tableau",
+    keywords: ["tableau", "data visualization", "dashboard", "reporting", "business intelligence", "sql", "data analysis", "excel"],
     url: "https://www.datacamp.com/tracks/data-analyst-in-tableau",
   },
   {
@@ -110,6 +143,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "11 Courses and Projects",
     category: "Data Analysis",
     primaryTech: "R",
+    keywords: ["r", "ggplot2", "dplyr", "tidyverse", "data analysis", "data visualization", "statistics", "reporting"],
     url: "https://www.datacamp.com/tracks/data-analyst-in-r",
   },
   {
@@ -118,6 +152,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "7 Courses and Projects",
     category: "Cloud & DevOps",
     primaryTech: "Azure",
+    keywords: ["azure", "cloud", "microsoft", "devops", "docker", "kubernetes", "ci/cd", "api", "serverless", "microservices"],
     partner: "Microsoft",
     url: "https://www.datacamp.com/tracks/microsoft-azure-developer-associate-az-204",
   },
@@ -127,6 +162,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "11 Courses and Projects",
     category: "Data Science",
     primaryTech: "R",
+    keywords: ["r", "ggplot2", "dplyr", "tidyverse", "machine learning", "statistics", "data science", "data visualization"],
     url: "https://www.datacamp.com/tracks/data-scientist-in-r",
   },
   {
@@ -135,6 +171,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "10 Courses and Projects",
     category: "AI & ML",
     primaryTech: "Python",
+    keywords: ["python", "ai", "llm", "api", "openai", "langchain", "nlp", "machine learning", "transformers", "software development"],
     url: "https://www.datacamp.com/tracks/associate-ai-engineer-for-developers",
   },
   {
@@ -143,6 +180,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "10 Courses and Projects",
     category: "Software Dev",
     primaryTech: "Python",
+    keywords: ["python", "software development", "oop", "git", "testing", "debugging", "functions", "classes"],
     url: "https://www.datacamp.com/tracks/associate-python-developer",
   },
   {
@@ -151,6 +189,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "24 Courses and Projects",
     category: "AI & ML",
     primaryTech: "Python",
+    keywords: ["python", "machine learning", "deep learning", "scikit-learn", "tensorflow", "keras", "pytorch", "neural network", "nlp", "computer vision", "statistics"],
     url: "https://www.datacamp.com/tracks/machine-learning-scientist-in-python",
   },
   {
@@ -159,6 +198,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "15 Courses and Projects",
     category: "AI & ML",
     primaryTech: "Python",
+    keywords: ["python", "machine learning", "mlops", "docker", "aws", "deployment", "ci/cd", "data pipeline", "model monitoring", "api"],
     url: "https://www.datacamp.com/tracks/machine-learning-engineer",
   },
   {
@@ -167,6 +207,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "8 Courses and Projects",
     category: "Software Dev",
     primaryTech: "Python",
+    keywords: ["python", "git", "testing", "web scraping", "software development", "packaging", "oop", "api"],
     url: "https://www.datacamp.com/tracks/python-developer",
   },
   {
@@ -175,6 +216,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "9 Courses and Projects",
     category: "Data Analysis",
     primaryTech: "Databricks",
+    keywords: ["databricks", "sql", "spark", "data visualization", "data analysis", "data lakehouse", "python", "dashboard"],
     url: "https://www.datacamp.com/tracks/data-analyst-in-databricks",
   },
   {
@@ -183,6 +225,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "15 Courses and Projects",
     category: "Data Engineering",
     primaryTech: "Python",
+    keywords: ["python", "spark", "airflow", "aws", "docker", "etl", "data pipeline", "kafka", "sql", "data warehousing", "ci/cd"],
     url: "https://www.datacamp.com/tracks/professional-data-engineer-in-python",
   },
   {
@@ -191,6 +234,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "11 Courses and Projects",
     category: "Data Engineering",
     primaryTech: "Snowflake",
+    keywords: ["snowflake", "sql", "data warehousing", "data modeling", "etl", "data pipeline", "cloud"],
     partner: "Snowflake",
     url: "https://www.datacamp.com/tracks/associate-data-engineer-in-snowflake",
   },
@@ -200,6 +244,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "10 Courses and Projects",
     category: "Software Dev",
     primaryTech: "SQL",
+    keywords: ["sql", "sql server", "database", "t-sql", "stored procedures", "performance tuning", "data modeling"],
     url: "https://www.datacamp.com/tracks/sql-server-developer",
   },
   {
@@ -208,6 +253,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "14 Courses and Projects",
     category: "Data Science",
     primaryTech: "R",
+    keywords: ["r", "statistics", "probability", "regression", "hypothesis testing", "data analysis", "bayesian", "time series"],
     url: "https://www.datacamp.com/tracks/statistician-in-r",
   },
   {
@@ -216,6 +262,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "15 Courses and Projects",
     category: "Software Dev",
     primaryTech: "R",
+    keywords: ["r", "software development", "packaging", "functions", "oop", "git", "testing", "shiny"],
     url: "https://www.datacamp.com/tracks/r-developer",
   },
   {
@@ -224,6 +271,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "15 Courses and Projects",
     category: "Data Science",
     primaryTech: "R",
+    keywords: ["r", "finance", "quantitative analysis", "statistics", "risk management", "portfolio", "time series", "regression", "mathematics"],
     url: "https://www.datacamp.com/tracks/quantitative-analyst-in-r",
   },
   {
@@ -232,6 +280,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "17 Courses and Projects",
     category: "AI & ML",
     primaryTech: "R",
+    keywords: ["r", "machine learning", "statistics", "caret", "deep learning", "neural network", "regression", "classification"],
     url: "https://www.datacamp.com/tracks/machine-learning-scientist-in-r",
   },
   {
@@ -240,6 +289,7 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "7 Courses and Projects",
     category: "Software Dev",
     primaryTech: "Java",
+    keywords: ["java", "spring", "software development", "oop", "testing", "maven", "gradle", "api"],
     url: "https://www.datacamp.com/tracks/java-developer",
   },
   {
@@ -248,9 +298,14 @@ const CAREER_TRACKS: CareerTrack[] = [
     courses: "9 Courses and Projects",
     category: "Data Engineering",
     primaryTech: "Java",
+    keywords: ["java", "database", "sql", "data pipeline", "etl", "file processing", "performance", "spring"],
     url: "https://www.datacamp.com/tracks/data-engineer-in-java",
   },
 ];
+
+/* ------------------------------------------------------------------ */
+/*  Constants                                                          */
+/* ------------------------------------------------------------------ */
 
 const CATEGORIES = ["All", "Data Analysis", "Data Science", "Data Engineering", "AI & ML", "Software Dev", "Cloud & DevOps"] as const;
 
@@ -283,13 +338,111 @@ const CATEGORY_STYLES: Record<string, { icon: typeof BookOpen; color: string }> 
   },
 };
 
+/* ------------------------------------------------------------------ */
+/*  Matching logic                                                     */
+/* ------------------------------------------------------------------ */
+
+/** Normalise a skill name for fuzzy comparison */
+function normalise(s: string): string {
+  return s.toLowerCase().trim().replace(/[.\-_]/g, " ");
+}
+
+/** Compute match score (0-100) between user skills and a track's keywords */
+function scoreTrack(
+  userSkillSet: Set<string>,
+  track: CareerTrack,
+): { score: number; matched: string[] } {
+  const matched: string[] = [];
+  for (const kw of track.keywords) {
+    const norm = normalise(kw);
+    // Exact match
+    if (userSkillSet.has(norm)) {
+      matched.push(kw);
+      continue;
+    }
+    // Partial: user skill contains keyword or keyword contains user skill
+    for (const us of userSkillSet) {
+      if (us.includes(norm) || norm.includes(us)) {
+        matched.push(kw);
+        break;
+      }
+    }
+  }
+  const score =
+    track.keywords.length > 0
+      ? Math.round((matched.length / track.keywords.length) * 100)
+      : 0;
+  return { score, matched };
+}
+
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
+
 export default function DataCampPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [selectedTech, setSelectedTech] = useState<string>("All");
 
+  // Resume / skills state
+  const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
+  const [skills, setSkills] = useState<ExtractedSkill[] | null>(null);
+  const [isLoadingSkills, setIsLoadingSkills] = useState(false);
+  const [skillsError, setSkillsError] = useState<string | null>(null);
+
+  // Fetch skills when resume changes
+  useEffect(() => {
+    if (!selectedResumeId) return;
+    let cancelled = false;
+    async function fetch() {
+      setIsLoadingSkills(true);
+      setSkillsError(null);
+      try {
+        const res = await apiGet<SkillsResponse>(
+          `/resume/${selectedResumeId}/skills`,
+        );
+        if (!cancelled) setSkills(res.skills);
+      } catch (err) {
+        if (!cancelled)
+          setSkillsError(
+            err instanceof Error ? err.message : "Failed to load skills",
+          );
+      } finally {
+        if (!cancelled) setIsLoadingSkills(false);
+      }
+    }
+    fetch();
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedResumeId]);
+
+  const handleResumeSelect = (resume: ResumeListItem) => {
+    setSelectedResumeId(resume.id);
+  };
+
+  // Build normalised skill set from resume
+  const userSkillSet = useMemo(() => {
+    if (!skills) return null;
+    const set = new Set<string>();
+    for (const s of skills) {
+      set.add(normalise(s.name));
+    }
+    return set;
+  }, [skills]);
+
+  // Score + filter + sort tracks
+  const scoredTracks = useMemo(() => {
+    return CAREER_TRACKS.map((track) => {
+      const result = userSkillSet
+        ? scoreTrack(userSkillSet, track)
+        : { score: 0, matched: [] as string[] };
+      return { ...track, ...result };
+    });
+  }, [userSkillSet]);
+
   const filteredTracks = useMemo(() => {
-    return CAREER_TRACKS.filter((track) => {
+    const filtered = scoredTracks.filter((track) => {
       const matchesSearch =
         searchQuery === "" ||
         track.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -300,7 +453,12 @@ export default function DataCampPage() {
         selectedTech === "All" || track.primaryTech === selectedTech;
       return matchesSearch && matchesCategory && matchesTech;
     });
-  }, [searchQuery, selectedCategory, selectedTech]);
+    // Sort by score descending when skills are loaded
+    if (userSkillSet) {
+      filtered.sort((a, b) => b.score - a.score);
+    }
+    return filtered;
+  }, [scoredTracks, searchQuery, selectedCategory, selectedTech, userSkillSet]);
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { All: CAREER_TRACKS.length };
@@ -310,6 +468,8 @@ export default function DataCampPage() {
     return counts;
   }, []);
 
+  const hasSkills = skills !== null && skills.length > 0;
+
   return (
     <div className="mx-auto max-w-5xl space-y-6">
       <div>
@@ -317,21 +477,61 @@ export default function DataCampPage() {
           DataCamp Career Tracks
         </h2>
         <p className="text-muted-foreground">
-          Explore {CAREER_TRACKS.length} career tracks to find the right
-          learning path for your goals. Filter by category, technology, or
-          search by keyword.
+          Select your resume to see which of the {CAREER_TRACKS.length} career
+          tracks align with your skills, ranked by match.
         </p>
       </div>
+
+      {/* Resume picker */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-sm font-medium">
+            Match Against Your Skills
+          </CardTitle>
+          <CardDescription>
+            Choose a resume so we can score each track based on your existing
+            skills.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <ResumePicker
+            selectedResumeId={selectedResumeId}
+            onSelect={handleResumeSelect}
+          />
+          {isLoadingSkills && (
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Analyzing your skills...
+            </div>
+          )}
+          {skillsError && (
+            <p className="text-sm text-destructive">{skillsError}</p>
+          )}
+          {hasSkills && (
+            <div className="rounded-lg border bg-muted/50 p-3">
+              <p className="mb-2 text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                Your Skills ({skills.length})
+              </p>
+              <div className="flex flex-wrap gap-1.5">
+                {skills.map((s) => (
+                  <Badge key={s.name} variant="secondary" className="text-xs">
+                    {s.name}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Filters */}
       <Card>
         <CardHeader>
           <CardTitle className="text-sm font-medium">
-            Find Your Track
+            Filter Tracks
           </CardTitle>
           <CardDescription>
-            Not sure where to start? Filter by the career area or technology
-            you're interested in.
+            Narrow down by category, technology, or keyword.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -383,12 +583,27 @@ export default function DataCampPage() {
               ))}
             </div>
           </div>
+
+          {(searchQuery || selectedCategory !== "All" || selectedTech !== "All") && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setSearchQuery("");
+                setSelectedCategory("All");
+                setSelectedTech("All");
+              }}
+            >
+              Clear filters
+            </Button>
+          )}
         </CardContent>
       </Card>
 
       {/* Results count */}
       <p className="text-sm text-muted-foreground">
         Showing {filteredTracks.length} of {CAREER_TRACKS.length} tracks
+        {hasSkills && " \u2014 sorted by skill match"}
       </p>
 
       {/* Track cards */}
@@ -414,19 +629,38 @@ export default function DataCampPage() {
                 <Card className="h-full transition-shadow hover:shadow-md">
                   <CardHeader>
                     <div className="flex items-start justify-between gap-2">
-                      <CardTitle className="text-base group-hover:text-primary transition-colors">
-                        {track.title}
-                      </CardTitle>
-                      <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                      <div className="flex-1 space-y-1">
+                        <div className="flex items-center gap-2">
+                          <CardTitle className="text-base group-hover:text-primary transition-colors">
+                            {track.title}
+                          </CardTitle>
+                          <ExternalLink className="h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                        </div>
+                        <CardDescription>{track.description}</CardDescription>
+                      </div>
+                      {hasSkills && (
+                        <div className="flex shrink-0 flex-col items-center">
+                          <div
+                            className={`flex h-11 w-11 items-center justify-center rounded-full text-sm font-bold ${
+                              track.score >= 60
+                                ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
+                                : track.score >= 30
+                                  ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300"
+                                  : "bg-muted text-muted-foreground"
+                            }`}
+                          >
+                            {track.score}%
+                          </div>
+                          <span className="mt-0.5 text-[10px] text-muted-foreground">
+                            match
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <CardDescription>{track.description}</CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="space-y-3">
                     <div className="flex flex-wrap items-center gap-2">
-                      <Badge
-                        variant="outline"
-                        className={style?.color}
-                      >
+                      <Badge variant="outline" className={style?.color}>
                         <Icon className="h-3 w-3" />
                         {track.category}
                       </Badge>
@@ -443,6 +677,19 @@ export default function DataCampPage() {
                         </Badge>
                       )}
                     </div>
+                    {hasSkills && track.matched.length > 0 && (
+                      <div className="flex flex-wrap gap-1">
+                        {track.matched.map((kw) => (
+                          <span
+                            key={kw}
+                            className="inline-flex items-center gap-0.5 rounded-md bg-emerald-50 px-1.5 py-0.5 text-[11px] text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
+                          >
+                            <CheckCircle2 className="h-2.5 w-2.5" />
+                            {kw}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </a>
