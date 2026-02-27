@@ -14,6 +14,7 @@ const pageTitles: Record<string, string> = {
   "/roles": "Roles Overview",
   "/dream-job": "Dream Job Planner",
   "/assessment": "Skills Assessment",
+  "/datacamp": "DataCamp Career Tracks",
 };
 
 interface HeaderProps {

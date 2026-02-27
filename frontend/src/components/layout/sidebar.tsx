@@ -13,6 +13,7 @@ import {
   Briefcase,
   Star,
   ClipboardCheck,
+  BookOpen,
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -38,6 +39,12 @@ const navGroups = [
     items: [
       { href: "/roles", label: "Roles", icon: Briefcase },
       { href: "/explore", label: "Explore Careers", icon: Compass },
+    ],
+  },
+  {
+    label: "Learning",
+    items: [
+      { href: "/datacamp", label: "DataCamp Tracks", icon: BookOpen },
     ],
   },
   {
