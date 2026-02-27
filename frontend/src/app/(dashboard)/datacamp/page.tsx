@@ -347,27 +347,99 @@ function normalise(s: string): string {
   return s.toLowerCase().trim().replace(/[.\-_]/g, " ");
 }
 
+/**
+ * Map of user-skill aliases → track keywords they should match.
+ * Covers ERP / accounting / compliance domain skills that map to
+ * data-adjacent tracks (SQL, BI, process automation, etc.).
+ */
+const SKILL_TO_KEYWORD: Record<string, string[]> = {
+  erp: ["sql", "database", "etl", "data modeling"],
+  "oracle netsuite": ["sql", "database", "reporting", "etl"],
+  "oracle ebs": ["sql", "database", "reporting"],
+  s2k: ["sql", "database"],
+  "sap business suite": ["sql", "database", "etl", "data modeling", "reporting"],
+  "sap s/4hana": ["sql", "database", "etl", "data modeling", "reporting"],
+  "sap ariba": ["sql", "database", "reporting"],
+  "sap concur": ["sql", "reporting"],
+  sap: ["sql", "database", "etl", "data modeling"],
+  oracle: ["sql", "database"],
+  gaap: ["reporting", "data analysis", "finance"],
+  ifrs: ["reporting", "data analysis", "finance"],
+  "indirect tax": ["reporting", "data analysis"],
+  vat: ["reporting", "data analysis"],
+  "tax compliance": ["reporting", "data analysis", "regulatory compliance"],
+  "tax reporting": ["reporting", "data analysis"],
+  compliance: ["reporting", "data analysis", "regulatory compliance"],
+  "regulatory compliance": ["reporting", "data analysis"],
+  "management accounting": ["reporting", "data analysis", "finance", "excel"],
+  "accounts payable": ["reporting", "data analysis", "excel"],
+  "invoice processing": ["reporting", "data analysis", "etl"],
+  "process optimization": ["data analysis", "data pipeline"],
+  "process standardization": ["data analysis", "etl"],
+  "data cleansing": ["data analysis", "etl", "data pipeline", "sql"],
+  "supplier master data": ["database", "data modeling", "sql", "data analysis"],
+  "vendor master data": ["database", "data modeling", "sql", "data analysis"],
+  "master data": ["database", "data modeling", "sql"],
+  leadership: ["project management"],
+  sop: ["process optimization"],
+  qa: ["testing", "data analysis"],
+  "wire transfer": ["reporting"],
+  html: ["software development"],
+  java: ["java"],
+  "visual basic": ["software development"],
+  "ms office": ["excel", "reporting"],
+  excel: ["excel", "reporting", "data analysis", "data visualization"],
+  sql: ["sql", "database"],
+  python: ["python"],
+  r: ["r"],
+  "power bi": ["power bi", "data visualization", "dashboard"],
+  tableau: ["tableau", "data visualization", "dashboard"],
+};
+
+/** Check if two normalised strings are a whole-word match */
+function isWordMatch(haystack: string, needle: string): boolean {
+  if (needle.length < 3) return false; // skip very short keywords for partial
+  const re = new RegExp(`\\b${needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`);
+  return re.test(haystack);
+}
+
 /** Compute match score (0-100) between user skills and a track's keywords */
 function scoreTrack(
-  userSkillSet: Set<string>,
+  userSkills: string[],
   track: CareerTrack,
 ): { score: number; matched: string[] } {
-  const matched: string[] = [];
-  for (const kw of track.keywords) {
-    const norm = normalise(kw);
-    // Exact match
-    if (userSkillSet.has(norm)) {
-      matched.push(kw);
-      continue;
+  const matchedSet = new Set<string>();
+
+  // 1) Alias-based matching: map user skills → track keywords via SKILL_TO_KEYWORD
+  for (const us of userSkills) {
+    const mapped = SKILL_TO_KEYWORD[us];
+    if (!mapped) continue;
+    for (const m of mapped) {
+      if (track.keywords.includes(m)) {
+        matchedSet.add(m);
+      }
     }
-    // Partial: user skill contains keyword or keyword contains user skill
-    for (const us of userSkillSet) {
-      if (us.includes(norm) || norm.includes(us)) {
-        matched.push(kw);
+  }
+
+  // 2) Direct matching: exact or whole-word match (min 3 chars for partial)
+  for (const kw of track.keywords) {
+    if (matchedSet.has(kw)) continue; // already matched via alias
+    const normKw = normalise(kw);
+    for (const us of userSkills) {
+      // Exact match
+      if (us === normKw) {
+        matchedSet.add(kw);
+        break;
+      }
+      // Whole-word match (only for keywords >= 3 chars to avoid "r" in "erp")
+      if (isWordMatch(us, normKw) || isWordMatch(normKw, us)) {
+        matchedSet.add(kw);
         break;
       }
     }
   }
+
+  const matched = Array.from(matchedSet);
   const score =
     track.keywords.length > 0
       ? Math.round((matched.length / track.keywords.length) * 100)
@@ -421,25 +493,30 @@ export default function DataCampPage() {
     setSelectedResumeId(resume.id);
   };
 
-  // Build normalised skill set from resume
-  const userSkillSet = useMemo(() => {
+  // Build normalised skill list from resume (deduplicated)
+  const userSkillList = useMemo(() => {
     if (!skills) return null;
-    const set = new Set<string>();
+    const seen = new Set<string>();
+    const list: string[] = [];
     for (const s of skills) {
-      set.add(normalise(s.name));
+      const n = normalise(s.name);
+      if (!seen.has(n)) {
+        seen.add(n);
+        list.push(n);
+      }
     }
-    return set;
+    return list;
   }, [skills]);
 
   // Score + filter + sort tracks
   const scoredTracks = useMemo(() => {
     return CAREER_TRACKS.map((track) => {
-      const result = userSkillSet
-        ? scoreTrack(userSkillSet, track)
+      const result = userSkillList
+        ? scoreTrack(userSkillList, track)
         : { score: 0, matched: [] as string[] };
       return { ...track, ...result };
     });
-  }, [userSkillSet]);
+  }, [userSkillList]);
 
   const filteredTracks = useMemo(() => {
     const filtered = scoredTracks.filter((track) => {
@@ -454,11 +531,11 @@ export default function DataCampPage() {
       return matchesSearch && matchesCategory && matchesTech;
     });
     // Sort by score descending when skills are loaded
-    if (userSkillSet) {
+    if (userSkillList) {
       filtered.sort((a, b) => b.score - a.score);
     }
     return filtered;
-  }, [scoredTracks, searchQuery, selectedCategory, selectedTech, userSkillSet]);
+  }, [scoredTracks, searchQuery, selectedCategory, selectedTech, userSkillList]);
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { All: CAREER_TRACKS.length };
